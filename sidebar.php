@@ -1,3 +1,4 @@
+
 <div class="sidebar-nav slimscrollsidebar">
     <div class="sidebar-head">
         <h3><span class="fa-fw open-close"><i class="ti-close ti-menu"></i></span> <span class="hide-menu">Navigation</span></h3> </div>
@@ -13,7 +14,8 @@
             </ul>
         </li>
 
-        <li><a href="admin-dashboard.php" class="waves-effect"><i class="mdi mdi-av-timer fa-fw"></i> <span class="hide-menu">Dashboard</span></a></li>
+        <li><a href="dashboard" class="waves-effect"><i class="mdi mdi-av-timer fa-fw"></i> <span class="hide-menu">Dashboard</span></a></li>
+
 
         <li> <a href="javascript:void(0)" class="waves-effect"><i class="mdi mdi-checkbox-multiple-marked-outline fa-fw"></i> <span class="hide-menu">Animal<span class="fa arrow"></span></span></a>
             <ul class="nav nav-second-level">
@@ -26,7 +28,7 @@
                 <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">Calving </span><span class="fa arrow"></span></a>
                     <ul class="nav nav-third-level">
                         <li> <a href="add"><i class="fa fa-plus-square fa-fw"></i><span class="hide-menu">New</span></a> </li>
-                        <li> <a href="javascript:void(0)"><i class="fa fa-eye-slash fa-fw"></i><span class="hide-menu">View</span></a> </li>
+                        <li> <a href="view-calving-records"><i class="fa fa-eye-slash fa-fw"></i><span class="hide-menu">View</span></a> </li>
                     </ul>
                 </li>
                 <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">Weight Tracker </span><span class="fa arrow"></span></a>
