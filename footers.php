@@ -1,0 +1,1 @@
+ <footer class="footer text-center"> <?php echo date('d/m/y');?> &copy; efamu </footer>
