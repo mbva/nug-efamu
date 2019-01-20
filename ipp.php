@@ -1,4 +1,6 @@
-<?php  function getIp(){
+<?php  
+date_default_timezone_set("Africa/Nairobi");
+ $time =date("Y-m-d H:i:s");function getIp(){
 
         $ip = $_SERVER['REMOTE_ADDR'];     
         if($ip){
@@ -40,7 +42,7 @@ $urlTemplate = 'http://api.ip2location.com/?' . 'ip='.$ip.'&key=demo' . '&packag
 		*/
     }
  }else{
-     echo 'IP Address parsing error!';
+     //echo 'IP Address parsing error!';
  }
  
  ?>
@@ -58,16 +60,16 @@ if(isset($geoLocation['country_code'])&&isset($geoLocation['country_name'])&&iss
         $long=$geoLocation['longitude'];
         $zone= $geoLocation['time_zone'];
        $sql_user = "insert into user_sources
-	   (country_code,country_name,region_name,city_name,latitude,longitude,time_zone)
-	   VALUES ('$code','$country','$region','$city','$lat','$long','$zone')";
+	   (logtime,country_code,country_name,region_name,city_name,latitude,longitude,time_zone)
+	   VALUES ('$time','$code','$country','$region','$city','$lat','$long','$zone')";
                
 		$insert_user = mysqli_query($con,$sql_user);
 		if($insert_user){
 		}else{
-			echo "<h2>FAILED</h2>".mysqli_error($con);
+			//echo "<h2>FAILED</h2>".mysqli_error($con);
 		}
 		}else{
-          echo 'IP Address parsing error!';
+          //echo 'IP Address parsing error!';
       }
 	  
 	  

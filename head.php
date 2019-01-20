@@ -46,6 +46,7 @@
     //-->
 </SCRIPT>
 <?php
+date_default_timezone_set("Africa/Nairobi");
 include 'session.php';
 include 'db.php';
 $farm = $_SESSION['farm'];
