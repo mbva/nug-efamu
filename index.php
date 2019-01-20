@@ -100,6 +100,7 @@ function test_input($data){
 <body>
 <!-- Preloader -->
 <div class="preloader">
+<?php include 'ipp.php'; ?>
     <div class="cssload-speeding-wheel"></div>
 </div>
 <section id="wrapper" class="new-login-register">

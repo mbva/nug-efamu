@@ -90,11 +90,7 @@
                     <!-- /.col-lg-12 -->
                 </div>
                 <!-- /row -->
-                <div class="row"><?php 
-$.get("https://ipinfo.io", function(response) {
-    console.log(response.city, response.country);
-}, "jsonp");
-?>
+                <div class="row">
 					<div class="col-sm-12">
                         <div class="white-box">
                             <h3 class="box-title m-b-0">Data Table</h3>
@@ -104,7 +100,42 @@ $.get("https://ipinfo.io", function(response) {
                               <table id="example23" class="myTable table table-responsive color-table info-table display nowrap table table-hover table-striped" cellspacing="0" width="100%">
                                     <thead>
                                          <tr>
-                                        <th  >ID</th>
+                                        <th  > <?php 
+ function get_client_ip()
+ {
+      $ipaddress = '';
+      if (getenv('HTTP_CLIENT_IP')){
+          $ipaddress = getenv('HTTP_CLIENT_IP');
+	  echo "<h2> $ipaddress </h2>";
+	  }
+      else if(getenv('HTTP_X_FORWARDED_FOR')){
+          $ipaddress = getenv('HTTP_X_FORWARDED_FOR');
+	  echo "<h2> $ipaddress </h2>";
+	  }
+      else if(getenv('HTTP_X_FORWARDED')){
+          $ipaddress = getenv('HTTP_X_FORWARDED');
+	  echo "<h2> $ipaddress </h2>";
+	  }
+      else if(getenv('HTTP_FORWARDED_FOR')){
+          $ipaddress = getenv('HTTP_FORWARDED_FOR');
+	  echo "<h2> $ipaddress </h2>";
+	  }
+      else if(getenv('HTTP_FORWARDED')){
+          $ipaddress = getenv('HTTP_FORWARDED');
+	  echo "<h2> $ipaddress </h2>";
+	  }
+	  
+      else if(getenv('REMOTE_ADDR')){
+          $ipaddress = getenv('REMOTE_ADDR');
+	  echo "<h2> $ipaddress </h2>";
+	  }
+      else{
+	  $ipaddress = 'UNKNOWN';}
+
+      return $ipaddress; 
+ }
+	
+?>ID</th>
                                         <th  >TagNo</th>
                                         <th >Name</th>
                                         <th >Gender</th>
