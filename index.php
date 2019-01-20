@@ -58,7 +58,7 @@ if (isset($_POST['login'])){
             if($insert){
 
                 header("location:dashboard");
-                echo "<script>document.location='dasboard'</script>";
+                echo "<script>document.location='dashboard'</script>";
             }else{ //echo "<h2>insert $action </h2>".mysqli_error($con);
 
             }
@@ -77,7 +77,7 @@ if (isset($_POST['login'])){
             if($insert){
 
                 header("location:admin/admin-dashboard");
-                echo "<script>document.location='admin/admin-dasboard'</script>";
+                echo "<script>document.location='admin/admin-dashboard'</script>";
             }else{ //echo "<h2>insert $action </h2>".mysqli_error($con);
 
             }
@@ -156,7 +156,7 @@ function test_input($data){
                     </div>
                 </div>
             </form>
-            <form class="form-horizontal" id="recoverform" action="dashboard">
+            <form class="form-horizontal" id="recoverform" method="POST" action="forgotpass">
                 <div class="form-group ">
                     <div class="col-xs-12">
                         <h3>Recover Password</h3>
@@ -165,7 +165,7 @@ function test_input($data){
                 </div>
                 <div class="form-group ">
                     <div class="col-xs-12">
-                        <input class="form-control" type="text"  required="" placeholder="Email">
+                        <input class="form-control" type="text"  required="" name="email" placeholder="Email">
                     </div>
                 </div>
                 <div class="form-group text-center m-t-20">
