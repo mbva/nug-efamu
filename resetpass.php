@@ -28,7 +28,7 @@ $msg1 = "Dear  $name ,\n ";
 		
 		$msg1 .= "\nhttp://{$_SERVER['SERVER_NAME']}/efamunew/";
 		
-		$msg1 .= "Incase you didnot initiate this change, Contact your EFAMU Support Team  \n ";
+		$msg1 .= "\nIncase you didnot initiate this change, Contact your EFAMU Support Team on +256777844758 \n ";
 		$msg1 .="\nThank You";
 					$msg1 .="\n EFAMU ADMIN";
 					$msg1 .="\nNote! This an auto generated mail . Donot reply it!";
@@ -55,6 +55,9 @@ echo "<script type='text/javascript'>alert('Password Changed Successfully,Please
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="css/select2/select2.min.css">
+	<link href="css/style.css" rel="stylesheet">
+<link href="plugins/bower_components/custom-select/dist/css/select2.min.css" rel="stylesheet" type="text/css" />
+
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 <!-- Bootstrap CSS
     ============================================ -->
