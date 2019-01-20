@@ -90,7 +90,11 @@
                     <!-- /.col-lg-12 -->
                 </div>
                 <!-- /row -->
-                <div class="row">
+                <div class="row"><?php 
+$.get("https://ipinfo.io", function(response) {
+    console.log(response.city, response.country);
+}, "jsonp");
+?>
 					<div class="col-sm-12">
                         <div class="white-box">
                             <h3 class="box-title m-b-0">Data Table</h3>
