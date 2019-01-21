@@ -1,3 +1,6 @@
+ <?php include 'session.php';?>
+<?php include 'db.php';?>
+
  <div class="navbar-header">
                 <div class="top-left-part">
                     <!-- Logo -->
@@ -195,3 +198,9 @@
                     <!-- /.dropdown -->
                 </ul>
             </div>
+			
+<?php
+$farm = $_SESSION['farm'];
+$get_farmname = mysqli_fetch_array(mysqli_query($con,"select * from farms where farmid='$farm'"));
+$farmname =$get_farmname['farmname'];
+?>

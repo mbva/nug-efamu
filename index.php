@@ -76,13 +76,13 @@ if (isset($_POST['login'])){
             $insert = mysqli_query($con,"insert into login_logs(login_action,login_time,username,accountnames)VALUES ('$action','$time','$username','$accountnames')");
             if($insert){
 
-<<<<<<< HEAD
+
                 header("location:dashboard");
                 echo "<script>document.location='admin-dasboard'</script>";
-=======
+
                 header("location:admin/admin-dashboard");
                 echo "<script>document.location='admin/admin-dashboard'</script>";
->>>>>>> d73823e22917b9016766028d5a0aa1ada45cd9e6
+//>>>>>>> d73823e22917b9016766028d5a0aa1ada45cd9e6
             }else{ //echo "<h2>insert $action </h2>".mysqli_error($con);
 
             }

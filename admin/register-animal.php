@@ -2,12 +2,13 @@
 <html lang="en">
 
 <head>
- <?php include 'admin-head.php';?>
+ <?php include 'head.php';
+ $active='animal';?>
 </head>
-<?php include 'head.php';?>
+<?php //include 'head.php';?>
 </head>
 <?php
-include '../db.php';
+include 'db.php';
 $message="";
 $farm = $_SESSION['farm'];
 if(isset($_POST['submit'])){
@@ -75,14 +76,14 @@ if(isset($_POST['submit'])){
     <!-- Topbar header - style you can find in pages.scss -->
     <!-- ============================================================== -->
     <nav class="navbar navbar-default navbar-static-top m-b-0">
-      <?php include 'admin-nav.php';?>
+      <?php include 'nav.php';?>
     </nav>
     <!-- End Top Navigation -->
     <!-- ============================================================== -->
     <!-- Left Sidebar - style you can find in sidebar.scss  -->
     <!-- ============================================================== -->
     <div class="navbar-default sidebar" role="navigation">
-        <?php include 'admin-sidebar.php';?>
+        <?php include 'sidebar.php';?>
     </div>
     <!-- ============================================================== -->
     <!-- End Left Sidebar -->
@@ -112,7 +113,7 @@ if(isset($_POST['submit'])){
                 <div class="col-md-9 col-sm-12">
                     <div class="white-box">
                         <h3 class="box-title m-b-0">Animal Registration Form</h3>
-                        <form action="register-animal.php" method="post" enctype="multipart/form-data">
+                        <form action="register-animal" method="post" enctype="multipart/form-data">
                         <div class="row">
                             <div class="col-sm-4 col-xs-12">
 
@@ -244,27 +245,27 @@ if(isset($_POST['submit'])){
         </div>
         <!-- /.container-fluid -->
 
-            <?php include '../footer.php';?>
+            <?php include 'footer.php';?>
     </div>
     <!-- /#page-wrapper -->
 </div>
 <!-- /#wrapper -->
 <!-- jQuery -->
-<script src="../plugins/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="plugins/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap Core JavaScript -->
-<script src="../bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- Menu Plugin JavaScript -->
-<script src="../plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
+<script src="plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
 <!--slimscroll JavaScript -->
-<script src="../js/jquery.slimscroll.js"></script>
+<script src="js/jquery.slimscroll.js"></script>
 <!--Wave Effects -->
-<script src="../js/waves.js"></script>
+<script src="js/waves.js"></script>
 <!-- Custom Theme JavaScript -->
-<script src="../js/custom.min.js"></script>
+<script src="js/custom.min.js"></script>
 
-<script src="../js/jasny-bootstrap.js"></script>
-<script src="../plugins/bower_components/switchery/dist/switchery.min.js"></script>
-<script src="../plugins/bower_components/custom-select/dist/js/select2.full.min.js" type="text/javascript"></script>
+<script src="js/jasny-bootstrap.js"></script>
+<script src="plugins/bower_components/switchery/dist/switchery.min.js"></script>
+<script src="plugins/bower_components/custom-select/dist/js/select2.full.min.js" type="text/javascript"></script>
 <script>
     $(function() {
         // Switchery
@@ -338,7 +339,7 @@ if(isset($_POST['submit'])){
     });
 </script>
 <!--Style Switcher -->
-<script src="../plugins/bower_components/styleswitcher/jQuery.style.switcher.js"></script>
+<script src="plugins/bower_components/styleswitcher/jQuery.style.switcher.js"></script>
 </body>
 
 </html>

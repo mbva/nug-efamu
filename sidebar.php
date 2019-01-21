@@ -14,12 +14,10 @@
             </ul>
         </li>
 
-<<<<<<< HEAD
+
         <li><a href="dashboard" class="waves-effect"><i class="mdi mdi-av-timer fa-fw"></i> <span class="hide-menu">Dashboard</span></a></li>
 
-=======
-        <li><a href="admin-dashboard" class="waves-effect"><i class="mdi mdi-av-timer fa-fw"></i> <span class="hide-menu">Dashboard</span></a></li>
->>>>>>> d73823e22917b9016766028d5a0aa1ada45cd9e6
+
 
         <li> <a href="javascript:void(0)" class="waves-effect <?php if($active=='animal') echo "active" ?>"><i class="mdi mdi-checkbox-multiple-marked-outline fa-fw"></i> <span class="hide-menu">Animal<span class="fa arrow"></span></span></a>
             <ul class="nav nav-second-level">
@@ -41,6 +39,13 @@
                         <li> <a href="javascript:void(0)"><i class="fa fa-eye-slash fa-fw"></i><span class="hide-menu">View</span></a> </li>
                     </ul>
                 </li>
+				<li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">10 Day After Culving</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-third-level">
+                        <li> <a href="javascript:void(0)"><i class="fa fa-plus-square fa-fw"></i><span class="hide-menu">New</span></a> </li>
+                        <li> <a href="view-ten-day-records"><i class="fa fa-eye-slash fa-fw"></i><span class="hide-menu">View</span></a> </li>
+                    </ul>
+                </li>
+				
                 <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">10 Day </span><span class="fa arrow"></span></a>
                     <ul class="nav nav-third-level">
                         <li> <a href="javascript:void(0)"><i class="fa fa-plus-square fa-fw"></i><span class="hide-menu">New</span></a> </li>

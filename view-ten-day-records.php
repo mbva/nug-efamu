@@ -77,30 +77,55 @@
             <div class="container-fluid">
                 <div class="row bg-title">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">Animal Records</h4> </div>
+                        <h4 class="page-title">Ten Day After Cilving Records</h4> </div>
                     <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
 
                        
                         <ol class="breadcrumb">
                             <li><a href="#">Dashboard</a></li>
-                            <li><a href="#">Animals</a></li>
-                            <li class="active">View Animals</li>
+                            <li><a href="#">10 Day Records</a></li>
+                            <li class="active">10 Day Records</li>
                         </ol>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
                 <!-- /row -->
+				
                 <div class="row">
 					<div class="col-sm-12">
-                        <div class="white-box">
-                            <h3 class="box-title m-b-0">Animal Records Table</h3>
+                        <div class="white-box
+						
+                               <div class="basic-login-inner inline-basic-form">
+                                                    <form action="view-ten-day-records" method="post">
+                                                        <div class="form-group-inner">
+                                                            <div class="row">
+                                                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                                    <div class="input-daterange input-group" >
+                                                                        <input type="date" class="form-control" name="sdate" id="datepicker"  />
+                                                                        <span class="input-group-addon">to</span>
+                                                                        <input type="date" class="form-control" name="tdate" id="datepicker"  />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                                    <div class="login-btn-inner">
+                                                                        <div class="row">
+                                                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                                                <button style="float: right" name="submit" class="btn btn-sm btn-primary login-submit-cs" type="submit">Search</button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                               
+							           
                             
                             <div class="table-responsive">
 							 
                               <table id="example23" class="myTable table table-responsive color-table info-table display nowrap table table-hover table-striped" cellspacing="0" width="100%">
                                     <thead>
-                                         <tr>
-                                        <th  > <?php 
+                                          <?php 
  function get_client_ip()
  {
       $ipaddress = '';
@@ -135,19 +160,24 @@
       return $ipaddress; 
  }
 	
-?>ID</th>
-                                        <th  >TagNo</th>
-                                        <th >Name</th>
-                                        <th >Gender</th>
-                                        <th >DOB</th>
-                                        <th >Breed</th>
-                                        <th >Premise</th>
-                                        <th >Genetic Percentage</th>
-                                        <th >Dam Name</th>
-                                        <th >Breed</th>
-                                        <th >Sire Name</th>
-                                        <th >Breed</th>
-                                        <th >Profile</th>
+?> <tr>
+                                        <th data-editable="true">Date</th>
+                                        <th data-editable="true">TagNo</th>
+                                        <th data-editable="true">Day No</th>
+                                        <th data-editable="true">GA</th>
+                                        <th data-editable="true">Appetite</th>
+                                        <th data-editable="true">Bright Eyes</th>
+                                        <th data-editable="true">Warm Ears</th>
+                                        <th data-editable="true">Uterine Discharge</th>
+                                        <th data-editable="true">Retained Placenta</th>
+                                        <th data-editable="true">Milk Volume</th>
+                                        <th data-editable="true">Udder Edema</th>
+                                        <th data-editable="true">Lameness</th>
+                                        <th data-editable="true">Manure</th>
+                                        <th data-editable="true">Ketotic</th>
+                                        <th data-editable="true">Temperature</th>
+
+                                          
                                        
                                             <th >Action</th>
                                 
@@ -158,20 +188,23 @@
                                     </thead>
                                     <tfoot>
                                          <tr>
-                                        <th  >ID</th>
-                                        <th  >TagNo</th>
-                                        <th >Name</th>
-                                        <th >Gender</th>
-                                        <th >DOB</th>
-                                        <th >Breed</th>
-                                        <th >Premise</th>
-                                        <th >Genetic Percentage</th>
-                                        <th >Dam Name</th>
-                                        <th >Breed</th>
-                                        <th >Sire Name</th>
-                                        <th >Breed</th>
-                                        <th >Profile</th>
-                                       
+                                         <tr>
+                                        <th data-editable="true">Date</th>
+                                        <th data-editable="true">TagNo</th>
+                                        <th data-editable="true">Day No</th>
+                                        <th data-editable="true">GA</th>
+                                        <th data-editable="true">Appetite</th>
+                                        <th data-editable="true">Bright Eyes</th>
+                                        <th data-editable="true">Warm Ears</th>
+                                        <th data-editable="true">Uterine Discharge</th>
+                                        <th data-editable="true">Retained Placenta</th>
+                                        <th data-editable="true">Milk Volume</th>
+                                        <th data-editable="true">Udder Edema</th>
+                                        <th data-editable="true">Lameness</th>
+                                        <th data-editable="true">Manure</th>
+                                        <th data-editable="true">Ketotic</th>
+                                        <th data-editable="true">Temperature</th>
+
                                             <th >Action</th>
                                 
                                        
@@ -181,36 +214,53 @@
                                     </tfoot>
                                     <tbody>
 									                                    <?php
-                                    include 'db.php';
-                                    $select = mysqli_query($con,"select * from animal_registration where status ='Present'");
-                                    $sno = 0;
-                                    while($results = mysqli_fetch_array($select)) {
-                                        $sno++
-                                        ?>
-                                        <tr><input type="hidden" id="id" name="id" value="<?=$results['animal_id'];?>">
-                                                <td><?=$sno;?></td>
-                                                <td><?=$results['tagNo'];?></td>
-                                                <td><?=$results['animal_name'];?></td>
-                                                <td><?=$results['gender'];?></td>
-                                                <td><?=$results['dob'];?></td>
-                                                <td><?=$results['breed'];?></td>
-                                                <td><?=$results['location'];?></td>
-                                                <td><?=$results['genetic_percentage'];?></td>
-                                                <td><?=$results['name_of_dam'];?></td>
-                                                <td><?=$results['breed_of_dam'];?></td>
-                                                <td><?=$results['name_of_sire'];?></td>
-                                                <td><?=$results['breed_of_sire'];?></td>
-                                                <td><a href="animal-profile?tagNo=<?=$results['tagNo'];?>" class="btn btn-warning"><i class="fa fa-eye-slash fa-1x"></a></i></a></td>
-                                                <td><a  style="color: white" class="btn btn-success" href="edit-animals?animalid=<?=$results['animal_id'];?>&&farm_id=<?=$results['farm_id'];?>"><i class="fa fa-edit fa-1x"></a></i></td>
-                                                <td><a  style="color: white" class="btn btn-danger" onclick="return deleted()" href=""><i class="fa fa-trash fa-1x"></a></i></td>
+                                   include 'db.php';
 
+                                    if(isset($_POST['search'])){
+                                        $today = date("Y-m-d");
+                                        $date_to             = $_POST['tdate'];
+                                        $date_from           = $_POST['sdate'];
 
+                                        $select = mysqli_query($con,"select 
+                                       a.*,t.* from animal_registration a,ten_day_sheet t
+									   where t.recdate BETWEEN '$date_from' AND '$date_to' and a.farm_id ='$farm' and t.farm_id ='$farm' AND a.animal_id=t.animal_id");
+									}
+									else{
+										   $current_month = date("m");
 
-                                            </tr>
-                                        <?php
-
-                                    }
+                                        $select = mysqli_query($con,"select a.*,t.* from animal_registration a, ten_day_sheet t
+										where  MONTH (t.recdate)='$current_month' and a.farm_id ='$farm' and t.farm_id ='$farm' AND a.animal_id=t.animal_id");
+									}
+										while($results = mysqli_fetch_array($select)){
+											$tagno=$results['tagNo'];
+											$animal_name=$results['animal_name'];
+                                            ?>
+                                            <form action="" method="post">
+                                                <tr>
+                                                    <td><input type="text" id="fname" name="tagno" value="<?=$results['recdate'];?>"></td>
+                                                    <td><input type="text" id="fname" name="aname" value="<?php echo "$animal_name ($tagno)"?>"></td>
+                                                    <td><input type="text" id="fname" name="gender" value="<?=$results['days'];?>"></td>
+                                                    <td><input type="text" id="fname" name="gender" value="<?=$results['gappearance'];?>"></td>
+                                                    <td><input type="text" id="fname" name="gender" value="<?=$results['appetite'];?>"></td>
+                                                    <td><input type="text" id="fname" name="gender" value="<?=$results['eyes_ears'];?>"></td>
+                                                    <td><input type="text" id="fname" name="gender" value="<?=$results['warm_ears'];?>"></td>
+                                                    <td><input type="text" id="fname" name="gender" value="<?=$results['uterine_discharge'];?>"></td>
+                                                    <td><input type="text" id="fname" name="gender" value="<?=$results['retained_placenta'];?>"></td>
+                                                    <td><input type="text" id="fname" name="gender" value="<?=$results['milk_volume'];?>"></td>
+                                                    <td><input type="text" id="fname" name="gender" value="<?=$results['udder_edema'];?>"></td>
+                                                    <td><input type="text" id="fname" name="gender" value="<?=$results['lameness'];?>"></td>
+                                                    <td><input type="text" id="fname" name="gender" value="<?=$results['manure'];?>"></td>
+                                                    <td><input type="text" id="fname" name="gender" value="<?=$results['ketotic'];?>"></td>
+                                                    <td><input type="text" id="fname" name="gender" value="<?=$results['temperature'];?>"></td>
+                                                    <td><button name="submit" type="submit" onclick="return edit()" class="btn btn-success"><i class="fa fa-edit fa-1x"></a></i></button></td>
+                                                    <td><a  style="color: white" class="btn btn-danger" onclick="return deleted()" href=""><i class="fa fa-trash fa-1x"></a></i></td>
+                                                </tr>
+                                            </form>
+                                            <?php
+                                        }
+                                 
                                     ?>
+                                    </tbody>
                                     </tbody>
                                 </table>
                             </div>

@@ -62,7 +62,7 @@
             <div class="sidebar-nav slimscrollsidebar">
                 <div class="sidebar-head">
                     <h3><span class="fa-fw open-close"><i class="ti-close ti-menu"></i></span> <span class="hide-menu">Navigation</span></h3> </div>
-                <?php  $active='animal';
+                <?php
 				include('sidebar.php');
 				?>
             </div>
@@ -99,110 +99,107 @@
 							 
                               <table id="example23" class="myTable table table-responsive color-table info-table display nowrap table table-hover table-striped" cellspacing="0" width="100%">
                                     <thead>
-                                         <tr>
-                                        <th  > <?php 
- function get_client_ip()
- {
-      $ipaddress = '';
-      if (getenv('HTTP_CLIENT_IP')){
-          $ipaddress = getenv('HTTP_CLIENT_IP');
-	  echo "<h2> $ipaddress </h2>";
-	  }
-      else if(getenv('HTTP_X_FORWARDED_FOR')){
-          $ipaddress = getenv('HTTP_X_FORWARDED_FOR');
-	  echo "<h2> $ipaddress </h2>";
-	  }
-      else if(getenv('HTTP_X_FORWARDED')){
-          $ipaddress = getenv('HTTP_X_FORWARDED');
-	  echo "<h2> $ipaddress </h2>";
-	  }
-      else if(getenv('HTTP_FORWARDED_FOR')){
-          $ipaddress = getenv('HTTP_FORWARDED_FOR');
-	  echo "<h2> $ipaddress </h2>";
-	  }
-      else if(getenv('HTTP_FORWARDED')){
-          $ipaddress = getenv('HTTP_FORWARDED');
-	  echo "<h2> $ipaddress </h2>";
-	  }
-	  
-      else if(getenv('REMOTE_ADDR')){
-          $ipaddress = getenv('REMOTE_ADDR');
-	  echo "<h2> $ipaddress </h2>";
-	  }
-      else{
-	  $ipaddress = 'UNKNOWN';}
-
-      return $ipaddress; 
- }
-	
-?>ID</th>
-                                        <th  >TagNo</th>
-                                        <th >Name</th>
-                                        <th >Gender</th>
-                                        <th >DOB</th>
-                                        <th >Breed</th>
-                                        <th >Premise</th>
-                                        <th >Genetic Percentage</th>
-                                        <th >Dam Name</th>
-                                        <th >Breed</th>
-                                        <th >Sire Name</th>
-                                        <th >Breed</th>
-                                        <th >Profile</th>
+    <tr>
+                                        <th data-field="id">ID</th>
+                                        <th data-editable="true">Date</th>
+                                        <th data-editable="true">TagNo</th>
+                                        <th data-editable="true">Animal Name</th>
+                                        <th data-editable="true">Ease of Calving</th>
+                                        <th data-editable="true">Description</th>
+                                        <th data-editable="true">YMCP</th>
+                                        <th data-editable="true">CAL GEL</th>
+                                        <th data-editable="true">Pro Bios</th>
+                                        <th data-editable="true">Keto Gel</th>
+                                        <th data-editable="true">Other</th>
+                                        <th data-editable="true">Calf Alive</th>
+                                        <th data-editable="true">Colostrum after 2 hrs</th>
+                                        <th data-editable="true">Dip Navel</th>
+                                        <th data-editable="true">Vitamin A & D</th>
+                                        <th data-editable="true">Weight at Birth</th>
+                                        <th data-editable="true">Bloody Milk</th>
+                                        <th data-editable="true">Milk Fever</th>
+                                        <th data-editable="true">After Birth Expelled</th>
+                                        <th data-editable="true">ECP</th>
                                        
+                                     
                                             <th >Action</th>
-                                
                                        
+                                        
                                             <th >Action</th>
-                                      
+                                     
                                     </tr>
                                     </thead>
                                     <tfoot>
-                                         <tr>
-                                        <th  >ID</th>
-                                        <th  >TagNo</th>
-                                        <th >Name</th>
-                                        <th >Gender</th>
-                                        <th >DOB</th>
-                                        <th >Breed</th>
-                                        <th >Premise</th>
-                                        <th >Genetic Percentage</th>
-                                        <th >Dam Name</th>
-                                        <th >Breed</th>
-                                        <th >Sire Name</th>
-                                        <th >Breed</th>
-                                        <th >Profile</th>
+                                            <tr>
+                                        <th data-field="id">ID</th>
+                                        <th data-editable="true">Date</th>
+                                        <th data-editable="true">TagNo</th>
+                                        <th data-editable="true">Animal Name</th>
+                                        <th data-editable="true">Ease of Calving</th>
+                                        <th data-editable="true">Description</th>
+                                        <th data-editable="true">YMCP</th>
+                                        <th data-editable="true">CAL GEL</th>
+                                        <th data-editable="true">Pro Bios</th>
+                                        <th data-editable="true">Keto Gel</th>
+                                        <th data-editable="true">Other</th>
+                                        <th data-editable="true">Calf Alive</th>
+                                        <th data-editable="true">Colostrum after 2 hrs</th>
+                                        <th data-editable="true">Dip Navel</th>
+                                        <th data-editable="true">Vitamin A & D</th>
+                                        <th data-editable="true">Weight at Birth</th>
+                                        <th data-editable="true">Bloody Milk</th>
+                                        <th data-editable="true">Milk Fever</th>
+                                        <th data-editable="true">After Birth Expelled</th>
+                                        <th data-editable="true">ECP</th>
+                                       
                                        
                                             <th >Action</th>
-                                
-                                       
+                                      
+                                      
                                             <th >Action</th>
+                                    
+                                    </tr>
                                       
                                     </tr>
                                     </tfoot>
                                     <tbody>
-									                                    <?php
+									<?php
                                     include 'db.php';
-                                    $select = mysqli_query($con,"select * from animal_registration where status ='Present'");
-                                    $sno = 0;
-                                    while($results = mysqli_fetch_array($select)) {
-                                        $sno++
+                                    $sql = "select a.*,c.* from animal_registration a,calving  c where a.animal_id = c.animal_id  ORDER by cdate ASC ";
+                                    $select = mysqli_query($con,$sql);
+                                    $sno=0;
+                                    while($results = mysqli_fetch_array($select)){
+                                        $sno++;
                                         ?>
-                                        <tr><input type="hidden" id="id" name="id" value="<?=$results['animal_id'];?>">
+                                            <tr>
+                                                <input type="hidden" id="id" name="id" value="<?=$results['id'];?>">
                                                 <td><?=$sno;?></td>
+                                                <td><?=$results['cdate'];?></td>
                                                 <td><?=$results['tagNo'];?></td>
                                                 <td><?=$results['animal_name'];?></td>
-                                                <td><?=$results['gender'];?></td>
-                                                <td><?=$results['dob'];?></td>
-                                                <td><?=$results['breed'];?></td>
-                                                <td><?=$results['location'];?></td>
-                                                <td><?=$results['genetic_percentage'];?></td>
-                                                <td><?=$results['name_of_dam'];?></td>
-                                                <td><?=$results['breed_of_dam'];?></td>
-                                                <td><?=$results['name_of_sire'];?></td>
-                                                <td><?=$results['breed_of_sire'];?></td>
-                                                <td><a href="animal-profile?tagNo=<?=$results['tagNo'];?>" class="btn btn-warning"><i class="fa fa-eye-slash fa-1x"></a></i></a></td>
-                                                <td><a  style="color: white" class="btn btn-success" href="edit-animals?animalid=<?=$results['animal_id'];?>&&farm_id=<?=$results['farm_id'];?>"><i class="fa fa-edit fa-1x"></a></i></td>
-                                                <td><a  style="color: white" class="btn btn-danger" onclick="return deleted()" href=""><i class="fa fa-trash fa-1x"></a></i></td>
+                                                <td><?=$results['eoc'];?></td>
+                                                <td><?=$results['des'];?></td>
+                                                <td><?=$results['ymcp'];?></td>
+                                                <td><?=$results['calgel'];?></td>
+                                                <td><?=$results['probios'];?></td>
+                                                <td><?=$results['ketogel'];?></td>
+                                                <td><?=$results['other'];?></td>
+                                                <td><?=$results['calfalive'];?></td>
+                                                <td><?=$results['colostrum'];?></td>
+                                                <td><?=$results['dipnavel'];?></td>
+                                                <td><?=$results['vitamins'];?></td>
+                                                <td><?=$results['weight'];?></td>
+                                                <td><?=$results['bloodymilk'];?></td>
+                                                <td><?=$results['milkfever'];?></td>
+                                                <td><?=$results['expelled'];?></td>
+                                                <td><?=$results['ecp'];?></td>
+                                               
+                                                    <td><a  style="color: white" class="btn btn-success"  href="edit-calving?farm_id=<?=$results['farm_id'];?>&&animal_id=<?=$results['animal_id'];?>"><i class="fa fa-edit fa-1x"></a></i></td>
+                                               
+                                              
+                                                    <td><a  style="color: white" class="btn btn-danger" onclick="return deleted()" href=""><i class="fa fa-trash fa-1x"></a></i></td>
+                                             
+
 
 
 
