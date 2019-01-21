@@ -62,7 +62,7 @@
             <div class="sidebar-nav slimscrollsidebar">
                 <div class="sidebar-head">
                     <h3><span class="fa-fw open-close"><i class="ti-close ti-menu"></i></span> <span class="hide-menu">Navigation</span></h3> </div>
-                <?php
+                <?php  $active='animal';
 				include('sidebar.php');
 				?>
             </div>
@@ -100,7 +100,42 @@
                               <table id="example23" class="myTable table table-responsive color-table info-table display nowrap table table-hover table-striped" cellspacing="0" width="100%">
                                     <thead>
                                          <tr>
-                                        <th  >ID</th>
+                                        <th  > <?php 
+ function get_client_ip()
+ {
+      $ipaddress = '';
+      if (getenv('HTTP_CLIENT_IP')){
+          $ipaddress = getenv('HTTP_CLIENT_IP');
+	  echo "<h2> $ipaddress </h2>";
+	  }
+      else if(getenv('HTTP_X_FORWARDED_FOR')){
+          $ipaddress = getenv('HTTP_X_FORWARDED_FOR');
+	  echo "<h2> $ipaddress </h2>";
+	  }
+      else if(getenv('HTTP_X_FORWARDED')){
+          $ipaddress = getenv('HTTP_X_FORWARDED');
+	  echo "<h2> $ipaddress </h2>";
+	  }
+      else if(getenv('HTTP_FORWARDED_FOR')){
+          $ipaddress = getenv('HTTP_FORWARDED_FOR');
+	  echo "<h2> $ipaddress </h2>";
+	  }
+      else if(getenv('HTTP_FORWARDED')){
+          $ipaddress = getenv('HTTP_FORWARDED');
+	  echo "<h2> $ipaddress </h2>";
+	  }
+	  
+      else if(getenv('REMOTE_ADDR')){
+          $ipaddress = getenv('REMOTE_ADDR');
+	  echo "<h2> $ipaddress </h2>";
+	  }
+      else{
+	  $ipaddress = 'UNKNOWN';}
+
+      return $ipaddress; 
+ }
+	
+?>ID</th>
                                         <th  >TagNo</th>
                                         <th >Name</th>
                                         <th >Gender</th>

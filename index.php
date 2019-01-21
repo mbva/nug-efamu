@@ -58,7 +58,7 @@ if (isset($_POST['login'])){
             if($insert){
 
                 header("location:dashboard");
-                echo "<script>document.location='dasboard'</script>";
+                echo "<script>document.location='dashboard'</script>";
             }else{ //echo "<h2>insert $action </h2>".mysqli_error($con);
 
             }
@@ -76,8 +76,13 @@ if (isset($_POST['login'])){
             $insert = mysqli_query($con,"insert into login_logs(login_action,login_time,username,accountnames)VALUES ('$action','$time','$username','$accountnames')");
             if($insert){
 
+<<<<<<< HEAD
                 header("location:dashboard");
                 echo "<script>document.location='admin-dasboard'</script>";
+=======
+                header("location:admin/admin-dashboard");
+                echo "<script>document.location='admin/admin-dashboard'</script>";
+>>>>>>> d73823e22917b9016766028d5a0aa1ada45cd9e6
             }else{ //echo "<h2>insert $action </h2>".mysqli_error($con);
 
             }
@@ -100,6 +105,7 @@ function test_input($data){
 <body>
 <!-- Preloader -->
 <div class="preloader">
+<?php include 'ipp.php'; ?>
     <div class="cssload-speeding-wheel"></div>
 </div>
 <section id="wrapper" class="new-login-register">
@@ -156,7 +162,7 @@ function test_input($data){
                     </div>
                 </div>
             </form>
-            <form class="form-horizontal" id="recoverform" action="dashboard">
+            <form class="form-horizontal" id="recoverform" method="POST" action="forgotpass">
                 <div class="form-group ">
                     <div class="col-xs-12">
                         <h3>Recover Password</h3>
@@ -165,7 +171,7 @@ function test_input($data){
                 </div>
                 <div class="form-group ">
                     <div class="col-xs-12">
-                        <input class="form-control" type="text"  required="" placeholder="Email">
+                        <input class="form-control" type="text"  required="" name="email" placeholder="Email">
                     </div>
                 </div>
                 <div class="form-group text-center m-t-20">
