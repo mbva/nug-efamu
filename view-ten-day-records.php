@@ -118,9 +118,7 @@
                                                             </div>
                                                         </div>
                                                     </form>
-                                               
-							           
-                            
+                      
                             <div class="table-responsive">
 							 
                               <table id="example23" class="myTable table table-responsive color-table info-table display nowrap table table-hover table-striped" cellspacing="0" width="100%">
