@@ -6,7 +6,7 @@
         <li class="user-pro">
 
             <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px;">
-                <li><a href="javascript:void(0)"><i class="ti-user"></i> <span class="hide-menu">My Profile</span></a></li>
+                <li><a href="javascript:void(0)"><i class="ti-user"></i> <span class="hide-menu">My Profiles</span></a></li>
                 <li><a href="javascript:void(0)"><i class="ti-wallet"></i> <span class="hide-menu">My Balance</span></a></li>
                 <li><a href="javascript:void(0)"><i class="ti-email"></i> <span class="hide-menu">Inbox</span></a></li>
                 <li><a href="javascript:void(0)"><i class="ti-settings"></i> <span class="hide-menu">Account Setting</span></a></li>
