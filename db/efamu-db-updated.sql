@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 16, 2019 at 08:10 PM
+-- Generation Time: Jan 22, 2019 at 09:04 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -129,7 +129,7 @@ INSERT INTO `animal_registration` (`farm_id`, `animal_id`, `tagNo`, `animal_name
 (1, 3, 'EFAMU23', 'Kahil', 'Male', 'dsv kg', '2016-09-16', 'yes', '63', 'casc', 'sacs', 'cs', 'fs', 'Present'),
 (1, 4, '45656', 'Joanota', 'Female', 'Abigar', '2018-11-17', 'On', '67', 'Vincent Matsiko', '433434', 'TOT', 'TOPO', 'Sold'),
 (1, 11, 'EG4323', 'Nugspftc', 'Female', 'Abigar', '2018-11-29', 'no', '63', 'faf', 'afa', 'saf', 'asf', 'Present'),
-(2, 12, '001', 'KOGA', 'Female', 'FRIESIAN', '', 'On', '75', 'ANKOLE', 'FRIESIAN', 'ANKOLE', 'FRIESIAN', 'Present'),
+(2, 12, '001', 'KOGA', 'Female', 'FRIESIAN', '', 'On', '75', 'ANKOLE', 'FRIESIAN', 'ANKOLE', 'FRIESIAN', 'Culled'),
 (1, 13, 'OO2', 'JASI', 'Female', 'FRIESIAN', '', 'On', '75', 'ANKOLE', 'FRIESIAN', 'ANKOLE', 'FRIESIAN', 'Present'),
 (1, 14, '003', 'STELLA', 'Female', 'FRIESIAN', '', 'On', '75', 'ANKOLE', 'FRIESIAN', 'ANKOLE', 'FRIESIAN', 'Present'),
 (1, 15, '004', 'LIILY', 'Female', 'FRIESIAN', '', 'On', '75', 'ANKOLE', 'FRIESIAN', 'ANKOLE', 'FRIESIAN', 'Present'),
@@ -262,7 +262,7 @@ CREATE TABLE IF NOT EXISTS `culling` (
   `reason` varchar(255) DEFAULT NULL,
   `comment` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
 
 --
 -- Dumping data for table `culling`
@@ -276,7 +276,8 @@ INSERT INTO `culling` (`farm_id`, `id`, `animal_id`, `date_of_culling`, `reason`
 (2, 17, '24', '0000-00-00', 'Egdf', 'Dfg'),
 (2, 18, '24', '2019-01-14', 'Fssas', 'Asfsff'),
 (2, 19, '2', '0000-00-00', '', ''),
-(2, 20, '2', '0000-00-00', '', '');
+(2, 20, '2', '0000-00-00', '', ''),
+(2, 21, '12', '2019-01-02', 'Oppp', 'Jkkj');
 
 -- --------------------------------------------------------
 
@@ -741,7 +742,7 @@ CREATE TABLE IF NOT EXISTS `login_logs` (
   `username` varchar(255) DEFAULT NULL,
   `accountnames` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=252 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=265 ;
 
 --
 -- Dumping data for table `login_logs`
@@ -849,7 +850,20 @@ INSERT INTO `login_logs` (`farm_id`, `id`, `login_action`, `login_time`, `userna
 (1, 248, 'System Admin Logged in', '2019-01-15 08:58:12', 'admin', 'System Admin'),
 (1, 249, 'System Admin Logged in', '2019-01-16 09:09:07', 'admin', 'System Admin'),
 (1, 250, 'System Admin Logged in', '2019-01-16 09:09:14', 'admin', 'System Admin'),
-(1, 251, 'System Admin Logged in', '2019-01-16 21:57:27', 'Admin', 'System Admin');
+(1, 251, 'System Admin Logged in', '2019-01-16 21:57:27', 'Admin', 'System Admin'),
+(1, 252, 'Vincent Bakunzi Logged in', '2019-01-17 10:13:24', 'vincent', 'Vincent Bakunzi'),
+(1, 253, 'Vincent Bakunzi Logged in', '2019-01-17 15:53:55', 'vincent', 'Vincent Bakunzi'),
+(1, 254, 'Vincent Bakunzi Logged in', '2019-01-19 02:35:55', 'vincent', 'Vincent Bakunzi'),
+(1, 255, 'Vincent Bakunzi Logged in', '2019-01-19 16:23:57', 'vincent', 'Vincent Bakunzi'),
+(1, 256, 'Vincent Bakunzi Logged in', '2019-01-19 16:26:42', 'vincent', 'Vincent Bakunzi'),
+(1, 257, 'Vincent Bakunzi Logged in', '2019-01-19 16:55:52', 'vincent', 'Vincent Bakunzi'),
+(1, 258, 'Vincent Bakunzi Logged in', '2019-01-20 11:11:45', 'vincent', 'Vincent Bakunzi'),
+(1, 259, 'Vincent Bakunzi Logged in', '2019-01-20 12:22:05', 'vincent', 'Vincent Bakunzi'),
+(1, 260, 'Vincent Bakunzi Logged in', '2019-01-20 12:55:25', 'vincent', 'Vincent Bakunzi'),
+(1, 261, 'Vincent Bakunzi Logged in', '2019-01-20 17:32:29', 'vincent', 'Vincent Bakunzi'),
+(1, 262, 'Vincent Bakunzi Logged in', '2019-01-21 18:11:34', 'vincent', 'Vincent Bakunzi'),
+(1, 263, 'Vincent Bakunzi Logged in', '2019-01-22 08:37:37', 'vincent', 'Vincent Bakunzi'),
+(1, 264, 'Vincent Bakunzi Logged in', '2019-01-22 09:44:12', 'VINCENT', 'Vincent Bakunzi');
 
 -- --------------------------------------------------------
 
@@ -1202,7 +1216,7 @@ CREATE TABLE IF NOT EXISTS `transaction_logs` (
   `transaction_time` datetime DEFAULT CURRENT_TIMESTAMP,
   `transaction_by` varchar(250) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=545 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=546 ;
 
 --
 -- Dumping data for table `transaction_logs`
@@ -1740,7 +1754,8 @@ INSERT INTO `transaction_logs` (`farm_id`, `id`, `transaction_action`, `transact
 (2, 541, 'Entered Culling records of  2', '2019-01-15 09:19:39', 'System Admin'),
 (2, 542, 'Entered Disease Incidence records of  ', '2019-01-15 09:21:20', 'System Admin'),
 (2, 543, 'Entered Spraying records ', '2019-01-15 09:40:37', 'System Admin'),
-(2, 544, 'Added an Acaricide', '2019-01-15 10:29:36', 'System Admin');
+(2, 544, 'Added an Acaricide', '2019-01-15 10:29:36', 'System Admin'),
+(2, 545, 'Entered Culling records of  12', '2019-01-17 10:35:19', 'Vincent Bakunzi');
 
 -- --------------------------------------------------------
 
@@ -1767,11 +1782,32 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`farm_id`, `id`, `memberid`, `full_names`, `contact`, `username`, `password`, `photo`, `status`, `email`) VALUES
-(2, 2, 'EFAMU-44977', 'System Admin', '0701656722', 'admin', 'e3afed0047b08059d0fada10f400c1e5', '', 'Activated', ''),
-(1, 5, 'EFAMU-84045', 'Efamu Brenda Kembabaz', '0781260064', 'efamu', '21232f297a57a5a743894a0e4a801fc3', '', 'Activated', ''),
+(2, 2, 'EFAMU-44977', 'System Admin', '0701656722', 'admin', 'e3afed0047b08059d0fada10f400c1e5', '', 'Activated', 'vmatsiko@gmail.com'),
+(2, 5, 'EFAMU-84045', 'Efamu Brenda Kembabaz', '0781260064', 'efamu', '21232f297a57a5a743894a0e4a801fc3', '', 'Activated', 'brendabakesigaki@gmail.com'),
 (1, 9, 'EFAMU-68559', 'Nampijja Adah', '0702724760', 'aidah', 'e3afed0047b08059d0fada10f400c1e5', '', 'Activated', ''),
 (2, 10, 'EFAMU-97909', 'Vincent Bakunzi', '0777844758', 'vincent', 'b15ab3f829f0f897fe507ef548741afb', '', 'Activated', ''),
 (5, 11, 'EFAMU-44620', 'MR AGGREY KAKUNDA', '077200002', 'AGGREY', '93a36b9e6d4390388ebe6344db288d61', '', 'Activated', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_sources`
+--
+
+CREATE TABLE IF NOT EXISTS `user_sources` (
+  `id` int(12) NOT NULL AUTO_INCREMENT,
+  `country_code` varchar(100) DEFAULT NULL,
+  `full_names` varchar(100) DEFAULT NULL,
+  `country_name` varchar(100) DEFAULT NULL,
+  `region_name` varchar(100) DEFAULT NULL,
+  `city_name` varchar(100) DEFAULT NULL,
+  `latitude` varchar(100) DEFAULT NULL,
+  `longitude` varchar(100) DEFAULT NULL,
+  `time_zone` varchar(100) DEFAULT NULL,
+  `ip` varchar(100) DEFAULT NULL,
+  `logtime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
