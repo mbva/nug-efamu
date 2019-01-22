@@ -78,11 +78,11 @@ if (isset($_POST['login'])){
 
 
                 header("location:dashboard");
-                echo "<script>document.location='admin-dasboard'</script>";
+                echo "<script>document.location='admin-dashboard'</script>";
 
                 header("location:admin/admin-dashboard");
                 echo "<script>document.location='admin/admin-dashboard'</script>";
-//>>>>>>> d73823e22917b9016766028d5a0aa1ada45cd9e6
+
             }else{ //echo "<h2>insert $action </h2>".mysqli_error($con);
 
             }
