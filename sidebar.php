@@ -75,6 +75,23 @@
             </ul>
         </li>
 
+        <li> <a href="javascript:void(0)" class="waves-effect"><i class="mdi mdi-checkbox-multiple-marked-outline fa-fw"></i> <span class="hide-menu">Feeding<span class="fa arrow"></span></span></a>
+            <ul class="nav nav-second-level">
+                <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">Calf </span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-third-level">
+                        <li> <a href="javascript:void(0)"><i class="fa fa-plus-square fa-fw"></i><span class="hide-menu">Add Records</span></a> </li>
+                        <li> <a href="javascript:void(0)"><i class="fa fa-eye-slash fa-fw"></i><span class="hide-menu">View Records</span></a> </li>
+                    </ul>
+                </li>
+                <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">Adult </span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-third-level">
+                        <li> <a href="javascript:void(0)"><i class="fa fa-plus-square fa-fw"></i><span class="hide-menu">New Records</span></a> </li>
+                        <li> <a href="javascript:void(0)"><i class="fa fa-eye-slash fa-fw"></i><span class="hide-menu">View Records</span></a> </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+
         <li> <a href="javascript:void(0)" class="waves-effect"><i class="mdi mdi-checkbox-multiple-marked-outline fa-fw"></i> <span class="hide-menu">Farm<span class="fa arrow"></span></span></a>
             <ul class="nav nav-second-level">
                 <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">Registration </span><span class="fa arrow"></span></a>

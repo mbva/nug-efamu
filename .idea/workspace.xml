@@ -12,56 +12,12 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="sidebar.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="sidebar.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/sidebar.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="332">
-              <caret line="169" column="12" lean-forward="false" selection-start-line="169" selection-start-column="12" selection-end-line="169" selection-end-column="12" />
-              <folding>
-                <marker date="1547630450979" expanded="true" signature="623:677" ph="select full_... users" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="nav.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/nav.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="113" column="58" lean-forward="false" selection-start-line="113" selection-start-column="58" selection-end-line="113" selection-end-column="58" />
-              <folding>
-                <marker date="1547665234749" expanded="true" signature="10336:10390" ph="select full_... users" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="graph-milk-sales.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/graph-milk-sales.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="393">
-              <caret line="213" column="62" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="317" selection-end-column="0" />
-              <folding>
-                <element signature="n#script#0;n#div#1;n#div#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
-                <marker date="1547665133758" expanded="true" signature="5640:5744" ph="select sum(q... milksales" />
-                <marker date="1547665133758" expanded="true" signature="6990:7094" ph="select sum(q... milksales" />
-                <marker date="1547665133758" expanded="true" signature="8874:8977" ph="select sum(q... milkyield" />
-                <marker date="1547665133758" expanded="true" signature="10138:10241" ph="select sum(q... milkyield" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="graph-weight-tracking.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/graph-weight-tracking.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="546">
-              <caret line="139" column="62" lean-forward="false" selection-start-line="139" selection-start-column="62" selection-end-line="139" selection-end-column="62" />
-              <folding>
-                <element signature="n#script#0;n#div#1;n#div#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
-                <marker date="1547665279829" expanded="true" signature="4988:5116" ph="select AVG (... weight" />
-                <marker date="1547665279829" expanded="true" signature="6004:6101" ph="select AVG (... weight" />
-              </folding>
+            <state relative-caret-position="410">
+              <caret line="88" column="131" lean-forward="false" selection-start-line="88" selection-start-column="131" selection-end-line="88" selection-end-column="131" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -80,14 +36,14 @@
       <find>meg</find>
     </findStrings>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/css/style.css" />
-        <option value="$PROJECT_DIR$/css/db.php" />
         <option value="$PROJECT_DIR$/db.php" />
         <option value="$PROJECT_DIR$/admin/dashbord.php" />
-        <option value="$PROJECT_DIR$/logout.php" />
         <option value="$PROJECT_DIR$/admin/dashboard.php" />
         <option value="$PROJECT_DIR$/admin/admin-nav.php" />
         <option value="$PROJECT_DIR$/admin/admin-dashboard.php" />
@@ -98,15 +54,6 @@
         <option value="$PROJECT_DIR$/admin/admin-sidebar.php" />
         <option value="$PROJECT_DIR$/admin/admin-head.php" />
         <option value="$PROJECT_DIR$/index.php" />
-        <option value="$PROJECT_DIR$/register-animal.php" />
-        <option value="$PROJECT_DIR$/add-calving.php" />
-        <option value="$PROJECT_DIR$/ten-day.php" />
-        <option value="$PROJECT_DIR$/animal-profile2.php" />
-        <option value="$PROJECT_DIR$/weight-track.php" />
-        <option value="$PROJECT_DIR$/add-culling.php" />
-        <option value="$PROJECT_DIR$/add-disease-incidences.php" />
-        <option value="$PROJECT_DIR$/add-spraying-records.php" />
-        <option value="$PROJECT_DIR$/add-vaccination-records.php" />
         <option value="$PROJECT_DIR$/head.php" />
         <option value="$PROJECT_DIR$/manage-doctors.php" />
         <option value="$PROJECT_DIR$/manage-acaricides.php" />
@@ -115,11 +62,37 @@
         <option value="$PROJECT_DIR$/manage-vaccinaes.php" />
         <option value="$PROJECT_DIR$/manage-breeds.php" />
         <option value="$PROJECT_DIR$/add-farmertips.php" />
-        <option value="$PROJECT_DIR$/sidebar.php" />
         <option value="$PROJECT_DIR$/dashboard.php" />
         <option value="$PROJECT_DIR$/graph-milk-sales.php" />
-        <option value="$PROJECT_DIR$/nav.php" />
         <option value="$PROJECT_DIR$/graph-weight-tracking.php" />
+        <option value="$PROJECT_DIR$/register-animal.php" />
+        <option value="$PROJECT_DIR$/animal-profile2.php" />
+        <option value="$PROJECT_DIR$/ten-day.php" />
+        <option value="$PROJECT_DIR$/nav.php" />
+        <option value="$PROJECT_DIR$/view-calving-records.php" />
+        <option value="$PROJECT_DIR$/view-animal-registration.php" />
+        <option value="$PROJECT_DIR$/add-calving.php" />
+        <option value="$PROJECT_DIR$/weight-track.php" />
+        <option value="$PROJECT_DIR$/view-weight-tracks.php" />
+        <option value="$PROJECT_DIR$/wheel-heat-animals.php" />
+        <option value="$PROJECT_DIR$/add-serving.php" />
+        <option value="$PROJECT_DIR$/wheel-heat-test.php" />
+        <option value="$PROJECT_DIR$/wheel-preg-test.php" />
+        <option value="$PROJECT_DIR$/wheel-pregnant.php" />
+        <option value="$PROJECT_DIR$/pregnancy_status.php" />
+        <option value="$PROJECT_DIR$/logout.php" />
+        <option value="$PROJECT_DIR$/session.php" />
+        <option value="$PROJECT_DIR$/data-table.html" />
+        <option value="$PROJECT_DIR$/add-vaccination-records.php" />
+        <option value="$PROJECT_DIR$/add-spraying-records.php" />
+        <option value="$PROJECT_DIR$/add-disease-incidences.php" />
+        <option value="$PROJECT_DIR$/add-culling.php" />
+        <option value="$PROJECT_DIR$/view-vaccination-records.php" />
+        <option value="$PROJECT_DIR$/view-culling-records.php" />
+        <option value="$PROJECT_DIR$/view-disease-incidences.php" />
+        <option value="$PROJECT_DIR$/view-spraying-records.php" />
+        <option value="$PROJECT_DIR$/view-ten-day-records.php" />
+        <option value="$PROJECT_DIR$/sidebar.php" />
       </list>
     </option>
   </component>
@@ -155,34 +128,34 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="nugsoft" />
+              <option name="myItemId" value="nug-efamu" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="nugsoft" />
+              <option name="myItemId" value="nug-efamu" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../nugsoft" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\wamp\www\nugsoft" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\wamp\www\nugsoft" />
       <recent name="C:\wamp\www\nugsoft\css" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\wamp\www\nugsoft" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -289,22 +262,26 @@
       <workItem from="1547531914501" duration="8965000" />
       <workItem from="1547617783229" duration="827000" />
       <workItem from="1547619035263" duration="9571000" />
+      <workItem from="1548176342474" duration="955000" />
+      <workItem from="1548228447150" duration="871000" />
+      <workItem from="1548229338032" duration="2520000" />
+      <workItem from="1548232037856" duration="16966000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="80907000" />
+    <option name="totallyTimeSpent" value="102219000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24450952" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24011713" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329653" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -329,121 +306,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1003">
-          <caret line="59" column="37" lean-forward="false" selection-start-line="59" selection-start-column="37" selection-end-line="59" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/admin-dashboard.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="24" column="38" lean-forward="false" selection-start-line="24" selection-start-column="38" selection-end-line="24" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/admin-nav.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3247">
-          <caret line="191" column="42" lean-forward="false" selection-start-line="191" selection-start-column="42" selection-end-line="191" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1003">
-          <caret line="59" column="37" lean-forward="false" selection-start-line="59" selection-start-column="37" selection-end-line="59" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/admin-dashboard.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="24" column="38" lean-forward="false" selection-start-line="24" selection-start-column="38" selection-end-line="24" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/admin-nav.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3247">
-          <caret line="191" column="42" lean-forward="false" selection-start-line="191" selection-start-column="42" selection-end-line="191" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ampleadmin-sidebar/login.html" />
-    <entry file="file://$PROJECT_DIR$/plugins/images/login-register.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/css/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="317">
-          <caret line="0" column="68825" lean-forward="false" selection-start-line="0" selection-start-column="68825" selection-end-line="0" selection-end-column="68825" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/db.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="19" lean-forward="true" selection-start-line="3" selection-start-column="19" selection-end-line="3" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/plugins/images/admin-text.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/plugins/images/admin-logo.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/session.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/admin-dashboard.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-68">
-          <caret line="53" column="22" lean-forward="true" selection-start-line="53" selection-start-column="22" selection-end-line="53" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/footer.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="54" column="6" lean-forward="false" selection-start-line="54" selection-start-column="6" selection-end-line="54" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/register-animal.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="108" column="23" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="344" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/admin-nav.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="337">
-          <caret line="198" column="64" lean-forward="false" selection-start-line="198" selection-start-column="64" selection-end-line="198" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/add-calving.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="101" column="44" lean-forward="true" selection-start-line="101" selection-start-column="44" selection-end-line="101" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/css/colors/megna-dark.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
@@ -482,69 +344,11 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/logout.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="17" column="30" lean-forward="false" selection-start-line="17" selection-start-column="30" selection-end-line="17" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/index.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="521">
           <caret line="78" column="54" lean-forward="false" selection-start-line="78" selection-start-column="54" selection-end-line="78" selection-end-column="54" />
-          <folding>
-            <marker date="1547403534984" expanded="true" signature="1498:1565" ph="select * fro... users" />
-            <marker date="1547403534984" expanded="true" signature="2412:2535" ph="insert into login_logs... " />
-            <marker date="1547403534984" expanded="true" signature="3355:3478" ph="insert into login_logs... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/animal-profile2.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="444">
-          <caret line="186" column="0" lean-forward="false" selection-start-line="186" selection-start-column="0" selection-end-line="186" selection-end-column="0" />
-          <folding>
-            <marker date="1547466636523" expanded="true" signature="3641:3718" ph="select * fro... animal_registration" />
-            <marker date="1547466636523" expanded="true" signature="5120:5176" ph="select * fro... animal_registration" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ten-day.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="97" column="10" lean-forward="true" selection-start-line="97" selection-start-column="10" selection-end-line="97" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/add-disease-incidences.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="188" column="42" lean-forward="true" selection-start-line="188" selection-start-column="42" selection-end-line="188" selection-end-column="42" />
-          <folding>
-            <marker date="1547533458570" expanded="true" signature="1445:1545" ph="select * fro... disease_incidences" />
-            <marker date="1547533458570" expanded="true" signature="1697:2054" ph="insert into disease_incidences... " />
-            <marker date="1547533458570" expanded="true" signature="2079:2216" ph="insert into transaction_logs... " />
-            <marker date="1547533458570" expanded="true" signature="6863:6941" ph="select * fro... animal_registration" />
-            <marker date="1547533458570" expanded="true" signature="12995:13046" ph="select * fro... manage_doctors" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/add-culling.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="35" column="24" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="260" selection-end-column="0" />
-          <folding>
-            <marker date="1547476460753" expanded="true" signature="780:879" ph="select * fro... culling" />
-            <marker date="1547476460753" expanded="true" signature="1034:1160" ph="insert into culling... " />
-            <marker date="1547476460753" expanded="true" signature="1212:1349" ph="insert into transaction_logs... " />
-            <marker date="1547476460753" expanded="true" signature="1441:1541" ph="update anima... " />
-            <marker date="1547476460753" expanded="true" signature="6097:6175" ph="select * fro... animal_registration" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -556,45 +360,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/add-spraying-records.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="410">
-          <caret line="144" column="35" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="251" selection-end-column="0" />
-          <folding>
-            <marker date="1547534487959" expanded="true" signature="649:723" ph="select * fro... spraying" />
-            <marker date="1547534487959" expanded="true" signature="868:1009" ph="insert into spraying... " />
-            <marker date="1547534487959" expanded="true" signature="1034:1171" ph="insert into transaction_logs... " />
-            <marker date="1547534487959" expanded="true" signature="6293:6370" ph="select * fro... manage_acaricide" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/weight-track.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="130">
-          <caret line="106" column="35" lean-forward="false" selection-start-line="106" selection-start-column="35" selection-end-line="124" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/head.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="546">
-          <caret line="46" column="9" lean-forward="false" selection-start-line="46" selection-start-column="9" selection-end-line="46" selection-end-column="9" />
-          <folding>
-            <marker date="1547536754202" expanded="true" signature="2245:2285" ph="select * fro... farms" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/manage-doctors.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="427">
           <caret line="82" column="55" lean-forward="false" selection-start-line="82" selection-start-column="55" selection-end-line="82" selection-end-column="55" />
-          <folding>
-            <marker date="1547536984584" expanded="true" signature="775:851" ph="select * fro... manage_doctors" />
-            <marker date="1547536984584" expanded="true" signature="1012:1174" ph="insert into manage_doctors... " />
-            <marker date="1547536984584" expanded="true" signature="1198:1335" ph="insert into transaction_logs... " />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -602,23 +372,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="342">
           <caret line="108" column="168" lean-forward="false" selection-start-line="108" selection-start-column="168" selection-end-line="108" selection-end-column="168" />
-          <folding>
-            <marker date="1547537345031" expanded="true" signature="578:665" ph="select * fro... expensesitems" />
-            <marker date="1547537345031" expanded="true" signature="925:1021" ph="insert into expensesitems... " />
-            <marker date="1547537345031" expanded="true" signature="1045:1182" ph="insert into transaction_logs... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/manage-acaricides.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="257">
-          <caret line="103" column="171" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="239" selection-end-column="0" />
-          <folding>
-            <marker date="1547537297346" expanded="true" signature="658:741" ph="select * fro... manage_acaricide" />
-            <marker date="1547537297346" expanded="true" signature="1023:1206" ph="insert into manage_acaricide... " />
-            <marker date="1547537297346" expanded="true" signature="1230:1367" ph="insert into transaction_logs... " />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -626,11 +380,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-15">
           <caret line="96" column="48" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="232" selection-end-column="0" />
-          <folding>
-            <marker date="1547538309180" expanded="true" signature="756:840" ph="select * fro... farmerresources" />
-            <marker date="1547538309180" expanded="true" signature="988:1143" ph="insert into farmerresources... " />
-            <marker date="1547538309180" expanded="true" signature="1167:1305" ph="insert into transaction_logs" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -638,40 +387,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1600">
           <caret line="101" column="178" lean-forward="false" selection-start-line="101" selection-start-column="178" selection-end-line="101" selection-end-column="178" />
-          <folding>
-            <marker date="1547539079946" expanded="true" signature="500:575" ph="select * fro... manage_breeds" />
-            <marker date="1547539079946" expanded="true" signature="848:979" ph="insert into manage_breeds... " />
-            <marker date="1547539079946" expanded="true" signature="1003:1140" ph="insert into transaction_logs... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/register-animal.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="172">
-          <caret line="132" column="35" lean-forward="false" selection-start-line="132" selection-start-column="35" selection-end-line="142" selection-end-column="42" />
-          <folding>
-            <marker date="1547403802871" expanded="true" signature="1336:1413" ph="select * fro... animal_registration" />
-            <marker date="1547403802871" expanded="true" signature="1815:1898" ph="select * fro... animal_registration" />
-            <marker date="1547403802871" expanded="true" signature="2403:2706" ph="insert into animal_registration... " />
-            <marker date="1547403802871" expanded="true" signature="2739:2876" ph="insert into transaction_logs... " />
-            <marker date="1547403802871" expanded="true" signature="8878:8929" ph="select * fro... manage_breeds" />
-            <marker date="1547403802871" expanded="true" signature="14994:15069" ph="select * fro... farmertips" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/add-calving.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="113">
-          <caret line="188" column="35" lean-forward="false" selection-start-line="188" selection-start-column="35" selection-end-line="193" selection-end-column="42" />
-          <folding>
-            <marker date="1547403803012" expanded="true" signature="2582:2678" ph="select * fro... calving" />
-            <marker date="1547403803012" expanded="true" signature="2807:3195" ph="INSERT INTO calving... " />
-            <marker date="1547403803012" expanded="true" signature="3579:3720" ph="insert into heat_animals... " />
-            <marker date="1547403803012" expanded="true" signature="3748:3887" ph="insert into transaction_logs... " />
-            <marker date="1547403803012" expanded="true" signature="8265:8365" ph="select * fro... animal_registration" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -679,11 +395,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="95" column="52" lean-forward="false" selection-start-line="95" selection-start-column="52" selection-end-line="95" selection-end-column="52" />
-          <folding>
-            <marker date="1547621360560" expanded="true" signature="736:802" ph="select * fro... farmertips" />
-            <marker date="1547621360560" expanded="true" signature="950:1071" ph="insert into farmertips... " />
-            <marker date="1547621360560" expanded="true" signature="1095:1232" ph="insert into transaction_logs... " />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -691,11 +402,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="546">
           <caret line="145" column="22" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="249" selection-end-column="0" />
-          <folding>
-            <marker date="1547538772142" expanded="true" signature="730:805" ph="select * fro... manage_vaccines" />
-            <marker date="1547538772142" expanded="true" signature="1083:1275" ph="insert into manage_vaccines... " />
-            <marker date="1547538772142" expanded="true" signature="1299:1436" ph="insert into transaction_logs... " />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -703,7 +410,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -711,30 +417,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="196">
           <caret line="420" column="37" lean-forward="false" selection-start-line="420" selection-start-column="37" selection-end-line="420" selection-end-column="37" />
-          <folding>
-            <element signature="n#div#1;n#div#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#li#2;n#ul#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#script#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#li#2;n#ul#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#3;n#div#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <marker date="1547664475558" expanded="true" signature="3868:3976" ph="select count... animal_registration" />
-            <marker date="1547664475558" expanded="true" signature="5802:5927" ph="select sum(q... milkyield" />
-            <marker date="1547664475558" expanded="true" signature="7789:7929" ph="select COUNT... disease_incidences" />
-            <marker date="1547664475558" expanded="true" signature="11564:11668" ph="select sum(q... milkyield" />
-            <marker date="1547664475558" expanded="true" signature="13798:13903" ph="select sum(q... milksales" />
-            <marker date="1547664475558" expanded="true" signature="17685:17816" ph="select sum(s... milksales" />
-            <marker date="1547664475558" expanded="true" signature="18196:18331" ph="select sum(s... animalsales" />
-            <marker date="1547664475558" expanded="true" signature="20280:20428" ph="select sum(t... generalexpenses" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sidebar.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="332">
-          <caret line="169" column="12" lean-forward="false" selection-start-line="169" selection-start-column="12" selection-end-line="169" selection-end-column="12" />
-          <folding>
-            <marker date="1547630450979" expanded="true" signature="623:677" ph="select full_... users" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -742,59 +425,396 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graph-milk-sales.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3621">
+          <caret line="213" column="62" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="317" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/add-vaccination-records.php">
+    <entry file="file://$PROJECT_DIR$/graph-weight-tracking.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="198" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="303" selection-end-column="0" />
+        <state relative-caret-position="2363">
+          <caret line="139" column="62" lean-forward="false" selection-start-line="139" selection-start-column="62" selection-end-line="139" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/register-animal.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="5" selection-end-column="20" />
           <folding>
-            <marker date="1547535819297" expanded="true" signature="617:700" ph="select * fro... animal_registration" />
-            <marker date="1547535819297" expanded="true" signature="1055:1164" ph="select * fro... vaccination" />
-            <marker date="1547535819297" expanded="true" signature="1309:1494" ph="insert into vaccination... " />
-            <marker date="1547535819297" expanded="true" signature="1518:1655" ph="insert into transaction_logs... " />
-            <marker date="1547535819297" expanded="true" signature="6198:6277" ph="select * fro... animal_registration" />
-            <marker date="1547535819297" expanded="true" signature="7643:7695" ph="select * fro... manage_vaccines" />
-            <marker date="1547535819297" expanded="true" signature="10266:10340" ph="select * fro... manage_doctors" />
+            <marker date="1548174890326" expanded="true" signature="1357:1434" ph="select * fro... animal_registration" />
+            <marker date="1548174890326" expanded="true" signature="1836:1919" ph="select * fro... animal_registration" />
+            <marker date="1548174890326" expanded="true" signature="2424:2727" ph="insert into animal_registration... " />
+            <marker date="1548174890326" expanded="true" signature="2760:2897" ph="insert into transaction_logs... " />
+            <marker date="1548174890326" expanded="true" signature="8899:8950" ph="select * fro... manage_breeds" />
+            <marker date="1548174890326" expanded="true" signature="15015:15090" ph="select * fro... farmertips" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/animal-profile2.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="23" lean-forward="false" selection-start-line="5" selection-start-column="23" selection-end-line="5" selection-end-column="23" />
+          <folding>
+            <marker date="1548230065619" expanded="true" signature="3635:3712" ph="select * fro... animal_registration" />
+            <marker date="1548230065619" expanded="true" signature="5114:5170" ph="select * fro... animal_registration" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ten-day.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="23" lean-forward="false" selection-start-line="5" selection-start-column="23" selection-end-line="5" selection-end-column="23" />
+          <folding>
+            <marker date="1548230109219" expanded="true" signature="1803:1876" ph="select * fro... calving" />
+            <marker date="1548230109219" expanded="true" signature="2323:2454" ph="select * fro... ten_day_sheet" />
+            <marker date="1548230109219" expanded="true" signature="2792:3267" ph="INSERT INTO ten_day_sheet... " />
+            <marker date="1548230109219" expanded="true" signature="3319:3456" ph="insert into transaction_logs... " />
+            <marker date="1548230109219" expanded="true" signature="7829:7886" ph="select * fro... animal_registration" />
+            <marker date="1548230109219" expanded="true" signature="8515:8636" ph="select count... ten_day_sheet" />
+            <marker date="1548230109219" expanded="true" signature="11336:11381" ph="select * fro... calving" />
+            <marker date="1548230109219" expanded="true" signature="11861:11946" ph="select * fro... animal_registration" />
+            <marker date="1548230109219" expanded="true" signature="13895:13991" ph="select max(d... ten_day_sheet" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view-doctors.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-391">
+          <caret line="4" column="25" lean-forward="false" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
+          <folding>
+            <marker date="1548156303826" expanded="true" signature="6544:6595" ph="select * fro... manage_doctors" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/head.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="782">
+          <caret line="46" column="9" lean-forward="false" selection-start-line="46" selection-start-column="9" selection-end-line="46" selection-end-column="9" />
+          <folding>
+            <marker date="1548174880893" expanded="true" signature="2290:2330" ph="select * fro... farms" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/topnav.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1548174890342" expanded="true" signature="14829:14869" ph="select * fro... farms" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/nav.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="113" column="58" lean-forward="false" selection-start-line="113" selection-start-column="58" selection-end-line="113" selection-end-column="58" />
+        <state relative-caret-position="3281">
+          <caret line="193" column="13" lean-forward="false" selection-start-line="193" selection-start-column="13" selection-end-line="193" selection-end-column="13" />
           <folding>
-            <marker date="1547665234749" expanded="true" signature="10336:10390" ph="select full_... users" />
+            <marker date="1548231385136" expanded="true" signature="10336:10390" ph="select full_... users" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/graph-milk-sales.php">
+    <entry file="file://$PROJECT_DIR$/add-calving.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="393">
-          <caret line="213" column="62" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="317" selection-end-column="0" />
+        <state relative-caret-position="119">
+          <caret line="7" column="17" lean-forward="false" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
           <folding>
-            <element signature="n#script#0;n#div#1;n#div#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <marker date="1547665133758" expanded="true" signature="5640:5744" ph="select sum(q... milksales" />
-            <marker date="1547665133758" expanded="true" signature="6990:7094" ph="select sum(q... milksales" />
-            <marker date="1547665133758" expanded="true" signature="8874:8977" ph="select sum(q... milkyield" />
-            <marker date="1547665133758" expanded="true" signature="10138:10241" ph="select sum(q... milkyield" />
+            <marker date="1548231614284" expanded="true" signature="2600:2696" ph="select * fro... calving" />
+            <marker date="1548231614284" expanded="true" signature="2825:3213" ph="INSERT INTO calving... " />
+            <marker date="1548231614284" expanded="true" signature="3597:3738" ph="insert into heat_animals... " />
+            <marker date="1548231614284" expanded="true" signature="3766:3905" ph="insert into transaction_logs... " />
+            <marker date="1548231614284" expanded="true" signature="8283:8383" ph="select * fro... animal_registration" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/graph-weight-tracking.php">
+    <entry file="file://$PROJECT_DIR$/view-animal-registration.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="546">
-          <caret line="139" column="62" lean-forward="false" selection-start-line="139" selection-start-column="62" selection-end-line="139" selection-end-column="62" />
+        <state relative-caret-position="-1853">
+          <caret line="38" column="23" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="282" selection-end-column="0" />
           <folding>
-            <element signature="n#script#0;n#div#1;n#div#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <marker date="1547665279829" expanded="true" signature="4988:5116" ph="select AVG (... weight" />
-            <marker date="1547665279829" expanded="true" signature="6004:6101" ph="select AVG (... weight" />
+            <marker date="1548231536403" expanded="true" signature="6996:7053" ph="select * fro... animal_registration" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view-calving-records.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="3" lean-forward="true" selection-start-line="5" selection-start-column="3" selection-end-line="5" selection-end-column="21" />
+          <folding>
+            <marker date="1548231417829" expanded="true" signature="7877:8002" ph="select a.*,c... animal_registration" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/weight-track.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="106" column="42" lean-forward="true" selection-start-line="100" selection-start-column="36" selection-end-line="106" selection-end-column="42" />
+          <folding>
+            <marker date="1548231674903" expanded="true" signature="864:955" ph="select * fro... weight" />
+            <marker date="1548231674903" expanded="true" signature="1114:1245" ph="insert into weight... " />
+            <marker date="1548231674903" expanded="true" signature="1269:1406" ph="insert into transaction_logs... " />
+            <marker date="1548231674903" expanded="true" signature="5843:5920" ph="select * fro... animal_registration" />
+            <marker date="1548231674903" expanded="true" signature="8381:8456" ph="select * fro... farmertips" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/add-serving.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-51">
+          <caret line="117" column="93" lean-forward="false" selection-start-line="117" selection-start-column="93" selection-end-line="117" selection-end-column="93" />
+          <folding>
+            <marker date="1548237011392" expanded="true" signature="826:901" ph="select * fro... animal_serving" />
+            <marker date="1548237011392" expanded="true" signature="1299:1495" ph="insert into animal_serving" />
+            <marker date="1548237011392" expanded="true" signature="1526:1651" ph="update heat_... " />
+            <marker date="1548237011392" expanded="true" signature="1796:1933" ph="insert into transaction_logs... " />
+            <marker date="1548237011392" expanded="true" signature="7000:7077" ph="select * fro... manage_doctors" />
+            <marker date="1548237011392" expanded="true" signature="8876:8951" ph="select * fro... farmertips" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pregnancy_status.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="918">
+          <caret line="54" column="2" lean-forward="false" selection-start-line="54" selection-start-column="2" selection-end-line="54" selection-end-column="2" />
+          <folding>
+            <marker date="1548237812579" expanded="true" signature="365:483" ph="update anima... " />
+            <marker date="1548237812579" expanded="true" signature="613:694" ph="select * fro... animal_serving" />
+            <marker date="1548237812579" expanded="true" signature="762:866" ph="update heat_... " />
+            <marker date="1548237812579" expanded="true" signature="1098:1252" ph="insert into pregnancy_test... " />
+            <marker date="1548237812579" expanded="true" signature="1588:1700" ph="select calvi... heat_animals" />
+            <marker date="1548237812579" expanded="true" signature="1771:1928" ph="insert into heat_animals... " />
+            <marker date="1548237812579" expanded="true" signature="1985:2084" ph="update anima... " />
+            <marker date="1548237812579" expanded="true" signature="2242:2364" ph="update pregn... " />
+            <marker date="1548237812579" expanded="true" signature="2391:2490" ph="update anima... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wheel-heat-test.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="173" column="66" lean-forward="false" selection-start-line="173" selection-start-column="66" selection-end-line="173" selection-end-column="66" />
+          <folding>
+            <marker date="1548237210268" expanded="true" signature="6749:6826" ph="select * fro... animal_serving" />
+            <marker date="1548237210268" expanded="true" signature="7210:7317" ph="select * fro... animal_registration" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wheel-preg-test.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="427">
+          <caret line="176" column="45" lean-forward="true" selection-start-line="176" selection-start-column="45" selection-end-line="176" selection-end-column="45" />
+          <folding>
+            <marker date="1548237405847" expanded="true" signature="6786:6869" ph="select * fro... pregnancy_test" />
+            <marker date="1548237405847" expanded="true" signature="7245:7351" ph="select * fro... animal_registration" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wheel-heat-animals.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="175" column="26" lean-forward="true" selection-start-line="175" selection-start-column="26" selection-end-line="175" selection-end-column="26" />
+          <folding>
+            <marker date="1548236232910" expanded="true" signature="6879:6949" ph="select * fro... heat_animals" />
+            <marker date="1548236232910" expanded="true" signature="7324:7426" ph="select * fro... animal_registration" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wheel-pregnant.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2227">
+          <caret line="25" column="23" lean-forward="false" selection-start-line="25" selection-start-column="23" selection-end-line="25" selection-end-column="23" />
+          <folding>
+            <marker date="1548237753118" expanded="true" signature="6891:6964" ph="select * fro... pregnancy_test" />
+            <marker date="1548237753118" expanded="true" signature="7347:7453" ph="select * fro... animal_registration" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/session.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="26" lean-forward="false" selection-start-line="4" selection-start-column="26" selection-end-line="4" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/logout.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="17" column="57" lean-forward="true" selection-start-line="17" selection-start-column="57" selection-end-line="17" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/manage-acaricides.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="70">
+          <caret line="92" column="0" lean-forward="true" selection-start-line="92" selection-start-column="0" selection-end-line="92" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data-table.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="13" column="124" lean-forward="true" selection-start-line="13" selection-start-column="124" selection-end-line="13" selection-end-column="124" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/add-spraying-records.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="19" lean-forward="false" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
+          <folding>
+            <marker date="1548246357743" expanded="true" signature="676:750" ph="select * fro... spraying" />
+            <marker date="1548246357743" expanded="true" signature="895:1036" ph="insert into spraying... " />
+            <marker date="1548246357743" expanded="true" signature="1061:1198" ph="insert into transaction_logs... " />
+            <marker date="1548246357743" expanded="true" signature="6320:6397" ph="select * fro... manage_acaricide" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/add-disease-incidences.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="19" lean-forward="false" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
+          <folding>
+            <marker date="1548246357513" expanded="true" signature="1472:1572" ph="select * fro... disease_incidences" />
+            <marker date="1548246357513" expanded="true" signature="1724:2081" ph="insert into disease_incidences... " />
+            <marker date="1548246357513" expanded="true" signature="2106:2243" ph="insert into transaction_logs... " />
+            <marker date="1548246357513" expanded="true" signature="6890:6968" ph="select * fro... animal_registration" />
+            <marker date="1548246357513" expanded="true" signature="13022:13073" ph="select * fro... manage_doctors" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/add-culling.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="19" lean-forward="false" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
+          <folding>
+            <marker date="1548246357843" expanded="true" signature="807:906" ph="select * fro... culling" />
+            <marker date="1548246357843" expanded="true" signature="1061:1187" ph="insert into culling... " />
+            <marker date="1548246357843" expanded="true" signature="1239:1376" ph="insert into transaction_logs... " />
+            <marker date="1548246357843" expanded="true" signature="1468:1568" ph="update anima... " />
+            <marker date="1548246357843" expanded="true" signature="6124:6202" ph="select * fro... animal_registration" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/add-vaccination-records.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="19" lean-forward="false" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
+          <folding>
+            <marker date="1548246357633" expanded="true" signature="644:727" ph="select * fro... animal_registration" />
+            <marker date="1548246357633" expanded="true" signature="1082:1191" ph="select * fro... vaccination" />
+            <marker date="1548246357633" expanded="true" signature="1336:1521" ph="insert into vaccination... " />
+            <marker date="1548246357633" expanded="true" signature="1545:1682" ph="insert into transaction_logs... " />
+            <marker date="1548246357633" expanded="true" signature="6225:6304" ph="select * fro... animal_registration" />
+            <marker date="1548246357633" expanded="true" signature="7670:7722" ph="select * fro... manage_vaccines" />
+            <marker date="1548246357633" expanded="true" signature="10293:10367" ph="select * fro... manage_doctors" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view-weight-tracks.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="54" column="57" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="262" selection-end-column="0" />
+          <folding>
+            <marker date="1548235090804" expanded="true" signature="6935:7026" ph="select * fro... weight" />
+            <marker date="1548235090804" expanded="true" signature="7257:7337" ph="select * fro... weight" />
+            <marker date="1548235090804" expanded="true" signature="7645:7729" ph="select * fro... animal_registration" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view-vaccination-records.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="73" column="23" lean-forward="true" selection-start-line="73" selection-start-column="23" selection-end-line="99" selection-end-column="30" />
+          <folding>
+            <marker date="1548249578460" expanded="true" signature="8472:8666" ph="select a.*,v... animal_registration" />
+            <marker date="1548249578460" expanded="true" signature="8976:9158" ph="select a.*,v... animal_registration" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view-culling-records.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="104">
+          <caret line="73" column="23" lean-forward="false" selection-start-line="73" selection-start-column="23" selection-end-line="99" selection-end-column="30" />
+          <folding>
+            <marker date="1548249764421" expanded="true" signature="9344:9531" ph="select a.*,c... animal_registration" />
+            <marker date="1548249764421" expanded="true" signature="9808:9960" ph="select a.*,c... animal_registration" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view-disease-incidences.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="104">
+          <caret line="73" column="23" lean-forward="true" selection-start-line="73" selection-start-column="23" selection-end-line="99" selection-end-column="30" />
+          <folding>
+            <marker date="1548249791883" expanded="true" signature="8804:8991" ph="select a.*,d... animal_registration" />
+            <marker date="1548249791883" expanded="true" signature="9256:9430" ph="select a.*,d... animal_registration" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view-spraying-records.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="73" column="23" lean-forward="true" selection-start-line="73" selection-start-column="23" selection-end-line="99" selection-end-column="30" />
+          <folding>
+            <marker date="1548249940098" expanded="true" signature="8299:8401" ph="select * fro... spraying" />
+            <marker date="1548249940098" expanded="true" signature="8606:8699" ph="select * fro... spraying" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view-ten-day-records.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="192" column="126" lean-forward="false" selection-start-line="192" selection-start-column="126" selection-end-line="192" selection-end-column="126" />
+          <folding>
+            <element signature="n#style#0;n#a#0;n#td#16;n#tr#0;n#form#0;n#tbody#0;n#table#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <marker date="1548252528525" expanded="true" signature="9597:9781" ph="select a.*,t... animal_registration" />
+            <marker date="1548252528525" expanded="true" signature="9922:10106" ph="select a.*,t... animal_registration" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sidebar.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="410">
+          <caret line="88" column="131" lean-forward="false" selection-start-line="88" selection-start-column="131" selection-end-line="88" selection-end-column="131" />
+          <folding />
         </state>
       </provider>
     </entry>

@@ -68,36 +68,35 @@ $active='animal';?>
 
                 <div class="row">
 					<div class="col-sm-12">
-                        <div class="white-box
-
-                               <div class="basic-login-inner inline-basic-form">
-                                                    <form action="view-ten-day-records" method="post">
-                                                        <div class="form-group-inner">
-                                                            <div class="row">
-                                                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                                    <div class="input-daterange input-group" >
-                                                                        <input type="date" class="form-control" name="sdate" id="datepicker"  />
-                                                                        <span class="input-group-addon">to</span>
-                                                                        <input type="date" class="form-control" name="tdate" id="datepicker"  />
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                                    <div class="login-btn-inner">
-                                                                        <div class="row">
-                                                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                                                <button style="float: right" name="submit" class="btn btn-sm btn-primary login-submit-cs" type="submit">Search</button>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
+                        <div class="white-box">
+                            <div class="row">
+                                <div class="col-md-4"><h3 class="box-title m-b-0">View Spraying Records</h3></div>
+                                <div class="col-md-8">
+                                    <form action="" method="post">
+                                        <div class="form-group-inner">
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                    <div class="input-daterange input-group" >
+                                                        <input type="date" class="form-control" name="sdate" id="datepicker"  />
+                                                        <span class="input-group-addon">to</span>
+                                                        <input type="date" class="form-control" name="tdate" id="datepicker"  />
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                    <div class="login-btn-inner">
+                                                        <div class="row">
+                                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                                <button style="float: right" name="submit" class="btn btn-sm btn-primary login-submit-cs" type="submit">Search</button>
                                                             </div>
                                                         </div>
-                                                    </form>
-
-
-
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                             <div class="table-responsive">
-
                               <table id="example23" class="myTable table table-responsive color-table info-table display nowrap table table-hover table-striped" cellspacing="0" width="100%">
                                     <thead>
                                           <?php
@@ -191,9 +190,7 @@ $active='animal';?>
                                         $date_to             = $_POST['tdate'];
                                         $date_from           = $_POST['sdate'];
 
-                                        $select = mysqli_query($con,"select 
-                                       a.*,t.* from animal_registration a,ten_day_sheet t
-									   where t.recdate BETWEEN '$date_from' AND '$date_to' and a.farm_id ='$farm' and t.farm_id ='$farm' AND a.animal_id=t.animal_id");
+                                        $select = mysqli_query($con,"select a.*,t.* from animal_registration a,ten_day_sheet t  where t.recdate BETWEEN '$date_from' AND '$date_to' and a.farm_id ='$farm' and t.farm_id ='$farm' AND a.animal_id=t.animal_id");
 									}
 									else{
 										   $current_month = date("m");
