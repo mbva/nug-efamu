@@ -3,7 +3,7 @@
 
 <head>
     <?php include 'head.php';
-    $active='animal';?>
+    $active='breeding';?>
 </head>
 
 <body class="fix-header">
@@ -52,14 +52,20 @@
         <div class="container-fluid">
             <div class="row bg-title">
                 <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                    <h4 class="page-title">Weight Records</h4> </div>
+                    <h4 class="page-title">
+
+                        Cows Pending Pregnancy Test
+
+                    </h4> </div>
                 <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
 
 
                     <ol class="breadcrumb">
                         <li><a href="#">Dashboard</a></li>
                         <li><a href="#">Animals</a></li>
-                        <li class="active">View Weight Records</li>
+                        <li class="active">
+                            Cows Pending Pregnancy Test
+                        </li>
                     </ol>
                 </div>
                 <!-- /.col-lg-12 -->
@@ -68,7 +74,11 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="white-box">
-                        <h3 class="box-title m-b-0">View Weight Records</h3>
+                        <h3 class="box-title m-b-0">
+
+                            Cows Pending Pregnancy Test
+
+                        </h3>
 
                         <div class="table-responsive">
 
@@ -112,58 +122,61 @@
 
                                         ?>ID</th>
                                     <th>TagNo</th>
-                                    <th>Animal name</th>
-                                    <th>Date of Weighing</th>
-                                    <th>Weight</th>
-                                    <th >Action</th>
-                                    <th >Action</th>
-
+                                    <th>Serving Date</th>
+                                    <th>Pregnancy Testing Date</th>
+                                    <th>Remaining Days</th>
+                                    <th>Result</th>
                                 </tr>
                                 </thead>
                                 <tfoot>
                                 <tr>
-                                    <th  >ID</th>
+                                    <th>ID</th>
                                     <th>TagNo</th>
-                                    <th>Animal name</th>
-                                    <th>Date of Weighing</th>
-                                    <th>Weight</th>
-                                    <th >Action</th>
-                                    <th >Action</th>
-
+                                    <th>Serving Date</th>
+                                    <th>Pregnancy Testing Date</th>
+                                    <th>Remaining Days</th>
+                                    <th>Result</th>
                                 </tr>
                                 </tfoot>
                                 <tbody>
                                 <?php
                                 include 'db.php';
-                                if(isset($_POST['submit'])) {
-                                    $today = date("Y-m-d");
-                                    $date_to = $_POST['tdate'];
-                                    $date_from = $_POST['sdate'];
-                                    $select = mysqli_query($con, "select * from weight where recdate BETWEEN '$date_from' AND '$date_to' and farm_id ='$farm'");
-                                }else{
-                                    $current_month = date("m");
-                                    //$current_month = 10;
-                                    $select = mysqli_query($con,"select * from weight where MONTH (recdate)='$current_month' and farm_id ='$farm'");
-                                }
-
+                                $select2 = mysqli_query($con,"select * from pregnancy_test where 
+									status ='Pending' and farm_id ='$farm'");
                                 $sno = 0;
-                                while($results = mysqli_fetch_array($select)){
-                                    $animal_ids=$results['animal_id'];
-                                    $check_animal_info = mysqli_query($con, "select * from animal_registration where animal_id='$animal_ids' and farm_id ='$farm'");
-                                    $animal_info=mysqli_fetch_array($check_animal_info);
-                                    $sno++
-                                    ?>
-                                    <tr><input type="hidden" id="id" name="id" value="<?=$results['animal_id'];?>">
-                                        <td><?=$sno;?></td>
-                                        <td><?=$animal_info['tagNo'];?></td>
-                                        <td><?=$animal_info['animal_name'];?></td>
-                                        <td><?=$results['wdate'];?></td>
-                                        <td><?=$results['weight'];?></td>
-                                        <td><a  style="color: white" class="btn btn-success"  href="edit-weight?farm_id=<?=$results['farm_id'];?>&&id=<?=$results['id'];?>&&animal_id=<?=$animal_info['animal_id'];?>"><i class="fa fa-edit fa-1x"></a></i></td>
-                                        <td><a  style="color: white" class="btn btn-danger" onclick="return deleted()" href=""><i class="fa fa-trash fa-1x"></a></i></td>
-                                    </tr>
-                                    <?php
-                                }
+                                while($results2 = mysqli_fetch_array($select2)) {
+                                $sno++;
+                                $animal_id= $results2['animal_id'];
+
+                                //looking for the existance of a cow
+                                $checkanimalinfo = mysqli_query($con,"select * from animal_registration where animal_id ='$animal_id' and status ='Present' and farm_id ='$farm'");
+                                if(mysqli_num_rows($checkanimalinfo)>0){
+                                $serve_date=date_create($results2['servedate']);
+                                //Getting the min heat date
+                                date_add($serve_date,date_interval_create_from_date_string("60 days"));
+                                $preg_date =  date_format($serve_date,"Y-m-d");
+
+                                if(mysqli_num_rows($checkanimalinfo)>0){
+                                    while($animalinfo = mysqli_fetch_array($checkanimalinfo)) {
+                                        ?>
+                                        <tr><input type="hidden" id="id" name="id" value="<?=$results['animal_id'];?>">
+                                            <td><?=$sno;?></td>
+                                            <td><?=$animalinfo['animal_name'];?></td>
+                                            <td><?=$results2['servedate'];?></td>
+                                            <td><?=$preg_date;?></td>
+                                            <td><?php
+                                                $now = time(); // or your date as well
+                                                $expected_date = strtotime($preg_date);
+                                                $datediff = $expected_date - $now;
+                                                echo round($datediff / (60 * 60 * 24));
+                                                ?>
+                                            </td>
+                                            <td>
+                                                <a href="pregnancy_status?animal_id=<?= $animal_id;?>&&action=<?= "pregnant";?>"  class="btn btn-success"><i class="fa fa-thumbs-o-up"></i></a>
+                                            </td>
+                                        </tr>
+                                        <?php
+                                    }}}}
                                 ?>
                                 </tbody>
                             </table>

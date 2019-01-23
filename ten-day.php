@@ -2,9 +2,8 @@
 <html lang="en">
 
 <head>
-    <?php include 'head.php';?>
-</head>
-<?php include 'head.php';?>
+    <?php include 'head.php';
+    $active='animal';?>
 </head>
 <?php
 include 'db.php';

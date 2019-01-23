@@ -21,36 +21,29 @@
             <ul class="nav nav-second-level">
                 <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">Registration </span><span class="fa arrow"></span></a>
                     <ul class="nav nav-third-level">
-                        <li> <a href="register-animal"><i class="fa fa-plus-square fa-fw"></i><span class="hide-menu">Add  Animal</span></a> </li>
+                        <li> <a href="register-animal"><i class="fa fa-plus-square fa-fw"></i><span class="hide-menu">Register Animal</span></a> </li>
                         <li> <a href="view-animal-registration"><i class="fa fa-eye-slash fa-fw"></i><span class="hide-menu">View Animals</span></a> </li>
                     </ul>
                 </li>
                 <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">Calving </span><span class="fa arrow"></span></a>
                     <ul class="nav nav-third-level">
-                        <li> <a href="add"><i class="fa fa-plus-square fa-fw"></i><span class="hide-menu">New</span></a> </li>
-                        <li> <a href="view-calving-records"><i class="fa fa-eye-slash fa-fw"></i><span class="hide-menu">View</span></a> </li>
+                        <li> <a href="add-calving"><i class="fa fa-plus-square fa-fw"></i><span class="hide-menu">Enter Calving Records</span></a> </li>
+                        <li> <a href="view-calving-records"><i class="fa fa-eye-slash fa-fw"></i><span class="hide-menu">View Calving Records</span></a> </li>
                     </ul>
                 </li>
                 <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">Weight Tracker </span><span class="fa arrow"></span></a>
                     <ul class="nav nav-third-level">
-                        <li> <a href="javascript:void(0)"><i class="fa fa-plus-square fa-fw"></i><span class="hide-menu">New</span></a> </li>
-                        <li> <a href="javascript:void(0)"><i class="fa fa-eye-slash fa-fw"></i><span class="hide-menu">View</span></a> </li>
+                        <li> <a href="weight-track"><i class="fa fa-plus-square fa-fw"></i><span class="hide-menu">New</span></a> </li>
+                        <li> <a href="view-weight-tracks"><i class="fa fa-eye-slash fa-fw"></i><span class="hide-menu">View Records</span></a> </li>
                     </ul>
                 </li>
-				<li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">10 Day After Culving</span><span class="fa arrow"></span></a>
-                    <ul class="nav nav-third-level">
-                        <li> <a href="javascript:void(0)"><i class="fa fa-plus-square fa-fw"></i><span class="hide-menu">New</span></a> </li>
-                        <li> <a href="view-ten-day-records"><i class="fa fa-eye-slash fa-fw"></i><span class="hide-menu">View</span></a> </li>
-                    </ul>
-                </li>
-				
                 <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">10 Day </span><span class="fa arrow"></span></a>
                     <ul class="nav nav-third-level">
-                        <li> <a href="javascript:void(0)"><i class="fa fa-plus-square fa-fw"></i><span class="hide-menu">New</span></a> </li>
-                        <li> <a href="javascript:void(0)"><i class="fa fa-eye-slash  fa-fw"></i><span class="hide-menu">View</span></a> </li>
+                        <li> <a href="ten-day"><i class="fa fa-plus-square fa-fw"></i><span class="hide-menu">New</span></a> </li>
+                        <li> <a href="view-ten-day-records"><i class="fa fa-eye-slash  fa-fw"></i><span class="hide-menu">View Records</span></a> </li>
                     </ul>
                 </li>
-                <li> <a href="javascript:void(0)"><i data-icon="7" class="fa fa-user fa-fw"></i><span class="hide-menu">Animal Profile</span></a> </li>
+                <li> <a href="animal-profile2"><i data-icon="7" class="fa fa-user fa-fw"></i><span class="hide-menu">Animal Profile</span></a> </li>
             </ul>
         </li>
 
@@ -65,12 +58,12 @@
             </ul>
         </li>
 
-        <li> <a href="javascript:void(0)" class="waves-effect"><i class="mdi mdi-checkbox-multiple-marked-outline fa-fw"></i> <span class="hide-menu">Breeding<span class="fa arrow"></span></span></a>
+        <li> <a href="javascript:void(0)" class="waves-effect <?php if($active=='breeding') echo "active" ?>"><i class="mdi mdi-checkbox-multiple-marked-outline fa-fw"></i> <span class="hide-menu">Breeding<span class="fa arrow"></span></span></a>
             <ul class="nav nav-second-level">
-                <li> <a href="javascript:void(0)"><i data-icon="7" class="fa fa-arrow-alt-circle-right fa-fw"></i><span class="hide-menu">Pending Heat</span></a> </li>
-                <li> <a href="javascript:void(0)"><i data-icon="7" class="fa fa-arrow-alt-circle-right fa-fw"></i><span class="hide-menu">Monitor Signs of Heat</span></a> </li>
-                <li> <a href="javascript:void(0)"><i data-icon="7" class="fa fa-arrow-alt-circle-right fa-fw"></i><span class="hide-menu">Pending Pregnancy Test</span></a> </li>
-                <li> <a href="javascript:void(0)"><i data-icon="7" class="fa fa-arrow-alt-circle-right fa-fw"></i><span class="hide-menu">Expecting Mothers</span></a> </li>
+                <li> <a href="wheel-heat-animals"><i data-icon="7" class="fa fa-arrow-alt-circle-right fa-fw"></i><span class="hide-menu">Pending Heat</span></a> </li>
+                <li> <a href="wheel-heat-test"><i data-icon="7" class="fa fa-arrow-alt-circle-right fa-fw"></i><span class="hide-menu">Monitor Signs of Heat</span></a> </li>
+                <li> <a href="wheel-preg-test"><i data-icon="7" class="fa fa-arrow-alt-circle-right fa-fw"></i><span class="hide-menu">Pending Pregnancy Test</span></a> </li>
+                <li> <a href="wheel-pregnant"><i data-icon="7" class="fa fa-arrow-alt-circle-right fa-fw"></i><span class="hide-menu">Expecting Mothers</span></a> </li>
             </ul>
         </li>
 

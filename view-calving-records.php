@@ -2,33 +2,8 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" type="image/png" sizes="16x16" href="plugins/images/favicon.png">
-    <title>Efamu </title>
-    <!-- Bootstrap Core CSS -->
-    <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="plugins/bower_components/datatables/media/css/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
-    <!-- Menu CSS -->
-    <link href="plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css" rel="stylesheet">
-    <!-- animation CSS -->
-    <link href="css/animate.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link href="css/style.css" rel="stylesheet">
-    <!-- color CSS -->
-    <link href="css/colors/megna-dark.css" id="theme" rel="stylesheet">
-
-	 <link href="plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css" rel="stylesheet">
-    <link href="plugins/bower_components/tablesaw-master/dist/tablesaw.css" rel="stylesheet">
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
+    <?php include 'head.php';
+    $active='animal';?>
 </head>
 
 <body class="fix-header">
@@ -48,7 +23,7 @@
         <!-- Topbar header - style you can find in pages.scss -->
         <!-- ============================================================== -->
         <nav class="navbar navbar-default navbar-static-top m-b-0">
-           <?php include('topnav.php');
+           <?php include('nav.php');
 		   ?>
             <!-- /.navbar-header -->
             <!-- /.navbar-top-links -->
@@ -165,7 +140,7 @@
                                     <tbody>
 									<?php
                                     include 'db.php';
-                                    $sql = "select a.*,c.* from animal_registration a,calving  c where a.animal_id = c.animal_id  ORDER by cdate ASC ";
+                                    $sql = "select a.*,c.* from animal_registration a,calving  c where a.animal_id = c.animal_id and c.farm_id='$farm' ORDER by cdate ASC ";
                                     $select = mysqli_query($con,$sql);
                                     $sno=0;
                                     while($results = mysqli_fetch_array($select)){
