@@ -46,6 +46,34 @@
                 <li> <a href="animal-profile2"><i data-icon="7" class="fa fa-user fa-fw"></i><span class="hide-menu">Animal Profile</span></a> </li>
             </ul>
         </li>
+        <li> <a href="javascript:void(0)" class="waves-effect <?php if($active=='health') echo "active" ?>"><i class="mdi mdi-checkbox-multiple-marked-outline fa-fw"></i> <span class="hide-menu">Health<span class="fa arrow"></span></span></a>
+            <ul class="nav nav-second-level">
+                <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">Culling </span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-third-level">
+                        <li> <a href="add-culling"><i class="fa fa-plus-square fa-fw"></i><span class="hide-menu">New</span></a> </li>
+                        <li> <a href="view-culling-records"><i class="fa fa-eye-slash fa-fw"></i><span class="hide-menu">View</span></a> </li>
+                    </ul>
+                </li>
+                <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">Diesiese Incidence </span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-third-level">
+                        <li> <a href="add-disease-incidences"><i class="fa fa-plus-square fa-fw"></i><span class="hide-menu">New</span></a> </li>
+                        <li> <a href="view-disease-incidences"><i class="fa fa-eye-slash fa-fw"></i><span class="hide-menu">View</span></a> </li>
+                    </ul>
+                </li>
+                <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">Spraying </span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-third-level">
+                        <li> <a href="add-spraying-records"><i class="fa fa-plus-square fa-fw"></i><span class="hide-menu">New</span></a> </li>
+                        <li> <a href="view-spraying-records"><i class="fa fa-eye-slash fa-fw"></i><span class="hide-menu">View</span></a> </li>
+                    </ul>
+                </li>
+                <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">Vaccination </span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-third-level">
+                        <li> <a href="add-vaccination-records"><i class="fa fa-plus-square fa-fw"></i><span class="hide-menu">New</span></a> </li>
+                        <li> <a href="view-vaccination-records"><i class="fa fa-eye-slash  fa-fw"></i><span class="hide-menu">View</span></a> </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
 
         <li> <a href="javascript:void(0)" class="waves-effect"><i class="mdi mdi-checkbox-multiple-marked-outline fa-fw"></i> <span class="hide-menu">Farm<span class="fa arrow"></span></span></a>
             <ul class="nav nav-second-level">

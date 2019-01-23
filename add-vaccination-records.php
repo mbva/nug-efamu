@@ -2,7 +2,9 @@
 <html lang="en">
 
 <head>
-    <?php include 'head.php';?>
+    <?php include 'head.php';
+    $active='health';
+    ?>
 </head>
 <?php
 include 'db.php';
