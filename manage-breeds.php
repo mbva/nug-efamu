@@ -7,6 +7,7 @@
 <?php
 include 'db.php';
 $message="";
+$active='settings';
 $farm = $_SESSION['farm'];
 if(isset($_POST['submit'])){
     $bname = mysqli_real_escape_string($con,    ucwords($_POST['bname']));
