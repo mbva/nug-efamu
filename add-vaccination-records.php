@@ -34,7 +34,7 @@ if(isset($_POST['submit'])){
     if(mysqli_num_rows($check_record)>0){
         echo "<script>alert('Record already Exists');</script>";
     }else{
-        $sql_deworm = "insert into vaccination(disease,frequency,farm_id,animal_id,date_of_vaccination,vaccine,route_of_admin,vet_doctor)
+        $sql_deworm = "insert into vaccination(disease,frequency_of_vaccination,farm_id,animal_id,date_of_vaccination,vaccine,route_of_admin,vet_doctor)
                         VALUES ('$disease','$frequency','$farm','$animal_id','$dov','$vaccine','$roa','$doctor')";
         $sql_log  = "insert into transaction_logs(farm_id,transaction_action,transaction_time,transaction_by) VALUES ('$farm','$action','$time','$entered_by')";
         //Executing the queries;
@@ -45,7 +45,8 @@ if(isset($_POST['submit'])){
         $insert_transaction = mysqli_query($con,$sql_log);
         if($insert_deworm && $insert_transaction ){
             echo "<script>alert('Recorded is Successfully');</script>";
-        }
+        }else{ echo "<h2>FAILED <h2> ".mysqli_error($con);
+		}
     }
     //}
 }
