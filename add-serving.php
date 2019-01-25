@@ -146,6 +146,19 @@ if(isset($_GET['submit'])){
                                             <div class="input-group-addon"><i class="ti-pencil"></i></div>
                                         </div>
                                     </div>
+                                     <div class="form-group">
+                                        <label for="exampleInputpwd2">Serving Method</label>
+                                        <div class="input-group">
+                                           <select class="form-control select2" name="smethod" required>
+                                                <option value='' selected>Select</option>
+                                               
+                                            
+                                                    <option value="artificial">Artificial Insermination</option>
+                                                     <option value="bull">Artificial Insermination</option>
+                                               
+                                            <span class="input-group-addon"><i class="icon-pencil"></i></span>
+                                        </div>
+                                    </div>
                                     <div class="text-center">
                                         <button type="submit" name="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>
                                         <button type="reset" class="btn btn-inverse waves-effect waves-light">Cancel</button>

@@ -85,7 +85,7 @@
                 </li>
                 <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">Adult </span><span class="fa arrow"></span></a>
                     <ul class="nav nav-third-level">
-                        <li> <a href="javascript:void(0)"><i class="fa fa-plus-square fa-fw"></i><span class="hide-menu">New Records</span></a> </li>
+                        <li> <a href="add-animal-feeding-records"><i class="fa fa-plus-square fa-fw"></i><span class="hide-menu">New Records</span></a> </li>
                         <li> <a href="javascript:void(0)"><i class="fa fa-eye-slash fa-fw"></i><span class="hide-menu">View Records</span></a> </li>
                     </ul>
                 </li>
