@@ -150,6 +150,45 @@ if(isset($_POST['submit'])){
                                             <div class="input-group-addon"><i class="ti-pencil"></i></div>
                                         </div>
                                     </div>
+									
+									     <div class="form-group">
+                                        <label for="exampleInputuname">Disease </label>
+                                        <div class="input-group">
+                                            <select class="form-control select2" name="vaccine" required>
+                                                <option>Select</option>
+                                                <?php
+                                                $select = mysqli_query($con,"select * from manage_vaccines where farm_id ='$farm'");
+                                                while ($vaccine = mysqli_fetch_array($select)){
+                                                    ?>
+                                                    <option value="<?php echo $vaccine['vaccine']; ?>"><?php echo $vaccine['vaccine']; ?></option>
+                                                    <?php
+                                                }
+                                                ?>
+                                            </select>
+                                            <?php
+                                            ?>
+                                            <div class="input-group-addon"><i class="ti-pencil"></i></div>
+                                        </div>
+                                    </div>
+									     <div class="form-group">
+                                        <label for="exampleInputuname">Frequency </label>
+                                        <div class="input-group">
+                                            <select class="form-control select2" name="vaccine" required>
+                                                <option>Select</option>
+                                                <?php
+                                                $select = mysqli_query($con,"select * from manage_vaccines where farm_id ='$farm'");
+                                                while ($vaccine = mysqli_fetch_array($select)){
+                                                    ?>
+                                                    <option value="<?php echo $vaccine['vaccine']; ?>"><?php echo $vaccine['vaccine']; ?></option>
+                                                    <?php
+                                                }
+                                                ?>
+                                            </select>
+                                            <?php
+                                            ?>
+                                            <div class="input-group-addon"><i class="ti-pencil"></i></div>
+                                        </div>
+                                    </div>
                                     <div class="form-group">
                                         <label for="exampleInputuname">Route of administering  </label>
                                         <div class="input-group">
