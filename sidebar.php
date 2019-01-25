@@ -91,6 +91,41 @@
                 </li>
             </ul>
         </li>
+        <li> <a href="javascript:void(0)" class="waves-effect <?php if($active=='finance') echo "active" ?>"><i class="mdi mdi-checkbox-multiple-marked-outline fa-fw"></i> <span class="hide-menu">Finance Manager<span class="fa arrow"></span></span></a>
+            <ul class="nav nav-second-level">
+                <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">Animal Sales </span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-third-level">
+                        <li> <a href="add-animal-sales"><i class="fa fa-plus-square fa-fw"></i><span class="hide-menu">Add Records</span></a> </li>
+                        <li> <a href="view-animal-sales"><i class="fa fa-eye-slash fa-fw"></i><span class="hide-menu">View Records</span></a> </li>
+                    </ul>
+                </li>
+                <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">Expenses</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-third-level">
+                        <li> <a href="add-expenses"><i class="fa fa-plus-square fa-fw"></i><span class="hide-menu">Add Records</span></a> </li>
+                        <li> <a href="view-expenses"><i class="fa fa-eye-slash fa-fw"></i><span class="hide-menu">View Records</span></a> </li>
+                    </ul>
+                </li>
+                <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">Milk Sales</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-third-level">
+                        <li> <a href="add-milk-sales"><i class="fa fa-plus-square fa-fw"></i><span class="hide-menu">Add Records</span></a> </li>
+                        <li> <a href="view-milk-sales"><i class="fa fa-eye-slash fa-fw"></i><span class="hide-menu">View Records</span></a> </li>
+                    </ul>
+                </li>
+                <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">Salaries</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-third-level">
+                        <li> <a href="add-salaries"><i class="fa fa-plus-square fa-fw"></i><span class="hide-menu">Add Records</span></a> </li>
+                        <li> <a href="view-calf-feeding-records"><i class="fa fa-eye-slash fa-fw"></i><span class="hide-menu">View Records</span></a> </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+
+        <li> <a href="javascript:void(0)" class="waves-effect <?php if($active=='milk_production') echo "active" ?>"><i class="mdi mdi-checkbox-multiple-marked-outline fa-fw"></i> <span class="hide-menu">Milk Production<span class="fa arrow"></span></span></a>
+            <ul class="nav nav-second-level">
+                <li> <a href="add-milk-production-records"><i data-icon="7" class="fa fa-user fa-fw"></i><span class="hide-menu">Add Records</span></a> </li>
+                <li> <a href="view-milk-production-records"><i data-icon="7" class="fa fa-user fa-fw"></i><span class="hide-menu">View Records</span></a> </li>
+            </ul>
+        </li>
 
         <li> <a href="javascript:void(0)" class="waves-effect"><i class="mdi mdi-checkbox-multiple-marked-outline fa-fw"></i> <span class="hide-menu">Farm<span class="fa arrow"></span></span></a>
             <ul class="nav nav-second-level">
