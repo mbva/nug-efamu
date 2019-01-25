@@ -16,6 +16,10 @@ if(isset($_POST['submit'])){
     $vaccine = mysqli_real_escape_string($con,          ucwords($_POST['vaccine']));
     $roa = mysqli_real_escape_string($con,          ucwords($_POST['roa']));
     $doctor = mysqli_real_escape_string($con,          ucwords($_POST['doctor']));
+	
+	$frequency= mysqli_real_escape_string($con,          ucwords($_POST['frequency']));
+    $disease= mysqli_real_escape_string($con,          ucwords($_POST['disease']));
+	
     $selects = mysqli_query($con,"select * from animal_registration where animal_id='$animal_id' and farm_id ='$farm'");
     while($names=mysqli_fetch_array($selects)){
         $aname=$names['animal_name'];
@@ -30,8 +34,8 @@ if(isset($_POST['submit'])){
     if(mysqli_num_rows($check_record)>0){
         echo "<script>alert('Record already Exists');</script>";
     }else{
-        $sql_deworm = "insert into vaccination(farm_id,animal_id,date_of_vaccination,vaccine,route_of_admin,vet_doctor)
-                        VALUES ('$farm','$animal_id','$dov','$vaccine','$roa','$doctor')";
+        $sql_deworm = "insert into vaccination(disease,frequency,farm_id,animal_id,date_of_vaccination,vaccine,route_of_admin,vet_doctor)
+                        VALUES ('$disease','$frequency','$farm','$animal_id','$dov','$vaccine','$roa','$doctor')";
         $sql_log  = "insert into transaction_logs(farm_id,transaction_action,transaction_time,transaction_by) VALUES ('$farm','$action','$time','$entered_by')";
         //Executing the queries;
         $insert_deworm = mysqli_query($con,$sql_deworm);
@@ -155,7 +159,18 @@ if(isset($_POST['submit'])){
 									     <div class="form-group">
                                         <label for="exampleInputuname">Disease </label>
                                         <div class="input-group">
-                                             <input type="text" class="form-control" name="disease" required>
+										 <select class="form-control select2" name="disease" required>
+                                                <option>Select</option>
+                                                <?php
+                                                $select = mysqli_query($con,"select * from manage_vaccines where farm_id ='$farm'");
+                                                while ($vaccine = mysqli_fetch_array($select)){
+                                                    ?>
+                                                    <option value="<?php echo $vaccine['disease']; ?>"><?php echo $vaccine['disease']; ?></option>
+                                                    <?php
+                                                }
+                                                ?>
+                                            </select>
+                                             
                                            
                                             <?php
                                             ?>

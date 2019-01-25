@@ -12,7 +12,7 @@
             var selectedfeedtype = $(".feedtype option:selected").val();
             $.ajax({
                 type: "POST",
-                url: "process_feedtype.php",
+                url: "process_feedtype",
                 data: { feedtype : selectedfeedtype } 
             }).done(function(data){
                 $("#response").html(data);
@@ -20,13 +20,7 @@
         });
 		 });
 	
-		var $select1 = $( '#select1' ),
-		$select2 = $( '#select2' ),
-    $options = $select2.find( 'option' );
-    
-$select1.on( 'change', function() {
-	$select2.html( $options.filter( '[value="' + this.value + '"]' ) );
-} ).trigger( 'change' );
+		
 </script>
 </head>
 <?php
@@ -167,27 +161,6 @@ if(isset($_POST['submit'])){
 			
 			
 			                                </div>
-											<div class="col-xs-6">
-  <select class="form-control" name="select1" id="select1">
-    <option value="1">Fruit</option>
-    <option value="2">Animal</option>
-    <option value="3">Bird</option>
-    <option value="4">Car</option>
-  </select>
-</div>
-<div class="col-xs-6">
-  <select class="form-control" name="select2" id="select2">
-    <option value="1">Banana</option>
-    <option value="1">Apple</option>
-    <option value="1">Orange</option>
-    <option value="2">Wolf</option>
-    <option value="2">Fox</option>
-    <option value="2">Bear</option>
-    <option value="3">Eagle</option>
-    <option value="3">Hawk</option>
-    <option value="4">BWM<option>
-</select>
-</div>
                                     
 									
 									
@@ -239,6 +212,22 @@ if(isset($_POST['submit'])){
     <!-- /#page-wrapper -->
 </div>
 <!-- /#wrapper -->
+<!-- jQuery -->
+<script src="plugins/bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- Menu Plugin JavaScript -->
+<script src="plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
+<!--slimscroll JavaScript -->
+<script src="js/jquery.slimscroll.js"></script>
+<!--Wave Effects -->
+<script src="js/waves.js"></script>
+<!-- Custom Theme JavaScript -->
+<script src="js/custom.min.js"></script>
+
+<script src="js/jasny-bootstrap.js"></script>
+<script src="plugins/bower_components/switchery/dist/switchery.min.js"></script>
+<script src="plugins/bower_components/custom-select/dist/js/select2.full.min.js" type="text/javascript"></script>
 <script>
     $(function() {
         // Switchery
