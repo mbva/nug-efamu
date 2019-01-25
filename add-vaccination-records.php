@@ -102,8 +102,9 @@ if(isset($_POST['submit'])){
                         <h3 class="box-title m-b-0">Vaccination Form</h3>
                         <form action="add-vaccination-records" method="post" enctype="multipart/form-data">
                             <div class="row">
-                                <div class="col-md-1"></div>
-                                <div class="col-sm-10 col-xs-12">
+                               
+								
+								 <div class="col-sm-6 col-xs-12">
                                     <div class="form-group">
                                         <label for="exampleInputpwd2">Vaccination Date</label>
                                         <div class="input-group">
@@ -154,38 +155,26 @@ if(isset($_POST['submit'])){
 									     <div class="form-group">
                                         <label for="exampleInputuname">Disease </label>
                                         <div class="input-group">
-                                            <select class="form-control select2" name="vaccine" required>
-                                                <option>Select</option>
-                                                <?php
-                                                $select = mysqli_query($con,"select * from manage_vaccines where farm_id ='$farm'");
-                                                while ($vaccine = mysqli_fetch_array($select)){
-                                                    ?>
-                                                    <option value="<?php echo $vaccine['vaccine']; ?>"><?php echo $vaccine['vaccine']; ?></option>
-                                                    <?php
-                                                }
-                                                ?>
-                                            </select>
+                                             <input type="text" class="form-control" name="disease" required>
+                                           
                                             <?php
                                             ?>
                                             <div class="input-group-addon"><i class="ti-pencil"></i></div>
                                         </div>
                                     </div>
+									
+
+                                    
+                                </div>
+								
+								
+                                <div class="col-sm-6 col-xs-12">
+                                   
 									     <div class="form-group">
                                         <label for="exampleInputuname">Frequency </label>
                                         <div class="input-group">
-                                            <select class="form-control select2" name="vaccine" required>
-                                                <option>Select</option>
-                                                <?php
-                                                $select = mysqli_query($con,"select * from manage_vaccines where farm_id ='$farm'");
-                                                while ($vaccine = mysqli_fetch_array($select)){
-                                                    ?>
-                                                    <option value="<?php echo $vaccine['vaccine']; ?>"><?php echo $vaccine['vaccine']; ?></option>
-                                                    <?php
-                                                }
-                                                ?>
-                                            </select>
-                                            <?php
-                                            ?>
+                                            <input type="text" class="form-control" name="frequency" required>
+                                            
                                             <div class="input-group-addon"><i class="ti-pencil"></i></div>
                                         </div>
                                     </div>
@@ -229,13 +218,24 @@ if(isset($_POST['submit'])){
                                         <button type="submit" name="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>
                                     </div>
                                 </div>
-                                <div class="col-md-1"></div>
+                                
                             </div>
                         </form>
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-12">
                     <h4><b>Vaccination Tips</b></h4>
+					  
+                    <marquee  behavior="scroll" direction="up" id="mymarquee" scrollamount="2" onmouseover="this.stop();" onmouseout="this.start();">
+                        <p style="text-align: justify">
+                            <?php
+                            $select = mysqli_query($con,"select * from farmertips where section='health' ORDER BY id desc LIMIT 1 ");
+                            while ($tipscheck = mysqli_fetch_array($select)){
+                                echo $tipscheck['tips'];
+                            }
+                            ?>
+                        </p>
+                    </marquee>
 
 
                 </div>
