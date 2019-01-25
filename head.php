@@ -23,6 +23,22 @@
 <!-- Custom CSS -->
 <link href="css/style.css" rel="stylesheet">
 <link href="plugins/bower_components/custom-select/dist/css/select2.min.css" rel="stylesheet" type="text/css" />
+<!-- jQuery -->
+<script src="plugins/bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- Menu Plugin JavaScript -->
+<script src="plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
+<!--slimscroll JavaScript -->
+<script src="js/jquery.slimscroll.js"></script>
+<!--Wave Effects -->
+<script src="js/waves.js"></script>
+<!-- Custom Theme JavaScript -->
+<script src="js/custom.min.js"></script>
+
+<script src="js/jasny-bootstrap.js"></script>
+<script src="plugins/bower_components/switchery/dist/switchery.min.js"></script>
+<script src="plugins/bower_components/custom-select/dist/js/select2.full.min.js" type="text/javascript"></script>
 
 <!-- color CSS -->
 <link href="css/colors/megna-dark.css" id="theme" rel="stylesheet">
