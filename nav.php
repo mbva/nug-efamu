@@ -51,50 +51,38 @@
         </li>
         <!-- .Task dropdown -->
         <li class="dropdown">
-            <a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#"> <i class="mdi mdi-check-circle"></i>
+            <a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#">Analysis Reports <i class="mdi mdi-check-circle"></i>
                 <div class="notify"><span class="heartbit"></span><span class="point"></span></div>
             </a>
             <ul class="dropdown-menu dropdown-tasks animated slideInUp">
                 <li>
-                    <a href="#">
+                    <a href="graph-milk-sales">
                         <div>
-                            <p> <strong>Task 1</strong> <span class="pull-right text-muted">40% Complete</span> </p>
-                            <div class="progress progress-striped active">
-                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%"> <span class="sr-only">40% Complete (success)</span> </div>
-                            </div>
+                          Milk Sales
+                        </div>
+                    </a>
+                </li>
+               <li class="divider"></li>
+               <li>
+                    <a href="graph-weight-tracking">
+                        <div>
+                         Weight Tracking
+                        </div>
+                    </a>
+                </li>
+                <li class="divider"></li>
+               <li>
+                    <a href="">
+                        <div>
+                         Animal Sales
                         </div>
                     </a>
                 </li>
                 <li class="divider"></li>
                 <li>
-                    <a href="#">
+                    <a href="graph-milk-sales">
                         <div>
-                            <p> <strong>Task 2</strong> <span class="pull-right text-muted">20% Complete</span> </p>
-                            <div class="progress progress-striped active">
-                                <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%"> <span class="sr-only">20% Complete</span> </div>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li class="divider"></li>
-                <li>
-                    <a href="#">
-                        <div>
-                            <p> <strong>Task 3</strong> <span class="pull-right text-muted">60% Complete</span> </p>
-                            <div class="progress progress-striped active">
-                                <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%"> <span class="sr-only">60% Complete (warning)</span> </div>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li class="divider"></li>
-                <li>
-                    <a href="#">
-                        <div>
-                            <p> <strong>Task 4</strong> <span class="pull-right text-muted">80% Complete</span> </p>
-                            <div class="progress progress-striped active">
-                                <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%"> <span class="sr-only">80% Complete (danger)</span> </div>
-                            </div>
+                          Income Flow
                         </div>
                     </a>
                 </li>
@@ -104,8 +92,110 @@
                 </li>
             </ul>
         </li>
-        <!-- .Megamenu -->
-        <li class="mega-dropdown"> <a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#"><span class="hidden-xs">Quick Menu</span> <i class="icon-options-vertical"></i></a>
+		
+		<!-- .Megamenu -->
+        <li class="mega-dropdown"> <a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#"><span class="hidden-xs">Settings</span> <i class="icon-options-vertical"></i></a>
+            <ul class="dropdown-menu mega-dropdown-menu animated bounceInDown">
+                <li class="col-sm-1">
+                    <ul>
+                        <li class="dropdown-header">Manage <br>Farms </li>
+                        <li><a href="graph-milk-sales">Add</a></li>
+                        <li><a href="graph-weight-tracking">View</a></li>
+                        
+                    </ul>
+                </li>
+				 <li class="col-sm-1">
+                    <ul>
+                        <li class="dropdown-header">Manage<br> Doctors </li>
+                        <li><a href="graph-milk-sales">Add</a></li>
+                        <li><a href="graph-weight-tracking">View</a></li>
+                        
+                    </ul>
+                </li>
+				 <li class="col-sm-1">
+                    <ul>
+                        <li class="dropdown-header">Manage<br> Expenses </li>
+                        <li><a href="graph-milk-sales">Add</a></li>
+                        <li><a href="graph-weight-tracking">View</a></li>
+                        
+                    </ul>
+                </li>
+				
+				 <li class="col-sm-1">
+                    <ul>
+                        <li class="dropdown-header">Manage <br>Farms </li>
+                        <li><a href="graph-milk-sales">Add</a></li>
+                        <li><a href="graph-weight-tracking">View</a></li>
+                        
+                    </ul>
+                </li>
+				 <li class="col-sm-1">
+                    <ul>
+                        <li class="dropdown-header">Manage<br> Doctors </li>
+                        <li><a href="graph-milk-sales">Add</a></li>
+                        <li><a href="graph-weight-tracking">View</a></li>
+                        
+                    </ul>
+                </li>
+				 <li class="col-sm-1">
+                    <ul>
+                        <li class="dropdown-header">Expense<br>Categories </li>
+                        <li><a href="graph-milk-sales">Add</a></li>
+                        <li><a href="graph-weight-tracking">View</a></li>
+                        
+                    </ul>
+                </li>
+				<li class="col-sm-1">
+                    <ul>
+                        <li class="dropdown-header">Manage<br> Doctors </li>
+                        <li><a href="graph-milk-sales">Add</a></li>
+                        <li><a href="graph-weight-tracking">View</a></li>
+                        
+                    </ul>
+                </li>
+				 <li class="col-sm-1">
+                    <ul>
+                        <li class="dropdown-header">Manage<br> Expenses </li>
+                        <li><a href="graph-milk-sales">Add</a></li>
+                        <li><a href="graph-weight-tracking">View</a></li>
+                        
+                    </ul>
+                </li>
+				
+				 <li class="col-sm-1">
+                    <ul>
+                        <li class="dropdown-header">Manage <br>Farms </li>
+                        <li><a href="graph-milk-sales">Add</a></li>
+                        <li><a href="graph-weight-tracking">View</a></li>
+                        
+                    </ul>
+                </li>
+				 <li class="col-sm-1">
+                    <ul>
+                        <li class="dropdown-header">Manage<br> Doctors </li>
+                        <li><a href="graph-milk-sales">Add</a></li>
+                        <li><a href="graph-weight-tracking">View</a></li>
+                        
+                    </ul>
+                </li>
+				 <li class="col-sm-1">
+                    <ul>
+                        <li class="dropdown-header">Expense<br>Categories </li>
+                        <li><a href="graph-milk-sales">Add</a></li>
+                        <li><a href="graph-weight-tracking">View</a></li>
+                        
+                    </ul>
+                </li>
+				
+				
+                
+               
+            </ul>
+        </li>
+        <!-- /.Megamenu -->
+		
+		<!-- .Megamenu -->
+        <li class="mega-dropdown"> <a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#"><span class="hidden-xs">Settings</span> <i class="icon-options-vertical"></i></a>
             <ul class="dropdown-menu mega-dropdown-menu animated bounceInDown">
                 <li class="col-sm-3">
                     <ul>
@@ -127,6 +217,52 @@
                         <li><a href="form-summernote.html">Summernote</a></li>
                         <li><a href="form-bootstrap-wysihtml5.html">Bootstrap wysihtml5</a></li>
                         <li><a href="form-tinymce-wysihtml5.html">Tinymce wysihtml5</a></li>
+                    </ul>
+                </li>
+                <li class="col-sm-3">
+                    <ul>
+                        <li class="dropdown-header">Table Example</li>
+                        <li><a href="basic-table.html">Basic Tables</a></li>
+                        <li><a href="table-layouts.html">Table Layouts</a></li>
+                        <li><a href="data-table.html">Data Table</a></li>
+                        <li><a href="bootstrap-tables.html">Bootstrap Tables</a></li>
+                        <li><a href="responsive-tables.html">Responsive Tables</a></li>
+                        <li><a href="editable-tables.html">Editable Tables</a></li>
+                        <li><a href="foo-tables.html">FooTables</a></li>
+                        <li><a href="jsgrid.html">JsGrid Tables</a></li>
+                    </ul>
+                </li>
+                <li class="col-sm-3">
+                    <ul>
+                        <li class="dropdown-header">Charts</li>
+                        <li> <a href="flot.html">Flot Charts</a> </li>
+                        <li><a href="morris-chart.html">Morris Chart</a></li>
+                        <li><a href="chart-js.html">Chart-js</a></li>
+                        <li><a href="peity-chart.html">Peity Charts</a></li>
+                        <li><a href="knob-chart.html">Knob Charts</a></li>
+                        <li><a href="sparkline-chart.html">Sparkline charts</a></li>
+                        <li><a href="extra-charts.html">Extra Charts</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <!-- /.Megamenu -->
+        <!-- .Megamenu -->
+        <li class="mega-dropdown"> <a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#"><span class="hidden-xs">Settings</span> <i class="icon-options-vertical"></i></a>
+            <ul class="dropdown-menu mega-dropdown-menu animated bounceInDown">
+                <li class="col-sm-3">
+                    <ul>
+                        <li class="dropdown-header">Analysis Reports </li>
+                        <li><a href="graph-milk-sales">Milk Sales</a></li>
+                        <li><a href="graph-weight-tracking">Weight Tracker</a></li>
+                        <li><a href="">Animal Sales</a></li>
+                        <li><a href="">Income Flow</a></li>
+                    </ul>
+                </li>
+                <li class="col-sm-3">
+                    <ul>
+                        <li class="dropdown-header">Financial Reports</li>
+                        <li><a href="view-cash-flow">Cash Flow Statement</a></li>
                     </ul>
                 </li>
                 <li class="col-sm-3">

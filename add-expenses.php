@@ -2,42 +2,55 @@
 <html lang="en">
 
 <head>
-    <?php include 'head.php';?>
+    <?php include 'head.php';
+    $active='finance';
+    ?>
 </head>
 <?php
 include 'db.php';
 $message="";
-$active='settings';
-$farm  =$_SESSION['farm'];
+$farm = $_SESSION['farm'];
 if(isset($_POST['submit'])){
-    $fname = mysqli_real_escape_string($con,    ucwords($_POST['fname']));
-    $lname = mysqli_real_escape_string($con,    ucwords($_POST['lname']));
-    $contact = mysqli_real_escape_string($con,  $_POST['contact']);
-    $email = mysqli_real_escape_string($con, $_POST['email']);
-    $vet_names =$fname.' '.$lname;
+    $item = mysqli_real_escape_string($con,        ucwords($_POST['item']));
+    $quantity = mysqli_real_escape_string($con,        ucwords($_POST['quantity']));
+    $ucost = mysqli_real_escape_string($con,          ucwords($_POST['ucost']));
+    $dop = mysqli_real_escape_string($con,          ucwords($_POST['dop']));
+    $recno = mysqli_real_escape_string($con,          ucwords($_POST['recno']));
+    $entrydate = date("Y-m-d");
+    $totalcost = ($quantity*$ucost);
+    // Getting the category
+
+    $cat = mysqli_fetch_array(mysqli_query($con,"select * from expensesitems where item ='$item' and farm_id ='$farm'"));
+    $category = $cat['cat_id'];
 
     //capturing the registrar of the data
     $entered_by =   $_SESSION['full_names'];
     $time =         date("Y-m-d H:i:s");
-    $action =       "Registered Doctor ".' '.$vet_names;
-    //checking if the member already exists
-    $check_account = mysqli_query($con,"select * from manage_doctors where contact = '$contact' and farm_id ='$farm'");
-    if(mysqli_num_rows($check_account) > 0){
-        echo "<script>alert('Failed! The Doctors already exists');</script>";
-    } else{
+    $action =       "Entered Expense records";
 
-        $sql_user = "insert into manage_doctors(farm_id,vet_name,contact,email,regby,regdate,status)VALUES ('$farm','$vet_names','$contact','$email','$entered_by','$time','Activated')";
+    //checking if the Receipt Number exists already
+    $check_receipt = mysqli_query($con,"select * from generalexpenses where recno = '$recno' and receiptdate='$dop' and item='$item' and farm_id ='$farm'");
+
+    if(mysqli_num_rows($check_receipt)>0){
+        //$message = "<div class=\"alert alert-danger\"><strong>Failed! The Receipt Number is already under Use</strong></div>";
+        echo "<script>alert('The Record already Exists');</script>";
+    }else{
+        $sql_expense = "insert into generalexpenses(farm_id,item,cat,qty,unitcost,totalcost,recno,receiptdate,recordedby,entrydate)
+                        VALUES ('$farm','$item','$category','$quantity','$ucost','$totalcost','$recno','$dop','$entered_by','$entrydate')";
+
         $sql_log  = "insert into transaction_logs(farm_id,transaction_action,transaction_time,transaction_by) VALUES ('$farm','$action','$time','$entered_by')";
 
         //Executing the queries;
-        $insert_user = mysqli_query($con,$sql_user);
+        $insert_expense = mysqli_query($con,$sql_expense);
         $insert_transaction = mysqli_query($con,$sql_log);
-        if($insert_user && $insert_transaction){
+        if($insert_expense && $insert_transaction){
+            //$message = "<div class=\"alert alert-success\"><strong>Registration is Successful</strong></div>";
             echo "<script>alert('Registration is Successful');</script>";
+        }else{
+            echo mysqli_error($con);
         }
     }
 }
-
 ?>
 <body class="fix-header">
 <!-- ============================================================== -->
@@ -75,14 +88,16 @@ if(isset($_POST['submit'])){
         <div class="container-fluid">
             <div class="row bg-title">
                 <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                    <h4 class="page-title">Doctors Registration</h4> </div>
+                    <h4 class="page-title">
+                        Expenses Form
+                    </h4> </div>
                 <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                     <button class="right-side-toggle waves-effect waves-light btn-info btn-circle pull-right m-l-20"><i class="ti-settings text-white"></i></button>
                     <a href="javascript: void(0);" target="_blank" class="btn btn-danger pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light">Buy Admin Now</a>
                     <ol class="breadcrumb">
                         <li><a href="#">Dashboard</a></li>
-                        <li><a href="#">System Settings</a></li>
-                        <li><a href="#">Doctors</a></li>
+                        <li><a href="#">Finance Manager</a></li>
+                        <li><a href="#">Expenses</a></li>
                     </ol>
                 </div>
                 <!-- /.col-lg-12 -->
@@ -92,37 +107,57 @@ if(isset($_POST['submit'])){
 
                 <div class="col-md-9 col-sm-12">
                     <div class="white-box">
-                        <h3 class="box-title m-b-0">Doctor's Form</h3>
-                        <form action="manage-doctors" method="post" enctype="multipart/form-data">
+                        <h3 class="box-title m-b-0">Expenses Form</h3>
+                        <form action="add-expenses" method="post" enctype="multipart/form-data">
                             <div class="row">
-                                <div class="col-md-1"></div>
-                                <div class="col-sm-10 col-xs-12">
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">First Name</label>
+                                        <label for="exampleInputpwd2">Expense Date</label>
                                         <div class="input-group">
-                                            <input type="text" name="fname" required autocomplete="off" class="form-control" id="exampleInputEmail1" placeholder="First Name">
+                                            <input type="date" class="form-control" name="dop" id="datepicker" />
+                                            <span class="input-group-addon"><i class="icon-calender"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputuname">Item</label>
+                                        <div class="input-group">
+                                            <select class="form-control select2" name="item" required>
+                                                <option value="">Select</option>
+                                                <?php
+                                                $select = mysqli_query($con,"select * from expensesitems where  farm_id ='$farm'");
+                                                while ($name = mysqli_fetch_array($select)){
+                                                    ?>
+                                                    <option value="<?php echo $name['item']; ?>"><?php echo $name['item']; ?></option>
+                                                    <?php
+                                                }
+                                                ?>
+                                            </select>
+                                            <?php
+                                            ?>
+                                            <div class="input-group-addon"><i class="ti-pencil"></i></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Quantity</label>
+                                        <div class="input-group">
+                                            <input class="form-control" name="quantity" onkeypress="return isNumberKey(event)" required autocomplete="off" placeholder="Quantity" type="number">
+                                            <div class="input-group-addon"><i class="ti-pencil-alt"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Unit Cost</label>
+                                        <div class="input-group">
+                                            <input class="form-control" name="ucost" onkeypress="return isNumberKey(event)" required autocomplete="off" placeholder="Unit Cost" type="number">
                                             <div class="input-group-addon"><i class="ti-pencil-alt"></i></div>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Last Name</label>
+                                        <label for="exampleInputEmail1">Receipt Number.</label>
                                         <div class="input-group">
-                                            <input type="text" name="lname" required autocomplete="off" class="form-control" id="exampleInputEmail1" placeholder="Last Name">
+                                            <input class="form-control" name="recno" required autocomplete="off" placeholder="Receipt Number" type="text">
                                             <div class="input-group-addon"><i class="ti-pencil-alt"></i></div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Contact</label>
-                                        <div class="input-group">
-                                            <input type="text" onkeypress="return isNumberKey(event)"  maxlength="10" title= "Numbers only" name="contact"  required autocomplete="off" class="form-control" id="exampleInputEmail1" placeholder="Contact">
-                                            <div class="input-group-addon"><i class="ti-mobile"></i></div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Email</label>
-                                        <div class="input-group">
-                                            <input type="email" name="email" required autocomplete="off" class="form-control" id="exampleInputEmail1" placeholder="Email">
-                                            <div class="input-group-addon"><i class="ti-email"></i></div>
                                         </div>
                                     </div>
 
@@ -130,13 +165,12 @@ if(isset($_POST['submit'])){
                                         <button type="submit" name="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>
                                     </div>
                                 </div>
-                                <div class="col-md-1"></div>
                             </div>
                         </form>
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-12">
-                    <h4><b>Vaccination Tips</b></h4>
+                    <h4><b>Expense Tips</b></h4>
 
 
                 </div>

@@ -2,42 +2,45 @@
 <html lang="en">
 
 <head>
-    <?php include 'head.php';?>
+    <?php include 'head.php';
+    $active='finance';
+    ?>
 </head>
 <?php
 include 'db.php';
 $message="";
-$active='settings';
-$farm  =$_SESSION['farm'];
+$farm = $_SESSION['farm'];
 if(isset($_POST['submit'])){
-    $fname = mysqli_real_escape_string($con,    ucwords($_POST['fname']));
-    $lname = mysqli_real_escape_string($con,    ucwords($_POST['lname']));
-    $contact = mysqli_real_escape_string($con,  $_POST['contact']);
-    $email = mysqli_real_escape_string($con, $_POST['email']);
-    $vet_names =$fname.' '.$lname;
+    $seldate = mysqli_real_escape_string($con,  ucwords($_POST['sdate']));
+    $amount = mysqli_real_escape_string($con,   ucwords($_POST['amount']));
+    $soldby = mysqli_real_escape_string($con,   ucwords($_POST['soldby']));
+    $qty = mysqli_real_escape_string($con,   ucwords($_POST['qty']));
+    $recdate = date("Y-m-d");
+    $recby = $_SESSION['full_names'];
 
     //capturing the registrar of the data
     $entered_by =   $_SESSION['full_names'];
     $time =         date("Y-m-d H:i:s");
-    $action =       "Registered Doctor ".' '.$vet_names;
-    //checking if the member already exists
-    $check_account = mysqli_query($con,"select * from manage_doctors where contact = '$contact' and farm_id ='$farm'");
-    if(mysqli_num_rows($check_account) > 0){
-        echo "<script>alert('Failed! The Doctors already exists');</script>";
-    } else{
+    $action =       "Entered Milk Sale records ";
 
-        $sql_user = "insert into manage_doctors(farm_id,vet_name,contact,email,regby,regdate,status)VALUES ('$farm','$vet_names','$contact','$email','$entered_by','$time','Activated')";
-        $sql_log  = "insert into transaction_logs(farm_id,transaction_action,transaction_time,transaction_by) VALUES ('$farm','$action','$time','$entered_by')";
+    //checking if the member was already paid
+    //Check for existance of a record
+    $check_record = mysqli_query($con,"select * from milksales where solddate = '$seldate' and qty = '$qty' and sp='$amount' and farm_id ='$farm'");
+    if(mysqli_num_rows($check_record)>0){
+        echo "<script>alert('Failed! the record already exists');</script>";
+    }else{
+        $insert_record = mysqli_query($con,"insert into milksales(farm_id,solddate,qty,sp,soldby,recby,recdate)VALUES ('$farm','$seldate','$qty','$amount','$soldby','$recby','$recdate')");
+        $insert_log = mysqli_query($con,"insert into transaction_logs(farm_id,transaction_action,transaction_time,transaction_by) VALUES ('$farm','$action','$time','$entered_by')");
 
-        //Executing the queries;
-        $insert_user = mysqli_query($con,$sql_user);
-        $insert_transaction = mysqli_query($con,$sql_log);
-        if($insert_user && $insert_transaction){
-            echo "<script>alert('Registration is Successful');</script>";
+        if($insert_record && $insert_log){
+            //$message = "<div class=\"alert alert-success\"><strong>Registration is Successful</strong></div>";
+            echo "<script>alert('Recorded Successfully');</script>";
+        }else{
+            echo mysqli_error($con);
         }
     }
-}
 
+}
 ?>
 <body class="fix-header">
 <!-- ============================================================== -->
@@ -75,14 +78,16 @@ if(isset($_POST['submit'])){
         <div class="container-fluid">
             <div class="row bg-title">
                 <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                    <h4 class="page-title">Doctors Registration</h4> </div>
+                    <h4 class="page-title">
+                        Record Milk Sales
+                    </h4> </div>
                 <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                     <button class="right-side-toggle waves-effect waves-light btn-info btn-circle pull-right m-l-20"><i class="ti-settings text-white"></i></button>
                     <a href="javascript: void(0);" target="_blank" class="btn btn-danger pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light">Buy Admin Now</a>
                     <ol class="breadcrumb">
                         <li><a href="#">Dashboard</a></li>
-                        <li><a href="#">System Settings</a></li>
-                        <li><a href="#">Doctors</a></li>
+                        <li><a href="#">Finance Manager</a></li>
+                        <li><a href="#"> Record Milk Sales</a></li>
                     </ol>
                 </div>
                 <!-- /.col-lg-12 -->
@@ -92,37 +97,38 @@ if(isset($_POST['submit'])){
 
                 <div class="col-md-9 col-sm-12">
                     <div class="white-box">
-                        <h3 class="box-title m-b-0">Doctor's Form</h3>
-                        <form action="manage-doctors" method="post" enctype="multipart/form-data">
+                        <h3 class="box-title m-b-0">Record Milk Sales</h3>
+                        <form action="add-milk-sales" method="post" enctype="multipart/form-data">
                             <div class="row">
-                                <div class="col-md-1"></div>
-                                <div class="col-sm-10 col-xs-12">
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">First Name</label>
+                                        <label for="exampleInputpwd2"> Date</label>
                                         <div class="input-group">
-                                            <input type="text" name="fname" required autocomplete="off" class="form-control" id="exampleInputEmail1" placeholder="First Name">
+                                            <input type="date" class="form-control" name="sdate" id="datepicker" />
+                                            <span class="input-group-addon"><i class="icon-calender"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Quantity</label>
+                                        <div class="input-group">
+                                            <input class="form-control" name="qty" onkeypress="return isNumberKey(event)" required autocomplete="off" placeholder="Quantity of milk in Ltrs" type="number">
+                                            <div class="input-group-addon"><i class="ti-pencil-alt"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Amount</label>
+                                        <div class="input-group">
+                                            <input class="form-control" name="amount" onkeypress="return isNumberKey(event)" required autocomplete="off" placeholder="Amount" type="number">
                                             <div class="input-group-addon"><i class="ti-pencil-alt"></i></div>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Last Name</label>
+                                        <label for="exampleInputEmail1">Sold By.</label>
                                         <div class="input-group">
-                                            <input type="text" name="lname" required autocomplete="off" class="form-control" id="exampleInputEmail1" placeholder="Last Name">
+                                            <input class="form-control" name="soldby" required autocomplete="off" placeholder="Milk was sold by" type="text">
                                             <div class="input-group-addon"><i class="ti-pencil-alt"></i></div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Contact</label>
-                                        <div class="input-group">
-                                            <input type="text" onkeypress="return isNumberKey(event)"  maxlength="10" title= "Numbers only" name="contact"  required autocomplete="off" class="form-control" id="exampleInputEmail1" placeholder="Contact">
-                                            <div class="input-group-addon"><i class="ti-mobile"></i></div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Email</label>
-                                        <div class="input-group">
-                                            <input type="email" name="email" required autocomplete="off" class="form-control" id="exampleInputEmail1" placeholder="Email">
-                                            <div class="input-group-addon"><i class="ti-email"></i></div>
                                         </div>
                                     </div>
 
@@ -130,13 +136,12 @@ if(isset($_POST['submit'])){
                                         <button type="submit" name="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>
                                     </div>
                                 </div>
-                                <div class="col-md-1"></div>
                             </div>
                         </form>
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-12">
-                    <h4><b>Vaccination Tips</b></h4>
+                    <h4><b>Milk Selling Tips</b></h4>
 
 
                 </div>

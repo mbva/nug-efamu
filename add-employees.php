@@ -2,42 +2,57 @@
 <html lang="en">
 
 <head>
-    <?php include 'head.php';?>
+    <?php include 'head.php';
+    $active='employees';
+    ?>
 </head>
 <?php
 include 'db.php';
 $message="";
-$active='settings';
-$farm  =$_SESSION['farm'];
+$farm = $_SESSION['farm'];
 if(isset($_POST['submit'])){
+    //$empno = "EMP".rand(100,999);
     $fname = mysqli_real_escape_string($con,    ucwords($_POST['fname']));
     $lname = mysqli_real_escape_string($con,    ucwords($_POST['lname']));
+    $gender = mysqli_real_escape_string($con,    ucwords($_POST['gender']));
+    $dob = mysqli_real_escape_string($con,    ucwords($_POST['dob']));
+    $salary = mysqli_real_escape_string($con,    ucwords($_POST['salary']));
+    $designation = mysqli_real_escape_string($con,    ucwords($_POST['designation']));
+    $email = mysqli_real_escape_string($con,    ucwords($_POST['email']));
     $contact = mysqli_real_escape_string($con,  $_POST['contact']);
-    $email = mysqli_real_escape_string($con, $_POST['email']);
-    $vet_names =$fname.' '.$lname;
+    $nok = mysqli_real_escape_string($con,  $_POST['nok']);
+    $nok_contact = mysqli_real_escape_string($con,  $_POST['nok_contact']);
 
+    $full_names= $fname.' '.$lname;
     //capturing the registrar of the data
     $entered_by =   $_SESSION['full_names'];
     $time =         date("Y-m-d H:i:s");
-    $action =       "Registered Doctor ".' '.$vet_names;
+    $action =       "Registered employee ".' '.$full_names;
+
     //checking if the member already exists
-    $check_account = mysqli_query($con,"select * from manage_doctors where contact = '$contact' and farm_id ='$farm'");
-    if(mysqli_num_rows($check_account) > 0){
-        echo "<script>alert('Failed! The Doctors already exists');</script>";
-    } else{
+    $check_no = mysqli_query($con,"select * from employees where  empno = '$empno' and farm_id ='$farm' ");
+    if(mysqli_num_rows($check_no)>0){
+        $empno++;
+    }else{
+        //checking if the member already exists
+        $check_account = mysqli_query($con,"select * from employees where  tel = '$contact' and farm_id ='$farm'");
+        if(mysqli_num_rows($check_account) > 0){
+            $message = "<div class=\"alert alert-danger\"><strong>Failed! The Employee already exists</strong></div>";
+            echo "<script>alert('Failed! The Employee already exists');</script>";
+        } else{
+            $sql_emp = "insert into employees(farm_id,empname,gender,dob,salary,designation,email,tel,nextofkin_name,nextofkin_tel)VALUES ('$farm','$full_names','$gender','$dob','$salary','$designation','$email','$contact','$nok','$nok_contact')";
+            $sql_log  = "insert into transaction_logs(farm_id,transaction_action,transaction_time,transaction_by) VALUES ('$farm','$action','$time','$entered_by')";
 
-        $sql_user = "insert into manage_doctors(farm_id,vet_name,contact,email,regby,regdate,status)VALUES ('$farm','$vet_names','$contact','$email','$entered_by','$time','Activated')";
-        $sql_log  = "insert into transaction_logs(farm_id,transaction_action,transaction_time,transaction_by) VALUES ('$farm','$action','$time','$entered_by')";
-
-        //Executing the queries;
-        $insert_user = mysqli_query($con,$sql_user);
-        $insert_transaction = mysqli_query($con,$sql_log);
-        if($insert_user && $insert_transaction){
-            echo "<script>alert('Registration is Successful');</script>";
+            //Executing the queries;
+            $insert_emp = mysqli_query($con,$sql_emp);
+            $insert_transaction = mysqli_query($con,$sql_log);
+            if($insert_emp && $insert_transaction){
+                //$message = "<div class=\"alert alert-success\"><strong>Registration is Successful</strong></div>";
+                echo "<script>alert('Recorded Successfully');</script>";
+            }
         }
     }
 }
-
 ?>
 <body class="fix-header">
 <!-- ============================================================== -->
@@ -75,14 +90,16 @@ if(isset($_POST['submit'])){
         <div class="container-fluid">
             <div class="row bg-title">
                 <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                    <h4 class="page-title">Doctors Registration</h4> </div>
+                    <h4 class="page-title">
+                        Employee Registration Form
+                    </h4> </div>
                 <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                     <button class="right-side-toggle waves-effect waves-light btn-info btn-circle pull-right m-l-20"><i class="ti-settings text-white"></i></button>
                     <a href="javascript: void(0);" target="_blank" class="btn btn-danger pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light">Buy Admin Now</a>
                     <ol class="breadcrumb">
                         <li><a href="#">Dashboard</a></li>
-                        <li><a href="#">System Settings</a></li>
-                        <li><a href="#">Doctors</a></li>
+                        <li><a href="#">Employees</a></li>
+                        <li><a href="#">Registration</a></li>
                     </ol>
                 </div>
                 <!-- /.col-lg-12 -->
@@ -92,37 +109,86 @@ if(isset($_POST['submit'])){
 
                 <div class="col-md-9 col-sm-12">
                     <div class="white-box">
-                        <h3 class="box-title m-b-0">Doctor's Form</h3>
-                        <form action="manage-doctors" method="post" enctype="multipart/form-data">
+                        <h3 class="box-title m-b-0">Employee Registration Form</h3>
+                        <form action="add-employees" method="post" enctype="multipart/form-data">
                             <div class="row">
-                                <div class="col-md-1"></div>
-                                <div class="col-sm-10 col-xs-12">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">First Name</label>
                                         <div class="input-group">
-                                            <input type="text" name="fname" required autocomplete="off" class="form-control" id="exampleInputEmail1" placeholder="First Name">
+                                            <input class="form-control" name="fname" required autocomplete="off" placeholder="First Name" type="text">
                                             <div class="input-group-addon"><i class="ti-pencil-alt"></i></div>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Last Name</label>
                                         <div class="input-group">
-                                            <input type="text" name="lname" required autocomplete="off" class="form-control" id="exampleInputEmail1" placeholder="Last Name">
+                                            <input class="form-control" name="lname" required autocomplete="off" placeholder="Last Name" type="text">
+                                            <div class="input-group-addon"><i class="ti-pencil-alt"></i></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputuname">Gender</label>
+                                        <div class="input-group">
+                                            <select class="form-control select2" name="gender" required>
+                                                <option value="">Select</option>
+                                                <option value="Male">Male</option>
+                                                <option value="Female">Female</option>
+                                            </select>
+                                            <?php
+                                            ?>
+                                            <div class="input-group-addon"><i class="ti-pencil"></i></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputpwd2">Date of Birth</label>
+                                        <div class="input-group">
+                                            <input type="date" class="form-control" name="dob" id="datepicker" />
+                                            <span class="input-group-addon"><i class="icon-calender"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Salary</label>
+                                        <div class="input-group">
+                                            <input class="form-control" name="salary" onkeypress="return isNumberKey(event)" required autocomplete="off" placeholder="Salary" type="number">
+                                            <div class="input-group-addon"><i class="fa fa-money-bill-alt"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Designation</label>
+                                        <div class="input-group">
+                                            <input class="form-control" name="designation" required autocomplete="off" placeholder="Designation" type="text">
+                                            <div class="input-group-addon"><i class="ti-pencil-alt"></i></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Email Address</label>
+                                        <div class="input-group">
+                                            <input class="form-control" name="email" required autocomplete="off" placeholder="Email Address" type="email">
+                                            <div class="input-group-addon"><i class="fa fa-envelope"></i></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Contact</label>
+                                        <div class="input-group">
+                                            <input class="form-control" name="contact" onkeypress="return isNumberKey(event)" maxlength="10" required autocomplete="off" placeholder="Contact" type="text">
+                                            <div class="input-group-addon"><i class="fa fa-phone"></i></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Next of Kin</label>
+                                        <div class="input-group">
+                                            <input class="form-control" name="nok" required autocomplete="off" placeholder="Next of Kin" type="text">
                                             <div class="input-group-addon"><i class="ti-pencil-alt"></i></div>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Contact</label>
                                         <div class="input-group">
-                                            <input type="text" onkeypress="return isNumberKey(event)"  maxlength="10" title= "Numbers only" name="contact"  required autocomplete="off" class="form-control" id="exampleInputEmail1" placeholder="Contact">
-                                            <div class="input-group-addon"><i class="ti-mobile"></i></div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Email</label>
-                                        <div class="input-group">
-                                            <input type="email" name="email" required autocomplete="off" class="form-control" id="exampleInputEmail1" placeholder="Email">
-                                            <div class="input-group-addon"><i class="ti-email"></i></div>
+                                            <input class="form-control" name="nok_contact" onkeypress="return isNumberKey(event)" maxlength="10" required autocomplete="off" placeholder="Next of Kin Contact" type="text">
+                                            <div class="input-group-addon"><i class="fa fa-phone"></i></div>
                                         </div>
                                     </div>
 
@@ -130,13 +196,12 @@ if(isset($_POST['submit'])){
                                         <button type="submit" name="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>
                                     </div>
                                 </div>
-                                <div class="col-md-1"></div>
                             </div>
                         </form>
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-12">
-                    <h4><b>Vaccination Tips</b></h4>
+                    <h4><b>Employee Registration Tips</b></h4>
 
 
                 </div>
