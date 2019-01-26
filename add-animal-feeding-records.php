@@ -5,7 +5,8 @@
     <?php include 'head.php';
     $active='feeding';
     ?>
-	
+	<script src="resources/jquery-min.js"></script>
+  
 	<script type="text/javascript">
     $(document).ready(function(){
         $("select.feedtype").change(function(){
@@ -32,11 +33,19 @@ if(isset($_POST['submit'])){
     $class = mysqli_real_escape_string($con,   ucwords($_POST['animalclass']));
     $feed_type = mysqli_real_escape_string($con,   ucwords($_POST['feedtype']));
     $quantity = mysqli_real_escape_string($con,   ucwords($_POST['quantity']));
+	$hay = mysqli_real_escape_string($con,   ucwords($_POST['hay']));
+	$silage = mysqli_real_escape_string($con,   ucwords($_POST['silage']));
+	$dailylevel= mysqli_real_escape_string($con,   ucwords($_POST['daily-level']));
     $frequency = mysqli_real_escape_string($con,   ucwords($_POST['frequency']));
     $number = mysqli_real_escape_string($con,   ucwords($_POST['animalnumber']));
     $recdate = date("Y-m-d");
     $recby = $_SESSION['full_names'];
-
+	
+	if($feed_type=='Total Mixed Ratio'){
+		$quantity=($dailylevel+$hay+$silage);
+	}
+	$feed_type=$feed_type.'(Hay:'.$hay.',Silage:'.$silage.'Daily Level:'.$dailylevel.')';
+$dailytotqty=($quantity*$frequency*$number);
     //capturing the registrar of the data
     $entered_by =   $_SESSION['full_names'];
     $time =         date("Y-m-d H:i:s");
@@ -49,8 +58,8 @@ if(isset($_POST['submit'])){
         //$message = "<div class=\"alert alert-danger\"><strong>These Feeding Records were already Taken</strong></div>";
         echo "<script>alert('These Feeding Records were already Taken');</script>";
     }else{
-        $insert_record = mysqli_query($con,"INSERT INTO animal_feeding (farm_id,fdate, animalclass, feedtype, quantityfed, frequency, numberofanimals,recby,recdate) 
-                                                VALUES ('$farm','$date', '$class', '$feed_type', '$quantity', '$frequency', '$number','$recby','$recdate');");
+        $insert_record = mysqli_query($con,"INSERT INTO animal_feeding (daily_tot_qty,farm_id,fdate, animalclass, feedtype, quantityfed, frequency, numberofanimals,recby,recdate) 
+                                                VALUES ('$dailytotqty','$farm','$date', '$class', '$feed_type', '$quantity', '$frequency', '$number','$recby','$recdate');");
 
         $insert_log = mysqli_query($con,"insert into transaction_logs(farm_id,transaction_action,transaction_time,transaction_by) VALUES ('$farm','$action','$time','$entered_by')");
 
@@ -122,21 +131,15 @@ if(isset($_POST['submit'])){
                         <form action="add-animal-feeding-records" method="post" enctype="multipart/form-data">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="exampleInputpwd2">Feeding Date</label>
-                                        <div class="input-group">
-                                            <input type="date" class="form-control" name="sdate" id="datepicker" />
-                                            <span class="input-group-addon"><i class="icon-calender"></i></span>
-                                        </div>
-                                    </div>
+                                   
                                     <div class="form-group">
                                         <label for="exampleInputuname">Animal</label>
                                         <div class="input-group">
                                             <select class="form-control select2" name="animalclass" required>
                                                 <option value="">Select</option>
                                                 <option value="Dry feeding">Dry feeding</option>
-                                                <option value="Breeding heard">Breeding heard</option>
-                                                <option value="Milking Heard">Milking Heard</option>
+                                                <option value="Breeding Herd">Breeding Herd</option>
+                                                <option value="Milking Herd">Milking Herd</option>
                                             </select>
                                             <?php
                                             ?>
@@ -149,7 +152,7 @@ if(isset($_POST['submit'])){
                                             <select class="form-control feedtype select2" name="feedtype" required>
                                                 <option value="">Select</option>
                                                 <option value="Pasture">Pasture</option>
-                                                <option value="ff">Total Mixed ratio</option>
+                                                <option value="Total Mixed Ratio">Total Mixed Ratio</option>
                                                 <option value="Supplement">Supplement</option>
                                             </select>
                                             <?php
@@ -167,13 +170,14 @@ if(isset($_POST['submit'])){
                                 </div>
                                 <div class="col-sm-6 col-xs-12">
 
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Quantity</label>
+                                   <div class="form-group">
+                                        <label for="exampleInputpwd2">Feeding Date</label>
                                         <div class="input-group">
-                                            <input class="form-control" name="quantity" required autocomplete="off" placeholder="Quantity Given" type="number">
-                                            <div class="input-group-addon"><i class="ti-pencil-alt"></i></div>
+                                            <input type="date" class="form-control" name="sdate" id="datepicker" />
+                                            <span class="input-group-addon"><i class="icon-calender"></i></span>
                                         </div>
                                     </div>
+									
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Frequency</label>
                                         <div class="input-group">
