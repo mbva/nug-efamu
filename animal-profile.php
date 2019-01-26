@@ -3,7 +3,6 @@
 
 <head>
 <?php include 'head.php';?>
-
 </head>
 
 <body class="fix-header">
@@ -72,8 +71,9 @@
                             
                             <div class="table-responsive">
 							 
-                              <table id="example23" class="myTable table table-responsive color-table info-table display nowrap table table-hover table-striped" cellspacing="0" width="100%">
+                              <table id="exampless" class="myable table table-responsive  display nowrap table table-hover table-striped" cellspacing="0" width="100%">
                                     <thead>
+									</th>
                                          <tr>
                                         <th  > <?php 
  function get_client_ip()
@@ -109,84 +109,42 @@
 
       return $ipaddress; 
  }
-	
-?>ID</th>
-                                        <th  >TagNo</th>
-                                        <th >Name</th>
-                                        <th >Gender</th>
-                                        <th >DOB</th>
-                                        <th >Breed</th>
-                                        <th >Premise</th>
-                                        <th >Genetic Percentage</th>
-                                        <th >Dam Name</th>
-                                        <th >Breed</th>
-                                        <th >Sire Name</th>
-                                        <th >Breed</th>
-                                        <th >Profile</th>
-                                       
-                                            <th >Action</th>
-                                
-                                       
-                                            <th >Action</th>
-                                      
-                                    </tr>
-                                    </thead>
-                                    <tfoot>
-                                         <tr>
-                                        <th  >ID</th>
-                                        <th  >TagNo</th>
-                                        <th >Name</th>
-                                        <th >Gender</th>
-                                        <th >DOB</th>
-                                        <th >Breed</th>
-                                        <th >Premise</th>
-                                        <th >Genetic Percentage</th>
-                                        <th >Dam Name</th>
-                                        <th >Breed</th>
-                                        <th >Sire Name</th>
-                                        <th >Breed</th>
-                                        <th >Profile</th>
-                                       
-                                            <th >Action</th>
-                                
-                                       
-                                            <th >Action</th>
-                                      
-                                    </tr>
-                                    </tfoot>
-                                    <tbody>
-									                                    <?php
-                                    include 'db.php';
-                                    $select = mysqli_query($con,"select * from animal_registration where status ='Present'");
-                                    $sno = 0;
-                                    while($results = mysqli_fetch_array($select)) {
-                                        $sno++
+
+                                        include 'db.php';
+                                        $tagNo = $_GET['tagNo'];
+                                        $select = mysqli_query($con,"select * from animal_registration where tagNo = '$tagNo' and farm_id ='$farm'");
+                                        $animal_records = mysqli_fetch_array($select);
                                         ?>
-                                        <tr><input type="hidden" id="id" name="id" value="<?=$results['animal_id'];?>">
-                                                <td><?=$sno;?></td>
-                                                <td><?=$results['tagNo'];?></td>
-                                                <td><?=$results['animal_name'];?></td>
-                                                <td><?=$results['gender'];?></td>
-                                                <td><?=$results['dob'];?></td>
-                                                <td><?=$results['breed'];?></td>
-                                                <td><?=$results['location'];?></td>
-                                                <td><?=$results['genetic_percentage'];?></td>
-                                                <td><?=$results['name_of_dam'];?></td>
-                                                <td><?=$results['breed_of_dam'];?></td>
-                                                <td><?=$results['name_of_sire'];?></td>
-                                                <td><?=$results['breed_of_sire'];?></td>
-                                                <td><a href="animal-profile?tagNo=<?=$results['tagNo'];?>" class="btn btn-info"><i class="fa fa-eye-slash fa-1x"></a></i></a></td>
-                                                <td><a  style="color: white" class="btn btn-success" href="edit-animals?animalid=<?=$results['animal_id'];?>&&farm_id=<?=$results['farm_id'];?>"><i class="fa fa-edit fa-1x"></a></i></td>
-                                               <td><a  style="color: white" class="btn btn-danger" onclick="return deleted()"  href="delete_animals?animalid=<?=$results['animal_id'];?>&&farm_id=<?=$results['farm_id'];?>"><i class="fa fa-trash fa-1x"></a></i></td>
-
-
-
-                                            </tr>
-                                        <?php
-
-                                    }
-                                    ?>
-                                    </tbody>
+                                        <h3 style="text-align: center"><?= $tagNo;?> Profile</h3>
+                                        <div class="col-md-4">
+                                            <img src="img/cow.PNG" class="img-rounded" alt="">
+                                            <h3><?= $animal_records['animal_name']." ".($animal_records['tagNo']);?></h3>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <h5>Gender: <span class="result"><?=$animal_records['gender'];?></span>   </h5>
+                                            <h5>Date of Birth:<span class="result"><?=$animal_records['dob'];?></span></h5>
+                                            <h5>Age: <span class="result"><?=floor((time() - strtotime($animal_records['dob'])) / 31556926);;?></span></h5>
+                                            <h5>Breed:   <span class="result"><?=$animal_records['breed'];?></span></h5>
+                                            <h5>Genetic %:   <span class="result"><?=$animal_records['genetic_percentage'];?></span></h5>
+                                            <h5>On Premise:   <span class="result">
+                        <?php
+                        if($animal_records['location']=="On"){
+                            echo "True";
+                        }
+                        if($animal_records['location']=="Off"){
+                            echo "False";
+                        }
+                        ?>
+                    </span>
+                                            </h5>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <h3>Lineage</h3>
+                                            <h5>Sire: <span class="result"><?=$animal_records['name_of_sire'];?></span></h5>
+                                            <h5>Sire Breed:   <span class="result"><?=$animal_records['breed_of_sire'];?></span></h5>
+                                            <hr>
+                                            <h5>Dam: <span class="result"><?=$animal_records['name_of_dam'];?></span></h5>
+                                            <h5>Dam Breed:   <span class="result"><?=$animal_records['breed_of_dam'];?></span></h5>
                                 </table>
                             </div>
                         </div>

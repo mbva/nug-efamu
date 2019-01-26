@@ -151,7 +151,7 @@ $active='animal';?>
                                         <th>Ketotic</th>
                                         <th>Temperature</th>
                                         <th >Action</th>
-                                        <th >Action</th>
+                               
 
                                     </tr>
                                     </thead>
@@ -177,7 +177,6 @@ $active='animal';?>
                                             <th >Action</th>
 
 
-                                            <th >Action</th>
 
                                     </tr>
                                     </tfoot>
@@ -200,27 +199,28 @@ $active='animal';?>
 									}
 										while($results = mysqli_fetch_array($select)){
 											$tagno=$results['tagNo'];
+											$ten_id=$results['id'];
 											$animal_name=$results['animal_name'];
                                             ?>
                                             <form action="" method="post">
                                                 <tr>
-                                                    <td><input type="text" id="fname" name="tagno" value="<?=$results['recdate'];?>"></td>
-                                                    <td><input type="text" id="fname" name="aname" value="<?php echo "$animal_name ($tagno)"?>"></td>
-                                                    <td><input type="text" id="fname" name="gender" value="<?=$results['days'];?>"></td>
-                                                    <td><input type="text" id="fname" name="gender" value="<?=$results['gappearance'];?>"></td>
-                                                    <td><input type="text" id="fname" name="gender" value="<?=$results['appetite'];?>"></td>
-                                                    <td><input type="text" id="fname" name="gender" value="<?=$results['eyes_ears'];?>"></td>
-                                                    <td><input type="text" id="fname" name="gender" value="<?=$results['warm_ears'];?>"></td>
-                                                    <td><input type="text" id="fname" name="gender" value="<?=$results['uterine_discharge'];?>"></td>
-                                                    <td><input type="text" id="fname" name="gender" value="<?=$results['retained_placenta'];?>"></td>
-                                                    <td><input type="text" id="fname" name="gender" value="<?=$results['milk_volume'];?>"></td>
-                                                    <td><input type="text" id="fname" name="gender" value="<?=$results['udder_edema'];?>"></td>
-                                                    <td><input type="text" id="fname" name="gender" value="<?=$results['lameness'];?>"></td>
-                                                    <td><input type="text" id="fname" name="gender" value="<?=$results['manure'];?>"></td>
-                                                    <td><input type="text" id="fname" name="gender" value="<?=$results['ketotic'];?>"></td>
-                                                    <td><input type="text" id="fname" name="gender" value="<?=$results['temperature'];?>"></td>
-                                                    <td><button name="submit" type="submit" onclick="return edit()" class="btn btn-success"><i class="fa fa-edit fa-1x"></a></i></button></td>
-                                                    <td><a  style="color: white" class="btn btn-danger" onclick="return deleted()" href=""><i class="fa fa-trash fa-1x"></a></i></td>
+                                                    <td> <?=$results['recdate'];?></td>
+                                                    <td> <?php echo "$animal_name ($tagno)"?></td>
+                                                    <td><?=$results['days'];?></td>
+                                                    <td><?=$results['gappearance'];?></td>
+                                                    <td><?=$results['appetite'];?></td>
+                                                    <td> <?=$results['eyes_ears'];?></td>
+                                                    <td><?=$results['warm_ears'];?></td>
+                                                    <td><?=$results['uterine_discharge'];?></td>
+                                                    <td><?=$results['retained_placenta'];?></td>
+                                                    <td><?=$results['milk_volume'];?></td>
+                                                    <td><?=$results['udder_edema'];?></td>
+                                                    <td><?=$results['lameness'];?></td>
+                                                    <td><?=$results['manure'];?></td>
+                                                    <td><?=$results['ketotic'];?></td>
+                                                    <td><?=$results['temperature'];?></td>
+                                                    <td><a  style="color: white" class="btn btn-success" href="edit-ten-day?animalid=<?=$results['animal_id'];?>&&farm_id=<?=$results['farm_id'];?>&&id=<?=$results['id'];?>"><i class="fa fa-edit fa-1x"></a></i></td>
+                                                  
                                                 </tr>
                                             </form>
                                             <?php
