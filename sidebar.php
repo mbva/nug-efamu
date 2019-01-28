@@ -153,16 +153,6 @@
             </ul>
         </li>
 
-        <li> <a href="javascript:void(0)" class="waves-effect"><i class="mdi mdi-checkbox-multiple-marked-outline fa-fw"></i> <span class="hide-menu">Farm<span class="fa arrow"></span></span></a>
-            <ul class="nav nav-second-level">
-                <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">Registration </span><span class="fa arrow"></span></a>
-                    <ul class="nav nav-third-level">
-                        <li> <a href="javascript:void(0)"><i class="fa fa-plus-square fa-fw"></i><span class="hide-menu">New</span></a> </li>
-                        <li> <a href="javascript:void(0)"><i class="fa fa-eye-slash fa-fw"></i><span class="hide-menu">View</span></a> </li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
         <li> <a href="javascript:void(0)" class="waves-effect <?php if($active=='settings') echo "active" ?>"><i class="mdi mdi-checkbox-multiple-marked-outline fa-fw"></i> <span class="hide-menu">System Settings<span class="fa arrow"></span></span></a>
             <ul class="nav nav-second-level">
                 <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">Manage Doctors </span><span class="fa arrow"></span></a>
@@ -220,9 +210,9 @@
         </li>
         <li> <a href="javascript:void(0);" class="waves-effect <?php if($active=='u-permissions') echo "active" ?>"><i class="mdi mdi-checkbox-multiple-marked-outline fa-fw"></i> <span class="hide-menu">User Permissions<span class="fa arrow"></span></span></a>
             <ul class="nav nav-second-level">
-                <li> <a href="register-animal"><i data-icon="7" class="fa fa-arrow-alt-circle-right fa-fw"></i><span class="hide-menu">Add</span></a> </li>
-                <li> <a href="view-animal-registration"><i data-icon="7" class="fa fa-arrow-alt-circle-right fa-fw"></i><span class="hide-menu">View </span></a> </li>
-                <li> <a href="javascript:void(0)"><i data-icon="7" class="fa fa-arrow-alt-circle-right fa-fw"></i><span class="hide-menu">edit</span></a> </li>
+                <li> <a href="permission_select"><i data-icon="7" class="fa fa-arrow-alt-circle-right fa-fw"></i><span class="hide-menu">Add</span></a> </li>
+                <li> <a href="view_permissions"><i data-icon="7" class="fa fa-arrow-alt-circle-right fa-fw"></i><span class="hide-menu">View </span></a> </li>
+                <li> <a href="edit_permissions"><i data-icon="7" class="fa fa-arrow-alt-circle-right fa-fw"></i><span class="hide-menu">Edit</span></a> </li>
             </ul>
         </li>
         <li> <a href="javascript:void(0)" class="waves-effect <?php if($active=='recycle') echo "logs"; ?>"><i class="mdi mdi-checkbox-multiple-marked-outline fa-fw"></i> <span class="hide-menu">System Logs<span class="fa arrow"></span></span></a>
@@ -237,11 +227,6 @@
                 <li> <a href="javascript:void(0)"><i data-icon="7" class="fa fa-arrow-alt-circle-right fa-fw"></i><span class="hide-menu">View</span></a> </li>
             </ul>
         </li>
-        <li> <a href="javascript:void(0)" class="waves-effect <?php if($active=='logs') echo "active"; ?>"><i class="mdi mdi-checkbox-multiple-marked-outline fa-fw"></i> <span class="hide-menu">System Logs<span class="fa arrow"></span></span></a>
-            <ul class="nav nav-second-level">
-                <li> <a href="javascript:void(0)"><i data-icon="7" class="fa fa-arrow-alt-circle-right fa-fw"></i><span class="hide-menu">View Transaction Logs</span></a> </li>
-                <li> <a href="javascript:void(0)"><i data-icon="7" class="fa fa-arrow-alt-circle-right fa-fw"></i><span class="hide-menu">View System Logs</span></a> </li>
-            </ul>
-        </li>
+
     </ul>
 </div>
