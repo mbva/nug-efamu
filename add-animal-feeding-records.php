@@ -174,7 +174,7 @@ $dailytotqty=($quantity*$frequency*$number);
                                                
                                                  <option value="">Select</option>
                                                         <option value="Pasture">Pasture</option>
-                                                        <option value="Total Mixed Ratio">Total Mixed ratio</option>
+                                                        <option value="Total Mixed Ratio">Total Mixed 	Ratio</option>
                                                         <option value="Supplement">Supplement</option>
                                             </select>
                                             <div class="input-group-addon"><i class="ti-email"></i></div>
