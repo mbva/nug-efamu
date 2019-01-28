@@ -3,54 +3,45 @@
 
 <head>
     <?php include 'head.php';
-    $active='breeding';?>
+    $active='animal';?>
 </head>
 <?php include 'head.php';?>
+<?php
+$animal_id = $_GET['animal_id'];
+$id = $_GET['id'];
+$farm_id = $_GET['farm_id'];
+
+$details = mysqli_fetch_array(mysqli_query($con,"select * from weight where animal_id='$animal_id' and farm_id='$farm_id'and id='$id'"))
+?>
 </head>
 <?php
 include 'db.php';
 $message="";
-$farm = $_SESSION['farm'];
+if(isset($_POST['submit'])){
 
-$animal = $_GET['animal'];
-$animal_id = $_GET['animalid'];
+    $animal_id = mysqli_real_escape_string($con,    ucwords($_POST['animal_id']));
+    $farm_id = mysqli_real_escape_string($con,    ucwords($_POST['farm_id']));
+    $id = mysqli_real_escape_string($con,    ucwords($_POST['id']));
+    $weights = mysqli_real_escape_string($con,    ucwords($_POST['weight']));
 
-if(isset($_GET['submit'])){
-    $animal_id = $_GET['animal_id'];
-    $atag = mysqli_real_escape_string($con,        ucwords($_GET['tagno']));
-    $dos = mysqli_real_escape_string($con,        ucwords($_GET['dos']));
-    $doctor = mysqli_real_escape_string($con,          ucwords($_GET['doctor']));
+    $recdate =         date("Y-m-d H:i:s");
+    $recby =   $_SESSION['full_names'];
     //capturing the registrar of the data
-    $entered_by =           $_SESSION['full_names'];
-    $time       =           date("Y-m-d H:i:s");
-    $action     =           "Entered Serving Record";
-
-    //checking for the result
-
-    $check = mysqli_query($con,"select * from animal_serving where servedate = '$dos'
-	and farm_id ='$farm'");
-    if(mysqli_num_rows($check)>0){
-        echo "<script>alert('The record already exists');</script>";
-    }else{
-        $serving_date = $dos;
-        $max_check_date =date_create($serving_date);
-        date_add($max_check_date,date_interval_create_from_date_string("21 days"));
-        $max_check_for_signs_of_heat__date =  date_format($max_check_date,"Y-m-d");
-
-        mysqli_query($con,"insert into 
-		animal_serving(farm_id,animal_id,servedate,servedby,checkup_date,soh_status)
-		VALUES ('$farm','$animal_id','$serving_date','$doctor','$max_check_for_signs_of_heat__date','Pending')");
-        mysqli_query($con,"update heat_animals set actualheatdate='$serving_date',
-		status='Served' where animal_id = '$animal_id' and farm_id ='$farm'");
-        /////////////////////////////Recording for the animal Serving///////////////////////////////
-
-        $sql_log  = mysqli_query($con,"insert into transaction_logs(farm_id,transaction_action,transaction_time,transaction_by) VALUES ('$farm','$action','$time','$entered_by')");
+    $entered_by =   $_SESSION['full_names'];
+    $time =         date("Y-m-d H:i:s");
+    $action =       "Edited animal weight record  ".' '.$animal_id;
+    $insert_weight = mysqli_query($con,"update weight set weight='$weights' WHERE farm_id='$farm_id'and animal_id='$animal_id' and id='$id'");
         //Executing the queries;
-        // header("location:wheel-heat-animals");
-        echo "<script>alert('Animal  Served Successfullly');</script>";
-        echo "<script>document.location='wheel-heat-animals'</script>";
-    }
 
+        $insert_transaction = mysqli_query($con,"insert into transaction_logs(farm_id,transaction_action,transaction_time,transaction_by) VALUES ('$farm','$action','$time','$entered_by')");
+ if(! $insert_weight){
+	 die("NOT UPDATED".mysql_error());
+ }
+	 else {
+		 ?>
+		 <script>window.location='view-weight-tracks';</script>
+		 <?php 
+		}
 }
 
 ?>
@@ -90,14 +81,14 @@ if(isset($_GET['submit'])){
         <div class="container-fluid">
             <div class="row bg-title">
                 <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                    <h4 class="page-title">Animal Serving Form</h4> </div>
+                    <h4 class="page-title">Weight Tracking Form</h4> </div>
                 <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                     <button class="right-side-toggle waves-effect waves-light btn-info btn-circle pull-right m-l-20"><i class="ti-settings text-white"></i></button>
                     <a href="javascript: void(0);" target="_blank" class="btn btn-danger pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light">Buy Admin Now</a>
                     <ol class="breadcrumb">
                         <li><a href="#">Dashboard</a></li>
                         <li><a href="#">Animal</a></li>
-                        <li><a href="#">Serving</a></li>
+                        <li><a href="#">Weight Tracker</a></li>
                     </ol>
                 </div>
                 <!-- /.col-lg-12 -->
@@ -107,58 +98,35 @@ if(isset($_GET['submit'])){
 
                 <div class="col-md-9 col-sm-12">
                     <div class="white-box">
-                        <h3 class="box-title m-b-0">Serving Form</h3>
-                        <form action="add-serving" method="get"  enctype="multipart/form-data">
+                        <h3 class="box-title m-b-0">Weight Tracking Form</h3>
+                        <form action="" method="post" enctype="multipart/form-data">
                             <div class="row">
-                                <div class="col-md-1"></div>
-                                <div class="col-sm-10 col-xs-12">
-                                    <div class="form-group">
-                                        <label for="exampleInputpwd2">Animal</label>
-                                        <div class="input-group">
-                                            <input class="form-control" name="tagno" required readonly value="<?=$animal;?>" type="text" >
-                                            <input class="form-control" name="animal_id" readonly value="<?=$animal_id;?>" type="hidden" >
-                                            <span class="input-group-addon"><i class="icon-pencil"></i></span>
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                            <div class="basic-login-inner">
+
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputpwd2">Serving Date</label>
-                                        <div class="input-group">
-                                            <input type="date" class="form-control" name="dos" required id="datepicker" />
-                                            <span class="input-group-addon"><i class="icon-calender"></i></span>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputuname">Doctor </label>
-                                        <div class="input-group">
-                                            <select class="form-control select2" name="doctor" required>
-                                                <option>Select</option>
-                                                <?php
-                                                $select = mysqli_query($con,"select * from manage_doctors where status = 'Activated' and farm_id = '$farm'");
-                                                while ($doctor = mysqli_fetch_array($select)){
-                                                    ?>
-                                                    <option value="<?php echo $doctor['vet_name']; ?>"><?php echo $doctor['vet_name']; ?></option>
-                                                    <?php
-                                                }
-                                                ?>
-                                            </select>
-                                            <?php
-                                            ?>
-                                            <div class="input-group-addon"><i class="ti-pencil"></i></div>
-                                        </div>
-                                    </div>
-                                     <div class="form-group">
-                                        <label for="exampleInputpwd2">Serving Method</label>
-                                        <div class="input-group">
-                                           <select class="form-control select2" name="smethod" required>
-                                                <option value='' selected>Select</option>
-                                               
-                                            
-                                                    <option value="artificial">Artificial Insermination</option>
-                                                     <option value="bull">Artificial Insermination</option>
-                                               
-                                            <span class="input-group-addon"><i class="icon-pencil"></i></span>
-                                        </div>
-                                    </div>
+                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                            <div class="basic-login-inner">
+                                                <div class="form-group-inner">
+                                                    <label>Measurement Date </label>
+                                                    <input type="date" value="<?=$details['wdate'];?>"  class="form-control" name="wdate"  />
+                                                </div>
+                                                <div class="form-group-inner">
+                                                    <label>Animal Name  </label>
+                                                    <input type="text" value="<?php
+                                                    $animal_details = mysqli_fetch_array(mysqli_query($con,"select * from animal_registration where animal_id='$animal_id' and farm_id='$farm_id'"));
+                                                    echo $animal_details['animal_name']." (".$animal_details['tagNo'].")";
+                                                    ?>" readonly class="form-control" name="animal_id"  />
+                                                    <input type="hidden" value="<?=$details['animal_id'];?>" readonly class="form-control" name="animal_id"  />
+                                                    <input type="hidden" value="<?=$details['farm_id'];?>" readonly class="form-control" name="farm_id"  />
+                                                    <input type="hidden" value="<?=$details['id'];?>" readonly class="form-control" name="id"  />
+                                                </div>
+
+                                                <div class="form-group-inner">
+                                                    <label>Weight </label>
+                                                    <input class="form-control" value="<?=$details['weight'];?>" name="weight" required autocomplete="off" placeholder="Genetic percentage" type="text" min="50" title="Value must be 50 and ABove">
+                                                </div>
                                     <div class="text-center">
                                         <button type="submit" name="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>
                                         <button type="reset" class="btn btn-inverse waves-effect waves-light">Cancel</button>
@@ -169,8 +137,9 @@ if(isset($_GET['submit'])){
                         </form>
                     </div>
                 </div>
+				</div>
                 <div class="col-md-3 col-sm-12">
-                    <h4><b>Serving Tips</b></h4>
+                    <h4><b>Weighing Tips</b></h4>
                     <marquee  behavior="scroll" direction="up" id="mymarquee" scrollamount="2" onmouseover="this.stop();" onmouseout="this.start();">
                         <p style="text-align: justify">
                             <?php

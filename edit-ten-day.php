@@ -3,13 +3,16 @@
 
 <head>
     <?php include 'head.php';
-    $active='animal';?>
+    $active='animal';
+	$animal_id= $_GET['animalid'];
+$farm_id  = $_GET['farm_id'];
+$ten_id=$_GET['id'];
+?>
 </head>
 <?php
 include 'db.php';
 $farm = $_SESSION['farm'];
-//include 'session.php';
-//error_reporting(0);
+
 if(isset($_POST['save'])){
     $animal_id = mysqli_real_escape_string($con,        ucwords($_POST['animal_id']));
     $input_days =   mysqli_real_escape_string($con,        ucwords($_POST['days']));
@@ -30,34 +33,16 @@ if(isset($_POST['save'])){
     $entered_by =   $_SESSION['full_names'];
     $recdate =         date("Y-m-d");
     $time =         date("Y-m-d H:i:s");
-    $action =       "Recorded Calving 10 Day Sheet info for ".' '.$animal_id;
+    $action =       "Edted Calving 10 Day Sheet info for ".' '.$animal_id;
 
-    $select_tag = mysqli_query($con,"select * from calving where animal_id = '$animal_id' and farm_id ='$farm'");
-    $tag_days = mysqli_fetch_array($select_tag);
-    $to_date = time(); // Input your date here e.g. strtotime("2014-01-02")
-    $from_date = strtotime($tag_days['cdate']);
-    $day_diff = $to_date - $from_date;
-    $actual_days =  floor($day_diff/(60*60*24))."\n";
 
-    //if($input_days <= $actual_days){
-    //Write here the code if the input is ok
-    //Check to see if the record wasnt entered before
-    $check_query = mysqli_query($con,"select * from ten_day_sheet where animal_id = '$animal_id' 
-		and recdate = '$recdate' and days ='$input_days' and farm_id ='$farm'");
-    $check_results = mysqli_fetch_array($check_query);
-    if(mysqli_num_rows($check_query)>0){
-        //$message = "<div class=\"alert alert-success\"><strong>The Record was already taken</strong></div>";
-        echo "<script>alert('The Record was already taken');</script>";
-
-    }
-    else{
-
-        $insert = mysqli_query($con,"INSERT INTO ten_day_sheet(farm_id,animal_id, recdate, recby, days, gappearance, appetite, eyes_ears, warm_ears, uterine_discharge, retained_placenta, milk_volume, udder_edema, lameness, manure, ketotic, temperature) 
-                           VALUES ('$farm','$animal_id', '$recdate', '$entered_by', '$input_days', '$ga', '$appetite', '$eyes_bright', '$ear_warm', '$urine_discharge', '$placenta', '$milk_volume', '$udder', '$lameness', '$manure', '$ketotic', '$temperature');");
+        $insert = mysqli_query($con,"UPDATE ten_day_sheet set days='$input_days', gappearance='$ga', appetite='$appetite', eyes_ears='$eyes_bright', warm_ears='$ear_warm', uterine_discharge='$urine_discharge', 
+		retained_placenta='$placenta', milk_volume='$milk_volume', udder_edema='$udder', lameness='$lameness', manure='$manure', ketotic='$ketotic', temperature='$temperature' WHERE id='$animal_id'");
         $sql_transaction  = mysqli_query($con,"insert into transaction_logs(farm_id,transaction_action,transaction_time,transaction_by) VALUES ('$farm','$action','$time','$entered_by')");
         if($insert && $sql_transaction ){
             $message = "<div class=\"alert alert-success\"><strong>Registration is Successful</strong></div>";
             echo "<script>alert('Registration is Successful');</script>";
+			 echo "<script>window.location='view-ten-day-records';</script>";
         }else{
             echo mysqli_error($con);
         }
@@ -67,7 +52,6 @@ if(isset($_POST['save'])){
     //write here the code if false
     //  echo "<script>alert('You Cant enter records for future Dates');</script>";
     //}
-}
 ?>
 <body class="fix-header">
 <!-- ============================================================== -->
@@ -126,64 +110,10 @@ if(isset($_POST['save'])){
                     <div class="white-box">
 
                             <div class="row">
-                                <div class="col-sm-3 col-xs-12">
-                                    <form action="ten-day" method="post" enctype="multipart/form-data">
-                                        <div class="form-group">
-                                            <label for="exampleInputuname">Select Animal </label>
-                                            <div class="input-group">
-                                                <select class="form-control select2" name="animal_id" required>
-                                                    <option>Select</option>
-                                                    <?php
-                                                    /*
-                                                     The tag nos to be displayed are for those whose age is less than 3 months and have no 10 day information (count the rows of 10 day info when is less than 10)
-                                                     *
-                                                     */
-                                                    $select_tag = mysqli_query($con,"select * from animal_registration WHERE  farm_id ='$farm'");
-                                                    while ($result = mysqli_fetch_array($select_tag)){
-                                                        $tagno = $result['tagNo'];
-                                                        $animal_id = $result['animal_id'];
-                                                        $animal_name = $result['animal_name'];
-                                                        //Checking to see if the tag number dont exist more than 10 times in the calving form
-                                                        $check_calving = mysqli_fetch_array(mysqli_query($con,"select count(id) as recordtimes from ten_day_sheet
-																			where animal_id = '$animal_id' and farm_id ='$farm'"));
-                                                        $rectm=$check_calving['recordtimes'];
-
-                                                        if($rectm<10){
-                                                            //Getting the dates to calculate the months of the cows
-                                                            $birth_date = strtotime($result['dob']);
-                                                            $today_date = strtotime(date("Y-m-d"));
-                                                            $months = 0;
-                                                            //loop to calculate the omnth between the dates
-
-                                                            while (($birth_date = strtotime('+1 MONTH', $birth_date)) <= $today_date) {
-                                                                $months++;
-                                                            }
-                                                            $age_months = $months;
-
-                                                            if($months <3){
-                                                                ?>
-                                                                <option value="<?php echo $animal_id; ?>"><?php echo "$animal_name ($tagno)" ; ?></option>
-                                                                <?php
-                                                            }
-
-                                                        }
-                                                    }
-                                                    ?>
-                                                </select>
-                                                <div class="input-group-addon"><i class="ti-ink-pen"></i></div>
-                                            </div>
-                                        </div>
-                                        <div class="text-center">
-                                            <button type="submit" name="submit" class="btn btn-success waves-effect waves-light m-r-10">Search</button>
-                                        </div>
-                                    </form>
-                                </div>
+                               
                                 <div class="col-sm-9 col-xs-12">
                                     <?php
-                                    if(isset($_POST['submit'])){
-                                    include 'db.php';
-                                    $animal_id = $_POST['animal_id'];
-                                    //echo "<h1>anima $animal_name $tagno id $animal_id<h1>";
+                                   
                                     $select_tag = mysqli_query($con,"select * from calving where  farm_id ='$farm'");
                                     $tag = mysqli_fetch_array($select_tag);
                                     $to_date = time(); // Input your date here e.g. strtotime("2014-01-02")
@@ -198,7 +128,7 @@ if(isset($_POST['save'])){
                                     $animal_name=$animal_records['animal_name'];
 
                                     ?>
-                                    <form action="ten-day" method="post" enctype="multipart/form-data">
+                                    <form action="" method="post" enctype="multipart/form-data">
                                        <div class="row">
                                            <div class="col-md-6">
                                                <div class="form-group">
@@ -215,12 +145,10 @@ if(isset($_POST['save'])){
                                                        <?php
                                                        include 'db.php';
                                                        //selecing to see the biggest day in the ten day table
-                                                       $check_days = mysqli_fetch_array(mysqli_query($con,"select max(days) as max_day from ten_day_sheet where animal_id='$animal_id' and farm_id ='$farm'"));
-                                                       $max_day = $check_days['max_day'];
-                                                       $today_day = $max_day+1;
-
+                                                       $check_days = mysqli_fetch_array(mysqli_query($con,"select * from ten_day_sheet WHERE id='$ten_id'"));
+                                                       $day= $check_days['days'];
                                                        ?>
-                                                       <input type="text"   name="days"  value="<?=$today_day;?>" readonly required autocomplete="off" class="form-control" id="exampleInputpwd2" placeholder="Breed of Dam ">
+                                                       <input type="text"   name="days"  value="<?=$day;?>" readonly required autocomplete="off" class="form-control" id="exampleInputpwd2" placeholder="Breed of Dam ">
                                                        <div class="input-group-addon"><i class="ti-lock"></i></div>
                                                    </div>
                                                </div>
@@ -462,10 +390,8 @@ if(isset($_POST['save'])){
                                        </div>
                                     </form>
 
-                                        <?php
-                                    }
-                                    echo $message ;
-                                    ?>
+                                  
+                                   
                                 </div>
                             </div>
                     </div>

@@ -2,64 +2,85 @@
 <html lang="en">
 
 <head>
+<<<<<<< HEAD
+
+    <?php include 'head.php';?>
+   
+ <script language="JavaScript">
+	<!--
+javascript:window.history.forward(1);
+//--></script>
+<script type="text/javascript">
+=======
     <?php include 'head.php';
     $active='feeding';
     ?>
-	<script src="resources/jquery-min.js"></script>
-  
+	
 	<script type="text/javascript">
+>>>>>>> 49b8989419ff899f78811be35c612e576f34d226
     $(document).ready(function(){
         $("select.feedtype").change(function(){
             var selectedfeedtype = $(".feedtype option:selected").val();
             $.ajax({
                 type: "POST",
+<<<<<<< HEAD
+                url: "feedtypes_form.php",
+                data: { feedtype: selectedfeedtype } 
+=======
                 url: "process_feedtype",
                 data: { feedtype : selectedfeedtype } 
+>>>>>>> 49b8989419ff899f78811be35c612e576f34d226
             }).done(function(data){
                 $("#response").html(data);
             });
         });
 		 });
-	
-		
+<<<<<<< HEAD
+		 
 </script>
+
 </head>
 <?php
 include 'db.php';
 $message="";
+>>>>>>> 49b8989419ff899f78811be35c612e576f34d226
 $farm= $_SESSION['farm'];
 if(isset($_POST['submit'])){
     $date = mysqli_real_escape_string($con,  ucwords($_POST['sdate']));
     $class = mysqli_real_escape_string($con,   ucwords($_POST['animalclass']));
     $feed_type = mysqli_real_escape_string($con,   ucwords($_POST['feedtype']));
     $quantity = mysqli_real_escape_string($con,   ucwords($_POST['quantity']));
-	$hay = mysqli_real_escape_string($con,   ucwords($_POST['hay']));
-	$silage = mysqli_real_escape_string($con,   ucwords($_POST['silage']));
-	$dailylevel= mysqli_real_escape_string($con,   ucwords($_POST['daily-level']));
     $frequency = mysqli_real_escape_string($con,   ucwords($_POST['frequency']));
     $number = mysqli_real_escape_string($con,   ucwords($_POST['animalnumber']));
     $recdate = date("Y-m-d");
     $recby = $_SESSION['full_names'];
-	
-	if($feed_type=='Total Mixed Ratio'){
-		$quantity=($dailylevel+$hay+$silage);
-	}
-	$feed_type=$feed_type.'(Hay:'.$hay.',Silage:'.$silage.'Daily Level:'.$dailylevel.')';
-$dailytotqty=($quantity*$frequency*$number);
+
     //capturing the registrar of the data
     $entered_by =   $_SESSION['full_names'];
     $time =         date("Y-m-d H:i:s");
     $action =       "Entered  Feeding records for".$class;
+<<<<<<< HEAD
+?>
+<script>alert('this is farm <?php echo $farm;?>')</script>
+<?php 
+
+
+//echo '<<h1>THIS IS FARM $farm</h1>';
+    //checking if the member was already paid
+    if(mysqli_num_rows(mysqli_query($con,"select * from animal_feeding where animalclass='$class' and fdate='$date' and farm_id ='$farm' "))>0){
+       //$message = "<div class=\"alert alert-danger\"><strong>These Feeding Records were already Taken</strong></div>";
+=======
 
 
 
     //checking if the member was already paid
     if(mysqli_num_rows(mysqli_query($con,"select * from animal_feeding where animalclass='$class' and fdate='$date' and farm_id ='$farm' "))>0){
         //$message = "<div class=\"alert alert-danger\"><strong>These Feeding Records were already Taken</strong></div>";
+>>>>>>> 49b8989419ff899f78811be35c612e576f34d226
         echo "<script>alert('These Feeding Records were already Taken');</script>";
     }else{
-        $insert_record = mysqli_query($con,"INSERT INTO animal_feeding (daily_tot_qty,farm_id,fdate, animalclass, feedtype, quantityfed, frequency, numberofanimals,recby,recdate) 
-                                                VALUES ('$dailytotqty','$farm','$date', '$class', '$feed_type', '$quantity', '$frequency', '$number','$recby','$recdate');");
+        $insert_record = mysqli_query($con,"INSERT INTO animal_feeding (farm_id,fdate, animalclass, feedtype, quantityfed, frequency, numberofanimals,recby,recdate) 
+                                                VALUES ('$farm','$date', '$class', '$feed_type', '$quantity', '$frequency', '$number','$recby','$recdate');");
 
         $insert_log = mysqli_query($con,"insert into transaction_logs(farm_id,transaction_action,transaction_time,transaction_by) VALUES ('$farm','$action','$time','$entered_by')");
 
@@ -70,7 +91,15 @@ $dailytotqty=($quantity*$frequency*$number);
             echo mysqli_error($con);
         }
     }
+<<<<<<< HEAD
+
+
+
 }
+
+=======
+}
+>>>>>>> 49b8989419ff899f78811be35c612e576f34d226
 ?>
 <body class="fix-header">
 <!-- ============================================================== -->
@@ -109,15 +138,24 @@ $dailytotqty=($quantity*$frequency*$number);
             <div class="row bg-title">
                 <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
                     <h4 class="page-title">
+<<<<<<< HEAD
+                        Calving Form
+=======
                         Animal Feeding Form
+>>>>>>> 49b8989419ff899f78811be35c612e576f34d226
                     </h4> </div>
                 <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                     <button class="right-side-toggle waves-effect waves-light btn-info btn-circle pull-right m-l-20"><i class="ti-settings text-white"></i></button>
                     <a href="javascript: void(0);" target="_blank" class="btn btn-danger pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light">Buy Admin Now</a>
                     <ol class="breadcrumb">
                         <li><a href="#">Dashboard</a></li>
+<<<<<<< HEAD
+                        <li><a href="#">Animal</a></li>
+                        <li><a href="#">Calving</a></li>
+=======
                         <li><a href="#">Feeding</a></li>
                         <li><a href="#">  Animal Feeding Form</a></li>
+>>>>>>> 49b8989419ff899f78811be35c612e576f34d226
                     </ol>
                 </div>
                 <!-- /.col-lg-12 -->
@@ -125,21 +163,115 @@ $dailytotqty=($quantity*$frequency*$number);
             <!--.row-->
             <div class="row">
 
+<<<<<<< HEAD
+                <div class="col-md-12 col-sm-12">
+                    <div class="white-box">
+                        <h3 class="box-title m-b-0">Calving Form</h3>
+                        <form action="" method="post" enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="col-sm-5 col-xs-12">
+                                    <div class="form-group">
+                                        <label for="exampleInputpwd2">Calving Date</label>
+=======
                 <div class="col-md-9 col-sm-12">
                     <div class="white-box">
                         <h3 class="box-title m-b-0"> Animal Feeding Form</h3>
                         <form action="add-animal-feeding-records" method="post" enctype="multipart/form-data">
                             <div class="row">
                                 <div class="col-md-6">
-                                   
                                     <div class="form-group">
+                                        <label for="exampleInputpwd2">Feeding Date</label>
+>>>>>>> 49b8989419ff899f78811be35c612e576f34d226
+                                        <div class="input-group">
+                                            <input type="date" class="form-control" name="sdate" id="datepicker" />
+                                            <span class="input-group-addon"><i class="icon-calender"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+<<<<<<< HEAD
+                                        <label for="exampleInputuname">Animal </label>
+                                        <div class="input-group">
+                                            <select class="form-control select2" name="animal_classs" required>
+                                               <option value="">Select</option>
+                                                        <option value="Dry feeding">Dry feeding</option>
+                                                        <option value="Breeding heard">Breeding heard</option>
+                                                        <option value="Milking Heard">Milking Heard</option>
+                                            </select>
+                                            
+                                            </select>
+                                            <div class="input-group-addon"><i class="ti-location-arrow"></i></div>
+                                        </div>
+                                    </div>
+                                
+                                    
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Feed Type</label>
+                                        <div class="input-group">
+                                            <select class="form-control feedtype" name="feedtype" required>
+                                               
+                                                 <option value="">Select</option>
+                                                        <option value="Pasture">Pasture</option>
+                                                        <option value="ff">Total Mixed ratio</option>
+                                                        <option value="Supplement">Supplement</option>
+                                            </select>
+                                            <div class="input-group-addon"><i class="ti-email"></i></div>
+                                        </div>
+                                    </div>
+                                        <div class="form-group' id="response">
+                                    
+                                    
+                                    </div>
+                                   
+									</div>
+									  <div class="col-sm-5 col-xs-12">
+                                  
+                                    <div class="form-group">
+                                        <label class="control-label">Quantity Fed Per animal</label>
+                                        <div class="input-group">
+                                        
+                                            <input class="form-control" name="quantity" required autocomplete="off" placeholder="Quantity" type="number" min="50" title="Value must be 50 and ABove">
+                                            <div class="input-group-addon"><i class="ti-email"></i></div>
+                                        </div>
+                                </div>
+								
+								    
+                                    <div class="form-group">
+                                        <label class="control-label">Frequence Of Feeding</label>
+                                        <div class="input-group">
+                                    
+                                            <input class="form-control" name="frequency" required autocomplete="off" placeholder="Quantity" type="number" min="50" title="Value must be 50 and ABove">
+                                            <div class="input-group-addon"><i class="ti-email"></i></div>
+                                        </div>
+                                </div>
+								
+								    
+                                    <div class="form-group">
+                                        <label class="control-label">Number Of Animals Fed</label>
+                                        <div class="input-group">
+                                     
+                                            <input class="form-control" name="animalnumber" required autocomplete="off" placeholder="Quantity" type="number" min="50" title="Value must be 50 and ABove">
+                                            <div class="input-group-addon"><i class="ti-email"></i></div>
+                                        </div>
+                                </div>
+								
+								    
+                                
+								</div>
+                                <div class="col-sm-3 col-xs-12">
+
+                                    <div class="text-right">
+                                        <button type="submit" name="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>
+                                        <button type="reset" class="btn btn-inverse waves-effect waves-light">Cancel</button>
+                                    </div>
+                               </div>
+=======
                                         <label for="exampleInputuname">Animal</label>
                                         <div class="input-group">
                                             <select class="form-control select2" name="animalclass" required>
                                                 <option value="">Select</option>
                                                 <option value="Dry feeding">Dry feeding</option>
-                                                <option value="Breeding Herd">Breeding Herd</option>
-                                                <option value="Milking Herd">Milking Herd</option>
+                                                <option value="Breeding heard">Breeding heard</option>
+                                                <option value="Milking Heard">Milking Heard</option>
                                             </select>
                                             <?php
                                             ?>
@@ -152,7 +284,7 @@ $dailytotqty=($quantity*$frequency*$number);
                                             <select class="form-control feedtype select2" name="feedtype" required>
                                                 <option value="">Select</option>
                                                 <option value="Pasture">Pasture</option>
-                                                <option value="Total Mixed Ratio">Total Mixed Ratio</option>
+                                                <option value="ff">Total Mixed ratio</option>
                                                 <option value="Supplement">Supplement</option>
                                             </select>
                                             <?php
@@ -170,14 +302,13 @@ $dailytotqty=($quantity*$frequency*$number);
                                 </div>
                                 <div class="col-sm-6 col-xs-12">
 
-                                   <div class="form-group">
-                                        <label for="exampleInputpwd2">Feeding Date</label>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Quantity</label>
                                         <div class="input-group">
-                                            <input type="date" class="form-control" name="sdate" id="datepicker" />
-                                            <span class="input-group-addon"><i class="icon-calender"></i></span>
+                                            <input class="form-control" name="quantity" required autocomplete="off" placeholder="Quantity Given" type="number">
+                                            <div class="input-group-addon"><i class="ti-pencil-alt"></i></div>
                                         </div>
                                     </div>
-									
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Frequency</label>
                                         <div class="input-group">
@@ -197,15 +328,19 @@ $dailytotqty=($quantity*$frequency*$number);
                                         <button type="submit" name="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>
                                     </div>
                                 </div>
+>>>>>>> 49b8989419ff899f78811be35c612e576f34d226
                             </div>
                         </form>
                     </div>
                 </div>
+<<<<<<< HEAD
+=======
                 <div class="col-md-3 col-sm-12">
                     <h4><b>Animal Feeding Tips</b></h4>
 
 
                 </div>
+>>>>>>> 49b8989419ff899f78811be35c612e576f34d226
             </div>
             <!-- ============================================================== -->
         </div>
