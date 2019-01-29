@@ -108,8 +108,8 @@
 				 <li class="col-sm-2">
                     <ul>
                         <li class="dropdown-header">System Logs </li>
-                        <li><a href="graph-milk-sales">Add</a></li>
-                        <li><a href="graph-weight-tracking">View</a></li>
+                        <li><a href="#">Add</a></li>
+                        <li><a href="#">View</a></li>
                         
                     </ul>
                 </li>
@@ -117,8 +117,8 @@
 				 <li class="col-sm-2">
                     <ul>
                         <li class="dropdown-header">Manage Users </li>
-                        <li><a href="add-users">Add</a></li>
-                        <li><a href="view-users">View</a></li>
+                        <li><a href="add-users">Add New User</a></li>
+                        <li><a href="view-users">View Existing Users</a></li>
                         
                     </ul>
                 </li>
@@ -131,20 +131,13 @@
                     </ul>
                 </li>
 			
-				 <li class="col-sm-1">
-                    <ul>
-                        <li class="dropdown-header">Manage<br> Expenses </li>
-                        <li><a href="graph-milk-sales">Add</a></li>
-                        <li><a href="graph-weight-tracking">View</a></li>
-                        
-                    </ul>
-                </li>
 				
-				 <li class="col-sm-1">
+				
+				 <li class="col-sm-2">
                     <ul>
                         <li class="dropdown-header">Manage <br>Farms </li>
-                        <li><a href="graph-milk-sales">Add</a></li>
-                        <li><a href="graph-weight-tracking">View</a></li>
+                        <li><a href="">Add Farms</a></li>
+                        <li><a href="">View Farms</a></li>
                         
                     </ul>
                 </li>

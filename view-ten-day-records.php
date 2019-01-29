@@ -89,10 +89,13 @@ $active='animal';?>
                                                                 <button style="float: right" name="submit" class="btn btn-sm btn-primary login-submit-cs" type="submit">Search</button>
                                                             </div>
                                                         </div>
-
-                                                    </form>
-                      
-
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                             <div class="table-responsive">
                               <table id="example23" class="myTable table table-responsive color-table info-table display nowrap table table-hover table-striped" cellspacing="0" width="100%">
                                     <thead>

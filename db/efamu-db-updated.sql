@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 22, 2019 at 09:04 AM
+-- Generation Time: Jan 29, 2019 at 09:39 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -66,18 +66,25 @@ CREATE TABLE IF NOT EXISTS `animal_feeding` (
   `numberofanimals` int(255) DEFAULT NULL,
   `recby` varchar(255) DEFAULT NULL,
   `recdate` date DEFAULT NULL,
+  `daily_tot_qty` int(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
 
 --
 -- Dumping data for table `animal_feeding`
 --
 
-INSERT INTO `animal_feeding` (`farm_id`, `id`, `fdate`, `animalclass`, `feedtype`, `quantityfed`, `frequency`, `numberofanimals`, `recby`, `recdate`) VALUES
-(1, 2, '2018-10-17', 'Dry Feeding', 'Pasture', 6, 3, 5, 'Golola Charles', '2018-10-17'),
-(0, 3, '2018-10-24', 'Dry Feeding', 'Pasture', 100, 4, 9, 'Golola Charles', '2018-10-24'),
-(1, 4, '2018-12-12', 'Dry Feeding', 'Supplement', 50, 2, 13, 'Golola Charles', '2018-12-13'),
-(1, 5, '2019-01-03', 'Breeding Heard', 'Total Mixed Ratio', 2, 2, 20, 'Efamu Brenda Kembabaz', '2019-01-03');
+INSERT INTO `animal_feeding` (`farm_id`, `id`, `fdate`, `animalclass`, `feedtype`, `quantityfed`, `frequency`, `numberofanimals`, `recby`, `recdate`, `daily_tot_qty`) VALUES
+(1, 2, '2018-10-17', 'Dry Feeding', 'Pasture', 6, 3, 5, 'Golola Charles', '2018-10-17', NULL),
+(0, 3, '2018-10-24', 'Dry Feeding', 'Pasture', 100, 4, 9, 'Golola Charles', '2018-10-24', NULL),
+(1, 4, '2018-12-12', 'Dry Feeding', 'Supplement', 50, 2, 13, 'Golola Charles', '2018-12-13', NULL),
+(1, 5, '2019-01-03', 'Breeding Heard', 'Total Mixed Ratio', 2, 2, 20, 'Efamu Brenda Kembabaz', '2019-01-03', NULL),
+(2, 6, '2019-01-25', 'Dry Feeding', 'Total Mixed Ratio(Hay:,Silage:12Daily Level:56)', 12, 3, 23, 'Nugsoft Support Account', '2019-01-26', NULL),
+(2, 7, '2019-01-17', 'Breeding Heard', 'Total Mixed Ratio(Hay:54,Silage:34Daily Level:12)', 88, 12, 4, 'Nugsoft Support Account', '2019-01-26', NULL),
+(2, 8, '2019-01-18', 'Dry Feeding', 'Pasture(Hay:,Silage:Daily Level:)', 45, 23, 10, 'Nugsoft Support Account', '2019-01-26', 10350),
+(2, 9, '2019-01-26', 'Breeding Heard', 'Total Mixed Ratio(Hay:10,Silage:12Daily Level:4)', 26, 10, 2, 'Nugsoft Support Account', '2019-01-26', 520),
+(2, 10, '2019-01-16', '', 'Total Mixed Ratio(Hay:2,Silage:2Daily Level:2)', 6, 2, 2, 'Vincent Bakunzi', '2019-01-28', 24),
+(2, 11, '2019-01-10', '', 'Total Mixed Ratio(Hay:3,Silage:3Daily Level:3)', 9, 3, 3, 'Vincent Bakunzi', '2019-01-28', 81);
 
 -- --------------------------------------------------------
 
@@ -384,6 +391,136 @@ INSERT INTO `disease_incidences` (`farm_id`, `id`, `animal_id`, `body_weight`, `
 (0, 6, 3, '67', '67', '2018-11-28', 'Dfgd', 'Dfd', 'Fgdfg', 'Fgdg', 'Dfgd', 'Dfgdg', 'Dr.Ntege Samuel', ''),
 (1, 7, 13, '100', '40', '2018-12-29', 'Lameness In Fore LimbLoss Of AppetiteDrop In Milk ProductionSalvation', 'Anaplasmosis', 'OTC 20% AND MULTIVITAMIN', 'OTC 20% AND MULTIVITAMIN', '35mls Of OTC, 25mls Of Multivitamin', '1*3', 'Dr. Joseph', ''),
 (2, 8, 12, '456', '567', '2019-01-15', 'Dsvds', 'Dvvd', 'Dsfdf', '', 'Dfdsf', 'Dsfd', 'Select', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `districts`
+--
+
+CREATE TABLE IF NOT EXISTS `districts` (
+  `id` int(255) NOT NULL AUTO_INCREMENT,
+  `district` varchar(13) DEFAULT NULL,
+  `region` varchar(15) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=115 ;
+
+--
+-- Dumping data for table `districts`
+--
+
+INSERT INTO `districts` (`id`, `district`, `region`) VALUES
+(2, 'Bukomansimbi', 'Central Region'),
+(3, 'Butambala', 'Central Region'),
+(4, 'Buvuma', 'Central Region'),
+(5, 'Gomba', 'Central Region'),
+(6, 'Kalangala', 'Central Region'),
+(7, 'Kalungu', 'Central Region'),
+(8, 'Kampala', 'Central Region'),
+(9, 'Kayunga', 'Central Region'),
+(10, 'Kiboga', 'Central Region'),
+(11, 'Kyankwanzi', 'Central Region'),
+(12, 'Luweero', 'Central Region'),
+(13, 'Lwengo', 'Central Region'),
+(14, 'Lyantonde', 'Central Region'),
+(15, 'Masaka', 'Central Region'),
+(16, 'Mityana', 'Central Region'),
+(17, 'Mpigi', 'Central Region'),
+(18, 'Mubende', 'Central Region'),
+(19, 'Mukono', 'Central Region'),
+(20, 'Nakaseke', 'Central Region'),
+(21, 'Nakasongola', 'Central Region'),
+(22, 'Rakai', 'Central Region'),
+(23, 'Sembabule', 'Central Region'),
+(24, 'Wakiso', 'Central Region'),
+(25, 'Amuria', 'Eastern Region'),
+(26, 'Budaka', 'Eastern Region'),
+(27, 'Bududa', 'Eastern Region'),
+(28, 'Bugiri', 'Eastern Region'),
+(29, 'Bukedea', 'Eastern Region'),
+(30, 'Bukwa', 'Eastern Region'),
+(31, 'Bulambuli', 'Eastern Region'),
+(32, 'Busia', 'Eastern Region'),
+(33, 'Butaleja', 'Eastern Region'),
+(34, 'Buyende', 'Eastern Region'),
+(35, 'Iganga', 'Eastern Region'),
+(36, 'Jinja', 'Eastern Region'),
+(37, 'Kaberamaido', 'Eastern Region'),
+(38, 'Kaliro', 'Eastern Region'),
+(39, 'Kamuli', 'Eastern Region'),
+(40, 'Kapchorwa', 'Eastern Region'),
+(41, 'Katakwi', 'Eastern Region'),
+(42, 'Kibuku', 'Eastern Region'),
+(43, 'Kumi', 'Eastern Region'),
+(44, 'Kween', 'Eastern Region'),
+(45, 'Luuka', 'Eastern Region'),
+(46, 'Manafwa', 'Eastern Region'),
+(47, 'Mayuge', 'Eastern Region'),
+(48, 'Mbale', 'Eastern Region'),
+(49, 'Namayingo', 'Eastern Region'),
+(50, 'Namutumba', 'Eastern Region'),
+(51, 'Ngora', 'Eastern Region'),
+(52, 'Pallisa', 'Eastern Region'),
+(53, 'Serere', 'Eastern Region'),
+(54, 'Sironko', 'Eastern Region'),
+(55, 'Soroti', 'Eastern Region'),
+(56, 'Tororo', 'Eastern Region'),
+(57, 'Abim', 'Northern Region'),
+(58, 'Adjumani', 'Northern Region'),
+(59, 'Agago', 'Northern Region'),
+(60, 'Alebtong', 'Northern Region'),
+(61, 'Amolatar', 'Northern Region'),
+(62, 'Amudat', 'Northern Region'),
+(63, 'Amuru', 'Northern Region'),
+(64, 'Apac', 'Northern Region'),
+(65, 'Arua', 'Northern Region'),
+(66, 'Dokolo', 'Northern Region'),
+(67, 'Gulu', 'Northern Region'),
+(68, 'Kaabong', 'Northern Region'),
+(69, 'Kitgum', 'Northern Region'),
+(70, 'Koboko', 'Northern Region'),
+(71, 'Kole', 'Northern Region'),
+(72, 'Kotido', 'Northern Region'),
+(73, 'Lamwo', 'Northern Region'),
+(74, 'Lira', 'Northern Region'),
+(75, 'Maracha', 'Northern Region'),
+(76, 'Moroto', 'Northern Region'),
+(77, 'Moyo', 'Northern Region'),
+(78, 'Nakapiripirit', 'Northern Region'),
+(79, 'Napak', 'Northern Region'),
+(80, 'Nebbi', 'Northern Region'),
+(81, 'Nwoya', 'Northern Region'),
+(82, 'Otuke', 'Northern Region'),
+(83, 'Oyam', 'Northern Region'),
+(84, 'Pader', 'Northern Region'),
+(85, 'Yumbe', 'Northern Region'),
+(86, 'Zombo', 'Northern Region'),
+(87, 'Buhweju', 'Western Region'),
+(88, 'Buliisa', 'Western Region'),
+(89, 'Bundibugyo', 'Western Region'),
+(90, 'Bushenyi', 'Western Region'),
+(91, 'Hoima', 'Western Region'),
+(92, 'Ibanda', 'Western Region'),
+(93, 'Isingiro', 'Western Region'),
+(94, 'Kabale', 'Western Region'),
+(95, 'Kabarole', 'Western Region'),
+(96, 'Kamwenge', 'Western Region'),
+(97, 'Kanungu', 'Western Region'),
+(98, 'Kasese', 'Western Region'),
+(99, 'Kibaale', 'Western Region'),
+(100, 'Kiruhura', 'Western Region'),
+(101, 'Kiryandongo', 'Western Region'),
+(102, 'Kisoro', 'Western Region'),
+(103, 'Kyegegwa', 'Western Region'),
+(104, 'Kyenjojo', 'Western Region'),
+(105, 'Masindi', 'Western Region'),
+(106, 'Mbarara', 'Western Region'),
+(107, 'Mitooma', 'Western Region'),
+(108, 'Ntoroko', 'Western Region'),
+(109, 'Ntungamo', 'Western Region'),
+(110, 'Rubirizi', 'Western Region'),
+(111, 'Rukungiri', 'Western Region'),
+(112, 'Sheema', 'Western Region');
 
 -- --------------------------------------------------------
 
@@ -742,7 +879,7 @@ CREATE TABLE IF NOT EXISTS `login_logs` (
   `username` varchar(255) DEFAULT NULL,
   `accountnames` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=265 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=282 ;
 
 --
 -- Dumping data for table `login_logs`
@@ -863,7 +1000,24 @@ INSERT INTO `login_logs` (`farm_id`, `id`, `login_action`, `login_time`, `userna
 (1, 261, 'Vincent Bakunzi Logged in', '2019-01-20 17:32:29', 'vincent', 'Vincent Bakunzi'),
 (1, 262, 'Vincent Bakunzi Logged in', '2019-01-21 18:11:34', 'vincent', 'Vincent Bakunzi'),
 (1, 263, 'Vincent Bakunzi Logged in', '2019-01-22 08:37:37', 'vincent', 'Vincent Bakunzi'),
-(1, 264, 'Vincent Bakunzi Logged in', '2019-01-22 09:44:12', 'VINCENT', 'Vincent Bakunzi');
+(1, 264, 'Vincent Bakunzi Logged in', '2019-01-22 09:44:12', 'VINCENT', 'Vincent Bakunzi'),
+(1, 265, 'Vincent Bakunzi Logged in', '2019-01-22 19:23:02', 'vincent', 'Vincent Bakunzi'),
+(1, 266, 'Vincent Bakunzi Logged in', '2019-01-22 19:48:18', 'VINCENT', 'Vincent Bakunzi'),
+(1, 267, 'Vincent Bakunzi Logged in', '2019-01-24 03:42:23', 'vincent', 'Vincent Bakunzi'),
+(1, 268, 'Vincent Bakunzi Logged in', '2019-01-24 03:44:33', 'vincent', 'Vincent Bakunzi'),
+(1, 269, 'Vincent Bakunzi Logged in', '2019-01-24 04:14:56', 'vincent', 'Vincent Bakunzi'),
+(1, 270, 'Vincent Bakunzi Logged in', '2019-01-24 04:49:31', 'vincent', 'Vincent Bakunzi'),
+(1, 271, 'Vincent Bakunzi Logged in', '2019-01-25 09:42:47', 'vincent', 'Vincent Bakunzi'),
+(1, 272, 'Vincent Bakunzi Logged in', '2019-01-25 16:11:37', 'vincent', 'Vincent Bakunzi'),
+(1, 273, 'Vincent Bakunzi Logged in', '2019-01-25 17:11:24', 'VINCENT', 'Vincent Bakunzi'),
+(1, 274, 'Vincent Bakunzi Logged in', '2019-01-26 09:07:39', 'vincent', 'Vincent Bakunzi'),
+(1, 275, 'Vincent Bakunzi Logged in', '2019-01-26 11:33:35', 'vincent', 'Vincent Bakunzi'),
+(1, 276, 'Vincent Bakunzi Logged in', '2019-01-26 12:28:00', 'vincent', 'Vincent Bakunzi'),
+(1, 277, 'Vincent Bakunzi Logged in', '2019-01-26 14:02:37', 'vincent', 'Vincent Bakunzi'),
+(1, 278, 'Vincent Bakunzi Logged in', '2019-01-28 10:15:41', 'vincent', 'Vincent Bakunzi'),
+(1, 279, 'Vincent Bakunzi Logged in', '2019-01-28 20:12:43', 'VINCENT', 'Vincent Bakunzi'),
+(1, 280, 'Vincent Bakunzi Logged in', '2019-01-29 06:50:07', 'vincent', 'Vincent Bakunzi'),
+(1, 281, 'Vincent Bakunzi Logged in', '2019-01-29 09:04:52', 'vincent', 'Vincent Bakunzi');
 
 -- --------------------------------------------------------
 
@@ -939,7 +1093,7 @@ CREATE TABLE IF NOT EXISTS `manage_doctors` (
   `regdate` datetime DEFAULT NULL,
   `status` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
 --
 -- Dumping data for table `manage_doctors`
@@ -949,7 +1103,13 @@ INSERT INTO `manage_doctors` (`farm_id`, `id`, `vet_name`, `contact`, `email`, `
 (1, 1, 'Dr. Joseph', '0789654123', 'jose@gmail.com', '', '0000-00-00 00:00:00', 'Activated'),
 (1, 2, 'Dr. Musoke Ronald', '0772342094', 'mroni@hotmail.com', '', '0000-00-00 00:00:00', 'Activated'),
 (0, 5, 'Dr.Ntege Samuel', '0785412369', 'nsamuel@gmail.com', 'Golola Charles', '2018-09-24 10:57:28', 'Activated'),
-(1, 6, 'Dr. ', '0779773949', 'mukagonebertakena@gmail.com', 'Efamu Brenda Kembabaz', '2018-12-30 15:08:29', 'Activated');
+(2, 8, 'Dr. ', '0777865433', 'musinguzialekoo@gmail.com', 'Vincent Bakunzi', '2019-01-25 17:22:53', 'Deactivated'),
+(2, 9, ' ', '0787887878', 'vmatsiko@gmail.com', 'Vincent Bakunzi', '2019-01-25 17:24:04', 'Activated'),
+(2, 10, '$fname $lname', '5656', 'vmatsiko@gmail.com', 'Vincent Bakunzi', '2019-01-25 17:25:08', 'Activated'),
+(2, 11, ' ', '0767677667', 'vmatsiko@gmail.com', 'Vincent Bakunzi', '2019-01-25 17:26:02', 'Activated'),
+(2, 12, ' ', '76767', 'landsat256@gmail.com', 'Vincent Bakunzi', '2019-01-25 17:28:00', 'Activated'),
+(2, 13, '', '46656', 'musinguzialekoo@gmail.com', 'Vincent Bakunzi', '2019-01-25 17:28:42', 'Activated'),
+(2, 14, 'Justus Ashaba', '0988778787', 'landsat256@gmail.com', 'Vincent Bakunzi', '2019-01-25 17:29:40', 'Activated');
 
 -- --------------------------------------------------------
 
@@ -975,10 +1135,10 @@ CREATE TABLE IF NOT EXISTS `manage_vaccines` (
 --
 
 INSERT INTO `manage_vaccines` (`farm_id`, `id`, `vaccine`, `disease`, `brand`, `registeredby`, `manufacturer`, `regdate`, `status`) VALUES
-(0, 1, ' IBR (Infectious Bovine Rhinotracheitis)', 'Disease ', '', '', '', '0000-00-00 00:00:00', 'Activated'),
-(1, 2, 'Pink Eye Vaccine', 'Musujja', '1', '', '2c', '0000-00-00 00:00:00', 'Deactivated'),
-(0, 3, 'BVD vaccine', '', '', '', '', '0000-00-00 00:00:00', 'Activated'),
-(1, 4, 'Killed Vaccine', 'Simanyi', '', '', '', '0000-00-00 00:00:00', 'Activated');
+(3, 1, ' IBR (Infectious Bovine Rhinotracheitis)', 'Disease ', '', '', '', '0000-00-00 00:00:00', 'Activated'),
+(2, 2, 'Pink Eye Vaccine', 'Musujja', '1', '', '2c', '0000-00-00 00:00:00', 'Deactivated'),
+(2, 3, 'BVD vaccine', '', '', '', '', '0000-00-00 00:00:00', 'Activated'),
+(2, 4, 'Killed Vaccine', 'Simanyi', '', '', '', '0000-00-00 00:00:00', 'Activated');
 
 -- --------------------------------------------------------
 
@@ -1216,7 +1376,7 @@ CREATE TABLE IF NOT EXISTS `transaction_logs` (
   `transaction_time` datetime DEFAULT CURRENT_TIMESTAMP,
   `transaction_by` varchar(250) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=546 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=565 ;
 
 --
 -- Dumping data for table `transaction_logs`
@@ -1755,7 +1915,26 @@ INSERT INTO `transaction_logs` (`farm_id`, `id`, `transaction_action`, `transact
 (2, 542, 'Entered Disease Incidence records of  ', '2019-01-15 09:21:20', 'System Admin'),
 (2, 543, 'Entered Spraying records ', '2019-01-15 09:40:37', 'System Admin'),
 (2, 544, 'Added an Acaricide', '2019-01-15 10:29:36', 'System Admin'),
-(2, 545, 'Entered Culling records of  12', '2019-01-17 10:35:19', 'Vincent Bakunzi');
+(2, 545, 'Entered Culling records of  12', '2019-01-17 10:35:19', 'Vincent Bakunzi'),
+(2, 546, 'Registered Doctor  Dr. ', '2019-01-22 20:08:16', 'Vincent Bakunzi'),
+(2, 547, 'Deactivated account for Dr.', '2019-01-25 17:15:45', 'Vincent Bakunzi'),
+(2, 548, 'Activated account for Dr.', '2019-01-25 17:15:49', 'Vincent Bakunzi'),
+(2, 549, 'Registered Doctor  Dr. ', '2019-01-25 17:22:53', 'Vincent Bakunzi'),
+(2, 550, 'Registered Doctor   ', '2019-01-25 17:24:04', 'Vincent Bakunzi'),
+(2, 551, 'Registered Doctor  $fname $lname', '2019-01-25 17:25:08', 'Vincent Bakunzi'),
+(2, 552, 'Registered Doctor   ', '2019-01-25 17:26:02', 'Vincent Bakunzi'),
+(2, 553, 'Registered Doctor   ', '2019-01-25 17:28:00', 'Vincent Bakunzi'),
+(2, 554, 'Registered Doctor  ', '2019-01-25 17:28:42', 'Vincent Bakunzi'),
+(2, 555, 'Registered Doctor  Justus Ashaba', '2019-01-25 17:29:40', 'Vincent Bakunzi'),
+(2, 556, 'Entered Vaccination records of KWEZI', '2019-01-25 18:03:10', 'Vincent Bakunzi'),
+(2, 557, 'Entered  Feeding records forDry Feeding', '2019-01-26 10:59:07', 'Nugsoft Support Account'),
+(2, 558, 'Entered  Feeding records forBreeding Heard', '2019-01-26 11:23:52', 'Nugsoft Support Account'),
+(2, 559, 'Entered  Feeding records forDry Feeding', '2019-01-26 11:27:43', 'Nugsoft Support Account'),
+(2, 560, 'Entered  Feeding records forBreeding Heard', '2019-01-26 11:32:08', 'Nugsoft Support Account'),
+(2, 561, 'Entered  Feeding records for', '2019-01-28 11:28:09', 'Vincent Bakunzi'),
+(2, 562, 'Entered  Feeding records for', '2019-01-28 11:31:46', 'Vincent Bakunzi'),
+(2, 563, 'Deactivated account for Dr.', '2019-01-29 09:05:49', 'Vincent Bakunzi'),
+(0, 564, 'Registered user  Mast Dsdsd', '2019-01-29 10:19:21', 'Self Register');
 
 -- --------------------------------------------------------
 
@@ -1774,19 +1953,21 @@ CREATE TABLE IF NOT EXISTS `users` (
   `photo` varchar(250) DEFAULT NULL,
   `status` varchar(250) DEFAULT NULL,
   `email` varchar(100) NOT NULL,
+  `district` int(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`farm_id`, `id`, `memberid`, `full_names`, `contact`, `username`, `password`, `photo`, `status`, `email`) VALUES
-(2, 2, 'EFAMU-44977', 'System Admin', '0701656722', 'admin', 'e3afed0047b08059d0fada10f400c1e5', '', 'Activated', 'vmatsiko@gmail.com'),
-(2, 5, 'EFAMU-84045', 'Efamu Brenda Kembabaz', '0781260064', 'efamu', '21232f297a57a5a743894a0e4a801fc3', '', 'Activated', 'brendabakesigaki@gmail.com'),
-(1, 9, 'EFAMU-68559', 'Nampijja Adah', '0702724760', 'aidah', 'e3afed0047b08059d0fada10f400c1e5', '', 'Activated', ''),
-(2, 10, 'EFAMU-97909', 'Vincent Bakunzi', '0777844758', 'vincent', 'b15ab3f829f0f897fe507ef548741afb', '', 'Activated', ''),
-(5, 11, 'EFAMU-44620', 'MR AGGREY KAKUNDA', '077200002', 'AGGREY', '93a36b9e6d4390388ebe6344db288d61', '', 'Activated', '');
+INSERT INTO `users` (`farm_id`, `id`, `memberid`, `full_names`, `contact`, `username`, `password`, `photo`, `status`, `email`, `district`) VALUES
+(2, 2, 'EFAMU-44977', 'System Admin', '0701656722', 'admin', 'e3afed0047b08059d0fada10f400c1e5', '', 'Activated', 'vmatsiko@gmail.com', NULL),
+(2, 5, 'EFAMU-84045', 'Efamu Brenda Kembabaz', '0781260064', 'efamu', '21232f297a57a5a743894a0e4a801fc3', '', 'Activated', 'brendabakesigaki@gmail.com', NULL),
+(1, 9, 'EFAMU-68559', 'Nampijja Adah', '0702724760', 'aidah', 'e3afed0047b08059d0fada10f400c1e5', '', 'Activated', '', NULL),
+(2, 10, 'EFAMU-97909', 'Vincent Bakunzi', '0777844758', 'vincent', 'b15ab3f829f0f897fe507ef548741afb', '', 'Activated', '', NULL),
+(5, 11, 'EFAMU-44620', 'MR AGGREY KAKUNDA', '077200002', 'AGGREY', '93a36b9e6d4390388ebe6344db288d61', '', 'Activated', '', NULL),
+(0, 12, 'EFAMU-14117', 'Mast Dsdsd', '097877676', 'home', '106a6c241b8797f52e1e77317b96a201', '', 'Deactivated', '', 20);
 
 -- --------------------------------------------------------
 
@@ -1823,34 +2004,37 @@ CREATE TABLE IF NOT EXISTS `vaccination` (
   `vaccine` varchar(255) NOT NULL,
   `route_of_admin` varchar(255) NOT NULL,
   `vet_doctor` varchar(255) NOT NULL,
+  `frequency_of_vaccination` varchar(100) DEFAULT NULL,
+  `disease` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
 
 --
 -- Dumping data for table `vaccination`
 --
 
-INSERT INTO `vaccination` (`farm_id`, `id`, `animal_id`, `date_of_vaccination`, `vaccine`, `route_of_admin`, `vet_doctor`) VALUES
-(0, 1, 0, '2018-09-12', 'Adsd', 'Ddwd', 'Dfdf'),
-(0, 2, 0, '2018-10-10', 'Pink Eye Vaccine', 'Topical', 'Dr. Joseph'),
-(0, 3, 0, '2018-10-10', 'Pink Eye Vaccine', 'Topical', 'Dr. Joseph'),
-(0, 7, 0, '2018-10-24', ' IBR (Infectious Bovine Rhinotracheitis)', 'Sublingual', 'Dr. Musoke Ronald'),
-(0, 9, 0, '', 'EFAMU001', '', ''),
-(0, 10, 0, '2018-11-28', 'BVD Vaccine', 'Topical', 'Dr.Ntege Samuel'),
-(0, 11, 0, '2018-11-28', 'BVD Vaccine', 'Topical', 'Dr.Ntege Samuel'),
-(0, 12, 0, '2018-11-28', 'BVD Vaccine', 'Topical', 'Dr.Ntege Samuel'),
-(0, 13, 3, '2018-11-28', 'BVD Vaccine', 'Topical', 'Dr.Ntege Samuel'),
-(0, 14, 5, '2018-11-30', ' IBR (Infectious Bovine Rhinotracheitis)', 'Rectal', 'Dr.Ntege Samuel'),
-(0, 15, 3, '2018-11-30', ' IBR (Infectious Bovine Rhinotracheitis)', 'Sublingual', 'Dr. Musoke Ronald'),
-(0, 16, 2, '', 'Pink Eye Vaccine', 'Rectal', 'Dr. Musoke Ronald'),
-(0, 17, 2, '2018-11-30', 'Pink Eye Vaccine', 'Rectal', 'Dr. Musoke Ronald'),
-(0, 18, 6, '2018-11-28', 'BVD Vaccine', 'Parenteral', 'Dr.Ntege Samuel'),
-(0, 19, 9, '2018-11-30', 'Killed Vaccine', 'Rectal', 'Dr.Ntege Samuel'),
-(0, 20, 9, '2018-11-23', 'Pink Eye Vaccine', 'Topical', 'Dr.Ntege Samuel'),
-(0, 21, 7, '2018-11-28', 'BVD Vaccine', 'Topical', 'Dr.Ntege Samuel'),
-(0, 22, 11, '2018-11-15', 'BVD Vaccine', 'Intravenous Injection', 'Dr.Ntege Samuel'),
-(0, 23, 8, '2018-11-30', ' IBR (Infectious Bovine Rhinotracheitis)', 'Parenteral', 'Dr.Ntege Samuel'),
-(1, 24, 3, '2018-12-12', 'Pink Eye Vaccine', 'Rectale', 'Dr. Musoke Ronald');
+INSERT INTO `vaccination` (`farm_id`, `id`, `animal_id`, `date_of_vaccination`, `vaccine`, `route_of_admin`, `vet_doctor`, `frequency_of_vaccination`, `disease`) VALUES
+(0, 1, 0, '2018-09-12', 'Adsd', 'Ddwd', 'Dfdf', NULL, NULL),
+(0, 2, 0, '2018-10-10', 'Pink Eye Vaccine', 'Topical', 'Dr. Joseph', NULL, NULL),
+(0, 3, 0, '2018-10-10', 'Pink Eye Vaccine', 'Topical', 'Dr. Joseph', NULL, NULL),
+(0, 7, 0, '2018-10-24', ' IBR (Infectious Bovine Rhinotracheitis)', 'Sublingual', 'Dr. Musoke Ronald', NULL, NULL),
+(0, 9, 0, '', 'EFAMU001', '', '', NULL, NULL),
+(0, 10, 0, '2018-11-28', 'BVD Vaccine', 'Topical', 'Dr.Ntege Samuel', NULL, NULL),
+(0, 11, 0, '2018-11-28', 'BVD Vaccine', 'Topical', 'Dr.Ntege Samuel', NULL, NULL),
+(0, 12, 0, '2018-11-28', 'BVD Vaccine', 'Topical', 'Dr.Ntege Samuel', NULL, NULL),
+(0, 13, 3, '2018-11-28', 'BVD Vaccine', 'Topical', 'Dr.Ntege Samuel', NULL, NULL),
+(0, 14, 5, '2018-11-30', ' IBR (Infectious Bovine Rhinotracheitis)', 'Rectal', 'Dr.Ntege Samuel', NULL, NULL),
+(0, 15, 3, '2018-11-30', ' IBR (Infectious Bovine Rhinotracheitis)', 'Sublingual', 'Dr. Musoke Ronald', NULL, NULL),
+(0, 16, 2, '', 'Pink Eye Vaccine', 'Rectal', 'Dr. Musoke Ronald', NULL, NULL),
+(0, 17, 2, '2018-11-30', 'Pink Eye Vaccine', 'Rectal', 'Dr. Musoke Ronald', NULL, NULL),
+(0, 18, 6, '2018-11-28', 'BVD Vaccine', 'Parenteral', 'Dr.Ntege Samuel', NULL, NULL),
+(0, 19, 9, '2018-11-30', 'Killed Vaccine', 'Rectal', 'Dr.Ntege Samuel', NULL, NULL),
+(0, 20, 9, '2018-11-23', 'Pink Eye Vaccine', 'Topical', 'Dr.Ntege Samuel', NULL, NULL),
+(0, 21, 7, '2018-11-28', 'BVD Vaccine', 'Topical', 'Dr.Ntege Samuel', NULL, NULL),
+(0, 22, 11, '2018-11-15', 'BVD Vaccine', 'Intravenous Injection', 'Dr.Ntege Samuel', NULL, NULL),
+(0, 23, 8, '2018-11-30', ' IBR (Infectious Bovine Rhinotracheitis)', 'Parenteral', 'Dr.Ntege Samuel', NULL, NULL),
+(1, 24, 3, '2018-12-12', 'Pink Eye Vaccine', 'Rectale', 'Dr. Musoke Ronald', NULL, NULL),
+(2, 25, 16, '2019-01-17', 'Pink Eye Vaccine', 'Sublingual', 'Justus Ashaba', '5', 'Musujja');
 
 -- --------------------------------------------------------
 
