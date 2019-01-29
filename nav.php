@@ -94,65 +94,43 @@
         </li>
 		
 		<!-- .Megamenu -->
-        <li class="mega-dropdown"> <a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#"><span class="hidden-xs">Settings</span> <i class="icon-options-vertical"></i></a>
+        <li class="mega-dropdown"> <a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#"><span class="hidden-xs">Advanced Settings</span> <i class="icon-options-vertical"></i></a>
             <ul class="dropdown-menu mega-dropdown-menu animated bounceInDown">
-                <li class="col-sm-1">
+                <li class="col-sm-2">
                     <ul>
-                        <li class="dropdown-header">Manage <br>Farms </li>
-                        <li><a href="graph-milk-sales">Add</a></li>
-                        <li><a href="graph-weight-tracking">View</a></li>
-                        
+                        <li class="dropdown-header">Manage Permissions </li>
+                        <li><a href="permission_select">Add Permissions</a></li>
+                        <li><a href="view_permissions">View Permissions</a></li>
+                        <li><a href="edit_permissions">Edit Permissions</a></li>
                     </ul>
                 </li>
-				 <li class="col-sm-1">
+				 
+				 <li class="col-sm-2">
                     <ul>
-                        <li class="dropdown-header">Manage<br> Doctors </li>
-                        <li><a href="graph-milk-sales">Add</a></li>
-                        <li><a href="graph-weight-tracking">View</a></li>
-                        
-                    </ul>
-                </li>
-				 <li class="col-sm-1">
-                    <ul>
-                        <li class="dropdown-header">Manage<br> Expenses </li>
+                        <li class="dropdown-header">System Logs </li>
                         <li><a href="graph-milk-sales">Add</a></li>
                         <li><a href="graph-weight-tracking">View</a></li>
                         
                     </ul>
                 </li>
 				
-				 <li class="col-sm-1">
+				 <li class="col-sm-2">
                     <ul>
-                        <li class="dropdown-header">Manage <br>Farms </li>
-                        <li><a href="graph-milk-sales">Add</a></li>
-                        <li><a href="graph-weight-tracking">View</a></li>
+                        <li class="dropdown-header">Manage Users </li>
+                        <li><a href="add-users">Add</a></li>
+                        <li><a href="view-users">View</a></li>
                         
                     </ul>
                 </li>
-				 <li class="col-sm-1">
+				 <li class="col-sm-2">
                     <ul>
-                        <li class="dropdown-header">Manage<br> Doctors </li>
-                        <li><a href="graph-milk-sales">Add</a></li>
-                        <li><a href="graph-weight-tracking">View</a></li>
+                        <li class="dropdown-header">Manage Employees </li>
+                        <li><a href="add-employees">Add Employees</a></li>
+                        <li><a href="view-employees">View Employees</a></li>
                         
                     </ul>
                 </li>
-				 <li class="col-sm-1">
-                    <ul>
-                        <li class="dropdown-header">Expense<br>Categories </li>
-                        <li><a href="graph-milk-sales">Add</a></li>
-                        <li><a href="graph-weight-tracking">View</a></li>
-                        
-                    </ul>
-                </li>
-				<li class="col-sm-1">
-                    <ul>
-                        <li class="dropdown-header">Manage<br> Doctors </li>
-                        <li><a href="graph-milk-sales">Add</a></li>
-                        <li><a href="graph-weight-tracking">View</a></li>
-                        
-                    </ul>
-                </li>
+			
 				 <li class="col-sm-1">
                     <ul>
                         <li class="dropdown-header">Manage<br> Expenses </li>

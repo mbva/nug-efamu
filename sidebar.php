@@ -16,7 +16,61 @@
 
 
         <li><a href="dashboard" class="waves-effect"><i class="mdi mdi-av-timer fa-fw"></i> <span class="hide-menu">Dashboard</span></a></li>
+<li> <a href="javascript:void(0)" class="waves-effect <?php if($active=='settings') echo "active" ?>"><i class="mdi mdi-checkbox-multiple-marked-outline fa-fw"></i> <span class="hide-menu">System Settings<span class="fa arrow"></span></span></a>
+            <ul class="nav nav-second-level">
+                <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">Manage Doctors </span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-third-level">
 
+                        <li> <a href="manage-doctors"><i class="fa fa-plus-square fa-fw"></i><span class="hide-menu">New</span></a> </li>
+                        <li> <a href="view-doctors"><i class="fa fa-eye-slash fa-fw"></i><span class="hide-menu">View</span></a> </li>
+
+                    </ul>
+                </li>
+                <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">Manage Expenses </span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-third-level">
+               <li> <a href="manage-expense-items"><i class="fa fa-plus-square fa-fw"></i><span class="hide-menu">New</span></a> </li>
+                        <li> <a href="view-expenses-items"><i class="fa fa-eye-slash fa-fw"></i><span class="hide-menu">View</span></a> </li>
+
+                    </ul>
+                </li>
+                <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">Manage Acaricides </span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-third-level">
+
+                        <li> <a href="manage-acaricides"><i class="fa fa-plus-square fa-fw"></i><span class="hide-menu">New</span></a> </li>
+                        <li> <a href="view-acaricides"><i class="fa fa-eye-slash fa-fw"></i><span class="hide-menu">View</span></a> </li>
+
+                    </ul>
+                </li>
+                <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">Manage Farmer Library </span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-third-level">
+                        <li> <a href="javascript:void(0)"><i class="fa fa-plus-square fa-fw"></i><span class="hide-menu">New</span></a> </li>
+                        <li> <a href="javascript:void(0)"><i class="fa fa-eye-slash  fa-fw"></i><span class="hide-menu">View</span></a> </li>
+                    </ul>
+                </li>
+                <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">Manage Vaccines</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-third-level">
+
+                        <li> <a href="manage-vaccinaes"><i class="fa fa-plus-square fa-fw"></i><span class="hide-menu">New</span></a> </li>
+                        <li> <a href="view-manage-vaccines"><i class="fa fa-eye-slash  fa-fw"></i><span class="hide-menu">View</span></a> </li>
+
+                    </ul>
+                </li>
+                <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">Manage Breeds </span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-third-level">
+
+                        <li> <a href="manage-breeds"><i class="fa fa-plus-square fa-fw"></i><span class="hide-menu">New</span></a> </li>
+                        <li> <a href="view-breeds"><i class="fa fa-eye-slash  fa-fw"></i><span class="hide-menu">View</span></a> </li>
+
+                    </ul>
+                </li>
+                <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">Manage Module Tips </span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-third-level">
+                        <li> <a href="javascript:void(0)"><i class="fa fa-plus-square fa-fw"></i><span class="hide-menu">New</span></a> </li>
+                        <li> <a href="javascript:void(0)"><i class="fa fa-eye-slash  fa-fw"></i><span class="hide-menu">View</span></a> </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
         <li> <a href="javascript:void(0)" class="waves-effect <?php if($active=='animal') echo "active" ?>"><i class="mdi mdi-checkbox-multiple-marked-outline fa-fw"></i> <span class="hide-menu">Animal<span class="fa arrow"></span></span></a>
             <ul class="nav nav-second-level">
                 <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">Registration </span><span class="fa arrow"></span></a>
@@ -86,11 +140,9 @@
                 <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">Adult </span><span class="fa arrow"></span></a>
                     <ul class="nav nav-third-level">
                         <li> <a href="add-animal-feeding-records"><i class="fa fa-plus-square fa-fw"></i><span class="hide-menu">New Records</span></a> </li>
-<<<<<<< HEAD
-                        <li> <a href="javascript:void(0)"><i class="fa fa-eye-slash fa-fw"></i><span class="hide-menu">View Records</span></a> </li>
-=======
+
                         <li> <a href="view-adults-feeding-records"><i class="fa fa-eye-slash fa-fw"></i><span class="hide-menu">View Records</span></a> </li>
->>>>>>> 49b8989419ff899f78811be35c612e576f34d226
+
                     </ul>
                 </li>
             </ul>
@@ -130,12 +182,7 @@
                 <li> <a href="view-milk-production-records"><i data-icon="7" class="fa fa-user fa-fw"></i><span class="hide-menu">View Records</span></a> </li>
             </ul>
         </li>
-        <li> <a href="javascript:void(0)" class="waves-effect <?php if($active=='employees') echo "active" ?>"><i class="mdi mdi-checkbox-multiple-marked-outline fa-fw"></i> <span class="hide-menu">Employees<span class="fa arrow"></span></span></a>
-            <ul class="nav nav-second-level">
-                <li> <a href="add-employees"><i data-icon="7" class="fa fa-user fa-fw"></i><span class="hide-menu">Register </span></a> </li>
-                <li> <a href="view-employees"><i data-icon="7" class="fa fa-user fa-fw"></i><span class="hide-menu">View Records</span></a> </li>
-            </ul>
-        </li>
+       
 
         <li> <a href="javascript:void(0)" class="waves-effect <?php if($active=='breeding') echo "active" ?>"><i class="mdi mdi-checkbox-multiple-marked-outline fa-fw"></i> <span class="hide-menu">Breeding<span class="fa arrow"></span></span></a>
             <ul class="nav nav-second-level">
@@ -146,87 +193,9 @@
             </ul>
         </li>
 
-        <li> <a href="javascript:void(0)" class="waves-effect <?php if($active=='users') echo "active" ?>"><i class="mdi mdi-checkbox-multiple-marked-outline fa-fw"></i> <span class="hide-menu">System Users<span class="fa arrow"></span></span></a>
-            <ul class="nav nav-second-level">
-                <li> <a href="add-users"><i data-icon="7" class="fa fa-user fa-fw"></i><span class="hide-menu">Register </span></a> </li>
-                <li> <a href="view-users"><i data-icon="7" class="fa fa-user fa-fw"></i><span class="hide-menu">View Records</span></a> </li>
-            </ul>
-        </li>
+      
 
-        <li> <a href="javascript:void(0)" class="waves-effect <?php if($active=='settings') echo "active" ?>"><i class="mdi mdi-checkbox-multiple-marked-outline fa-fw"></i> <span class="hide-menu">System Settings<span class="fa arrow"></span></span></a>
-            <ul class="nav nav-second-level">
-                <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">Manage Doctors </span><span class="fa arrow"></span></a>
-                    <ul class="nav nav-third-level">
-
-                        <li> <a href="manage-doctors"><i class="fa fa-plus-square fa-fw"></i><span class="hide-menu">New</span></a> </li>
-                        <li> <a href="view-doctors"><i class="fa fa-eye-slash fa-fw"></i><span class="hide-menu">View</span></a> </li>
-
-                    </ul>
-                </li>
-                <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">Manage Expenses </span><span class="fa arrow"></span></a>
-                    <ul class="nav nav-third-level">
-               <li> <a href="manage-expense-items"><i class="fa fa-plus-square fa-fw"></i><span class="hide-menu">New</span></a> </li>
-                        <li> <a href="view-expenses-items"><i class="fa fa-eye-slash fa-fw"></i><span class="hide-menu">View</span></a> </li>
-
-                    </ul>
-                </li>
-                <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">Manage Acaricides </span><span class="fa arrow"></span></a>
-                    <ul class="nav nav-third-level">
-
-                        <li> <a href="manage-acaricides"><i class="fa fa-plus-square fa-fw"></i><span class="hide-menu">New</span></a> </li>
-                        <li> <a href="view-acaricides"><i class="fa fa-eye-slash fa-fw"></i><span class="hide-menu">View</span></a> </li>
-
-                    </ul>
-                </li>
-                <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">Manage Farmer Library </span><span class="fa arrow"></span></a>
-                    <ul class="nav nav-third-level">
-                        <li> <a href="javascript:void(0)"><i class="fa fa-plus-square fa-fw"></i><span class="hide-menu">New</span></a> </li>
-                        <li> <a href="javascript:void(0)"><i class="fa fa-eye-slash  fa-fw"></i><span class="hide-menu">View</span></a> </li>
-                    </ul>
-                </li>
-                <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">Manage Vaccines</span><span class="fa arrow"></span></a>
-                    <ul class="nav nav-third-level">
-
-                        <li> <a href="manage-vaccinaes"><i class="fa fa-plus-square fa-fw"></i><span class="hide-menu">New</span></a> </li>
-                        <li> <a href="view-manage-vaccines"><i class="fa fa-eye-slash  fa-fw"></i><span class="hide-menu">View</span></a> </li>
-
-                    </ul>
-                </li>
-                <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">Manage Breeds </span><span class="fa arrow"></span></a>
-                    <ul class="nav nav-third-level">
-
-                        <li> <a href="manage-breeds"><i class="fa fa-plus-square fa-fw"></i><span class="hide-menu">New</span></a> </li>
-                        <li> <a href="view-breeds"><i class="fa fa-eye-slash  fa-fw"></i><span class="hide-menu">View</span></a> </li>
-
-                    </ul>
-                </li>
-                <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">Manage Module Tips </span><span class="fa arrow"></span></a>
-                    <ul class="nav nav-third-level">
-                        <li> <a href="javascript:void(0)"><i class="fa fa-plus-square fa-fw"></i><span class="hide-menu">New</span></a> </li>
-                        <li> <a href="javascript:void(0)"><i class="fa fa-eye-slash  fa-fw"></i><span class="hide-menu">View</span></a> </li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
-        <li> <a href="javascript:void(0);" class="waves-effect <?php if($active=='u-permissions') echo "active" ?>"><i class="mdi mdi-checkbox-multiple-marked-outline fa-fw"></i> <span class="hide-menu">User Permissions<span class="fa arrow"></span></span></a>
-            <ul class="nav nav-second-level">
-                <li> <a href="permission_select"><i data-icon="7" class="fa fa-arrow-alt-circle-right fa-fw"></i><span class="hide-menu">Add</span></a> </li>
-                <li> <a href="view_permissions"><i data-icon="7" class="fa fa-arrow-alt-circle-right fa-fw"></i><span class="hide-menu">View </span></a> </li>
-                <li> <a href="edit_permissions"><i data-icon="7" class="fa fa-arrow-alt-circle-right fa-fw"></i><span class="hide-menu">Edit</span></a> </li>
-            </ul>
-        </li>
-        <li> <a href="javascript:void(0)" class="waves-effect <?php if($active=='recycle') echo "logs"; ?>"><i class="mdi mdi-checkbox-multiple-marked-outline fa-fw"></i> <span class="hide-menu">System Logs<span class="fa arrow"></span></span></a>
-            <ul class="nav nav-second-level">
-                <li> <a href="javascript:void(0)"><i data-icon="7" class="fa fa-arrow-alt-circle-right fa-fw"></i><span class="hide-menu">Add</span></a> </li>
-                <li> <a href="javascript:void(0)"><i data-icon="7" class="fa fa-arrow-alt-circle-right fa-fw"></i><span class="hide-menu">View </span></a> </li>
-                <li> <a href="javascript:void(0)"><i data-icon="7" class="fa fa-arrow-alt-circle-right fa-fw"></i><span class="hide-menu">edit</span></a> </li>
-            </ul>
-        </li>
-        <li> <a href="javascript:void(0)" class="waves-effect <?php if($active=='recycle') echo "active"; ?>"><i class="mdi mdi-checkbox-multiple-marked-outline fa-fw"></i> <span class="hide-menu">Recycle Bin<span class="fa arrow"></span></span></a>
-            <ul class="nav nav-second-level">
-                <li> <a href="javascript:void(0)"><i data-icon="7" class="fa fa-arrow-alt-circle-right fa-fw"></i><span class="hide-menu">View</span></a> </li>
-            </ul>
-        </li>
+      
 
     </ul>
 </div>

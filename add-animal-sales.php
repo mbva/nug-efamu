@@ -153,7 +153,7 @@ if(isset($_POST['submit'])){
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Amount</label>
                                         <div class="input-group">
-                                            <input class="form-control" name="amount" onkeypress="return isNumberKey(event)" required autocomplete="off" placeholder="Frequency of feeding" type="number">
+                                            <input class="form-control" name="amount" onkeypress="return isNumberKey(event)" required autocomplete="off" placeholder="" type="number">
                                             <div class="input-group-addon"><i class="ti-pencil-alt"></i></div>
                                         </div>
                                     </div>
