@@ -145,7 +145,8 @@
                                     <th>Administrative Route</th>
                                     <th>VeT Doctor</th>
                                     <th>Action</th>
-                                    <th>Action</th>
+
+   
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -179,7 +180,9 @@
                                         <td><?=$results['route_of_admin'];?></td>
                                         <td><?=$results['vet_doctor'];?></td>
                                         <td><a  style="color: white" class="btn btn-info"  href="edit-vaccination?animal_id=<?=$results['animal_id'];?>&&id=<?=$results['id'];?>"><i class="fa fa-edit fa-1x"></a></i></td>
-                                        <td><a  style="color: white" class="btn btn-danger" onclick="return deleted()" href=""><i class="fa fa-trash fa-1x"></a></i></td>
+
+                                        <!--<td><a  style="color: white" class="btn btn-danger" onclick="return deleted()" href=""><i class="fa fa-trash fa-1x"></a></i></td>-->
+
                                     </tr>
                                     <?php
                                 }

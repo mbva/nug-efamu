@@ -36,7 +36,9 @@
         <div class="sidebar-nav slimscrollsidebar">
             <div class="sidebar-head">
                 <h3><span class="fa-fw open-close"><i class="ti-close ti-menu"></i></span> <span class="hide-menu">Navigation</span></h3> </div>
-            <?php  $active='animal';
+
+            <?php  $active='settings';
+
             include('sidebar.php');
             ?>
         </div>
@@ -155,8 +157,9 @@
                                             }
                                             ?>
                                         </td>
-                                        <td><a  style="color: white" class="btn btn-success" href="edit-animals?animalid=<?=$results['animal_id'];?>&&farm_id=<?=$results['farm_id'];?>"><i class="fa fa-edit fa-1x"></a></i></td>
-                                    </tr>
+
+                                         <td><a  style="color: white" class="btn btn-info"  href="edit-doctor?farm_id=<?=$results['farm_id']?>&&id=<?=$results['id'];?>"><i class="fa fa-edit fa-1x"></a></i></td>
+
                                     <?php
                                 }
                                 ?>

@@ -45,8 +45,11 @@ if(isset($_POST['submit'])){
         $insert_transaction = mysqli_query($con,$sql_log);
         if($insert_deworm && $insert_transaction ){
             echo "<script>alert('Recorded is Successfully');</script>";
+
         }else{ echo "<h2>FAILED <h2> ".mysqli_error($con);
 		}
+
+
     }
     //}
 }

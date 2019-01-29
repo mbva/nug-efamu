@@ -7,15 +7,40 @@
 </head>
 <?php 
 include 'db.php';
-$animal_id= $_GET['animalid'];
-$farm_id  = $_GET['farm_id'];
-$details = mysqli_fetch_array(mysqli_query($con,"select * from animal_registration where farm_id ='$farm_id' and animal_id='$animal_id'"));
-if(!$details){
-    echo mysqli_error($con);
-}?>
+
+$animal_id = $_GET['animal_id'];
+$id = $_GET['id'];
+$detail = mysqli_fetch_array(mysqli_query($con,"select v.*, a.*  from vaccination v,animal_registration a where v.animal_id='$animal_id' and v.id='$id'and v.animal_id = a.animal_id"))
+
+?>
+<?php 
+$farm = $_SESSION['farm'];
+if(isset($_POST['submit'])){
+    $animal_id = mysqli_real_escape_string($con,        ucwords($_POST['animal_id']));
+    $id = mysqli_real_escape_string($con,        ucwords($_POST['id']));
+    $dov = mysqli_real_escape_string($con,          ucwords($_POST['dow']));
+    $vaccine = mysqli_real_escape_string($con,          ucwords($_POST['vaccine']));
+    $roa = mysqli_real_escape_string($con,          ucwords($_POST['roa']));
+    $doctor = mysqli_real_escape_string($con,          ucwords($_POST['doctor']));
+
+        $update = mysqli_query($con,"update vaccination set date_of_vaccination='$dov',vaccine='$vaccine',route_of_admin='$roa',vet_doctor='$doctor' where animal_id='$animal_id' and id='$id'");
+        //Executing the queries;
+        $insert_deworm = mysqli_query($con,"insert into transaction_logs(farm_id,transaction_action,transaction_time,transaction_by) VALUES ('$farm','$action','$time','$entered_by')");
+
+		if(!$update){
+			die('NOT UPDATED'.mysql_error());
+		}else{
+			?>
+			<script>alert("SUCESSFULY UPDATED");</script>
+		<script>window.location='view-vaccination-records';</script>
+		<?php 
+		}
+}
+			
+?>
+<body>
 
 <body class="fix-header">
-
     <!-- ============================================================== -->
     <!-- Preloader -->
     <!-- ============================================================== -->
@@ -75,136 +100,87 @@ if(!$details){
                 </div>
                 <!-- /row -->
                 <div class="row">
-
 					<div class="col-sm-12">
                         <div class="white-box">
                             <h3 class="box-title m-b-0">Edit Animal Details</h3>
                             
+                            <form action="" method="post" enctype="multipart/form-data">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                            <div class="basic-login-inner">
+                                                <div class="form-group-inner">
+                                                    <label>Vaccination Date </label>
+                                                    <input type="text" readonly value="<?=$detail['date_of_vaccination'] ?>" class="form-control" name="dow"/>
+                                                </div>
+                                                <div class="form-group-inner">
+                                                    <label>Animal </label>
+                                                    <input type="text" readonly value="<?=$detail['animal_name']." (".$detail['tagNo'].")" ?>" class="form-control" name="animal_name"/>
+                                                    <input type="hidden" value="<?=$detail['animal_id'] ?>" class="form-control" name="animal_id"/>
+                                                    <input type="hidden" value="<?=$detail['id'] ?>" class="form-control" name="id"/>
 
-                           <form action="edit_animal" method="post" enctype="multipart/form-data">
-                    
-                        <div class="row">
-                            <div class="col-sm-4 col-xs-12">
-
-                                    <div class="form-group">
-                                        <label for="exampleInputuname">Animal Name </label>
+                                                </div>
+                                                     <div class="form-group">
+                                        <label for="exampleInputuname">Vaccine </label>
                                         <div class="input-group">
-                                            <input type="text" value="<?=$details['animal_name']?>" name="names"   class="form-control" />
-                                                    <input type="hidden" value="<?=$details['farm_id']?>" name="farm_id"   class="form-control" />
-                                                    <input type="hidden" value="<?=$details['animal_id']?>" name="animal_id"   class="form-control" />
-                                            <div class="input-group-addon"><i class="ti-user"></i></div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">TagNo</label>
-                                        <div class="input-group">
-                                             <input type="text" value="<?=$details['tagNo']?>" name="tag"   class="form-control" />
-                                            <div class="input-group-addon"><i class="ti-email"></i></div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputphone">Gender</label>
-                                        <div class="input-group">
-                                        <select class="form-control select2" name="gender" required>
-
-                                            <option value="<?=$details['gender']?>"><?=$details['gender']?></option>
-
-                                            <option value="Male">Male</option>
-                                            <option value="Female">Female</option>
-                                        </select>
-                                        <div class="input-group-addon"><i class="ti-email"></i></div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputpwd1">Breed</label>
-                                        <div class="input-group">
-                                            <select class="form-control select2" name="breed" required>
-
-                                                <option value="<?=$details['breed']?>"><?=$details['breed']?></option>
-
+                                            <select class="form-control select2" name="vaccine" required>
+                                                <option>Select</option>
                                                 <?php
-                                                $select = mysqli_query($con,"select * from manage_breeds where  farm_id ='$farm'");
-                                                while ($breed = mysqli_fetch_array($select)){
+                                                $select = mysqli_query($con,"select * from manage_vaccines where farm_id ='$farm'");
+                                                while ($vaccine = mysqli_fetch_array($select)){
                                                     ?>
-                                                    <option value="<?php echo $breed['breedname']; ?>"><?php echo $breed['breedname']; ?></option>
+                                                    <option value="<?php echo $vaccine['vaccine']; ?>"><?php echo $vaccine['vaccine']; ?></option>
                                                     <?php
                                                 }
                                                 ?>
                                             </select>
-                                            <div class="input-group-addon"><i class="ti-email"></i></div>
+                                            <?php
+                                            ?>
+                                            <div class="input-group-addon"><i class="ti-pencil"></i></div>
                                         </div>
                                     </div>
-                            </div>
-                            <div class="col-sm-4 col-xs-12">
-                                <div class="form-group">
-                                    <label for="exampleInputpwd2">Date of Birth</label>
-                                    <div class="input-group">
-                                        <input type="date" value="<?=$details['dob']?>" name="dob"   class="form-control" />
-                                         <span class="input-group-addon"><i class="icon-calender"></i></span>
-                                    </div>
-                                </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputuname">On Premise </label>
-                                        <div class="input-group">
-                                            <select class="form-control select2" name="location" required>
-                                                <option value="<?=$details['location']?>"><?=$details['location']?></option>
-                                                        <option value="On">Yes</option>
-                                                        <option value="Off">No</option>
-                                            </select>
-                                            <div class="input-group-addon"><i class="ti-location-arrow"></i></div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Genetic Percentage</label>
-                                        <div class="input-group">
-                                            <input class="form-control" value="<?=$details['genetic_percentage'];?>" name="genetic_percentage" required autocomplete="off" placeholder="Genetic percentage" type="text" min="50" title="Value must be 50 and ABove" name="demo3">
-                                            <div class="input-group-addon"><i class="ti-email"></i></div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputphone">Name of Sire </label>
-                                        <div class="input-group">
-                                            <input type="text" value="<?=$details['name_of_sire'];?>" name="name_of_sire"  required autocomplete="off" class="form-control" placeholder="Name of Sire:" />
-                                            <div class="input-group-addon"><i class="ti-mobile"></i></div>
-                                        </div>
-                                    </div>
-                            </div>
-                            <div class="col-sm-4 col-xs-12">
-                                <div class="form-group">
-                                    <label for="exampleInputpwd1">Breed of Sire </label>
-                                    <div class="input-group">
-                                       <input type="text"  name="breed_of_sire"  value="<?=$details['breed_of_sire'];?>" required autocomplete="off" class="form-control" placeholder="Breed of Sire:" />
-                                        <div class="input-group-addon"><i class="ti-lock"></i></div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputpwd2">Name of Dam </label>
-                                    <div class="input-group">
-                                        <input type="text"  name="name_of_dam" value="<?=$details['name_of_dam'];?>" required autocomplete="off" class="form-control" placeholder="Name of Dam:" />
-                                        <div class="input-group-addon"><i class="ti-lock"></i></div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputpwd2">Breed of Dam </label>
-                                    <div class="input-group">
-                                        <input type="text" value="<?=$details['breed_of_dam'];?>"  name="breed_of_dam"  required autocomplete="off" class="form-control" placeholder="Breed of Dam:" />
-                                        <div class="input-group-addon"><i class="ti-lock"></i></div>
-                                    </div>
-                                </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                            <div class="basic-login-inner">
 
-                                <div class="text-right">
-                                        <button type="submit" name="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>
-                                        <button type="reset" class="btn btn-inverse waves-effect waves-light">Cancel</button>
-                                </div>
+
+                                            </div>
+                                             <div class="form-group">
+                                        <label for="exampleInputuname">Route of administering  </label>
+                                        <div class="input-group">
+                                            <select class="form-control select2" name="roa" required>
+                                                <option>Select</option>
+                                                <option value="Sublingual">Sublingual</option>
+                                                <option value="Rectal">Rectal</option>
+                                                <option value="Topical">Topical</option>
+                                                <option value="Parenteral">Parenteral</option>
+                                                <option value="Intravenous Injection">Intravenous Injection</option>
+                                            </select>
+                                            <?php
+                                            ?>
+                                            <div class="input-group-addon"><i class="ti-pencil"></i></div>
+                                        </div>
+                                    </div>
+                                            <div class="form-group-inner">
+                                                <label>Vet Doctor  </label>
+                                                <input type="text" readonly value="<?=$detail['vet_doctor'] ?>" class="form-control" name="doctor"/>
+                                            </div>
+                                            <div class="login-btn-inner">
+                                                <div class="inline-remember-me" style="text-align: center">
+                                                    <button class="btn btn-lg btn-primary login-submit-cs" name="submit" type="submit">Update</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
                             </div>
-                        </div>
-                        </form>
+                            </form>
                     </div>
                   
              
                     </div>
                 </div>
-
 				<?php 
 				if(isset($_POST['submit'])){
     $farm_id = mysqli_real_escape_string($con,    ucwords($_POST['farm_id']));
@@ -238,7 +214,6 @@ if(!$details){
    
 }
 ?>
-
                 
                 <!-- ============================================================== -->
                 <!-- End Right sidebar -->
