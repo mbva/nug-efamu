@@ -258,7 +258,15 @@
                             </div>
                         </div>
                         <div class="bg-theme-alt">
-                            <?php include 'weather.html'; ?>
+                        <?php 
+                        $weather_query=mysqli_query($con,"select * from farms where farmid='$farm'");
+$weather=mysqli_fetch_array($weather_query);
+
+$cityId=$weather['address'];
+    
+    include "weather.html";
+
+?>
                         </div>
                     </div>
                 </div>
