@@ -133,7 +133,7 @@
 			
 				
 				
-				 <li class="col-sm-2">
+				 <!--<li class="col-sm-2">
                     <ul>
                         <li class="dropdown-header">Manage <br>Farms </li>
                         <li><a href="">Add Farms</a></li>
@@ -156,7 +156,7 @@
                         <li><a href="graph-weight-tracking">View</a></li>
                         
                     </ul>
-                </li>
+                </li>-->
 				
 				
                 
@@ -166,104 +166,8 @@
         <!-- /.Megamenu -->
 		
 		<!-- .Megamenu -->
-        <li class="mega-dropdown"> <a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#"><span class="hidden-xs">Settings</span> <i class="icon-options-vertical"></i></a>
-            <ul class="dropdown-menu mega-dropdown-menu animated bounceInDown">
-                <li class="col-sm-3">
-                    <ul>
-                        <li class="dropdown-header">Analysis Reports </li>
-                        <li><a href="graph-milk-sales">Milk Sales</a></li>
-                        <li><a href="graph-weight-tracking">Weight Tracker</a></li>
-                        <li><a href="form-advanced.html">Animal Sales</a></li>
-                        <li><a href="form-material-elements.html">Income Flow</a></li>
-                    </ul>
-                </li>
-                <li class="col-sm-3">
-                    <ul>
-                        <li class="dropdown-header">Advance Forms</li>
-                        <li><a href="form-dropzone.html">File Dropzone</a></li>
-                        <li><a href="form-pickers.html">Form-pickers</a></li>
-                        <li><a href="form-wizard.html">Form-wizards</a></li>
-                        <li><a href="form-typehead.html">Typehead</a></li>
-                        <li><a href="form-xeditable.html">X-editable</a></li>
-                        <li><a href="form-summernote.html">Summernote</a></li>
-                        <li><a href="form-bootstrap-wysihtml5.html">Bootstrap wysihtml5</a></li>
-                        <li><a href="form-tinymce-wysihtml5.html">Tinymce wysihtml5</a></li>
-                    </ul>
-                </li>
-                <li class="col-sm-3">
-                    <ul>
-                        <li class="dropdown-header">Table Example</li>
-                        <li><a href="basic-table.html">Basic Tables</a></li>
-                        <li><a href="table-layouts.html">Table Layouts</a></li>
-                        <li><a href="data-table.html">Data Table</a></li>
-                        <li><a href="bootstrap-tables.html">Bootstrap Tables</a></li>
-                        <li><a href="responsive-tables.html">Responsive Tables</a></li>
-                        <li><a href="editable-tables.html">Editable Tables</a></li>
-                        <li><a href="foo-tables.html">FooTables</a></li>
-                        <li><a href="jsgrid.html">JsGrid Tables</a></li>
-                    </ul>
-                </li>
-                <li class="col-sm-3">
-                    <ul>
-                        <li class="dropdown-header">Charts</li>
-                        <li> <a href="flot.html">Flot Charts</a> </li>
-                        <li><a href="morris-chart.html">Morris Chart</a></li>
-                        <li><a href="chart-js.html">Chart-js</a></li>
-                        <li><a href="peity-chart.html">Peity Charts</a></li>
-                        <li><a href="knob-chart.html">Knob Charts</a></li>
-                        <li><a href="sparkline-chart.html">Sparkline charts</a></li>
-                        <li><a href="extra-charts.html">Extra Charts</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
-        <!-- /.Megamenu -->
-        <!-- .Megamenu -->
-        <li class="mega-dropdown"> <a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#"><span class="hidden-xs">Settings</span> <i class="icon-options-vertical"></i></a>
-            <ul class="dropdown-menu mega-dropdown-menu animated bounceInDown">
-                <li class="col-sm-3">
-                    <ul>
-                        <li class="dropdown-header">Analysis Reports </li>
-                        <li><a href="graph-milk-sales">Milk Sales</a></li>
-                        <li><a href="graph-weight-tracking">Weight Tracker</a></li>
-                        <li><a href="">Animal Sales</a></li>
-                        <li><a href="">Income Flow</a></li>
-                    </ul>
-                </li>
-                <li class="col-sm-3">
-                    <ul>
-                        <li class="dropdown-header">Financial Reports</li>
-                        <li><a href="view-cash-flow">Cash Flow Statement</a></li>
-                    </ul>
-                </li>
-                <li class="col-sm-3">
-                    <ul>
-                        <li class="dropdown-header">Table Example</li>
-                        <li><a href="basic-table.html">Basic Tables</a></li>
-                        <li><a href="table-layouts.html">Table Layouts</a></li>
-                        <li><a href="data-table.html">Data Table</a></li>
-                        <li><a href="bootstrap-tables.html">Bootstrap Tables</a></li>
-                        <li><a href="responsive-tables.html">Responsive Tables</a></li>
-                        <li><a href="editable-tables.html">Editable Tables</a></li>
-                        <li><a href="foo-tables.html">FooTables</a></li>
-                        <li><a href="jsgrid.html">JsGrid Tables</a></li>
-                    </ul>
-                </li>
-                <li class="col-sm-3">
-                    <ul>
-                        <li class="dropdown-header">Charts</li>
-                        <li> <a href="flot.html">Flot Charts</a> </li>
-                        <li><a href="morris-chart.html">Morris Chart</a></li>
-                        <li><a href="chart-js.html">Chart-js</a></li>
-                        <li><a href="peity-chart.html">Peity Charts</a></li>
-                        <li><a href="knob-chart.html">Knob Charts</a></li>
-                        <li><a href="sparkline-chart.html">Sparkline charts</a></li>
-                        <li><a href="extra-charts.html">Extra Charts</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
-        <!-- /.Megamenu -->
+       
+       
     </ul>
     <ul class="nav navbar-top-links navbar-right pull-right">
         <li>
