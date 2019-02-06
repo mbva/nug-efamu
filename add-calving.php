@@ -4,8 +4,7 @@
 <head>
     <?php include 'head.php';?>
 </head>
-<?php include 'head.php';
-$active='animal';?>
+<?php include 'head.php';?>
 </head>
 <?php
 include 'db.php';

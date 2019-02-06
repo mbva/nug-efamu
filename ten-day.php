@@ -2,8 +2,9 @@
 <html lang="en">
 
 <head>
-    <?php include 'head.php';
-    $active='animal';?>
+    <?php include 'head.php';?>
+</head>
+<?php include 'head.php';?>
 </head>
 <?php
 include 'db.php';
@@ -321,7 +322,6 @@ if(isset($_POST['save'])){
                                                </div>
                                            </div>
                                            <div class="col-md-6">
-										   <br><br>
                                                <div class="form-group">
                                                    <label class="control-label">RETAINED PLACENTA AFTER BIRTH</label>
                                                    <div class="input-group">

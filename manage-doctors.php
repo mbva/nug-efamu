@@ -7,14 +7,13 @@
 <?php
 include 'db.php';
 $message="";
-$active='settings';
 $farm  =$_SESSION['farm'];
 if(isset($_POST['submit'])){
-    $fname = mysqli_real_escape_string($con,    ucwords($_POST['fname']));
-    $lname = mysqli_real_escape_string($con,    ucwords($_POST['lname']));
+    $fname = mysqli_real_escape_string($con,    ucwords($_POST['vet_fname']));
+    $lname = mysqli_real_escape_string($con,    ucwords($_POST['vet_lname']));
     $contact = mysqli_real_escape_string($con,  $_POST['contact']);
     $email = mysqli_real_escape_string($con, $_POST['email']);
-    $vet_names =$fname.' '.$lname;
+    $vet_names = "Dr.".$fname.' '.$lname;
 
     //capturing the registrar of the data
     $entered_by =   $_SESSION['full_names'];
