@@ -105,14 +105,14 @@
                     </ul>
                 </li>
 				 
-				 <li class="col-sm-2">
+				 <!--<li class="col-sm-2">
                     <ul>
                         <li class="dropdown-header">System Logs </li>
                         <li><a href="#">Add</a></li>
                         <li><a href="#">View</a></li>
                         
                     </ul>
-                </li>
+                </li>-->
 				
 				 <li class="col-sm-2">
                     <ul>
