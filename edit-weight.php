@@ -2,8 +2,49 @@
 <html lang="en">
 
 <head>
-    <?php include 'head.php';?>
+    <?php include 'head.php';
+    $active='animal';?>
 </head>
+<?php include 'head.php';?>
+<?php
+$animal_id = $_GET['animal_id'];
+$id = $_GET['id'];
+$farm_id = $_GET['farm_id'];
+
+$details = mysqli_fetch_array(mysqli_query($con,"select * from weight where animal_id='$animal_id' and farm_id='$farm_id'and id='$id'"))
+?>
+</head>
+<?php
+include 'db.php';
+$message="";
+if(isset($_POST['submit'])){
+
+    $animal_id = mysqli_real_escape_string($con,    ucwords($_POST['animal_id']));
+    $farm_id = mysqli_real_escape_string($con,    ucwords($_POST['farm_id']));
+    $id = mysqli_real_escape_string($con,    ucwords($_POST['id']));
+    $weights = mysqli_real_escape_string($con,    ucwords($_POST['weight']));
+
+    $recdate =         date("Y-m-d H:i:s");
+    $recby =   $_SESSION['full_names'];
+    //capturing the registrar of the data
+    $entered_by =   $_SESSION['full_names'];
+    $time =         date("Y-m-d H:i:s");
+    $action =       "Edited animal weight record  ".' '.$animal_id;
+    $insert_weight = mysqli_query($con,"update weight set weight='$weights' WHERE farm_id='$farm_id'and animal_id='$animal_id' and id='$id'");
+        //Executing the queries;
+
+        $insert_transaction = mysqli_query($con,"insert into transaction_logs(farm_id,transaction_action,transaction_time,transaction_by) VALUES ('$farm','$action','$time','$entered_by')");
+ if(! $insert_weight){
+	 die("NOT UPDATED".mysql_error());
+ }
+	 else {
+		 ?>
+		 <script>window.location='view-weight-tracks';</script>
+		 <?php 
+		}
+}
+
+?>
 <body class="fix-header">
 <!-- ============================================================== -->
 <!-- Preloader -->
@@ -40,104 +81,77 @@
         <div class="container-fluid">
             <div class="row bg-title">
                 <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                    <h4 class="page-title">Graphical Weight Tracking Analysis</h4> </div>
+                    <h4 class="page-title">Weight Tracking Form</h4> </div>
                 <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                     <button class="right-side-toggle waves-effect waves-light btn-info btn-circle pull-right m-l-20"><i class="ti-settings text-white"></i></button>
                     <a href="javascript: void(0);" "></a>
                     <ol class="breadcrumb">
                         <li><a href="#">Dashboard</a></li>
-                        <li><a href="#">Health</a></li>
-                        <li><a href="#">Vaccination</a></li>
+                        <li><a href="#">Animal</a></li>
+                        <li><a href="#">Weight Tracker</a></li>
                     </ol>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
             <!--.row-->
             <div class="row">
-                <script>
-                    window.onload = function () {
 
-                        var chart = new CanvasJS.Chart("chartContainer", {
-                            animationEnabled: true,
-                            exportEnabled: true,
-                            title:{
-                                text: " (<?php
-                                    if(isset($_POST['submit'])){
-                                        $date = $_POST['date'];
-                                        $tagno = $_POST['tagno'];
-                                        // $d = date_parse_from_format("Y-m-d", $date);
-                                        $m =  date("F", strtotime($date));
-                                        $y =  date("Y", strtotime($date));
-                                        echo $tagno. " Weight Analysis as at ".$m."-".$y;
-                                    }else{
-                                        echo "Annual Representation of Herd Average Weight";
-                                    }
-                                    ?>)"
-                            },
-                            axisY:{
-                                title: "Average Weight in Kgs"
-                            },
-                            toolTip: {
-                                shared: true
-                            },
-                            legend:{
-                                cursor:"pointer",
-                                itemclick: toggleDataSeries
-                            },
-                            data: [
-                                {
-                                    type: "spline",
-                                    name: "Average Weight",
-                                    showInLegend: true,
-                                    dataPoints: [
-                                        <?php
-                                        include 'db.php';
+                <div class="col-md-9 col-sm-12">
+                    <div class="white-box">
+                        <h3 class="box-title m-b-0">Weight Tracking Form</h3>
+                        <form action="" method="post" enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                            <div class="basic-login-inner">
 
-                                        if(isset($_POST['submit'])){
-                                        $date_from = $_POST['date'];
-                                        $tagno =$_POST['tagno'];
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                            <div class="basic-login-inner">
+                                                <div class="form-group-inner">
+                                                    <label>Measurement Date </label>
+                                                    <input type="date" value="<?=$details['wdate'];?>"  class="form-control" name="wdate"  />
+                                                </div>
+                                                <div class="form-group-inner">
+                                                    <label>Animal Name  </label>
+                                                    <input type="text" value="<?php
+                                                    $animal_details = mysqli_fetch_array(mysqli_query($con,"select * from animal_registration where animal_id='$animal_id' and farm_id='$farm_id'"));
+                                                    echo $animal_details['animal_name']." (".$animal_details['tagNo'].")";
+                                                    ?>" readonly class="form-control" name="animal_id"  />
+                                                    <input type="hidden" value="<?=$details['animal_id'];?>" readonly class="form-control" name="animal_id"  />
+                                                    <input type="hidden" value="<?=$details['farm_id'];?>" readonly class="form-control" name="farm_id"  />
+                                                    <input type="hidden" value="<?=$details['id'];?>" readonly class="form-control" name="id"  />
+                                                </div>
 
-                                        for($i=1;$i<=31;$i++){
-                                        $select =mysqli_query($con,"select AVG (weight) as daily_avg_weight , wdate from weight where tagno = '$tagno' AND wdate = '$date_from' and farm_id ='$farm'");
-                                        $result = mysqli_fetch_array($select);
-                                        $daily_avg_weight = $result['daily_avg_weight'];
-                                        ?>
-                                        { label: "<?=$result['wdate']?>" , y: <?=number_format($daily_avg_weight);?> },
-                                        <?php
-                                        $date_from = date ("Y-m-d", strtotime("+1 day", strtotime($date_from)));
-                                        }
-                                        }else{
-                                        for($iM =1;$iM<=12;$iM++){
-                                        $month =  date("m", strtotime("$iM/12/10"));
-                                        $x_axis = date("M", strtotime("$iM/12/10"));
-                                        $select =mysqli_query($con,"select AVG (weight) as avg_weight  from weight where MONTH (wdate)= '$month' and farm_id ='$farm'");
-                                        $result = mysqli_fetch_array($select);
-                                        ?>
-                                        { label: "<?=$x_axis?>" , y: <?=number_format($result['avg_weight']);?>},
-                                        <?php
-                                        }
-                                        }
-                                        ?>
-                                    ]
-                                },
-                            ]
-                        });
-                        chart.render();
-
-                        function toggleDataSeries(e) {
-                            if(typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
-                                e.dataSeries.visible = false;
+                                                <div class="form-group-inner">
+                                                    <label>Weight </label>
+                                                    <input class="form-control" value="<?=$details['weight'];?>" name="weight" required autocomplete="off" placeholder="Genetic percentage" type="text" min="50" title="Value must be 50 and ABove">
+                                                </div>
+                                    <div class="text-center">
+                                        <button type="submit" name="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>
+                                        <button type="reset" class="btn btn-inverse waves-effect waves-light">Cancel</button>
+                                    </div>
+                                </div>
+                                <div class="col-md-1"></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+				</div>
+                <div class="col-md-3 col-sm-12">
+                    <h4><b>Weighing Tips</b></h4>
+                    <marquee  behavior="scroll" direction="up" id="mymarquee" scrollamount="2" onmouseover="this.stop();" onmouseout="this.start();">
+                        <p style="text-align: justify">
+                            <?php
+                            $select = mysqli_query($con,"select * from farmertips where section='Profiling' ORDER BY id desc LIMIT 1 ");
+                            while ($tipscheck = mysqli_fetch_array($select)){
+                                echo $tipscheck['tips'];
                             }
-                            else {
-                                e.dataSeries.visible = true;
-                            }
-                            chart.render();
-                        }
-                    }
-                </script>
+                            ?>
+                        </p>
+                    </marquee>
 
-                <div id="chartContainer" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
-                <script src="charts/canvasjs.min.js"></script>
+                </div>
             </div>
             <!-- ============================================================== -->
         </div>

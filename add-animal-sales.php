@@ -2,41 +2,55 @@
 <html lang="en">
 
 <head>
-    <?php include 'head.php';?>
+    <?php include 'head.php';
+    $active='finance';
+    ?>
 </head>
 <?php
 include 'db.php';
+$farm =$_SESSION['farm'];
 $message="";
-$farm = $_SESSION['farm'];
 if(isset($_POST['submit'])){
-    $resourcetitle= mysqli_real_escape_string($con,    ucwords($_POST['resourcetitle']));
-    $resourceurl= mysqli_real_escape_string($con,    ucwords($_POST['resourceurl']));
-
-    $date = mysqli_real_escape_string($con,  $_POST['sdate']);
-    $recdate =         date("Y-m-d H:i:s");
-    $recby =   $_SESSION['full_names'];
+    $animal_id = mysqli_real_escape_string($con,    ucwords($_POST['animal_id']));
+    $seldate = mysqli_real_escape_string($con,  ucwords($_POST['sdate']));
+    $amount = mysqli_real_escape_string($con,   ucwords($_POST['amount']));
+    $soldby = mysqli_real_escape_string($con,   ucwords($_POST['soldby']));
+    $recdate = date("Y-m-d");
+    $recby = $_SESSION['full_names'];
+    $selects = mysqli_query($con,"select * from animal_registration where animal_id='$animal_id' and farm_id ='$farm'");
+    $names=mysqli_fetch_array($selects);
+    $aname=$names['animal_name'];
     //capturing the registrar of the data
     $entered_by =   $_SESSION['full_names'];
     $time =         date("Y-m-d H:i:s");
-    $action =       'Recorded Farmers Resources ';
+    $action =       "Entered Animal Sale records for ".' '.$aname;
 
-    //checking if the id doesn't exist
-    $check_record = mysqli_query($con,"select * from farmerresources where resourceurl ='$resourceurl' and farm_id ='$farm'");
-    if(mysqli_num_rows($check_record) > 0){
-        echo "<script>alert('This is a duplicate post');</script>";
-    }else{
-        $sql_user = "insert into farmerresources(farm_id,resourceurl,resourcetitle,date_added,addby)
-		VALUES ('$farm','$resourceurl','$resourcetitle','$recdate','$entered_by')";
-        $sql_log  = "insert into  transaction_logs(farm_id,transaction_action,transaction_time,transaction_by) VALUES ('$farm','$action','$time','$entered_by')";
+    //checking if the member was already paid
+    $check_presence = mysqli_query($con,"select * from animal_registration where animal_id = '$animal_id' and farm_id ='$farm'");
+    if(mysqli_num_rows($check_presence) > 0){
 
-        //Executing the queries;
-        $insert_user = mysqli_query($con,$sql_user);
-        $insert_transaction = mysqli_query($con,$sql_log);
-        if($insert_user && $insert_transaction){
-            echo "<script>alert('Recorded is Successfully');</script>";
+        $check_record = mysqli_query($con,"select * from animalsales where animal_id='$animal_id' and solddate='$seldate' and farm_id ='$farm'");
+        if(mysqli_num_rows($check_record)>0){
+            echo "<script>alert('The Record already Exists');</script>";
         }else{
-            //echo "<H2>FAILED TO WORK".mysqli_error($dbconnection);
+            $insert_record = mysqli_query($con,"insert into animalsales(farm_id,animal_id,sp,soldby,solddate,recdate,recby)VALUES ('$farm','$animal_id','$amount','$soldby','$seldate','$recdate','$recby')");
+            if(!$insert_record){
+                die('NOT INSERTED'.mysqli_error($con));
+            }
+            $insert_log = mysqli_query($con,"insert into transaction_logs(farm_id,transaction_action,transaction_time,transaction_by) VALUES ('$farm','$action','$time','$entered_by')");
+
+            if($insert_record && $insert_log){
+                mysqli_query($con,"update animal_registration set status = 'Sold' where animal_id='$animal_id'");
+                //$message = "<div class=\"alert alert-success\"><strong>Registration is Successful</strong></div>";
+                echo "<script>alert('Registration is Successful');</script>";
+            }else{
+                echo mysqli_error($con);
+            }
         }
+    }
+    else{
+        // $message = "<div class=\"alert alert-danger\"><strong>Sorry, Operation Failed!</strong></div>";
+        echo "<script>alert('Sorry, Operation Failed!');</script>";
     }
 }
 ?>
@@ -76,14 +90,16 @@ if(isset($_POST['submit'])){
         <div class="container-fluid">
             <div class="row bg-title">
                 <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                    <h4 class="page-title">Farmer Library</h4> </div>
+                    <h4 class="page-title">
+                        Animal Sales Form
+                    </h4> </div>
                 <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                     <button class="right-side-toggle waves-effect waves-light btn-info btn-circle pull-right m-l-20"><i class="ti-settings text-white"></i></button>
                     <a href="javascript: void(0);" "></a>
                     <ol class="breadcrumb">
                         <li><a href="#">Dashboard</a></li>
-                        <li><a href="#">System Settings</a></li>
-                        <li><a href="#">Farmer Library</a></li>
+                        <li><a href="#">Finance Manager</a></li>
+                        <li><a href="#">Animal Sales Form</a></li>
                     </ol>
                 </div>
                 <!-- /.col-lg-12 -->
@@ -93,37 +109,66 @@ if(isset($_POST['submit'])){
 
                 <div class="col-md-9 col-sm-12">
                     <div class="white-box">
-                        <h3 class="box-title m-b-0">Record Farmer Library</h3>
-                        <form action="add-farmerresources" method="post" enctype="multipart/form-data">
+                        <h3 class="box-title m-b-0">Animal Sales Entry Form</h3>
+                        <form action="add-animal-sales" method="post" enctype="multipart/form-data">
                             <div class="row">
-                                <div class="col-md-1"></div>
-                                <div class="col-sm-10 col-xs-12">
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Title</label>
+                                        <label for="exampleInputpwd2">Selling Date</label>
                                         <div class="input-group">
-                                            <input type="text" name="resourcetitle" required autocomplete="off" class="form-control" id="exampleInputEmail1" placeholder="Acaricide Name">
+                                            <input type="date" class="form-control" name="sdate" id="datepicker" />
+                                            <span class="input-group-addon"><i class="icon-calender"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputuname">Animal</label>
+                                        <div class="input-group">
+                                            <select class="form-control select2" name="animal_id" required>
+                                                <option value="">Select</option>
+                                                <?php
+                                                $select = mysqli_query($con,"select * from animal_registration where status='Present' and farm_id ='$farm'");
+                                                while ($details = mysqli_fetch_array($select)){
+                                                    ?>
+                                                    <option value="<?php echo $details['animal_id']; ?>"><?php echo $details['animal_name'].'('.$details['animal_name'].')'; ?></option>
+
+                                                    <?php
+                                                }
+                                                ?>
+                                            </select>
+                                            <?php
+                                            ?>
+                                            <div class="input-group-addon"><i class="ti-pencil"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-xs-12">
+
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Sold By</label>
+                                        <div class="input-group">
+                                            <input class="form-control" name="soldby" required autocomplete="off" placeholder="Who Sold The animal?" type="text">
                                             <div class="input-group-addon"><i class="ti-pencil-alt"></i></div>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Url</label>
+                                        <label for="exampleInputEmail1">Amount</label>
                                         <div class="input-group">
-                                            <input type="url" name="resourceurl" required autocomplete="off" class="form-control" id="exampleInputEmail1" placeholder="Brand">
+                                            <input class="form-control" name="amount" onkeypress="return isNumberKey(event)" required autocomplete="off" placeholder="" type="number">
                                             <div class="input-group-addon"><i class="ti-pencil-alt"></i></div>
                                         </div>
                                     </div>
+
 
                                     <div class="text-center">
                                         <button type="submit" name="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>
                                     </div>
                                 </div>
-                                <div class="col-md-1"></div>
                             </div>
                         </form>
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-12">
-                    <h4><b>Tips</b></h4>
+                    <h4><b>Animal Selling Tips</b></h4>
 
 
                 </div>

@@ -2,43 +2,49 @@
 <html lang="en">
 
 <head>
-    <?php include 'head.php';?>
+    <?php include 'head.php';
+    $active='feeding';
+    ?>
 </head>
 <?php
 include 'db.php';
 $message="";
-$farm = $_SESSION['farm'];
+$farm =$_SESSION['farm'];
 if(isset($_POST['submit'])){
-    $resourcetitle= mysqli_real_escape_string($con,    ucwords($_POST['resourcetitle']));
-    $resourceurl= mysqli_real_escape_string($con,    ucwords($_POST['resourceurl']));
+    $date = mysqli_real_escape_string($con,  ucwords($_POST['sdate']));
+    $animal_id = mysqli_real_escape_string($con,   ucwords($_POST['animal_id']));
+    $colostrum = mysqli_real_escape_string($con,   ucwords($_POST['colostrum']));
+    $milk = mysqli_real_escape_string($con,   ucwords($_POST['milk']));
+    $supplement = mysqli_real_escape_string($con,   ucwords($_POST['supplement']));
+    $recdate = date("Y-m-d");
+    $recby = $_SESSION['full_names'];
 
-    $date = mysqli_real_escape_string($con,  $_POST['sdate']);
-    $recdate =         date("Y-m-d H:i:s");
-    $recby =   $_SESSION['full_names'];
     //capturing the registrar of the data
     $entered_by =   $_SESSION['full_names'];
     $time =         date("Y-m-d H:i:s");
-    $action =       'Recorded Farmers Resources ';
+    $action =       "Entered Calf Feeding records for".$tagno;
 
-    //checking if the id doesn't exist
-    $check_record = mysqli_query($con,"select * from farmerresources where resourceurl ='$resourceurl' and farm_id ='$farm'");
-    if(mysqli_num_rows($check_record) > 0){
-        echo "<script>alert('This is a duplicate post');</script>";
+
+
+    //checking if the member was already paid
+    if(mysqli_num_rows(mysqli_query($con,"select * from calf_feeding where animal_id='$animal_id' and fdate='$date' and farm_id ='$farm'"))>0){
+        //  $message = "<div class=\"alert alert-danger\"><strong>This Calf's Feeding Records were already Taken</strong></div>";
+        echo "<script>alert('This Record were already Taken');</script>";
     }else{
-        $sql_user = "insert into farmerresources(farm_id,resourceurl,resourcetitle,date_added,addby)
-		VALUES ('$farm','$resourceurl','$resourcetitle','$recdate','$entered_by')";
-        $sql_log  = "insert into  transaction_logs(farm_id,transaction_action,transaction_time,transaction_by) VALUES ('$farm','$action','$time','$entered_by')";
+        $insert_record = mysqli_query($con,"INSERT INTO calf_feeding (farm_id,animal_id,fdate,colostrumgiven,milkgiven,supplementgiven,recby,recdate)
+                                      VALUES ('$farm','$animal_id', '$date', '$colostrum', '$milk', '$supplement','$recby','$recdate');");
 
-        //Executing the queries;
-        $insert_user = mysqli_query($con,$sql_user);
-        $insert_transaction = mysqli_query($con,$sql_log);
-        if($insert_user && $insert_transaction){
+        $insert_log = mysqli_query($con,"insert into transaction_logs(farm_id,transaction_action,transaction_time,transaction_by) VALUES ('$farm','$action','$time','$entered_by')");
+
+        if($insert_record && $insert_log){
             echo "<script>alert('Recorded is Successfully');</script>";
         }else{
-            //echo "<H2>FAILED TO WORK".mysqli_error($dbconnection);
+            echo mysqli_error($con);
         }
     }
+
 }
+
 ?>
 <body class="fix-header">
 <!-- ============================================================== -->
@@ -76,14 +82,16 @@ if(isset($_POST['submit'])){
         <div class="container-fluid">
             <div class="row bg-title">
                 <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                    <h4 class="page-title">Farmer Library</h4> </div>
+                    <h4 class="page-title">
+                        Calf Feeding Form
+                    </h4> </div>
                 <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                     <button class="right-side-toggle waves-effect waves-light btn-info btn-circle pull-right m-l-20"><i class="ti-settings text-white"></i></button>
                     <a href="javascript: void(0);" "></a>
                     <ol class="breadcrumb">
                         <li><a href="#">Dashboard</a></li>
-                        <li><a href="#">System Settings</a></li>
-                        <li><a href="#">Farmer Library</a></li>
+                        <li><a href="#">Feeding</a></li>
+                        <li><a href="#">  Calf Feeding Form</a></li>
                     </ol>
                 </div>
                 <!-- /.col-lg-12 -->
@@ -93,22 +101,57 @@ if(isset($_POST['submit'])){
 
                 <div class="col-md-9 col-sm-12">
                     <div class="white-box">
-                        <h3 class="box-title m-b-0">Record Farmer Library</h3>
-                        <form action="add-farmerresources" method="post" enctype="multipart/form-data">
+                        <h3 class="box-title m-b-0">  Calf Feeding Form</h3>
+                        <form action="add-calf-feeding-records" method="post" enctype="multipart/form-data">
                             <div class="row">
                                 <div class="col-md-1"></div>
                                 <div class="col-sm-10 col-xs-12">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Title</label>
+                                        <label for="exampleInputpwd2">Feeding Date</label>
                                         <div class="input-group">
-                                            <input type="text" name="resourcetitle" required autocomplete="off" class="form-control" id="exampleInputEmail1" placeholder="Acaricide Name">
+                                            <input type="date" class="form-control" name="sdate" id="datepicker" />
+                                            <span class="input-group-addon"><i class="icon-calender"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputuname">Animal</label>
+                                        <div class="input-group">
+                                            <select class="form-control select2" name="animal_id" required>
+                                                <option>Select</option>
+                                                <?php
+                                                $select_tag = mysqli_query($con,"select * from animal_registration where status ='Present' and farm_id ='$farm'");
+                                                while ($tag = mysqli_fetch_array($select_tag)){
+                                                    ?>
+                                                    <option value="<?php echo $tag['animal_id']; ?>"><?php echo $tag['animal_name'].
+                                                            '('.$tag['tagNo'].')'; ?></option>
+                                                    <?php
+                                                }
+                                                ?>
+
+                                            </select>
+                                            <?php
+                                            ?>
+                                            <div class="input-group-addon"><i class="ti-pencil"></i></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Colostrum  Given</label>
+                                        <div class="input-group">
+                                            <input class="form-control" name="colostrum" required autocomplete="off" placeholder="Quantity of Colostrum Given" type="number">
                                             <div class="input-group-addon"><i class="ti-pencil-alt"></i></div>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Url</label>
+                                        <label for="exampleInputEmail1">Milk  Given</label>
                                         <div class="input-group">
-                                            <input type="url" name="resourceurl" required autocomplete="off" class="form-control" id="exampleInputEmail1" placeholder="Brand">
+                                            <input class="form-control" name="milk" required autocomplete="off" placeholder="Quantity of Milk Given" type="number">
+                                            <div class="input-group-addon"><i class="ti-pencil-alt"></i></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Supplement  Given</label>
+                                        <div class="input-group">
+                                            <input class="form-control" name="supplement" required autocomplete="off" placeholder="Supplement Provided" type="text">
                                             <div class="input-group-addon"><i class="ti-pencil-alt"></i></div>
                                         </div>
                                     </div>
@@ -123,7 +166,7 @@ if(isset($_POST['submit'])){
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-12">
-                    <h4><b>Tips</b></h4>
+                    <h4><b>Calf Feeding Tips</b></h4>
 
 
                 </div>

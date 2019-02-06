@@ -3,42 +3,87 @@
 
 <head>
     <?php include 'head.php';
-    $active='animal';?>
-</head>
-<?php include 'head.php';?>
+    $active='finance';
+    ?>
 </head>
 <?php
 include 'db.php';
 $message="";
+$farm = $_SESSION['farm'];
 if(isset($_POST['submit'])){
-    //$tagno = mysqli_real_escape_string($con,    ucwords($_POST['tagno']));
-    $animal_id = mysqli_real_escape_string($con,    ucwords($_POST['animal_id']));
-    $weight = mysqli_real_escape_string($con,    ucwords($_POST['weight']));
-    $date = mysqli_real_escape_string($con,  $_POST['sdate']);
-    $recdate =         date("Y-m-d H:i:s");
-    $recby =   $_SESSION['full_names'];
+    $empname = mysqli_real_escape_string($con,    ucwords($_POST['empname']));
+    $month = mysqli_real_escape_string($con,    ucwords($_POST['month']));
+    $sum_amount = mysqli_real_escape_string($con,    ucwords($_POST['amount']));
+    $contact = mysqli_real_escape_string($con,    ucwords($_POST['contact']));
+    $paydate = date("Y-m-d");
+    $payby = $_SESSION['full_names'];
+
     //capturing the registrar of the data
     $entered_by =   $_SESSION['full_names'];
     $time =         date("Y-m-d H:i:s");
-    $action =       "Recorded animal weight for  ".' '.$animal_id;
+    $action =       "Paid Salary to".' '.$empname;
 
 
-    //checking if the id doesn't exist
-    $check_record = mysqli_query($con,"select * from weight where animal_id = '$animal_id' and wdate ='$date' and farm_id ='$farm'");
-    if(mysqli_num_rows($check_record) > 0){
-        echo "<script>alert('The Animal weight was already taken');</script>";
-    }else{
-        $sql_user = "insert into weight(farm_id,animal_id,wdate,weight,recdate,recby)VALUES ('$farm','$animal_id','$date','$weight','$recdate','$recby')";
-        $sql_log  = "insert into transaction_logs(farm_id,transaction_action,transaction_time,transaction_by) VALUES ('$farm','$action','$time','$entered_by')";
-        //Executing the queries;
-        $insert_user = mysqli_query($con,$sql_user);
-        $insert_transaction = mysqli_query($con,$sql_log);
-        if($insert_user && $insert_transaction){
-            echo "<script>alert('Recorded is Successfully');</script>";
+
+    //checking if the member was already paid
+    $check_account = mysqli_query($con,"select * from salary where empname = '$empname' and months='$month' and farm_id ='$farm'");
+    if(mysqli_num_rows($check_account) > 0){
+        //getting the total amount paid yet
+        $amount = mysqli_fetch_array(mysqli_query($con,"select sum(amount) as total_paid from salary where empname = '$empname' and months='$month' and farm_id ='$farm'"));
+        $amount_paid = $amount['total_paid'];
+
+        //adding the amount being paid to the total already paid
+        $new_balance  = $sum_amount + $amount_paid;
+        //fetching the total salary for the employee
+        $salary = mysqli_fetch_array(mysqli_query($con,"select * from employees where tel ='$contact' and farm_id ='$farm'"));
+        $salary_to_be_paid = $salary['salary'];
+
+        if($new_balance > $salary_to_be_paid){
+            $message = "<div class=\"alert alert-danger\"><strong>Failed! You have exceeded the the salary amount</strong></div>";
+        }else{
+
+
+            $sql_emp = "insert into salary(farm_id,empname,contact,months,amount,paydate,payby)VALUES ('$farm','$empname','$contact','$month','$sum_amount','$paydate','$payby')";
+            $sql_log  = "insert into transaction_logs(farm_id,transaction_action,transaction_time,transaction_by) VALUES ('$farm','$action','$time','$entered_by')";
+            $update = mysqli_query($con,"update s_salary set amount = '$new_balance' where contact = '$contact' and months = '$month' and farm_id ='$farm'");
+
+            //Executing the queries;
+            $insert_emp = mysqli_query($con,$sql_emp);
+            $insert_transaction = mysqli_query($con,$sql_log);
+            if($insert_emp && $insert_transaction){
+                $message = "<div class=\"alert alert-success\"><strong>Registration is Successful</strong></div>";
+            }else{
+                echo mysqli_error();
+            }
+        }
+    }
+    else{
+        //Getting the total salary which has to be paid
+        $sql = mysqli_query($con,"select * from employees where tel = '$contact' and farm_id ='$farm'");
+        $result_sql = mysqli_fetch_array($sql);
+        $tsalary = $result_sql['salary'];
+
+        echo $tsalary;
+
+        if($sum_amount < $tsalary){
+            //$message = "<div class=\"alert alert-danger\"><strong>Failed! You have exceeded the the salary amount</strong></div>";
+            echo "<script>alert('Failed! You have exceeded the the salary amount');</script>";
+        }else{
+            $sql_emp = "insert into salary(farm_id,empname,contact,months,amount,paydate,payby)VALUES ('$farm','$empname','$contact','$month','$sum_amount','$paydate','$payby')";
+            $sql_log  = "insert into transaction_logs(farm_id,transaction_action,transaction_time,transaction_by) VALUES ('$farm','$action','$time','$entered_by')";
+
+            $insert = mysqli_query($con, "insert into s_salary (farm_id,empname,contact,months,amount)VALUES ('$farm','$empname','$contact','$month','$sum_amount')");
+
+            //Executing the queries;
+            $insert_emp = mysqli_query($con,$sql_emp);
+            $insert_transaction = mysqli_query($con,$sql_log);
+            if($insert_emp && $insert_transaction){
+                // $message = "<div class=\"alert alert-success\"><strong>Registration is Successful</strong></div>";
+                echo "<script>alert('Recorded  Successfully');</script>";
+            }
         }
     }
 }
-
 ?>
 <body class="fix-header">
 <!-- ============================================================== -->
@@ -76,14 +121,16 @@ if(isset($_POST['submit'])){
         <div class="container-fluid">
             <div class="row bg-title">
                 <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                    <h4 class="page-title">Weight Tracking Form</h4> </div>
+                    <h4 class="page-title">
+                        Employee Salaries
+                    </h4> </div>
                 <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                     <button class="right-side-toggle waves-effect waves-light btn-info btn-circle pull-right m-l-20"><i class="ti-settings text-white"></i></button>
                     <a href="javascript: void(0);" "></a>
                     <ol class="breadcrumb">
                         <li><a href="#">Dashboard</a></li>
-                        <li><a href="#">Animal</a></li>
-                        <li><a href="#">Weight Tracker</a></li>
+                        <li><a href="#">Finance Manager</a></li>
+                        <li><a href="#">Employee Salaries</a></li>
                     </ol>
                 </div>
                 <!-- /.col-lg-12 -->
@@ -93,28 +140,27 @@ if(isset($_POST['submit'])){
 
                 <div class="col-md-9 col-sm-12">
                     <div class="white-box">
-                        <h3 class="box-title m-b-0">Weight Tracking Form</h3>
-                        <form action="weight-track" method="post" enctype="multipart/form-data">
+                        <h3 class="box-title m-b-0">Record Employee Salaries</h3>
+                        <form action="add-salaries" method="post" enctype="multipart/form-data">
                             <div class="row">
-                                <div class="col-md-1"></div>
-                                <div class="col-sm-10 col-xs-12">
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="exampleInputpwd2">Weighing Date</label>
+                                        <label for="exampleInputpwd2"> Date</label>
                                         <div class="input-group">
                                             <input type="date" class="form-control" name="sdate" id="datepicker" />
                                             <span class="input-group-addon"><i class="icon-calender"></i></span>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputuname">Animal </label>
+                                        <label for="exampleInputuname">Employee Name</label>
                                         <div class="input-group">
-                                            <select class="form-control select2" name="animal_id" required>
-                                                <option>Select</option>
+                                            <select class="form-control select2" name="empname" required>
+                                                <option value="">Select</option>
                                                 <?php
-                                                $select = mysqli_query($con,"select * from animal_registration where status='Present' and farm_id ='$farm'");
-                                                while ($details = mysqli_fetch_array($select)){
+                                                $select = mysqli_query($con,"select * from employees where farm_id ='$farm'");
+                                                while ($empname = mysqli_fetch_array($select)){
                                                     ?>
-                                                    <option value="<?php echo $details['animal_id']; ?>"><?php echo $details['animal_name'].'('.$details['animal_name'].')'; ?></option>
+                                                    <option value="<?php echo $empname['empname']; ?>"><?php echo $empname['empname']; ?></option>
                                                     <?php
                                                 }
                                                 ?>
@@ -125,34 +171,56 @@ if(isset($_POST['submit'])){
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Weight</label>
+                                        <label for="exampleInputuname">Month Being Paid for </label>
                                         <div class="input-group">
-                                            <input class="form-control" name="weight" required autocomplete="off" placeholder="Weight" type="number" min="50" title="Value must be 50 and ABove" name="demo3">
+                                            <select class="form-control select2" name="month" required>
+                                                <option value="">Select</option>
+                                                <option value="January">January</option>
+                                                <option value="February">February</option>
+                                                <option value="March">March</option>
+                                                <option value="April">April</option>
+                                                <option value="May">May</option>
+                                                <option value="June">June</option>
+                                                <option value="July">July</option>
+                                                <option value="August">August</option>
+                                                <option value="September">September</option>
+                                                <option value="October">October</option>
+                                                <option value="November">November</option>
+                                                <option value="December">December</option>
+                                            </select>
+                                            <?php
+                                            ?>
+                                            <div class="input-group-addon"><i class="ti-pencil"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Amount</label>
+                                        <div class="input-group">
+                                            <input class="form-control" name="amount" onkeypress="return isNumberKey(event)" required autocomplete="off" placeholder="Amount" type="number">
                                             <div class="input-group-addon"><i class="ti-pencil-alt"></i></div>
                                         </div>
                                     </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Contact</label>
+                                        <div class="input-group">
+                                            <input class="form-control" name="contact" onkeypress="return isNumberKey(event)" required autocomplete="off" placeholder="Contact" type="number">
+                                            <div class="input-group-addon"><i class="ti-pencil-alt"></i></div>
+                                        </div>
+                                    </div>
+
                                     <div class="text-center">
                                         <button type="submit" name="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>
-                                        <button type="reset" class="btn btn-inverse waves-effect waves-light">Cancel</button>
                                     </div>
                                 </div>
-                                <div class="col-md-1"></div>
                             </div>
                         </form>
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-12">
-                    <h4><b>Weighing Tips</b></h4>
-                    <marquee  behavior="scroll" direction="up" id="mymarquee" scrollamount="2" onmouseover="this.stop();" onmouseout="this.start();">
-                        <p style="text-align: justify">
-                            <?php
-                            $select = mysqli_query($con,"select * from farmertips where section='Profiling' ORDER BY id desc LIMIT 1 ");
-                            while ($tipscheck = mysqli_fetch_array($select)){
-                                echo $tipscheck['tips'];
-                            }
-                            ?>
-                        </p>
-                    </marquee>
+                    <h4><b>Milk Selling Tips</b></h4>
+
 
                 </div>
             </div>

@@ -2,43 +2,57 @@
 <html lang="en">
 
 <head>
-    <?php include 'head.php';?>
+    <?php include 'head.php';
+    $active='breeding';?>
+</head>
+<?php include 'head.php';?>
 </head>
 <?php
 include 'db.php';
 $message="";
 $farm = $_SESSION['farm'];
-if(isset($_POST['submit'])){
-    $resourcetitle= mysqli_real_escape_string($con,    ucwords($_POST['resourcetitle']));
-    $resourceurl= mysqli_real_escape_string($con,    ucwords($_POST['resourceurl']));
 
-    $date = mysqli_real_escape_string($con,  $_POST['sdate']);
-    $recdate =         date("Y-m-d H:i:s");
-    $recby =   $_SESSION['full_names'];
+$animal = $_GET['animal'];
+$animal_id = $_GET['animalid'];
+
+if(isset($_GET['submit'])){
+    $animal_id = $_GET['animal_id'];
+    $atag = mysqli_real_escape_string($con,        ucwords($_GET['tagno']));
+    $dos = mysqli_real_escape_string($con,        ucwords($_GET['dos']));
+    $doctor = mysqli_real_escape_string($con,          ucwords($_GET['doctor']));
     //capturing the registrar of the data
-    $entered_by =   $_SESSION['full_names'];
-    $time =         date("Y-m-d H:i:s");
-    $action =       'Recorded Farmers Resources ';
+    $entered_by =           $_SESSION['full_names'];
+    $time       =           date("Y-m-d H:i:s");
+    $action     =           "Entered Serving Record";
 
-    //checking if the id doesn't exist
-    $check_record = mysqli_query($con,"select * from farmerresources where resourceurl ='$resourceurl' and farm_id ='$farm'");
-    if(mysqli_num_rows($check_record) > 0){
-        echo "<script>alert('This is a duplicate post');</script>";
+    //checking for the result
+
+    $check = mysqli_query($con,"select * from animal_serving where servedate = '$dos'
+	and farm_id ='$farm'");
+    if(mysqli_num_rows($check)>0){
+        echo "<script>alert('The record already exists');</script>";
     }else{
-        $sql_user = "insert into farmerresources(farm_id,resourceurl,resourcetitle,date_added,addby)
-		VALUES ('$farm','$resourceurl','$resourcetitle','$recdate','$entered_by')";
-        $sql_log  = "insert into  transaction_logs(farm_id,transaction_action,transaction_time,transaction_by) VALUES ('$farm','$action','$time','$entered_by')";
+        $serving_date = $dos;
+        $max_check_date =date_create($serving_date);
+        date_add($max_check_date,date_interval_create_from_date_string("21 days"));
+        $max_check_for_signs_of_heat__date =  date_format($max_check_date,"Y-m-d");
 
+        mysqli_query($con,"insert into 
+		animal_serving(farm_id,animal_id,servedate,servedby,checkup_date,soh_status)
+		VALUES ('$farm','$animal_id','$serving_date','$doctor','$max_check_for_signs_of_heat__date','Pending')");
+        mysqli_query($con,"update heat_animals set actualheatdate='$serving_date',
+		status='Served' where animal_id = '$animal_id' and farm_id ='$farm'");
+        /////////////////////////////Recording for the animal Serving///////////////////////////////
+
+        $sql_log  = mysqli_query($con,"insert into transaction_logs(farm_id,transaction_action,transaction_time,transaction_by) VALUES ('$farm','$action','$time','$entered_by')");
         //Executing the queries;
-        $insert_user = mysqli_query($con,$sql_user);
-        $insert_transaction = mysqli_query($con,$sql_log);
-        if($insert_user && $insert_transaction){
-            echo "<script>alert('Recorded is Successfully');</script>";
-        }else{
-            //echo "<H2>FAILED TO WORK".mysqli_error($dbconnection);
-        }
+        // header("location:wheel-heat-animals");
+        echo "<script>alert('Animal  Served Successfullly');</script>";
+        echo "<script>document.location='wheel-heat-animals'</script>";
     }
+
 }
+
 ?>
 <body class="fix-header">
 <!-- ============================================================== -->
@@ -76,14 +90,14 @@ if(isset($_POST['submit'])){
         <div class="container-fluid">
             <div class="row bg-title">
                 <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                    <h4 class="page-title">Farmer Library</h4> </div>
+                    <h4 class="page-title">Animal Serving Form</h4> </div>
                 <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                     <button class="right-side-toggle waves-effect waves-light btn-info btn-circle pull-right m-l-20"><i class="ti-settings text-white"></i></button>
                     <a href="javascript: void(0);" "></a>
                     <ol class="breadcrumb">
                         <li><a href="#">Dashboard</a></li>
-                        <li><a href="#">System Settings</a></li>
-                        <li><a href="#">Farmer Library</a></li>
+                        <li><a href="#">Animal</a></li>
+                        <li><a href="#">Serving</a></li>
                     </ol>
                 </div>
                 <!-- /.col-lg-12 -->
@@ -93,28 +107,61 @@ if(isset($_POST['submit'])){
 
                 <div class="col-md-9 col-sm-12">
                     <div class="white-box">
-                        <h3 class="box-title m-b-0">Record Farmer Library</h3>
-                        <form action="add-farmerresources" method="post" enctype="multipart/form-data">
+                        <h3 class="box-title m-b-0">Serving Form</h3>
+                        <form action="add-serving" method="get"  enctype="multipart/form-data">
                             <div class="row">
                                 <div class="col-md-1"></div>
                                 <div class="col-sm-10 col-xs-12">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Title</label>
+                                        <label for="exampleInputpwd2">Animal</label>
                                         <div class="input-group">
-                                            <input type="text" name="resourcetitle" required autocomplete="off" class="form-control" id="exampleInputEmail1" placeholder="Acaricide Name">
-                                            <div class="input-group-addon"><i class="ti-pencil-alt"></i></div>
+                                            <input class="form-control" name="tagno" required readonly value="<?=$animal;?>" type="text" >
+                                            <input class="form-control" name="animal_id" readonly value="<?=$animal_id;?>" type="hidden" >
+                                            <span class="input-group-addon"><i class="icon-pencil"></i></span>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Url</label>
+                                        <label for="exampleInputpwd2">Serving Date</label>
                                         <div class="input-group">
-                                            <input type="url" name="resourceurl" required autocomplete="off" class="form-control" id="exampleInputEmail1" placeholder="Brand">
-                                            <div class="input-group-addon"><i class="ti-pencil-alt"></i></div>
+                                            <input type="date" class="form-control" name="dos" required id="datepicker" />
+                                            <span class="input-group-addon"><i class="icon-calender"></i></span>
                                         </div>
                                     </div>
-
+                                    <div class="form-group">
+                                        <label for="exampleInputuname">Doctor </label>
+                                        <div class="input-group">
+                                            <select class="form-control select2" name="doctor" required>
+                                                <option>Select</option>
+                                                <?php
+                                                $select = mysqli_query($con,"select * from manage_doctors where status = 'Activated' and farm_id = '$farm'");
+                                                while ($doctor = mysqli_fetch_array($select)){
+                                                    ?>
+                                                    <option value="<?php echo $doctor['vet_name']; ?>"><?php echo $doctor['vet_name']; ?></option>
+                                                    <?php
+                                                }
+                                                ?>
+                                            </select>
+                                            <?php
+                                            ?>
+                                            <div class="input-group-addon"><i class="ti-pencil"></i></div>
+                                        </div>
+                                    </div>
+                                     <div class="form-group">
+                                        <label for="exampleInputpwd2">Serving Method</label>
+                                        <div class="input-group">
+                                           <select class="form-control select2" name="smethod" required>
+                                                <option value='' selected>Select</option>
+                                               
+                                            
+                                                    <option value="artificial">Artificial Insermination</option>
+                                                     <option value="bull">Artificial Insermination</option>
+                                               
+                                            <span class="input-group-addon"><i class="icon-pencil"></i></span>
+                                        </div>
+                                    </div>
                                     <div class="text-center">
                                         <button type="submit" name="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>
+                                        <button type="reset" class="btn btn-inverse waves-effect waves-light">Cancel</button>
                                     </div>
                                 </div>
                                 <div class="col-md-1"></div>
@@ -123,8 +170,17 @@ if(isset($_POST['submit'])){
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-12">
-                    <h4><b>Tips</b></h4>
-
+                    <h4><b>Serving Tips</b></h4>
+                    <marquee  behavior="scroll" direction="up" id="mymarquee" scrollamount="2" onmouseover="this.stop();" onmouseout="this.start();">
+                        <p style="text-align: justify">
+                            <?php
+                            $select = mysqli_query($con,"select * from farmertips where section='Profiling' ORDER BY id desc LIMIT 1 ");
+                            while ($tipscheck = mysqli_fetch_array($select)){
+                                echo $tipscheck['tips'];
+                            }
+                            ?>
+                        </p>
+                    </marquee>
 
                 </div>
             </div>

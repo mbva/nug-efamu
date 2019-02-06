@@ -2,40 +2,58 @@
 <html lang="en">
 
 <head>
-    <?php include 'head.php';?>
+    <?php include 'head.php';
+    $active='users';
+    ?>
 </head>
 <?php
 include 'db.php';
 $message="";
 $farm = $_SESSION['farm'];
 if(isset($_POST['submit'])){
-    $resourcetitle= mysqli_real_escape_string($con,    ucwords($_POST['resourcetitle']));
-    $resourceurl= mysqli_real_escape_string($con,    ucwords($_POST['resourceurl']));
+    $member_id = "EFAMU-".rand(10000,99999);
+    $fname = mysqli_real_escape_string($con,    ucwords($_POST['fname']));
+    $lname = mysqli_real_escape_string($con,    ucwords($_POST['lname']));
+    $contact = mysqli_real_escape_string($con,  $_POST['contact']);
+    $username = mysqli_real_escape_string($con, $_POST['username']);
+	$district = mysqli_real_escape_string($con, $_POST['district']);
+    $password = mysqli_real_escape_string($con, md5($_POST['password']));
+    $full_names= $fname.' '.$lname;
+    // $farm = mysqli_real_escape_string($con,    ucwords($_POST['farmid']));
 
-    $date = mysqli_real_escape_string($con,  $_POST['sdate']);
-    $recdate =         date("Y-m-d H:i:s");
-    $recby =   $_SESSION['full_names'];
     //capturing the registrar of the data
     $entered_by =   $_SESSION['full_names'];
     $time =         date("Y-m-d H:i:s");
-    $action =       'Recorded Farmers Resources ';
+    $action =       "Registered user ".' '.$full_names;
+
 
     //checking if the id doesn't exist
-    $check_record = mysqli_query($con,"select * from farmerresources where resourceurl ='$resourceurl' and farm_id ='$farm'");
-    if(mysqli_num_rows($check_record) > 0){
-        echo "<script>alert('This is a duplicate post');</script>";
+    $check_id = mysqli_query($con,"select * from users where memberid = '$member_id'");
+    if(mysqli_num_rows($check_id) > 0){
+        $member_id++;
     }else{
-        $sql_user = "insert into farmerresources(farm_id,resourceurl,resourcetitle,date_added,addby)
-		VALUES ('$farm','$resourceurl','$resourcetitle','$recdate','$entered_by')";
-        $sql_log  = "insert into  transaction_logs(farm_id,transaction_action,transaction_time,transaction_by) VALUES ('$farm','$action','$time','$entered_by')";
-
-        //Executing the queries;
-        $insert_user = mysqli_query($con,$sql_user);
-        $insert_transaction = mysqli_query($con,$sql_log);
-        if($insert_user && $insert_transaction){
-            echo "<script>alert('Recorded is Successfully');</script>";
-        }else{
-            //echo "<H2>FAILED TO WORK".mysqli_error($dbconnection);
+        //checking if the member already exists
+        $check_account = mysqli_query($con,"select * from users where contact = '$contact'");
+        if(mysqli_num_rows($check_account) > 0){
+            //$message = "<div class=\"alert alert-danger\"><strong>Failed! The account already exists</strong></div>";
+            echo "<script>alert('Failed! The account already exists');</script>";
+        } else{
+            //check if the username already exists
+            $check_username = mysqli_query($con,"select * from users where username = '$username'");
+            if(mysqli_num_rows($check_username) > 0){
+                $message = "<div class=\"alert alert-danger\"><strong>Failed! The Username already taken. Chose another one</strong></div>";
+            }else{
+                $sql_user = "insert into users(district,farm_id,memberid,full_names,contact,username,password,photo,status)
+				VALUES ('$district','$farm','$member_id','$full_names','$contact','$username','$password','','Deactivated')";
+                $sql_log  = "insert into transaction_logs(farm_id,transaction_action,transaction_time,transaction_by) VALUES ('$farm','$action','$time','$entered_by')";
+                //Executing the queries;
+                $insert_user = mysqli_query($con,$sql_user);
+                $insert_transaction = mysqli_query($con,$sql_log);
+                if($insert_user && $insert_transaction){
+                    //$message = "<div class=\"alert alert-success\"><strong>Registration is Successful</strong></div>";
+                    echo "<script>alert('Registration is Successful');</script>";
+                }
+            }
         }
     }
 }
@@ -76,14 +94,16 @@ if(isset($_POST['submit'])){
         <div class="container-fluid">
             <div class="row bg-title">
                 <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                    <h4 class="page-title">Farmer Library</h4> </div>
+                    <h4 class="page-title">
+                        System Users Registration Form
+                    </h4> </div>
                 <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                     <button class="right-side-toggle waves-effect waves-light btn-info btn-circle pull-right m-l-20"><i class="ti-settings text-white"></i></button>
                     <a href="javascript: void(0);" "></a>
                     <ol class="breadcrumb">
                         <li><a href="#">Dashboard</a></li>
-                        <li><a href="#">System Settings</a></li>
-                        <li><a href="#">Farmer Library</a></li>
+                        <li><a href="#">Users</a></li>
+                        <li><a href="#">Registration</a></li>
                     </ol>
                 </div>
                 <!-- /.col-lg-12 -->
@@ -93,23 +113,68 @@ if(isset($_POST['submit'])){
 
                 <div class="col-md-9 col-sm-12">
                     <div class="white-box">
-                        <h3 class="box-title m-b-0">Record Farmer Library</h3>
-                        <form action="add-farmerresources" method="post" enctype="multipart/form-data">
+                        <h3 class="box-title m-b-0">System Users Registration Form</h3>
+                        <form action="add-users" method="post" enctype="multipart/form-data">
                             <div class="row">
-                                <div class="col-md-1"></div>
-                                <div class="col-sm-10 col-xs-12">
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Title</label>
+                                        <label for="exampleInputEmail1">First Name</label>
                                         <div class="input-group">
-                                            <input type="text" name="resourcetitle" required autocomplete="off" class="form-control" id="exampleInputEmail1" placeholder="Acaricide Name">
+                                            <input class="form-control" name="fname" required autocomplete="off" placeholder="First Name" type="text">
                                             <div class="input-group-addon"><i class="ti-pencil-alt"></i></div>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Url</label>
+                                        <label for="exampleInputEmail1">Last Name</label>
                                         <div class="input-group">
-                                            <input type="url" name="resourceurl" required autocomplete="off" class="form-control" id="exampleInputEmail1" placeholder="Brand">
+                                            <input class="form-control" name="lname" required autocomplete="off" placeholder="Last Name" type="text">
                                             <div class="input-group-addon"><i class="ti-pencil-alt"></i></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Contact</label>
+                                        <div class="input-group">
+                                            <input class="form-control" name="contact" onkeypress="return isNumberKey(event)" maxlength="10" required autocomplete="off" placeholder="Contact" type="text">
+                                            <div class="input-group-addon"><i class="fa fa-phone"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Username</label>
+                                        <div class="input-group">
+                                            <input class="form-control" name="username"  required autocomplete="off" placeholder="Username" type="text">
+                                            <div class="input-group-addon"><i class="fa fa-user-circle"></i></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Password</label>
+                                        <div class="input-group">
+                                            <input class="form-control" name="password" required autocomplete="off" placeholder="Password" type="text">
+                                            <div class="input-group-addon"><i class="fa fa-lock"></i></div>
+                                        </div>
+                                    </div>
+									
+									  <div class="form-group">
+                                        <label for="exampleInputuname">District </label>
+                                        <div class="input-group">
+										 <select class="form-control select2" name="district" required>
+                                                <option>Select</option>
+                                                <?php
+                                                $select = mysqli_query($con,"select * from districts ");
+                                                while ($district = mysqli_fetch_array($select)){
+                                                    ?>
+                                                    <option value="<?php echo $district['id']; ?>"><?php echo $district['district']; ?></option>
+                                                    <?php
+                                                }
+                                                ?>
+                                            </select>
+                                             
+                                           
+                                            <?php
+                                            ?>
+                                            <div class="input-group-addon"><i class="ti-pencil"></i></div>
                                         </div>
                                     </div>
 
@@ -117,13 +182,12 @@ if(isset($_POST['submit'])){
                                         <button type="submit" name="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>
                                     </div>
                                 </div>
-                                <div class="col-md-1"></div>
                             </div>
                         </form>
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-12">
-                    <h4><b>Tips</b></h4>
+                    <h4><b>User Registration Tips</b></h4>
 
 
                 </div>

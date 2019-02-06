@@ -2,8 +2,46 @@
 <html lang="en">
 
 <head>
-    <?php include 'head.php';?>
+    <?php include 'head.php';
+    $active='finance';
+    ?>
 </head>
+<?php
+include 'db.php';
+$message="";
+$farm = $_SESSION['farm'];
+if(isset($_POST['submit'])){
+    $seldate = mysqli_real_escape_string($con,  ucwords($_POST['sdate']));
+    $amount = mysqli_real_escape_string($con,   ucwords($_POST['amount']));
+    $soldby = mysqli_real_escape_string($con,   ucwords($_POST['soldby']));
+    $qty = mysqli_real_escape_string($con,   ucwords($_POST['qty']));
+    $recdate = date("Y-m-d");
+    $recby = $_SESSION['full_names'];
+
+    //capturing the registrar of the data
+    $entered_by =   $_SESSION['full_names'];
+    $time =         date("Y-m-d H:i:s");
+    $action =       "Entered Milk Sale records ";
+
+    //checking if the member was already paid
+    //Check for existance of a record
+    $check_record = mysqli_query($con,"select * from milksales where solddate = '$seldate' and qty = '$qty' and sp='$amount' and farm_id ='$farm'");
+    if(mysqli_num_rows($check_record)>0){
+        echo "<script>alert('Failed! the record already exists');</script>";
+    }else{
+        $insert_record = mysqli_query($con,"insert into milksales(farm_id,solddate,qty,sp,soldby,recby,recdate)VALUES ('$farm','$seldate','$qty','$amount','$soldby','$recby','$recdate')");
+        $insert_log = mysqli_query($con,"insert into transaction_logs(farm_id,transaction_action,transaction_time,transaction_by) VALUES ('$farm','$action','$time','$entered_by')");
+
+        if($insert_record && $insert_log){
+            //$message = "<div class=\"alert alert-success\"><strong>Registration is Successful</strong></div>";
+            echo "<script>alert('Recorded Successfully');</script>";
+        }else{
+            echo mysqli_error($con);
+        }
+    }
+
+}
+?>
 <body class="fix-header">
 <!-- ============================================================== -->
 <!-- Preloader -->
@@ -40,104 +78,73 @@
         <div class="container-fluid">
             <div class="row bg-title">
                 <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                    <h4 class="page-title">Graphical Weight Tracking Analysis</h4> </div>
+                    <h4 class="page-title">
+                        Record Milk Sales
+                    </h4> </div>
                 <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                     <button class="right-side-toggle waves-effect waves-light btn-info btn-circle pull-right m-l-20"><i class="ti-settings text-white"></i></button>
                     <a href="javascript: void(0);" "></a>
                     <ol class="breadcrumb">
                         <li><a href="#">Dashboard</a></li>
-                        <li><a href="#">Health</a></li>
-                        <li><a href="#">Vaccination</a></li>
+                        <li><a href="#">Finance Manager</a></li>
+                        <li><a href="#"> Record Milk Sales</a></li>
                     </ol>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
             <!--.row-->
             <div class="row">
-                <script>
-                    window.onload = function () {
 
-                        var chart = new CanvasJS.Chart("chartContainer", {
-                            animationEnabled: true,
-                            exportEnabled: true,
-                            title:{
-                                text: " (<?php
-                                    if(isset($_POST['submit'])){
-                                        $date = $_POST['date'];
-                                        $tagno = $_POST['tagno'];
-                                        // $d = date_parse_from_format("Y-m-d", $date);
-                                        $m =  date("F", strtotime($date));
-                                        $y =  date("Y", strtotime($date));
-                                        echo $tagno. " Weight Analysis as at ".$m."-".$y;
-                                    }else{
-                                        echo "Annual Representation of Herd Average Weight";
-                                    }
-                                    ?>)"
-                            },
-                            axisY:{
-                                title: "Average Weight in Kgs"
-                            },
-                            toolTip: {
-                                shared: true
-                            },
-                            legend:{
-                                cursor:"pointer",
-                                itemclick: toggleDataSeries
-                            },
-                            data: [
-                                {
-                                    type: "spline",
-                                    name: "Average Weight",
-                                    showInLegend: true,
-                                    dataPoints: [
-                                        <?php
-                                        include 'db.php';
+                <div class="col-md-9 col-sm-12">
+                    <div class="white-box">
+                        <h3 class="box-title m-b-0">Record Milk Sales</h3>
+                        <form action="add-milk-sales" method="post" enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputpwd2"> Date</label>
+                                        <div class="input-group">
+                                            <input type="date" class="form-control" name="sdate" id="datepicker" />
+                                            <span class="input-group-addon"><i class="icon-calender"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Quantity</label>
+                                        <div class="input-group">
+                                            <input class="form-control" name="qty" onkeypress="return isNumberKey(event)" required autocomplete="off" placeholder="Quantity of milk in Ltrs" type="number">
+                                            <div class="input-group-addon"><i class="ti-pencil-alt"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Amount</label>
+                                        <div class="input-group">
+                                            <input class="form-control" name="amount" onkeypress="return isNumberKey(event)" required autocomplete="off" placeholder="Amount" type="number">
+                                            <div class="input-group-addon"><i class="ti-pencil-alt"></i></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Sold By.</label>
+                                        <div class="input-group">
+                                            <input class="form-control" name="soldby" required autocomplete="off" placeholder="Milk was sold by" type="text">
+                                            <div class="input-group-addon"><i class="ti-pencil-alt"></i></div>
+                                        </div>
+                                    </div>
 
-                                        if(isset($_POST['submit'])){
-                                        $date_from = $_POST['date'];
-                                        $tagno =$_POST['tagno'];
+                                    <div class="text-center">
+                                        <button type="submit" name="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-12">
+                    <h4><b>Milk Selling Tips</b></h4>
 
-                                        for($i=1;$i<=31;$i++){
-                                        $select =mysqli_query($con,"select AVG (weight) as daily_avg_weight , wdate from weight where tagno = '$tagno' AND wdate = '$date_from' and farm_id ='$farm'");
-                                        $result = mysqli_fetch_array($select);
-                                        $daily_avg_weight = $result['daily_avg_weight'];
-                                        ?>
-                                        { label: "<?=$result['wdate']?>" , y: <?=number_format($daily_avg_weight);?> },
-                                        <?php
-                                        $date_from = date ("Y-m-d", strtotime("+1 day", strtotime($date_from)));
-                                        }
-                                        }else{
-                                        for($iM =1;$iM<=12;$iM++){
-                                        $month =  date("m", strtotime("$iM/12/10"));
-                                        $x_axis = date("M", strtotime("$iM/12/10"));
-                                        $select =mysqli_query($con,"select AVG (weight) as avg_weight  from weight where MONTH (wdate)= '$month' and farm_id ='$farm'");
-                                        $result = mysqli_fetch_array($select);
-                                        ?>
-                                        { label: "<?=$x_axis?>" , y: <?=number_format($result['avg_weight']);?>},
-                                        <?php
-                                        }
-                                        }
-                                        ?>
-                                    ]
-                                },
-                            ]
-                        });
-                        chart.render();
 
-                        function toggleDataSeries(e) {
-                            if(typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
-                                e.dataSeries.visible = false;
-                            }
-                            else {
-                                e.dataSeries.visible = true;
-                            }
-                            chart.render();
-                        }
-                    }
-                </script>
-
-                <div id="chartContainer" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
-                <script src="charts/canvasjs.min.js"></script>
+                </div>
             </div>
             <!-- ============================================================== -->
         </div>
