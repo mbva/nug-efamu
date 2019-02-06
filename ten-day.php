@@ -2,9 +2,8 @@
 <html lang="en">
 
 <head>
-    <?php include 'head.php';?>
-</head>
-<?php include 'head.php';?>
+    <?php include 'head.php';
+    $active='animal';?>
 </head>
 <?php
 include 'db.php';
@@ -82,7 +81,7 @@ if(isset($_POST['save'])){
 <!-- ============================================================== -->
 <!-- Wrapper -->
 <!-- ============================================================== -->
-<div id="wrapper">
+<div id="wrapper" >
     <!-- ============================================================== -->
     <!-- Topbar header - style you can find in pages.scss -->
     <!-- ============================================================== -->
@@ -111,7 +110,7 @@ if(isset($_POST['save'])){
                     </h4> </div>
                 <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                     <button class="right-side-toggle waves-effect waves-light btn-info btn-circle pull-right m-l-20"><i class="ti-settings text-white"></i></button>
-                    <a href="javascript: void(0);" target="_blank" class="btn btn-danger pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light">Buy Admin Now</a>
+                    <a href="javascript: void(0);" "></a>
                     <ol class="breadcrumb">
                         <li><a href="#">Dashboard</a></li>
                         <li><a href="#">Animal</a></li>
@@ -322,6 +321,7 @@ if(isset($_POST['save'])){
                                                </div>
                                            </div>
                                            <div class="col-md-6">
+										   <br><br>
                                                <div class="form-group">
                                                    <label class="control-label">RETAINED PLACENTA AFTER BIRTH</label>
                                                    <div class="input-group">

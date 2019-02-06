@@ -7,13 +7,14 @@
 <?php
 include 'db.php';
 $message="";
+$active='settings';
 $farm  =$_SESSION['farm'];
 if(isset($_POST['submit'])){
-    $fname = mysqli_real_escape_string($con,    ucwords($_POST['vet_fname']));
-    $lname = mysqli_real_escape_string($con,    ucwords($_POST['vet_lname']));
+    $fname = mysqli_real_escape_string($con,    ucwords($_POST['fname']));
+    $lname = mysqli_real_escape_string($con,    ucwords($_POST['lname']));
     $contact = mysqli_real_escape_string($con,  $_POST['contact']);
     $email = mysqli_real_escape_string($con, $_POST['email']);
-    $vet_names = "Dr.".$fname.' '.$lname;
+    $vet_names =$fname.' '.$lname;
 
     //capturing the registrar of the data
     $entered_by =   $_SESSION['full_names'];
@@ -50,7 +51,7 @@ if(isset($_POST['submit'])){
 <!-- ============================================================== -->
 <!-- Wrapper -->
 <!-- ============================================================== -->
-<div id="wrapper">
+<div id="wrapper" >
     <!-- ============================================================== -->
     <!-- Topbar header - style you can find in pages.scss -->
     <!-- ============================================================== -->
@@ -77,7 +78,7 @@ if(isset($_POST['submit'])){
                     <h4 class="page-title">Doctors Registration</h4> </div>
                 <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                     <button class="right-side-toggle waves-effect waves-light btn-info btn-circle pull-right m-l-20"><i class="ti-settings text-white"></i></button>
-                    <a href="javascript: void(0);" target="_blank" class="btn btn-danger pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light">Buy Admin Now</a>
+                    <a href="javascript: void(0);" "></a>
                     <ol class="breadcrumb">
                         <li><a href="#">Dashboard</a></li>
                         <li><a href="#">System Settings</a></li>

@@ -2,7 +2,9 @@
 <html lang="en">
 
 <head>
-    <?php include 'head.php';?>
+    <?php include 'head.php';
+    $active='health';
+    ?>
 </head>
 <?php
 include 'db.php';
@@ -14,6 +16,10 @@ if(isset($_POST['submit'])){
     $vaccine = mysqli_real_escape_string($con,          ucwords($_POST['vaccine']));
     $roa = mysqli_real_escape_string($con,          ucwords($_POST['roa']));
     $doctor = mysqli_real_escape_string($con,          ucwords($_POST['doctor']));
+	
+	$frequency= mysqli_real_escape_string($con,          ucwords($_POST['frequency']));
+    $disease= mysqli_real_escape_string($con,          ucwords($_POST['disease']));
+	
     $selects = mysqli_query($con,"select * from animal_registration where animal_id='$animal_id' and farm_id ='$farm'");
     while($names=mysqli_fetch_array($selects)){
         $aname=$names['animal_name'];
@@ -28,8 +34,8 @@ if(isset($_POST['submit'])){
     if(mysqli_num_rows($check_record)>0){
         echo "<script>alert('Record already Exists');</script>";
     }else{
-        $sql_deworm = "insert into vaccination(farm_id,animal_id,date_of_vaccination,vaccine,route_of_admin,vet_doctor)
-                        VALUES ('$farm','$animal_id','$dov','$vaccine','$roa','$doctor')";
+        $sql_deworm = "insert into vaccination(disease,frequency_of_vaccination,farm_id,animal_id,date_of_vaccination,vaccine,route_of_admin,vet_doctor)
+                        VALUES ('$disease','$frequency','$farm','$animal_id','$dov','$vaccine','$roa','$doctor')";
         $sql_log  = "insert into transaction_logs(farm_id,transaction_action,transaction_time,transaction_by) VALUES ('$farm','$action','$time','$entered_by')";
         //Executing the queries;
         $insert_deworm = mysqli_query($con,$sql_deworm);
@@ -39,8 +45,11 @@ if(isset($_POST['submit'])){
         $insert_transaction = mysqli_query($con,$sql_log);
         if($insert_deworm && $insert_transaction ){
             echo "<script>alert('Recorded is Successfully');</script>";
-			
-        }
+
+        }else{ echo "<h2>FAILED <h2> ".mysqli_error($con);
+		}
+
+
     }
     //}
 }
@@ -57,7 +66,7 @@ if(isset($_POST['submit'])){
 <!-- ============================================================== -->
 <!-- Wrapper -->
 <!-- ============================================================== -->
-<div id="wrapper">
+<div id="wrapper" >
     <!-- ============================================================== -->
     <!-- Topbar header - style you can find in pages.scss -->
     <!-- ============================================================== -->
@@ -84,7 +93,7 @@ if(isset($_POST['submit'])){
                     <h4 class="page-title">Vaccination Form</h4> </div>
                 <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                     <button class="right-side-toggle waves-effect waves-light btn-info btn-circle pull-right m-l-20"><i class="ti-settings text-white"></i></button>
-                    <a href="javascript: void(0);" target="_blank" class="btn btn-danger pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light">Buy Admin Now</a>
+                    <a href="javascript: void(0);" "></a>
                     <ol class="breadcrumb">
                         <li><a href="#">Dashboard</a></li>
                         <li><a href="#">Health</a></li>
@@ -101,8 +110,9 @@ if(isset($_POST['submit'])){
                         <h3 class="box-title m-b-0">Vaccination Form</h3>
                         <form action="add-vaccination-records" method="post" enctype="multipart/form-data">
                             <div class="row">
-                                <div class="col-md-1"></div>
-                                <div class="col-sm-10 col-xs-12">
+                               
+								
+								 <div class="col-sm-6 col-xs-12">
                                     <div class="form-group">
                                         <label for="exampleInputpwd2">Vaccination Date</label>
                                         <div class="input-group">
@@ -149,6 +159,44 @@ if(isset($_POST['submit'])){
                                             <div class="input-group-addon"><i class="ti-pencil"></i></div>
                                         </div>
                                     </div>
+									
+									     <div class="form-group">
+                                        <label for="exampleInputuname">Disease </label>
+                                        <div class="input-group">
+										 <select class="form-control select2" name="disease" required>
+                                                <option>Select</option>
+                                                <?php
+                                                $select = mysqli_query($con,"select * from manage_vaccines where farm_id ='$farm'");
+                                                while ($vaccine = mysqli_fetch_array($select)){
+                                                    ?>
+                                                    <option value="<?php echo $vaccine['disease']; ?>"><?php echo $vaccine['disease']; ?></option>
+                                                    <?php
+                                                }
+                                                ?>
+                                            </select>
+                                             
+                                           
+                                            <?php
+                                            ?>
+                                            <div class="input-group-addon"><i class="ti-pencil"></i></div>
+                                        </div>
+                                    </div>
+									
+
+                                    
+                                </div>
+								
+								
+                                <div class="col-sm-6 col-xs-12">
+                                   
+									     <div class="form-group">
+                                        <label for="exampleInputuname">Frequency </label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" name="frequency" required>
+                                            
+                                            <div class="input-group-addon"><i class="ti-pencil"></i></div>
+                                        </div>
+                                    </div>
                                     <div class="form-group">
                                         <label for="exampleInputuname">Route of administering  </label>
                                         <div class="input-group">
@@ -189,13 +237,24 @@ if(isset($_POST['submit'])){
                                         <button type="submit" name="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>
                                     </div>
                                 </div>
-                                <div class="col-md-1"></div>
+                                
                             </div>
                         </form>
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-12">
                     <h4><b>Vaccination Tips</b></h4>
+					  
+                    <marquee  behavior="scroll" direction="up" id="mymarquee" scrollamount="2" onmouseover="this.stop();" onmouseout="this.start();">
+                        <p style="text-align: justify">
+                            <?php
+                            $select = mysqli_query($con,"select * from farmertips where section='health' ORDER BY id desc LIMIT 1 ");
+                            while ($tipscheck = mysqli_fetch_array($select)){
+                                echo $tipscheck['tips'];
+                            }
+                            ?>
+                        </p>
+                    </marquee>
 
 
                 </div>
