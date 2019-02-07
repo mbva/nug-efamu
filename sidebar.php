@@ -1,10 +1,18 @@
-<div style="overflow-y: scroll;">
+      
+	 	  <style>
+            .scroll{ 
+        height=70%
+  overflow: auto;
+               
+            } 
+        </style>
+<div class="scroll">
 
-<div class="sidebar-nav slimscrollsidebar" >
-    <div class="sidebar-head">
+<div class="sidebar-nav slimscrollsidebar"  style="overflow-y: scroll;">
+    <div class="sidebar-head" style="overflow-y: scroll;">
         <h3><span class="fa-fw open-close"><i class="ti-close ti-menu"></i></span> <span class="hide-menu">Navigation</span></h3> </div>
     <ul class="nav" id="side-menu">
-        <li class="user-pro">
+        <li class="user-pro" style="overflow-y: scroll;">
 
             <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px;">
                 <li><a href="javascript:void(0)"><i class="ti-user"></i> <span class="hide-menu">My Profiles</span></a></li>
