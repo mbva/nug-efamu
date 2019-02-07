@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<?php $active='reports';?>
 <head>
     <?php include 'head.php';?>
 </head>
