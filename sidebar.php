@@ -157,7 +157,7 @@
             </ul>
         </li>
 		
-		        <li> <a href="javascript:void(0)" class="waves-effect <?php if($active=='reports') echo "active" ?>"><i class="mdi mdi-chart-bar fa-fw"></i> <span class="hide-menu">Analysis Reports<span class="fa arrow"></span></span></a>
+		        <!--<li> <a href="javascript:void(0)" class="waves-effect <?php if($active=='reports') echo "active" ?>"><i class="mdi mdi-chart-bar fa-fw"></i> <span class="hide-menu">Analysis Reports<span class="fa arrow"></span></span></a>
             <ul class="nav nav-second-level">
                 <li> <a href="graph-milk-sales" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">Milk Sales</span><span class="fa arrow"></span></a>
                    
@@ -172,7 +172,7 @@
        
                 </li>
             </ul>
-        </li>
+        </li>-->
 		
 		
 		
@@ -213,7 +213,7 @@
             </ul>
         </li>
 		
-		       <li> <a href="javascript:void(0)" class="waves-effect <?php if($active=='users') echo "active" ?>"><i class="mdi  mdi-account fa-fw"></i> <span class="hide-menu">System Users<span class="fa arrow"></span></span></a>
+		    <!--   <li> <a href="javascript:void(0)" class="waves-effect <?php if($active=='users') echo "active" ?>"><i class="mdi  mdi-account fa-fw"></i> <span class="hide-menu">System Users<span class="fa arrow"></span></span></a>
             <ul class="nav nav-second-level">
                 <li> <a href="add-users" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">Register User </span></a>
                    
@@ -249,9 +249,9 @@
 				</ul>
                 
              
-        </li>
+        </li>-->
 		
-			       <li> <a href="javascript:void(0)" class="waves-effect <?php if($active=='logs') echo "active" ?>"><i class="mdi mdi-checkbox-multiple-marked-outline fa-fw"></i> <span class="hide-menu">System Logs<span class="fa arrow"></span></span></a>
+			     <!--  <li> <a href="javascript:void(0)" class="waves-effect <?php if($active=='logs') echo "active" ?>"><i class="mdi mdi-checkbox-multiple-marked-outline fa-fw"></i> <span class="hide-menu">System Logs<span class="fa arrow"></span></span></a>
             <ul class="nav nav-second-level">
                 <li> <a href="transaction-logs" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">Transaction Logs </span></a>
                    
@@ -262,7 +262,7 @@
 				</ul>
                 
              
-        </li>
+        </li>-->
 
        
 
