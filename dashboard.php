@@ -17,7 +17,7 @@
     <!-- ============================================================== -->
     <!-- Wrapper -->
     <!-- ============================================================== -->
-    <div id="wrapper">
+    <div id="wrapper" >
         <!-- ============================================================== -->
         <!-- Topbar header - style you can find in pages.scss -->
         <!-- ============================================================== -->
@@ -363,7 +363,7 @@ $cityId=$weather['address'];
                 </div>
 				
 				
-				   <div class="row">
+				   <!--<div class="row">
                     <div class="col-lg-4 col-md-12">
                         <div class="white-box">
                             <h3 class="box-title">Visit from the countries</h3>
@@ -454,7 +454,7 @@ $cityId=$weather['address'];
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>-->
 				
 				
 				

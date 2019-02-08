@@ -3,6 +3,7 @@
 
 <head>
     <?php include 'head.php';?>
+
 	<script>
 	var txt;
 var r = confirm("Are you sure you want to delete?");
@@ -12,6 +13,7 @@ if (r == true) {
 window(location="view-animal-registration");
 }
 </script>
+
 </head>
 <?php
 include 'db.php';
@@ -48,7 +50,9 @@ $farm_id  = $_GET['farm_id'];
 	 die("noy".mysqli_error($con));
  }
     else if($delete ){?>
+<
 	 <script> alert('Animal Deleted Successfuly');</script>
+
      <script>window(location="view-animal-registration");</script>
 	 
 	 <?php 

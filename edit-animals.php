@@ -14,9 +14,6 @@ if(!$details){
     echo mysqli_error($con);
 }?>
 
-
-
-
 <body class="fix-header">
 
     <!-- ============================================================== -->
@@ -30,7 +27,7 @@ if(!$details){
     <!-- ============================================================== -->
     <!-- Wrapper -->
     <!-- ============================================================== -->
-    <div id="wrapper">
+    <div id="wrapper" >
         <!-- ============================================================== -->
         <!-- Topbar header - style you can find in pages.scss -->
         <!-- ============================================================== -->
@@ -78,53 +75,14 @@ if(!$details){
                 </div>
                 <!-- /row -->
                 <div class="row">
-				<?php 
-				include "db.php";
-/*if(isset($_POST['submit'])){
-	?>
-	<h1>YES HERE I REACH</h1>
-	<?php 
-    $farm_id = mysqli_real_escape_string($con,    ucwords($_POST['farm_id']));
-    $animal_id = mysqli_real_escape_string($con,    ucwords($_POST['animal_id']));
-    $tagNo = mysqli_real_escape_string($con,    ucwords($_POST['tag']));
-	$animalname = mysqli_real_escape_string($con,    ucwords($_POST['names']));
-    $gender = mysqli_real_escape_string($con,  $_POST['gender']);
-    $breed = mysqli_real_escape_string($con, $_POST['breed']);
-    $dob = mysqli_real_escape_string($con, $_POST['dob']);
-    $location = mysqli_real_escape_string($con, $_POST['location']);
-    $genetic_percentage = mysqli_real_escape_string($con, $_POST['genetic_percentage']);
-    $name_of_sire = mysqli_real_escape_string($con, $_POST['name_of_sire']);
-    $breed_of_sire = mysqli_real_escape_string($con, $_POST['breed_of_sire']);
-    $name_of_dam = mysqli_real_escape_string($con, $_POST['name_of_dam']);
-    $breed_of_dam = mysqli_real_escape_string($con, $_POST['breed_of_dam']);
-	
 
-
-    //capturing the registrar of the data
-    $entered_by =   $_SESSION['full_names'];
-    $time =         date("Y-m-d H:i:s");
-    $action =       "Edited animal ".' '.$animal_id;
- echo $farm_id ;
-    echo $animal_id; 
-    $update = mysqli_query($con,"UPDATE animal_registration SET tagNo='$tagNo',animal_name='$animalname',gender='$gender',breed='$breed',dob='$dob',location='$location',
-	genetic_percentage='$genetic_percentage',name_of_dam='$name_of_dam',breed_of_dam='$name_of_dam',name_of_sire='$name_of_sire',breed_of_sire='$breed_of_sire', where animal_id = '$animal_id'");
-    //$sql_log  =  mysqli_query($con,"insert into transaction_logs(farm_id,transaction_action,transaction_time,transaction_by) VALUES ('$farm','$action','$time','$entered_by')");
-    //Executing the queries;
-if(!$update){
-	die("not updated".mysql_error());
-}
-	else{
-		Echo "<h1>SUCCESS</H1>";
-  
-}
-}*/
-?>
 					<div class="col-sm-12">
                         <div class="white-box">
                             <h3 class="box-title m-b-0">Edit Animal Details</h3>
                             
+
                            <form action="edit_animal" method="post" enctype="multipart/form-data">
-                                    
+                    
                         <div class="row">
                             <div class="col-sm-4 col-xs-12">
 
@@ -148,7 +106,9 @@ if(!$update){
                                         <label for="exampleInputphone">Gender</label>
                                         <div class="input-group">
                                         <select class="form-control select2" name="gender" required>
+
                                             <option value="<?=$details['gender']?>"><?=$details['gender']?></option>
+
                                             <option value="Male">Male</option>
                                             <option value="Female">Female</option>
                                         </select>
@@ -159,7 +119,9 @@ if(!$update){
                                         <label for="exampleInputpwd1">Breed</label>
                                         <div class="input-group">
                                             <select class="form-control select2" name="breed" required>
+
                                                 <option value="<?=$details['breed']?>"><?=$details['breed']?></option>
+
                                                 <?php
                                                 $select = mysqli_query($con,"select * from manage_breeds where  farm_id ='$farm'");
                                                 while ($breed = mysqli_fetch_array($select)){
@@ -242,7 +204,41 @@ if(!$update){
              
                     </div>
                 </div>
-				
+
+				<?php 
+				if(isset($_POST['submit'])){
+    $farm_id = mysqli_real_escape_string($con,    ucwords($_POST['farm_id']));
+    $animal_id = mysqli_real_escape_string($con,    ucwords($_POST['animal_id']));
+    $tagNo = mysqli_real_escape_string($con,    ucwords($_POST['tag']));
+	$animalname = mysqli_real_escape_string($con,    ucwords($_POST['names']));
+    $gender = mysqli_real_escape_string($con,  $_POST['gender']);
+    $breed = mysqli_real_escape_string($con, $_POST['breed']);
+    $dob = mysqli_real_escape_string($con, $_POST['dob']);
+    $location = mysqli_real_escape_string($con, $_POST['location']);
+    $genetic_percentage = mysqli_real_escape_string($con, $_POST['genetic_percentage']);
+    $name_of_sire = mysqli_real_escape_string($con, $_POST['name_of_sire']);
+    $breed_of_sire = mysqli_real_escape_string($con, $_POST['breed_of_sire']);
+    $name_of_dam = mysqli_real_escape_string($con, $_POST['name_of_dam']);
+    $breed_of_dam = mysqli_real_escape_string($con, $_POST['breed_of_dam']);
+
+    //capturing the registrar of the data
+    $entered_by =   $_SESSION['full_names'];
+    $time =         date("Y-m-d H:i:s");
+    $action =       "Edited animal ".' '.$animal_id;
+
+    $update = mysqli_query($con,"update animal_registration set animal_name='$animalname', tagNo='$tagNo' gender='$gender', breed='$breed',dob='$dob',location='$location',genetic_percentage='$genetic_percentage',name_of_sire='$name_of_sire',name_of_dam='$name_of_dam',breed_of_sire='$breed_of_sire',breed_of_dam='$breed_of_dam' where farm_id = '$farm_id' and animal_id = '$animal_id'");
+    //$sql_log  =  mysqli_query($con,"insert into transaction_logs(farm_id,transaction_action,transaction_time,transaction_by) VALUES ('$farm','$action','$time','$entered_by')");
+    //Executing the queries;
+ if(!$update){
+	 die("not".mysqli_error($con));
+ }
+    else{
+        header("location:view-animal-registration");
+    }
+   
+}
+?>
+
                 
                 <!-- ============================================================== -->
                 <!-- End Right sidebar -->

@@ -15,6 +15,6 @@ $insert = mysqli_query($con,"insert into login_logs(login_action,login_time)VALU
 session_start();
 if(session_destroy()) // Destroying All Sessions
 {
-    header("location:index.php"); // Redirecting To Home Page
+    header("location:index"); // Redirecting To Home Page
 }
 ?>

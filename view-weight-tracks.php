@@ -2,283 +2,212 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" type="image/png" sizes="16x16" href="plugins/images/favicon.png">
-    <title>Efamu </title>
-    <!-- Bootstrap Core CSS -->
-    <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="plugins/bower_components/datatables/media/css/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
-    <!-- Menu CSS -->
-    <link href="plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css" rel="stylesheet">
-    <!-- animation CSS -->
-    <link href="css/animate.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link href="css/style.css" rel="stylesheet">
-    <!-- color CSS -->
-    <link href="css/colors/megna-dark.css" id="theme" rel="stylesheet">
-
-	 <link href="plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css" rel="stylesheet">
-    <link href="plugins/bower_components/tablesaw-master/dist/tablesaw.css" rel="stylesheet">
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
+    <?php include 'head.php';
+    $active='animal';?>
 </head>
 
 <body class="fix-header">
+<!-- ============================================================== -->
+<!-- Preloader -->
+<!-- ============================================================== -->
+<div class="preloader">
+    <svg class="circular" viewBox="25 25 50 50">
+        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
+    </svg>
+</div>
+<!-- ============================================================== -->
+<!-- Wrapper -->
+<!-- ============================================================== -->
+<div id="wrapper" >
     <!-- ============================================================== -->
-    <!-- Preloader -->
+    <!-- Topbar header - style you can find in pages.scss -->
     <!-- ============================================================== -->
-    <div class="preloader">
-        <svg class="circular" viewBox="25 25 50 50">
-            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
-        </svg>
+    <nav class="navbar navbar-default navbar-static-top m-b-0">
+        <?php include('nav.php');
+        ?>
+        <!-- /.navbar-header -->
+        <!-- /.navbar-top-links -->
+        <!-- /.navbar-static-side -->
+    </nav>
+    <!-- End Top Navigation -->
+    <!-- ============================================================== -->
+    <!-- Left Sidebar - style you can find in sidebar.scss  -->
+    <!-- ============================================================== -->
+    <div class="navbar-default sidebar" role="navigation">
+        <div class="sidebar-nav slimscrollsidebar">
+            <div class="sidebar-head">
+                <h3><span class="fa-fw open-close"><i class="ti-close ti-menu"></i></span> <span class="hide-menu">Navigation</span></h3> </div>
+            <?php
+            include('sidebar.php');
+            ?>
+        </div>
     </div>
     <!-- ============================================================== -->
-    <!-- Wrapper -->
+    <!-- End Left Sidebar -->
     <!-- ============================================================== -->
-    <div id="wrapper">
-        <!-- ============================================================== -->
-        <!-- Topbar header - style you can find in pages.scss -->
-        <!-- ============================================================== -->
-        <nav class="navbar navbar-default navbar-static-top m-b-0">
-           <?php include('topnav.php');
-		   ?>
-            <!-- /.navbar-header -->
-            <!-- /.navbar-top-links -->
-            <!-- /.navbar-static-side -->
-        </nav>
-        <!-- End Top Navigation -->
-        <!-- ============================================================== -->
-        <!-- Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
-        <div class="navbar-default sidebar" role="navigation">
-            <div class="sidebar-nav slimscrollsidebar">
-                <div class="sidebar-head">
-                    <h3><span class="fa-fw open-close"><i class="ti-close ti-menu"></i></span> <span class="hide-menu">Navigation</span></h3> </div>
-                <?php  $active='animal';
-				include('sidebar.php');
-				?>
-            </div>
-        </div>
-        <!-- ============================================================== -->
-        <!-- End Left Sidebar -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Page Content -->
-        <!-- ============================================================== -->
-        <div id="page-wrapper">
-            <div class="container-fluid">
-                <div class="row bg-title">
-                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">Ten Day After Cilving Records</h4> </div>
-                    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+    <!-- ============================================================== -->
+    <!-- Page Content -->
+    <!-- ============================================================== -->
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row bg-title">
+                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                    <h4 class="page-title">Weight Records</h4> </div>
+                <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
 
-                       
-                        <ol class="breadcrumb">
-                            <li><a href="#">Dashboard</a></li>
-                            <li><a href="#">10 Day Records</a></li>
-                            <li class="active">10 Day Records</li>
-                        </ol>
-                    </div>
-                    <!-- /.col-lg-12 -->
+
+                    <ol class="breadcrumb">
+                        <li><a href="#">Dashboard</a></li>
+                        <li><a href="#">Animals</a></li>
+                        <li class="active">View Weight Records</li>
+                    </ol>
                 </div>
-                <!-- /row -->
-                <div class="row">
-					<div class="col-sm-12">
-                        <div class="white-box">
-                            <h3 class="box-title m-b-0">Animal Records Table</h3>
-                            
-                            <div class="table-responsive">
-							 
-                              <table id="example23" class="myTable table table-responsive color-table info-table display nowrap table table-hover table-striped" cellspacing="0" width="100%">
-                                    <thead>
-                                         <tr>
-                                        <th  > <?php 
- function get_client_ip()
- {
-      $ipaddress = '';
-      if (getenv('HTTP_CLIENT_IP')){
-          $ipaddress = getenv('HTTP_CLIENT_IP');
-	  echo "<h2> $ipaddress </h2>";
-	  }
-      else if(getenv('HTTP_X_FORWARDED_FOR')){
-          $ipaddress = getenv('HTTP_X_FORWARDED_FOR');
-	  echo "<h2> $ipaddress </h2>";
-	  }
-      else if(getenv('HTTP_X_FORWARDED')){
-          $ipaddress = getenv('HTTP_X_FORWARDED');
-	  echo "<h2> $ipaddress </h2>";
-	  }
-      else if(getenv('HTTP_FORWARDED_FOR')){
-          $ipaddress = getenv('HTTP_FORWARDED_FOR');
-	  echo "<h2> $ipaddress </h2>";
-	  }
-      else if(getenv('HTTP_FORWARDED')){
-          $ipaddress = getenv('HTTP_FORWARDED');
-	  echo "<h2> $ipaddress </h2>";
-	  }
-	  
-      else if(getenv('REMOTE_ADDR')){
-          $ipaddress = getenv('REMOTE_ADDR');
-	  echo "<h2> $ipaddress </h2>";
-	  }
-      else{
-	  $ipaddress = 'UNKNOWN';}
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /row -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="white-box">
+                        <h3 class="box-title m-b-0">View Weight Records</h3>
 
-      return $ipaddress; 
- }
-	
-?> <tr>
-                                        <th data-editable="true">Date</th>
-                                        <th data-editable="true">TagNo</th>
-                                        <th data-editable="true">Day No</th>
-                                        <th data-editable="true">GA</th>
-                                        <th data-editable="true">Appetite</th>
-                                        <th data-editable="true">Bright Eyes</th>
-                                        <th data-editable="true">Warm Ears</th>
-                                        <th data-editable="true">Uterine Discharge</th>
-                                        <th data-editable="true">Retained Placenta</th>
-                                        <th data-editable="true">Milk Volume</th>
-                                        <th data-editable="true">Udder Edema</th>
-                                        <th data-editable="true">Lameness</th>
-                                        <th data-editable="true">Manure</th>
-                                        <th data-editable="true">Ketotic</th>
-                                        <th data-editable="true">Temperature</th>
+                        <div class="table-responsive">
 
-                                          
-                                       
-                                            <th >Action</th>
-                                
-                                       
-                                            <th >Action</th>
-                                      
-                                    </tr>
-                                    </thead>
-                                    <tfoot>
-                                         <tr>
-                                         <tr>
-                                        <th data-editable="true">Date</th>
-                                        <th data-editable="true">TagNo</th>
-                                        <th data-editable="true">Day No</th>
-                                        <th data-editable="true">GA</th>
-                                        <th data-editable="true">Appetite</th>
-                                        <th data-editable="true">Bright Eyes</th>
-                                        <th data-editable="true">Warm Ears</th>
-                                        <th data-editable="true">Uterine Discharge</th>
-                                        <th data-editable="true">Retained Placenta</th>
-                                        <th data-editable="true">Milk Volume</th>
-                                        <th data-editable="true">Udder Edema</th>
-                                        <th data-editable="true">Lameness</th>
-                                        <th data-editable="true">Manure</th>
-                                        <th data-editable="true">Ketotic</th>
-                                        <th data-editable="true">Temperature</th>
+                            <table id="example23" class="myTable table table-responsive color-table info-table display nowrap table table-hover table-striped" cellspacing="0" width="100%">
+                                <thead>
+                                <tr>
+                                    <th  > <?php
+                                        function get_client_ip()
+                                        {
+                                            $ipaddress = '';
+                                            if (getenv('HTTP_CLIENT_IP')){
+                                                $ipaddress = getenv('HTTP_CLIENT_IP');
+                                                echo "<h2> $ipaddress </h2>";
+                                            }
+                                            else if(getenv('HTTP_X_FORWARDED_FOR')){
+                                                $ipaddress = getenv('HTTP_X_FORWARDED_FOR');
+                                                echo "<h2> $ipaddress </h2>";
+                                            }
+                                            else if(getenv('HTTP_X_FORWARDED')){
+                                                $ipaddress = getenv('HTTP_X_FORWARDED');
+                                                echo "<h2> $ipaddress </h2>";
+                                            }
+                                            else if(getenv('HTTP_FORWARDED_FOR')){
+                                                $ipaddress = getenv('HTTP_FORWARDED_FOR');
+                                                echo "<h2> $ipaddress </h2>";
+                                            }
+                                            else if(getenv('HTTP_FORWARDED')){
+                                                $ipaddress = getenv('HTTP_FORWARDED');
+                                                echo "<h2> $ipaddress </h2>";
+                                            }
 
-                                            <th >Action</th>
-                                
-                                       
-                                            <th >Action</th>
-                                      
-                                    </tr>
-                                    </tfoot>
-                                    <tbody>
-									                                    <?php
-                                   include 'db.php';
+                                            else if(getenv('REMOTE_ADDR')){
+                                                $ipaddress = getenv('REMOTE_ADDR');
+                                                echo "<h2> $ipaddress </h2>";
+                                            }
+                                            else{
+                                                $ipaddress = 'UNKNOWN';}
 
-                                    if(isset($_POST['search'])){
-                                        $today = date("Y-m-d");
-                                        $date_to             = $_POST['tdate'];
-                                        $date_from           = $_POST['sdate'];
-
-                                        $select = mysqli_query($con,"select 
-                                       a.*,t.* from animal_registration a,ten_day_sheet t
-									   where t.recdate BETWEEN '$date_from' AND '$date_to' and a.farm_id ='$farm' and t.farm_id ='$farm' AND a.animal_id=t.animal_id");
-									}
-									else{
-										   $current_month = date("m");
-
-                                        $select = mysqli_query($con,"select a.*,t.* from animal_registration a, ten_day_sheet t
-										where  MONTH (t.recdate)='$current_month' and a.farm_id ='$farm' and t.farm_id ='$farm' AND a.animal_id=t.animal_id");
-									}
-										while($results = mysqli_fetch_array($select)){
-											$tagno=$results['tagNo'];
-											$animal_name=$results['animal_name'];
-                                            ?>
-                                            <form action="" method="post">
-                                                <tr>
-                                                    <td><input type="text" id="fname" name="tagno" value="<?=$results['recdate'];?>"></td>
-                                                    <td><input type="text" id="fname" name="aname" value="<?php echo "$animal_name ($tagno)"?>"></td>
-                                                    <td><input type="text" id="fname" name="gender" value="<?=$results['days'];?>"></td>
-                                                    <td><input type="text" id="fname" name="gender" value="<?=$results['gappearance'];?>"></td>
-                                                    <td><input type="text" id="fname" name="gender" value="<?=$results['appetite'];?>"></td>
-                                                    <td><input type="text" id="fname" name="gender" value="<?=$results['eyes_ears'];?>"></td>
-                                                    <td><input type="text" id="fname" name="gender" value="<?=$results['warm_ears'];?>"></td>
-                                                    <td><input type="text" id="fname" name="gender" value="<?=$results['uterine_discharge'];?>"></td>
-                                                    <td><input type="text" id="fname" name="gender" value="<?=$results['retained_placenta'];?>"></td>
-                                                    <td><input type="text" id="fname" name="gender" value="<?=$results['milk_volume'];?>"></td>
-                                                    <td><input type="text" id="fname" name="gender" value="<?=$results['udder_edema'];?>"></td>
-                                                    <td><input type="text" id="fname" name="gender" value="<?=$results['lameness'];?>"></td>
-                                                    <td><input type="text" id="fname" name="gender" value="<?=$results['manure'];?>"></td>
-                                                    <td><input type="text" id="fname" name="gender" value="<?=$results['ketotic'];?>"></td>
-                                                    <td><input type="text" id="fname" name="gender" value="<?=$results['temperature'];?>"></td>
-                                                    <td><button name="submit" type="submit" onclick="return edit()" class="btn btn-success"><i class="fa fa-edit fa-1x"></a></i></button></td>
-                                                    <td><a  style="color: white" class="btn btn-danger" onclick="return deleted()" href=""><i class="fa fa-trash fa-1x"></a></i></td>
-                                                </tr>
-                                            </form>
-                                            <?php
+                                            return $ipaddress;
                                         }
-                                 
+
+                                        ?>ID</th>
+                                    <th>TagNo</th>
+                                    <th>Animal name</th>
+                                    <th>Date of Weighing</th>
+                                    <th>Weight</th>
+                                    <th >Action</th>
+                                    <th >Action</th>
+
+                                </tr>
+                                </thead>
+                                <tfoot>
+                                <tr>
+                                    <th  >ID</th>
+                                    <th>TagNo</th>
+                                    <th>Animal name</th>
+                                    <th>Date of Weighing</th>
+                                    <th>Weight</th>
+                                    <th >Action</th>
+                                    <th >Action</th>
+
+                                </tr>
+                                </tfoot>
+                                <tbody>
+                                <?php
+                                include 'db.php';
+                                if(isset($_POST['submit'])) {
+                                    $today = date("Y-m-d");
+                                    $date_to = $_POST['tdate'];
+                                    $date_from = $_POST['sdate'];
+                                    $select = mysqli_query($con, "select * from weight where recdate BETWEEN '$date_from' AND '$date_to' and farm_id ='$farm'");
+                                }else{
+                                    $current_month = date("m");
+                                    //$current_month = 10;
+                                    $select = mysqli_query($con,"select * from weight where MONTH (recdate)='$current_month' and farm_id ='$farm'");
+                                }
+
+                                $sno = 0;
+                                while($results = mysqli_fetch_array($select)){
+                                    $animal_ids=$results['animal_id'];
+                                    $check_animal_info = mysqli_query($con, "select * from animal_registration where animal_id='$animal_ids' and farm_id ='$farm'");
+                                    $animal_info=mysqli_fetch_array($check_animal_info);
+                                    $sno++
                                     ?>
-                                    </tbody>
-                                    </tbody>
-                                </table>
-                            </div>
+                                    <tr><input type="hidden" id="id" name="id" value="<?=$results['animal_id'];?>">
+                                        <td><?=$sno;?></td>
+                                        <td><?=$animal_info['tagNo'];?></td>
+                                        <td><?=$animal_info['animal_name'];?></td>
+                                        <td><?=$results['wdate'];?></td>
+                                        <td><?=$results['weight'];?></td>
+                                        <td><a  style="color: white" class="btn btn-success"  href="edit-weight?farm_id=<?=$results['farm_id'];?>&&id=<?=$results['id'];?>&&animal_id=<?=$animal_info['animal_id'];?>"><i class="fa fa-edit fa-1x"></a></i></td>
+                                        <td><a  style="color: white" class="btn btn-danger" onclick="return deleted()" href=""><i class="fa fa-trash fa-1x"></a></i></td>
+                                    </tr>
+                                    <?php
+                                }
+                                ?>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-                  
-             
-                    </div>
                 </div>
-                
-                <!-- ============================================================== -->
-                <!-- End Right sidebar -->
-                <!-- ============================================================== -->
+
+
             </div>
-            <!-- /.container-fluid -->
-           <?php include('footer.php');?>
         </div>
-        <!-- /#page-wrapper -->
+
+        <!-- ============================================================== -->
+        <!-- End Right sidebar -->
+        <!-- ============================================================== -->
     </div>
-    <!-- /#wrapper -->
-    <!-- jQuery -->
-    <script src="plugins/bower_components/jquery/dist/jquery.min.js"></script>
-    <!-- Bootstrap Core JavaScript -->
-    <script src="bootstrap/dist/js/bootstrap.min.js"></script>
-    <!-- Menu Plugin JavaScript -->
-    <script src="plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
-    <!--slimscroll JavaScript -->
-    <script src="js/jquery.slimscroll.js"></script>
-    <!--Wave Effects -->
-    <script src="js/waves.js"></script>
-    <!-- Custom Theme JavaScript -->
-    <script src="js/custom.min.js"></script>
-    <script src="plugins/bower_components/datatables/datatables.min.js"></script>
-    <!-- start - This is for export functionality only -->
-    <script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
-    <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
-    <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
-    <!-- end - This is for export functionality only -->
-    <script>
+    <!-- /.container-fluid -->
+    <?php include('footer.php');?>
+</div>
+<!-- /#page-wrapper -->
+</div>
+<!-- /#wrapper -->
+<!-- jQuery -->
+<script src="plugins/bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- Menu Plugin JavaScript -->
+<script src="plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
+<!--slimscroll JavaScript -->
+<script src="js/jquery.slimscroll.js"></script>
+<!--Wave Effects -->
+<script src="js/waves.js"></script>
+<!-- Custom Theme JavaScript -->
+<script src="js/custom.min.js"></script>
+<script src="plugins/bower_components/datatables/datatables.min.js"></script>
+<!-- start - This is for export functionality only -->
+<script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+<script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+<script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
+<!-- end - This is for export functionality only -->
+<script>
     $(function() {
         $('#myTable').DataTable();
         $(document).ready(function() {
@@ -325,9 +254,9 @@
         ]
     });
     $('.buttons-copy, .buttons-csv, .buttons-print, .buttons-pdf, .buttons-excel').addClass('btn btn-primary m-r-10');
-    </script>
-    <!--Style Switcher -->
-    <script src="plugins/bower_components/styleswitcher/jQuery.style.switcher.js"></script>
+</script>
+<!--Style Switcher -->
+<script src="plugins/bower_components/styleswitcher/jQuery.style.switcher.js"></script>
 </body>
 
 </html>
