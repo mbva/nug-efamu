@@ -68,6 +68,8 @@ if(isset($_POST['submit'])){
             if(mysqli_num_rows($check_username) > 0){
                 $message = "<div class=\"alert alert-danger\"><strong>Failed! The Username already taken. Chose another one</strong></div>";
             }else{
+				
+				
                 $sql_user = "insert into users(district,farm_id,memberid,full_names,contact,username,password,photo,status)
 				VALUES ('$district','$farm','$member_id','$full_names','$contact','$username','$password','','Deactivated')";
                 $sql_log  = "insert into transaction_logs(farm_id,transaction_action,transaction_time,transaction_by) VALUES ('$farm','$action','$time','$entered_by')";

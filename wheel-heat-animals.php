@@ -78,39 +78,7 @@
                                 <thead>
                                 <tr>
                                     <th  > <?php
-                                        function get_client_ip()
-                                        {
-                                            $ipaddress = '';
-                                            if (getenv('HTTP_CLIENT_IP')){
-                                                $ipaddress = getenv('HTTP_CLIENT_IP');
-                                                echo "<h2> $ipaddress </h2>";
-                                            }
-                                            else if(getenv('HTTP_X_FORWARDED_FOR')){
-                                                $ipaddress = getenv('HTTP_X_FORWARDED_FOR');
-                                                echo "<h2> $ipaddress </h2>";
-                                            }
-                                            else if(getenv('HTTP_X_FORWARDED')){
-                                                $ipaddress = getenv('HTTP_X_FORWARDED');
-                                                echo "<h2> $ipaddress </h2>";
-                                            }
-                                            else if(getenv('HTTP_FORWARDED_FOR')){
-                                                $ipaddress = getenv('HTTP_FORWARDED_FOR');
-                                                echo "<h2> $ipaddress </h2>";
-                                            }
-                                            else if(getenv('HTTP_FORWARDED')){
-                                                $ipaddress = getenv('HTTP_FORWARDED');
-                                                echo "<h2> $ipaddress </h2>";
-                                            }
-
-                                            else if(getenv('REMOTE_ADDR')){
-                                                $ipaddress = getenv('REMOTE_ADDR');
-                                                echo "<h2> $ipaddress </h2>";
-                                            }
-                                            else{
-                                                $ipaddress = 'UNKNOWN';}
-
-                                            return $ipaddress;
-                                        }
+                                  
 
                                         ?>ID</th>
                                     <th>TagNo</th>
@@ -137,8 +105,11 @@
                                 <tbody>
                                 <?php
                                 include 'db.php';
+								//echo "<h2> farm $farm </h2>";
+					
                                 //$select = mysqli_query($con,"select * from heat_animals where status!='Served'");
-                                $select = mysqli_query($con,"select * from heat_animals where status='Pending' and farm_id ='$farm'");
+     $select = mysqli_query($con,"select * from heat_animals where status='Pending' 
+	 and farm_id ='$farm'");
                                 $sno = 0;
                                 while($results = mysqli_fetch_array($select)) {
                                 $sno++;
@@ -146,7 +117,8 @@
 
                                 //looking for the existance of a cow
 
-                                $checkanimalinfo = mysqli_query($con,"select * from animal_registration where tagNo ='$animal_id' and status ='Present' and farm_id ='$farm'");
+                                $checkanimalinfo = mysqli_query($con,"select * from animal_registration 
+								where animal_id ='$animal_id' and status ='Present' and farm_id ='$farm'");
                                 if(mysqli_num_rows($checkanimalinfo)>0){
                                 while($animalinfo = mysqli_fetch_array($checkanimalinfo)) {
 
