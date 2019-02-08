@@ -26,29 +26,16 @@
                             </li>
                             <li>
                                 <div class="message-center">
-								
                                     <a href="#">
                                         <div class="user-img"> <img src="plugins/images/users/pawandeep.jpg" alt="user" class="img-circle"> <span class="profile-status online pull-right"></span> </div>
                                         <div class="mail-contnet">
-										
-                                            <h5>Pavan kumarghghgh</h5> 
-											<span class="mail-desc">Just see the my admin!</span> <span class="time">9:30 AM</span> </div>
+                                            <h5>Pavan kumar</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:30 AM</span> </div>
                                     </a>
-									 <?php
-                                                            $select_tag = mysqli_query($con,"select * from farmerresources ORDER BY id desc LIMIT 7");
-                                                            while ($tag = mysqli_fetch_array($select_tag)){
-                                                                ?>
-																 <li><a target="_blank" href="<?php echo $tag['resourceurl']; ?>"><?php echo $tag['resourcetitle'];?></a></li>
-                                                             
-                                                             
                                     <a href="#">
                                         <div class="user-img"> <img src="plugins/images/users/sonu.jpg" alt="user" class="img-circle"> <span class="profile-status busy pull-right"></span> </div>
                                         <div class="mail-contnet">
                                             <h5>Sonu Nigam</h5> <span class="mail-desc">I've sung a song! See you at</span> <span class="time">9:10 AM</span> </div>
                                     </a>
-									   <?php
-                                                            }
-                                                            ?>
                                     <a href="#">
                                         <div class="user-img"> <img src="plugins/images/users/arijit.jpg" alt="user" class="img-circle"> <span class="profile-status away pull-right"></span> </div>
                                         <div class="mail-contnet">
