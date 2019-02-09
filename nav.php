@@ -12,35 +12,30 @@
     <ul class="nav navbar-top-links navbar-left">
         <li><a href="javascript:void(0)" class="open-close waves-effect waves-light"><i class="ti-menu"></i></a></li>
         <li class="dropdown">
-            <a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#"> <i class="mdi mdi-gmail"></i>
+            <a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#"> Farmer Library<i class="mdi mdi-book"></i>
                 <div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
             </a>
             <ul class="dropdown-menu mailbox animated bounceInDown">
                 <li>
-                    <div class="drop-title">You have 4 new messages</div>
+                    <div class="drop-title">Latest From Library</div>
                 </li>
                 <li>
                     <div class="message-center">
-                        <a href="#">
-                            <div class="user-img"> <img src="plugins/images/users/pawandeep.jpg" alt="user" class="img-circle"> <span class="profile-status online pull-right"></span> </div>
-                            <div class="mail-contnet">
-                                <h5>Pavan kumar</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:30 AM</span> </div>
-                        </a>
-                        <a href="#">
-                            <div class="user-img"> <img src="plugins/images/users/sonu.jpg" alt="user" class="img-circle"> <span class="profile-status busy pull-right"></span> </div>
-                            <div class="mail-contnet">
-                                <h5>Sonu Nigam</h5> <span class="mail-desc">I've sung a song! See you at</span> <span class="time">9:10 AM</span> </div>
-                        </a>
-                        <a href="#">
-                            <div class="user-img"> <img src="plugins/images/users/arijit.jpg" alt="user" class="img-circle"> <span class="profile-status away pull-right"></span> </div>
-                            <div class="mail-contnet">
-                                <h5>Arijit Sinh</h5> <span class="mail-desc">I am a singer!</span> <span class="time">9:08 AM</span> </div>
-                        </a>
-                        <a href="#">
-                            <div class="user-img"> <img src="plugins/images/users/pawandeep.jpg" alt="user" class="img-circle"> <span class="profile-status offline pull-right"></span> </div>
-                            <div class="mail-contnet">
-                                <h5>Pavan kumar</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:02 AM</span> </div>
-                        </a>
+					 <?php
+    $select_tag = mysqli_query($con,"select * from farmerresources ORDER BY id desc LIMIT 7");
+                              while ($tag = mysqli_fetch_array($select_tag)){
+                                                                ?>
+
+                                                             
+                                                             
+                                    <a target="_blank" href="<?php echo $tag['resourceurl']; ?>">
+                                        <div class="mail-contnet">
+                                            <h5><?php echo $tag['resourcetitle'];?></h5>  </div>
+                                    </a>
+									   <?php
+                                                            }
+                                                            ?>
+                        
                     </div>
                 </li>
                 <li>
@@ -104,6 +99,21 @@
                         <li><a href="edit_permissions">Edit Permissions</a></li>
                     </ul>
                 </li>
+				
+				
+				 <li class="col-sm-2">
+                    <ul>
+                        <li class="dropdown-header">System Audit </li>
+                        <li><a href="transaction-logs">Transaction Logs</a></li>
+                        <li><a href="system-logs">System Logs</a></li>
+                        
+                    </ul>
+                </li>
+				
+				
+				
+				
+				
 				 
 				 <!--<li class="col-sm-2">
                     <ul>
