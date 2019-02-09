@@ -35,13 +35,21 @@
 
                     </ul>
                 </li>
-                <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon money fa-fw"></i><span class="hide-menu">Manage Expenses </span><span class="fa arrow"></span></a>
+                <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon money fa-fw"></i><span class="hide-menu">Expenses Categories </span><span class="fa arrow"></span></a>
                     <ul class="nav nav-third-level">
                <li> <a href="manage-expense-items"><i class="fa fa-plus-square fa-fw"></i><span class="hide-menu">New</span></a> </li>
                         <li> <a href="view-expenses-items"><i class="fa fa-eye-slash fa-fw"></i><span class="hide-menu">View</span></a> </li>
 
                     </ul>
                 </li>
+				   <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon money fa-fw"></i><span class="hide-menu">Income Categories </span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-third-level">
+               <li> <a href="add-income-categories"><i class="fa fa-plus-square fa-fw"></i><span class="hide-menu">New</span></a> </li>
+                        <li> <a href="view-income-categories"><i class="fa fa-eye-slash fa-fw"></i><span class="hide-menu">View</span></a> </li>
+
+                    </ul>
+                </li>
+				
                 <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">Manage Acaricides </span><span class="fa arrow"></span></a>
                     <ul class="nav nav-third-level">
 
@@ -52,8 +60,8 @@
                 </li>
                 <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">Manage Farmer Library </span><span class="fa arrow"></span></a>
                     <ul class="nav nav-third-level">
-                        <li> <a href="javascript:void(0)"><i class="fa fa-plus-square fa-fw"></i><span class="hide-menu">New</span></a> </li>
-                        <li> <a href="javascript:void(0)"><i class="fa fa-eye-slash  fa-fw"></i><span class="hide-menu">View</span></a> </li>
+                        <li> <a href="add-farmerresources"><i class="fa fa-plus-square fa-fw"></i><span class="hide-menu">New</span></a> </li>
+                        <li> <a href="view-farmerresources"><i class="fa fa-eye-slash  fa-fw"></i><span class="hide-menu">View</span></a> </li>
                     </ul>
                 </li>
                 <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">Manage Vaccines</span><span class="fa arrow"></span></a>
@@ -74,8 +82,8 @@
                 </li>
                 <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">Manage Module Tips </span><span class="fa arrow"></span></a>
                     <ul class="nav nav-third-level">
-                        <li> <a href="javascript:void(0)"><i class="fa fa-plus-square fa-fw"></i><span class="hide-menu">New</span></a> </li>
-                        <li> <a href="javascript:void(0)"><i class="fa fa-eye-slash  fa-fw"></i><span class="hide-menu">View</span></a> </li>
+                        <li> <a href="add-farmertips"><i class="fa fa-plus-square fa-fw"></i><span class="hide-menu">New</span></a> </li>
+                        <li> <a href="view-moduletips"><i class="fa fa-eye-slash  fa-fw"></i><span class="hide-menu">View</span></a> </li>
                     </ul>
                 </li>
             </ul>
@@ -157,7 +165,7 @@
             </ul>
         </li>
 		
-		        <li> <a href="javascript:void(0)" class="waves-effect <?php if($active=='reports') echo "active" ?>"><i class="mdi mdi-chart-bar fa-fw"></i> <span class="hide-menu">Analysis Reports<span class="fa arrow"></span></span></a>
+		        <!--<li> <a href="javascript:void(0)" class="waves-effect <?php if($active=='reports') echo "active" ?>"><i class="mdi mdi-chart-bar fa-fw"></i> <span class="hide-menu">Analysis Reports<span class="fa arrow"></span></span></a>
             <ul class="nav nav-second-level">
                 <li> <a href="graph-milk-sales" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">Milk Sales</span><span class="fa arrow"></span></a>
                    
@@ -172,14 +180,14 @@
        
                 </li>
             </ul>
-        </li>
+        </li>-->
 		
 		
 		
 		
         <li> <a href="javascript:void(0)" class="waves-effect <?php if($active=='finance') echo "active" ?>"><i class="mdi mdi-cash-multiple fa-fw"></i> <span class="hide-menu">Finance Manager<span class="fa arrow"></span></span></a>
             <ul class="nav nav-second-level">
-                <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">Animal Sales </span><span class="fa arrow"></span></a>
+                <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">Animal Sales</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-third-level">
                         <li> <a href="add-animal-sales"><i class="fa fa-plus-square fa-fw"></i><span class="hide-menu">Add Records</span></a> </li>
                         <li> <a href="view-animal-sales"><i class="fa fa-eye-slash fa-fw"></i><span class="hide-menu">View Records</span></a> </li>
@@ -191,6 +199,13 @@
                         <li> <a href="view-expenses"><i class="fa fa-eye-slash fa-fw"></i><span class="hide-menu">View Records</span></a> </li>
                     </ul>
                 </li>
+				 <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">Incomes</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-third-level">
+                        <li> <a href="add-income"><i class="fa fa-plus-square fa-fw"></i><span class="hide-menu">Add Records</span></a> </li>
+                        <li> <a href="view-incomes"><i class="fa fa-eye-slash fa-fw"></i><span class="hide-menu">View Records</span></a> </li>
+                    </ul>
+                </li>
+				
                 <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">Milk Sales</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-third-level">
                         <li> <a href="add-milk-sales"><i class="fa fa-plus-square fa-fw"></i><span class="hide-menu">Add Records</span></a> </li>
@@ -213,7 +228,7 @@
             </ul>
         </li>
 		
-		       <li> <a href="javascript:void(0)" class="waves-effect <?php if($active=='users') echo "active" ?>"><i class="mdi  mdi-account fa-fw"></i> <span class="hide-menu">System Users<span class="fa arrow"></span></span></a>
+		    <!--   <li> <a href="javascript:void(0)" class="waves-effect <?php if($active=='users') echo "active" ?>"><i class="mdi  mdi-account fa-fw"></i> <span class="hide-menu">System Users<span class="fa arrow"></span></span></a>
             <ul class="nav nav-second-level">
                 <li> <a href="add-users" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">Register User </span></a>
                    
@@ -249,9 +264,9 @@
 				</ul>
                 
              
-        </li>
+        </li>-->
 		
-			       <li> <a href="javascript:void(0)" class="waves-effect <?php if($active=='logs') echo "active" ?>"><i class="mdi mdi-checkbox-multiple-marked-outline fa-fw"></i> <span class="hide-menu">System Logs<span class="fa arrow"></span></span></a>
+			     <!--  <li> <a href="javascript:void(0)" class="waves-effect <?php if($active=='logs') echo "active" ?>"><i class="mdi mdi-checkbox-multiple-marked-outline fa-fw"></i> <span class="hide-menu">System Logs<span class="fa arrow"></span></span></a>
             <ul class="nav nav-second-level">
                 <li> <a href="transaction-logs" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">Transaction Logs </span></a>
                    
@@ -262,14 +277,19 @@
 				</ul>
                 
              
-        </li>
+        </li>-->
 
        
 
         <li> <a href="javascript:void(0)" class="waves-effect <?php if($active=='breeding') echo "active" ?>"><i class="mdi mdi-checkbox-multiple-marked-outline fa-fw"></i> <span class="hide-menu">Breeding<span class="fa arrow"></span></span></a>
             <ul class="nav nav-second-level">
-                <li> <a href="wheel-heat-animals"><i data-icon="7" class="fa fa-arrow-alt-circle-right fa-fw"></i><span class="hide-menu">Pending Heat</span></a> </li>
-                <li> <a href="wheel-heat-test"><i data-icon="7" class="fa fa-arrow-alt-circle-right fa-fw"></i><span class="hide-menu">Monitor Signs of Heat</span></a> </li>
+               <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">pending Heat </span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-third-level">
+                        <li> <a href="add_pending_heat"><i class="fa fa-plus-square fa-fw"></i><span class="hide-menu">New</span></a> </li>
+                        <li> <a href="wheel-heat-animals"><i class="fa fa-eye-slash  fa-fw"></i><span class="hide-menu">View Records</span></a> </li>
+                    </ul>
+                </li>
+				<li> <a href="wheel-heat-test"><i data-icon="7" class="fa fa-arrow-alt-circle-right fa-fw"></i><span class="hide-menu">Monitor Signs of Heat</span></a> </li>
                 <li> <a href="wheel-preg-test"><i data-icon="7" class="fa fa-arrow-alt-circle-right fa-fw"></i><span class="hide-menu">Pending Pregnancy Test</span></a> </li>
                 <li> <a href="wheel-pregnant"><i data-icon="7" class="fa fa-arrow-alt-circle-right fa-fw"></i><span class="hide-menu">Expecting Mothers</span></a> </li>
             </ul>

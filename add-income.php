@@ -2,41 +2,52 @@
 <html lang="en">
 
 <head>
-
     <?php include 'head.php';
-	$active='settings';?>
+    $active='finance';
+    ?>
 </head>
 <?php
 include 'db.php';
-$farm = $_SESSION['farm'];
 $message="";
+$farm = $_SESSION['farm'];
 if(isset($_POST['submit'])){
-    $module = mysqli_real_escape_string($con,    ucwords($_POST['module']));
-    $notes = mysqli_real_escape_string($con,    ucwords($_POST['notes']));
+    $from = mysqli_real_escape_string($con,        ucwords($_POST['from']));
+    $amount = mysqli_real_escape_string($con,        ucwords($_POST['amount']));
+    $invoiceno = mysqli_real_escape_string($con,          ucwords($_POST['invoice']));
+    $dop = mysqli_real_escape_string($con,          ucwords($_POST['dop']));
+    
+    $entrydate = date("Y-m-d");
+    $totalcost = ($quantity*$ucost);
+    // Getting the category
 
-    $date = mysqli_real_escape_string($con,  $_POST['sdate']);
-    $recdate =         date("Y-m-d H:i:s");
-    $recby =   $_SESSION['full_names'];
+    $cat = mysqli_fetch_array(mysqli_query($con,"select * from expensesitems where item ='$item' and farm_id ='$farm'"));
+    $category = $cat['cat_id'];
+
     //capturing the registrar of the data
     $entered_by =   $_SESSION['full_names'];
     $time =         date("Y-m-d H:i:s");
-    $action =       'Recorded Farmers Tip for Module';
+    $action =       "Entered Expense records";
 
-    //checking if the id doesn't exist
-    $check_record = mysqli_query($con,"select * from farmertips where tips ='$notes' and farm_id ='$farm'");
-    if(mysqli_num_rows($check_record) > 0){
-        echo "<script>alert('This is a duplicate post');</script>";
+    //checking if the Receipt Number exists already
+    $check_receipt = mysqli_query($con,"select * from incomes where invoiceno= '$invoiceno' and receiptdate='$dop' and farm_id ='$farm'");
+
+    if(mysqli_num_rows($check_receipt)>0){
+        //$message = "<div class=\"alert alert-danger\"><strong>Failed! The Receipt Number is already under Use</strong></div>";
+        echo "<script>alert('The Record already Exists');</script>";
     }else{
-        $sql_user = "insert into farmertips(farm_id,tips,section,date_added,addby)VALUES ('$farm','$notes','$module','$recdate','$entered_by')";
+        $sql_expense = "insert into generalexpenses(farm_id,item,cat,qty,unitcost,totalcost,recno,receiptdate,recordedby,entrydate)
+                        VALUES ('$farm','$item','$category','$quantity','$ucost','$totalcost','$recno','$dop','$entered_by','$entrydate')";
+
         $sql_log  = "insert into transaction_logs(farm_id,transaction_action,transaction_time,transaction_by) VALUES ('$farm','$action','$time','$entered_by')";
 
         //Executing the queries;
-        $insert_user = mysqli_query($con,$sql_user);
+        $insert_expense = mysqli_query($con,$sql_expense);
         $insert_transaction = mysqli_query($con,$sql_log);
-        if($insert_user && $insert_transaction){
-            echo "<script>alert('Recorded is Successfully');</script>";
+        if($insert_expense && $insert_transaction){
+            //$message = "<div class=\"alert alert-success\"><strong>Registration is Successful</strong></div>";
+            echo "<script>alert('Registration is Successful');</script>";
         }else{
-            //echo "<H2>FAILED TO WORK".mysqli_error($dbconnection);
+            echo mysqli_error($con);
         }
     }
 }
@@ -77,14 +88,16 @@ if(isset($_POST['submit'])){
         <div class="container-fluid">
             <div class="row bg-title">
                 <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                    <h4 class="page-title">Farm Tips</h4> </div>
+                    <h4 class="page-title">
+                        Expenses Form
+                    </h4> </div>
                 <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                     <button class="right-side-toggle waves-effect waves-light btn-info btn-circle pull-right m-l-20"><i class="ti-settings text-white"></i></button>
                     <a href="javascript: void(0);" "></a>
                     <ol class="breadcrumb">
                         <li><a href="#">Dashboard</a></li>
-                        <li><a href="#">System Settings</a></li>
-                        <li><a href="#">Farm Tips</a></li>
+                        <li><a href="#">Finance Manager</a></li>
+                        <li><a href="#">Expenses</a></li>
                     </ol>
                 </div>
                 <!-- /.col-lg-12 -->
@@ -94,29 +107,57 @@ if(isset($_POST['submit'])){
 
                 <div class="col-md-9 col-sm-12">
                     <div class="white-box">
-                        <h3 class="box-title m-b-0">Record Farm Tips</h3>
-                        <form action="add-farmertips" method="post" enctype="multipart/form-data">
+                        <h3 class="box-title m-b-0">Expenses Form</h3>
+                        <form action="add-expenses" method="post" enctype="multipart/form-data">
                             <div class="row">
-                                <div class="col-md-1"></div>
-                                <div class="col-sm-10 col-xs-12">
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="exampleInputphone"> Module/Section </label>
+                                        <label for="exampleInputpwd2">Date</label>
                                         <div class="input-group">
-                                            <select class="form-control select2" name="module" required>
-                                                <option>Select</option>
-                                                <option value="Profiling">Animal Profiling</option>
-                                                <option value="Feeding">Animal Feeding</option>
-                                                <option value="Calving">Calving</option>
-                                                <option value="Milk">Milk Production</option>
-                                                <option value="health">Herd Health</option>
-                                            </select>
-                                            <div class="input-group-addon"><i class="ti-email"></i></div>
+                                            <input type="date" class="form-control" name="dop" id="datepicker" />
+                                            <span class="input-group-addon"><i class="icon-calender"></i></span>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputphone">Notes/Tips </label>
+                                        <label for="exampleInputuname">Income Category</label>
                                         <div class="input-group">
-                                            <textarea name="notes" class="form-control" id="" rows="3" cols="90"  placeholder="Notes/Tips "></textarea>
+                                            <select class="form-control select2" name="item" required>
+                                                <option value="">Select</option>
+                                                <?php
+                                                $select = mysqli_query($con,"select * from incomecategories where  farm_id ='$farm'");
+                                                while ($name = mysqli_fetch_array($select)){
+                                                    ?>
+                                                    <option value="<?php echo $name['category']; ?>"><?php echo $name['category']; ?></option>
+                                                    <?php
+                                                }
+                                                ?>
+                                            </select>
+                                            <?php
+                                            ?>
+                                            <div class="input-group-addon"><i class="ti-pencil"></i></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Recieved From</label>
+                                        <div class="input-group">
+                                            <input class="form-control" name="from" onkeypress="return isNumberKey(event)" required autocomplete="off" placeholder="Quantity" type="number">
+                                            <div class="input-group-addon"><i class="ti-pencil-alt"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Amount</label>
+                                        <div class="input-group">
+                                            <input class="form-control" name="amount" onkeypress="return isNumberKey(event)" required autocomplete="off" placeholder="Unit Cost" type="number">
+                                            <div class="input-group-addon"><i class="ti-pencil-alt"></i></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Invoice Number.</label>
+                                        <div class="input-group">
+                                            <input class="form-control" name="recno" required autocomplete="off" placeholder="Receipt Number" type="text">
+                                            <div class="input-group-addon"><i class="ti-pencil-alt"></i></div>
                                         </div>
                                     </div>
 
@@ -124,13 +165,13 @@ if(isset($_POST['submit'])){
                                         <button type="submit" name="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>
                                     </div>
                                 </div>
-                                <div class="col-md-1"></div>
                             </div>
                         </form>
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-12">
-                    <h4><b>Tips</b></h4>
+                    <h4><b>Expense Tips</b></h4>
+
 
                 </div>
             </div>

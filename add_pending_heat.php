@@ -2,43 +2,52 @@
 <html lang="en">
 
 <head>
-
     <?php include 'head.php';
-	$active='settings';?>
+    $active='breeding';
+    ?>
 </head>
 <?php
 include 'db.php';
-$farm = $_SESSION['farm'];
 $message="";
+$farm = $_SESSION['farm'];
 if(isset($_POST['submit'])){
-    $module = mysqli_real_escape_string($con,    ucwords($_POST['module']));
-    $notes = mysqli_real_escape_string($con,    ucwords($_POST['notes']));
+    $exdate = mysqli_real_escape_string($con,  ucwords($_POST['exdate']));
+    $animal_id= mysqli_real_escape_string($con,   ucwords($_POST['animal_id']));
+    
+    $actual_date = mysqli_real_escape_string($con,   ucwords($_POST['actual']));
+    
+    $recdate = date("Y-m-d");
+    $recby = $_SESSION['full_names'];
+    $selects = mysqli_query($con,"select * from animal_registration where animal_id='$animal_id' and farm_id ='$farm'");
+    $names=mysqli_fetch_array($selects);
+    $aname=$names['animal_name'];
 
-    $date = mysqli_real_escape_string($con,  $_POST['sdate']);
-    $recdate =         date("Y-m-d H:i:s");
-    $recby =   $_SESSION['full_names'];
     //capturing the registrar of the data
     $entered_by =   $_SESSION['full_names'];
     $time =         date("Y-m-d H:i:s");
-    $action =       'Recorded Farmers Tip for Module';
+    $action =       "Recorded Heat Records For  $aname";
+    //Check if the records exists
+    $check_record = mysqli_query($con,"select * from heat_animals where animal_id='$animal_id' and status='Pending' and farm_id ='$farm'");
+    if(mysqli_num_rows($check_record)>0){
+        echo "<script>alert('Record already Exists');</script>";
+    }
+    else{
+        //checking if the member was already paid
+       $insert_record = mysqli_query($con,"insert into heat_animals(farm_id,animal_id,exp_heat,actualheatdate,status)VALUES ('$farm','$animal_id','$exdate','$actual_date','pending')");
+         if(!$insert_record){
+			 die('Not inserted'.mysqli_error($con));
+		 }else{
+			 echo "<script>alert('Recorded Successfully');</script>";
+		$insert_log = mysqli_query($con,"insert into transaction_logs(farm_id,transaction_action,transaction_time,transaction_by) VALUES ('$farm','$action','$time','$entered_by')");
 
-    //checking if the id doesn't exist
-    $check_record = mysqli_query($con,"select * from farmertips where tips ='$notes' and farm_id ='$farm'");
-    if(mysqli_num_rows($check_record) > 0){
-        echo "<script>alert('This is a duplicate post');</script>";
-    }else{
-        $sql_user = "insert into farmertips(farm_id,tips,section,date_added,addby)VALUES ('$farm','$notes','$module','$recdate','$entered_by')";
-        $sql_log  = "insert into transaction_logs(farm_id,transaction_action,transaction_time,transaction_by) VALUES ('$farm','$action','$time','$entered_by')";
-
-        //Executing the queries;
-        $insert_user = mysqli_query($con,$sql_user);
-        $insert_transaction = mysqli_query($con,$sql_log);
-        if($insert_user && $insert_transaction){
-            echo "<script>alert('Recorded is Successfully');</script>";
+        if($insert_log){
+            //$message = "<div class=\"alert alert-success\"><strong>Recorded Successfully</strong></div>";
+            
         }else{
-            //echo "<H2>FAILED TO WORK".mysqli_error($dbconnection);
+            echo mysqli_error($con);
         }
     }
+}
 }
 ?>
 <body class="fix-header">
@@ -77,14 +86,16 @@ if(isset($_POST['submit'])){
         <div class="container-fluid">
             <div class="row bg-title">
                 <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                    <h4 class="page-title">Farm Tips</h4> </div>
+                    <h4 class="page-title">
+                       Pending Heat Form
+                    </h4> </div>
                 <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                     <button class="right-side-toggle waves-effect waves-light btn-info btn-circle pull-right m-l-20"><i class="ti-settings text-white"></i></button>
                     <a href="javascript: void(0);" "></a>
                     <ol class="breadcrumb">
                         <li><a href="#">Dashboard</a></li>
-                        <li><a href="#">System Settings</a></li>
-                        <li><a href="#">Farm Tips</a></li>
+                        <li><a href="#">Milk Production</a></li>
+                        <li><a href="#">Add Records</a></li>
                     </ol>
                 </div>
                 <!-- /.col-lg-12 -->
@@ -94,43 +105,76 @@ if(isset($_POST['submit'])){
 
                 <div class="col-md-9 col-sm-12">
                     <div class="white-box">
-                        <h3 class="box-title m-b-0">Record Farm Tips</h3>
-                        <form action="add-farmertips" method="post" enctype="multipart/form-data">
+                        <h3 class="box-title m-b-0"> Expected Heat registration Form</h3>
+                        <form action="" method="post" enctype="multipart/form-data">
                             <div class="row">
-                                <div class="col-md-1"></div>
-                                <div class="col-sm-10 col-xs-12">
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="exampleInputphone"> Module/Section </label>
+                                        <label for="exampleInputpwd2">Expected Date</label>
                                         <div class="input-group">
-                                            <select class="form-control select2" name="module" required>
-                                                <option>Select</option>
-                                                <option value="Profiling">Animal Profiling</option>
-                                                <option value="Feeding">Animal Feeding</option>
-                                                <option value="Calving">Calving</option>
-                                                <option value="Milk">Milk Production</option>
-                                                <option value="health">Herd Health</option>
-                                            </select>
-                                            <div class="input-group-addon"><i class="ti-email"></i></div>
+                                            <input type="date" class="form-control" name="exdate" id="datepicker" />
+                                            <span class="input-group-addon"><i class="icon-calender"></i></span>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputphone">Notes/Tips </label>
+                                        <label for="exampleInputuname">Animal</label>
                                         <div class="input-group">
-                                            <textarea name="notes" class="form-control" id="" rows="3" cols="90"  placeholder="Notes/Tips "></textarea>
+                                            <select class="form-control select2" name="animal_id" required>
+                                                <option value="">Select</option>
+                                                <?php
+                                                $select = mysqli_query($con,"select * from animal_registration where status='Present' and farm_id ='$farm'");
+                                                while ($details = mysqli_fetch_array($select)){
+                                                    ?>
+                                                        <option value="<?php echo $details['animal_id']; ?>"><?php echo $details['animal_name'].'('. $details['tagNo'];?></option>
+                                                        <?php
+                                                    }
+                                                ?>
+                                            </select>
+                                            <?php
+                                            ?>
+                                            <div class="input-group-addon"><i class="ti-pencil"></i></div>
                                         </div>
                                     </div>
 
+                                </div>
+                                <div class="col-sm-6 col-xs-12">
+
+                                 <div class="form-group">
+                                        <label for="exampleInputpwd2">Actual Heat Date</label>
+                                        <div class="input-group">
+                                            <input type="date" class="form-control" name="actual" id="datepicker" />
+                                            <span class="input-group-addon"><i class="icon-calender"></i></span>
+                                        </div>
+                                    </div>
+                                   <!-- <div class="form-group">
+                                        <label for="exampleInputEmail1">Quantity of Milk</label>
+                                        <div class="input-group">
+                                            <input class="form-control" name="qty" onkeypress="return isNumberKey(event)" required autocomplete="off" placeholder="Quantity of Milk Produced" type="number">
+                                            <div class="input-group-addon"><i class="ti-pencil-alt"></i></div>
+                                        </div>
+                                    </div>-->
                                     <div class="text-center">
                                         <button type="submit" name="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>
                                     </div>
                                 </div>
-                                <div class="col-md-1"></div>
                             </div>
                         </form>
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-12">
-                    <h4><b>Tips</b></h4>
+                    <h4><b>Animal Heat Tips</b></h4>
+                    <marquee  behavior="scroll" direction="up" id="mymarquee" scrollamount="2" onmouseover="this.stop();" onmouseout="this.start();">
+                        <p style="text-align: justify">
+                            <?php
+                            $select = mysqli_query($con,"select * from farmertips where section='Heat' ORDER BY id desc LIMIT 1 ");
+                            while ($tipscheck = mysqli_fetch_array($select)){
+
+                                echo $tipscheck['tips'];
+
+                            }
+                            ?>
+                        </p>
+                    </marquee>
 
                 </div>
             </div>

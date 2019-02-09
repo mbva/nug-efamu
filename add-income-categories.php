@@ -2,43 +2,47 @@
 <html lang="en">
 
 <head>
-
-    <?php include 'head.php';
-	$active='settings';?>
+    <?php include 'head.php';?>
 </head>
 <?php
 include 'db.php';
-$farm = $_SESSION['farm'];
 $message="";
+$active='settings';
+$farm = $_SESSION['farm'];
 if(isset($_POST['submit'])){
-    $module = mysqli_real_escape_string($con,    ucwords($_POST['module']));
-    $notes = mysqli_real_escape_string($con,    ucwords($_POST['notes']));
+    //$cat = mysqli_real_escape_string($con,    ucwords($_POST['cat']));
+    $category = mysqli_real_escape_string($con,    ucwords($_POST['category']));
 
-    $date = mysqli_real_escape_string($con,  $_POST['sdate']);
-    $recdate =         date("Y-m-d H:i:s");
-    $recby =   $_SESSION['full_names'];
+
     //capturing the registrar of the data
     $entered_by =   $_SESSION['full_names'];
     $time =         date("Y-m-d H:i:s");
-    $action =       'Recorded Farmers Tip for Module';
+    $action =       "Entered income category";
 
-    //checking if the id doesn't exist
-    $check_record = mysqli_query($con,"select * from farmertips where tips ='$notes' and farm_id ='$farm'");
-    if(mysqli_num_rows($check_record) > 0){
-        echo "<script>alert('This is a duplicate post');</script>";
-    }else{
-        $sql_user = "insert into farmertips(farm_id,tips,section,date_added,addby)VALUES ('$farm','$notes','$module','$recdate','$entered_by')";
-        $sql_log  = "insert into transaction_logs(farm_id,transaction_action,transaction_time,transaction_by) VALUES ('$farm','$action','$time','$entered_by')";
+
+    //checking if the member already exists
+    $check_account = mysqli_query($con,"select * from incomecategories where category = '$category' and farm_id ='$farm' ");
+    if(mysqli_num_rows($check_account) > 0){
+        // $message = "<div class=\"alert alert-danger\"><strong>The Record Already Exists</strong></div>";
+        echo "<script>alert('The Record Already Exists');</script>";
+    } else{
+        $sql_user = mysqli_query($con,"insert into incomecategories(farm_id,category,date_added,addedby)VALUES ('$farm','$category',NOW(),'$entered_by')");
+		if(! $sql_user){
+			die('<h1>NOT INSERTED'.mysqli_error($con).'</h1>');
+		}else{
+        $sql_log  = mysqli_query($con,"insert into transaction_logs(farm_id,transaction_action,transaction_time,transaction_by) VALUES ('$farm','$action','$time','$entered_by')");
 
         //Executing the queries;
-        $insert_user = mysqli_query($con,$sql_user);
-        $insert_transaction = mysqli_query($con,$sql_log);
-        if($insert_user && $insert_transaction){
-            echo "<script>alert('Recorded is Successfully');</script>";
-        }else{
-            //echo "<H2>FAILED TO WORK".mysqli_error($dbconnection);
+       
+       
+        if(!$sql_log){
+			die('NOT INSERTED'.mysqli_error($con));
+		}else{
+            //$message = "<div class=\"alert alert-success\"><strong>Recorded Successfully</strong></div>";
+            echo "<script>alert('Recorded Successfully');</script>";
         }
     }
+}
 }
 ?>
 <body class="fix-header">
@@ -77,14 +81,14 @@ if(isset($_POST['submit'])){
         <div class="container-fluid">
             <div class="row bg-title">
                 <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                    <h4 class="page-title">Farm Tips</h4> </div>
+                    <h4 class="page-title">incomes categories</h4> </div>
                 <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                     <button class="right-side-toggle waves-effect waves-light btn-info btn-circle pull-right m-l-20"><i class="ti-settings text-white"></i></button>
                     <a href="javascript: void(0);" "></a>
                     <ol class="breadcrumb">
                         <li><a href="#">Dashboard</a></li>
                         <li><a href="#">System Settings</a></li>
-                        <li><a href="#">Farm Tips</a></li>
+                        <li><a href="#">incomes categories</a></li>
                     </ol>
                 </div>
                 <!-- /.col-lg-12 -->
@@ -94,31 +98,25 @@ if(isset($_POST['submit'])){
 
                 <div class="col-md-9 col-sm-12">
                     <div class="white-box">
-                        <h3 class="box-title m-b-0">Record Farm Tips</h3>
-                        <form action="add-farmertips" method="post" enctype="multipart/form-data">
+                        <h3 class="box-title m-b-0">Manage incomes categories</h3>
+                        <form action="" method="post" enctype="multipart/form-data">
                             <div class="row">
                                 <div class="col-md-1"></div>
                                 <div class="col-sm-10 col-xs-12">
                                     <div class="form-group">
-                                        <label for="exampleInputphone"> Module/Section </label>
+                                        <label for="exampleInputEmail1">income category</label>
                                         <div class="input-group">
-                                            <select class="form-control select2" name="module" required>
-                                                <option>Select</option>
-                                                <option value="Profiling">Animal Profiling</option>
-                                                <option value="Feeding">Animal Feeding</option>
-                                                <option value="Calving">Calving</option>
-                                                <option value="Milk">Milk Production</option>
-                                                <option value="health">Herd Health</option>
-                                            </select>
-                                            <div class="input-group-addon"><i class="ti-email"></i></div>
+                                            <input type="text" name="category" required autocomplete="off" class="form-control" id="exampleInputEmail1" placeholder="income category">
+                                            <div class="input-group-addon"><i class="ti-pencil-alt"></i></div>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputphone">Notes/Tips </label>
+                                    <!--<div class="form-group">
+                                        <label for="exampleInputEmail1">Category</label>
                                         <div class="input-group">
-                                            <textarea name="notes" class="form-control" id="" rows="3" cols="90"  placeholder="Notes/Tips "></textarea>
+                                            <input type="text" name="cat" required autocomplete="off" class="form-control" id="exampleInputEmail1" placeholder="Category">
+                                            <div class="input-group-addon"><i class="ti-pencil-alt"></i></div>
                                         </div>
-                                    </div>
+                                    </div>-->
 
                                     <div class="text-center">
                                         <button type="submit" name="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>
@@ -131,6 +129,7 @@ if(isset($_POST['submit'])){
                 </div>
                 <div class="col-md-3 col-sm-12">
                     <h4><b>Tips</b></h4>
+
 
                 </div>
             </div>
