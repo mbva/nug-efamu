@@ -1,14 +1,7 @@
-
 <?php
-
 if(isset($_POST['email'])){
 $email=$_POST['email'];
-
 include("db.php");
-
-//$email = stripslashes($email);
-
-//$email = mysqli_real_escape_string($dbconnection,$email);
 $sql="SELECT * FROM users WHERE email='$email'";
 $result=mysqli_query($con,$sql) or die("ERROR : " . mysqli_error($con));
 
@@ -28,11 +21,11 @@ $msg1 = "Dear  $name ,\n ";
 		
 		
 		
-		$msg1 .= "Click on the link below to to reset your password\n ";
+		$msg1 .= "Click on the link below to  reset your password\n ";
 		
 		$msg1 .= "\nhttp://{$_SERVER['SERVER_NAME']}/efamunew/resetpass?vm=$email";
 		$msg1 .="\nThank You";
-					$msg1 .="\n Farmer's Market Info- Admin";
+					$msg1 .="\n EFAMU- Admin";
 					$msg1 .="\nNote! This an auto generated mail . Donot reply it!";
 					$headers .= 'From: <admin@nugsoft.com>' . "\r\n";
 					
