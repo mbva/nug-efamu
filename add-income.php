@@ -9,24 +9,22 @@
 <?php
 include 'db.php';
 $message="";
+?>
+<body class="fix-header">
+
+<?php 
 $farm = $_SESSION['farm'];
 if(isset($_POST['submit'])){
     $from = mysqli_real_escape_string($con,        ucwords($_POST['from']));
     $amount = mysqli_real_escape_string($con,        ucwords($_POST['amount']));
     $invoiceno = mysqli_real_escape_string($con,          ucwords($_POST['invoice']));
     $dop = mysqli_real_escape_string($con,          ucwords($_POST['dop']));
-    
-    $entrydate = date("Y-m-d");
-    $totalcost = ($quantity*$ucost);
-    // Getting the category
-
-    $cat = mysqli_fetch_array(mysqli_query($con,"select * from expensesitems where item ='$item' and farm_id ='$farm'"));
-    $category = $cat['cat_id'];
+    $category =mysqli_real_escape_string($con,          ucwords($_POST['category']));
 
     //capturing the registrar of the data
     $entered_by =   $_SESSION['full_names'];
     $time =         date("Y-m-d H:i:s");
-    $action =       "Entered Expense records";
+    $action =       "Entered Income records";
 
     //checking if the Receipt Number exists already
     $check_receipt = mysqli_query($con,"select * from incomes where invoiceno= '$invoiceno' and receiptdate='$dop' and farm_id ='$farm'");
@@ -35,24 +33,27 @@ if(isset($_POST['submit'])){
         //$message = "<div class=\"alert alert-danger\"><strong>Failed! The Receipt Number is already under Use</strong></div>";
         echo "<script>alert('The Record already Exists');</script>";
     }else{
-        $sql_expense = "insert into generalexpenses(farm_id,item,cat,qty,unitcost,totalcost,recno,receiptdate,recordedby,entrydate)
-                        VALUES ('$farm','$item','$category','$quantity','$ucost','$totalcost','$recno','$dop','$entered_by','$entrydate')";
+        $sql_expense = mysqli_query($con,"insert into incomes(farm_id,amount,received_from,income_category,recorded_by,date_recieved,invoice_number,date_recorded)
+                        VALUES ('$farm','$amount','$from','$category','$entered_by','$dop','$invoiceno',NOW())");
 
+			if (!$sql_expense){
+			die('Not inserted. '.mysqli_error($con));
+	}else{
+
+	
         $sql_log  = "insert into transaction_logs(farm_id,transaction_action,transaction_time,transaction_by) VALUES ('$farm','$action','$time','$entered_by')";
-
-        //Executing the queries;
-        $insert_expense = mysqli_query($con,$sql_expense);
-        $insert_transaction = mysqli_query($con,$sql_log);
-        if($insert_expense && $insert_transaction){
-            //$message = "<div class=\"alert alert-success\"><strong>Registration is Successful</strong></div>";
+if (!$sql_log){
+	die('Not inserted log. '.mysqli_error($con));
+}else{
+       
             echo "<script>alert('Registration is Successful');</script>";
-        }else{
-            echo mysqli_error($con);
-        }
+       
     }
 }
+	}
+	}
+
 ?>
-<body class="fix-header">
 <!-- ============================================================== -->
 <!-- Preloader -->
 <!-- ============================================================== -->
@@ -89,7 +90,7 @@ if(isset($_POST['submit'])){
             <div class="row bg-title">
                 <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
                     <h4 class="page-title">
-                        Expenses Form
+                       Income Form
                     </h4> </div>
                 <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                     <button class="right-side-toggle waves-effect waves-light btn-info btn-circle pull-right m-l-20"><i class="ti-settings text-white"></i></button>
@@ -97,7 +98,7 @@ if(isset($_POST['submit'])){
                     <ol class="breadcrumb">
                         <li><a href="#">Dashboard</a></li>
                         <li><a href="#">Finance Manager</a></li>
-                        <li><a href="#">Expenses</a></li>
+                        <li><a href="#">Incomes</a></li>
                     </ol>
                 </div>
                 <!-- /.col-lg-12 -->
@@ -108,7 +109,7 @@ if(isset($_POST['submit'])){
                 <div class="col-md-9 col-sm-12">
                     <div class="white-box">
                         <h3 class="box-title m-b-0">Expenses Form</h3>
-                        <form action="add-expenses" method="post" enctype="multipart/form-data">
+                        <form action="" method="post" enctype="multipart/form-data">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -121,7 +122,7 @@ if(isset($_POST['submit'])){
                                     <div class="form-group">
                                         <label for="exampleInputuname">Income Category</label>
                                         <div class="input-group">
-                                            <select class="form-control select2" name="item" required>
+                                            <select class="form-control select2" name="category" required>
                                                 <option value="">Select</option>
                                                 <?php
                                                 $select = mysqli_query($con,"select * from incomecategories where  farm_id ='$farm'");
@@ -140,7 +141,7 @@ if(isset($_POST['submit'])){
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Recieved From</label>
                                         <div class="input-group">
-                                            <input class="form-control" name="from" onkeypress="return isNumberKey(event)" required autocomplete="off" placeholder="Quantity" type="number">
+                                            <input class="form-control" name="from" required autocomplete="off" placeholder="Recieved From" type="text">
                                             <div class="input-group-addon"><i class="ti-pencil-alt"></i></div>
                                         </div>
                                     </div>
@@ -156,7 +157,7 @@ if(isset($_POST['submit'])){
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Invoice Number.</label>
                                         <div class="input-group">
-                                            <input class="form-control" name="recno" required autocomplete="off" placeholder="Receipt Number" type="text">
+                                            <input class="form-control" name="invoice" required autocomplete="off" placeholder="Receipt Number" type="text">
                                             <div class="input-group-addon"><i class="ti-pencil-alt"></i></div>
                                         </div>
                                     </div>
@@ -170,7 +171,7 @@ if(isset($_POST['submit'])){
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-12">
-                    <h4><b>Expense Tips</b></h4>
+                    <h4><b></b></h4>
 
 
                 </div>
