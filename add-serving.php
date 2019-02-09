@@ -42,14 +42,14 @@ if(isset($_GET['submit'])){
 	$aismethod== mysqli_real_escape_string($con,$_GET['aimethod']);
 	$smethod== mysqli_real_escape_string($con,$_GET['smethod']);
     //capturing the registrar of the data
-    $entered_by =           $_SESSION['full_names'];
-    $time       =           date("Y-m-d H:i:s");
-    $action     =           "Entered Serving Record";
+    $entered_by = $_SESSION['full_names'];
+    $time       = date("Y-m-d H:i:s");
+    $action     = "Entered Serving Record";
 
     //checking for the result
 
-    $check = mysqli_query($con,"select * from animal_serving where servedate = '$dos'
-	and farm_id ='$farm'");
+    $check = mysqli_query($con,"select * from animal_serving where animal_id= '$animal_id'
+	and farm_id ='$farm' and status='Pregnant'");
     if(mysqli_num_rows($check)>0){
         echo "<script>alert('The record already exists');</script>";
     }else{
@@ -59,27 +59,32 @@ if(isset($_GET['submit'])){
         $max_check_for_signs_of_heat__date =  date_format($max_check_date,"Y-m-d");
 
         $recordserve=mysqli_query($con,"insert into 
-		animal_serving(serve_method,ai_serven_method,farm_id,animal_id,servedate,servedby,checkup_date,soh_status)
+		animal_serving(serve_method,ai_serve_method,farm_id,animal_id,servedate,servedby,checkup_date,soh_status)
 		VALUES ('$smethod','$aismethod','$farm','$animal_id','$serving_date','$doctor','$max_check_for_signs_of_heat__date','Pending')" );
-       
-	   /*mysqli_query($con,"update heat_animals set actualheatdate='$serving_date',
-		status='Served' where animal_id = '$animal_id' and farm_id ='$farm'");
-		*/
+       if(!$recordserve){
+		   die('not inserted' .mysql_error($con));
+	   }else{
+		   
+	  $update_animal= mysqli_query($con,"update heat_animals set actualheatdate='$serving_date',
+		status='Served' where animal_id = '$animal_id' and farm_id='$farm'");
 		
+		if(!$update_animal){
+		   die('not updated' .mysql_error($con));
 		
         /////////////////////////////Recording for the animal Serving///////////////////////////////
 
         //Executing the queries;
         
-		if($recordserve){
+		}else{
 			 $sql_log  = mysqli_query($con,"insert into transaction_logs(farm_id,transaction_action,transaction_time,transaction_by) VALUES ('$farm','$action','$time','$entered_by')");
        
 			echo "<script>alert('Animal  Served Successfullly');</script>";
-        echo "<script>document.location='wheel-heat-animals'</script>";
-		}else{echo "<h2> FAILED to INSWERT    ERJHJHJEHJHERJH </h2>".mysqli_error($con);};
+        echo "<script>document.location='wheel-heat-animals';</script>";
+		} 
         
     }
 
+}
 }
 
 ?>
