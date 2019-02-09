@@ -2,10 +2,29 @@
 <html lang="en">
 
 <head>
-    <?php include 'head.php';
+    <?php 
     $active='breeding';?>
 </head>
 <?php include 'head.php';?>
+<script src="resources/jquery-min.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(function(){
+        $("select.smethod").change(function(){
+            var selectedsmethod = $(".smethod option:selected").val();
+            $.ajax({
+                type: "POST",
+                url: "process_smethod",
+                data: { smethod : selectedsmethod } 
+
+            }).done(function(data){
+                $("#response").html(data);
+            });
+        });
+		 });
+
+		 
+</script>
 </head>
 <?php
 include 'db.php';
@@ -17,9 +36,11 @@ $animal_id = $_GET['animalid'];
 
 if(isset($_GET['submit'])){
     $animal_id = $_GET['animal_id'];
-    $atag = mysqli_real_escape_string($con,        ucwords($_GET['tagno']));
-    $dos = mysqli_real_escape_string($con,        ucwords($_GET['dos']));
-    $doctor = mysqli_real_escape_string($con,          ucwords($_GET['doctor']));
+    $atag = mysqli_real_escape_string($con,ucwords($_GET['tagno']));
+    $dos = mysqli_real_escape_string($con,ucwords($_GET['dos']));
+    $doctor = mysqli_real_escape_string($con, ucwords($_GET['doctor']));
+	$aismethod== mysqli_real_escape_string($con,$_GET['aimethod']);
+	$smethod== mysqli_real_escape_string($con,$_GET['smethod']);
     //capturing the registrar of the data
     $entered_by =           $_SESSION['full_names'];
     $time       =           date("Y-m-d H:i:s");
@@ -37,18 +58,26 @@ if(isset($_GET['submit'])){
         date_add($max_check_date,date_interval_create_from_date_string("21 days"));
         $max_check_for_signs_of_heat__date =  date_format($max_check_date,"Y-m-d");
 
-        mysqli_query($con,"insert into 
-		animal_serving(farm_id,animal_id,servedate,servedby,checkup_date,soh_status)
-		VALUES ('$farm','$animal_id','$serving_date','$doctor','$max_check_for_signs_of_heat__date','Pending')");
-        mysqli_query($con,"update heat_animals set actualheatdate='$serving_date',
+        $recordserve=mysqli_query($con,"insert into 
+		animal_serving(serve_method,ai_serven_method,farm_id,animal_id,servedate,servedby,checkup_date,soh_status)
+		VALUES ('$smethod','$aismethod','$farm','$animal_id','$serving_date','$doctor','$max_check_for_signs_of_heat__date','Pending')" );
+       
+	   /*mysqli_query($con,"update heat_animals set actualheatdate='$serving_date',
 		status='Served' where animal_id = '$animal_id' and farm_id ='$farm'");
+		*/
+		
+		
         /////////////////////////////Recording for the animal Serving///////////////////////////////
 
-        $sql_log  = mysqli_query($con,"insert into transaction_logs(farm_id,transaction_action,transaction_time,transaction_by) VALUES ('$farm','$action','$time','$entered_by')");
         //Executing the queries;
-        // header("location:wheel-heat-animals");
-        echo "<script>alert('Animal  Served Successfullly');</script>";
+        
+		if($recordserve){
+			 $sql_log  = mysqli_query($con,"insert into transaction_logs(farm_id,transaction_action,transaction_time,transaction_by) VALUES ('$farm','$action','$time','$entered_by')");
+       
+			echo "<script>alert('Animal  Served Successfullly');</script>";
         echo "<script>document.location='wheel-heat-animals'</script>";
+		}else{echo "<h2> FAILED to INSWERT    ERJHJHJEHJHERJH </h2>".mysqli_error($con);};
+        
     }
 
 }
@@ -108,7 +137,7 @@ if(isset($_GET['submit'])){
                 <div class="col-md-9 col-sm-12">
                     <div class="white-box">
                         <h3 class="box-title m-b-0">Serving Form</h3>
-                        <form action="add-serving" method="get"  enctype="multipart/form-data">
+                        <form action="add-serving" method="GET"  enctype="multipart/form-data">
                             <div class="row">
                                 <div class="col-md-1"></div>
                                 <div class="col-sm-10 col-xs-12">
@@ -146,30 +175,39 @@ if(isset($_GET['submit'])){
                                             <div class="input-group-addon"><i class="ti-pencil"></i></div>
                                         </div>
                                     </div>
-                                     <div class="form-group">
-                                        <label for="exampleInputpwd2">Serving Method</label>
+									
+									  <div class="form-group">
+                                        <label for="exampleInputEmail1">Serving Method</label>
                                         <div class="input-group">
-                                           <select class="form-control select2" name="smethod" required>
-                                                <option value='' selected>Select</option>
+                                            <select class="form-control smethod" name="smethod" required>
                                                
-                                            
-                                                    <option value="artificial">Artificial Insermination</option>
-                                                     <option value="bull">Artificial Insermination</option>
-                                               
-                                            <span class="input-group-addon"><i class="icon-pencil"></i></span>
+                                                 <option value="">Select</option>
+                                                        <option value="Artifical Insermination">Artifical Insermination</option>
+                                                        <option value="Bull">Bull</option>
+                                                        
+                                            </select>
+                                            <div class="input-group-addon"><i class="ti-email"></i></div>
                                         </div>
                                     </div>
+                                        <div class="form-group" id="response">
+                                    
+                                    
+                                    </div>
+                                     <div class="form-group">
+                                     
                                     <div class="text-center">
                                         <button type="submit" name="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>
                                         <button type="reset" class="btn btn-inverse waves-effect waves-light">Cancel</button>
                                     </div>
                                 </div>
-                                <div class="col-md-1"></div>
+                               
                             </div>
                         </form>
                     </div>
                 </div>
+				</div>
                 <div class="col-md-3 col-sm-12">
+				<div class="white-box">
                     <h4><b>Serving Tips</b></h4>
                     <marquee  behavior="scroll" direction="up" id="mymarquee" scrollamount="2" onmouseover="this.stop();" onmouseout="this.start();">
                         <p style="text-align: justify">
@@ -183,6 +221,7 @@ if(isset($_GET['submit'])){
                     </marquee>
 
                 </div>
+				</div>
             </div>
             <!-- ============================================================== -->
         </div>

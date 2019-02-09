@@ -144,7 +144,7 @@ function test_input($data){
                 </div>
                 <div class="form-group m-b-0">
                     <div class="col-sm-12 text-center">
-                        <p>Don't have an account? <a href="register" class="text-primary m-l-5"><b>Sign Up</b></a></p>
+                        <p>Don't have an account? <a href="signup" class="text-primary m-l-5"><b>Sign Up</b></a></p>
                     </div>
                 </div>
             </form>
