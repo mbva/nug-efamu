@@ -20,6 +20,7 @@
 <link href="plugins/bower_components/calendar/dist/fullcalendar.css" rel="stylesheet" />
 <!-- animation CSS -->
 <link href="css/animate.css" rel="stylesheet">
+<link href="css/customcss.css" rel="stylesheet">
 <!-- Custom CSS -->
 <link href="css/style.css" rel="stylesheet">
 <link href="plugins/bower_components/custom-select/dist/css/select2.min.css" rel="stylesheet" type="text/css" />

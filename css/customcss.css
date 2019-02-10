@@ -1,0 +1,11 @@
+.navbar-header {
+    background: #707cd2 !important;
+}
+#side-menu > li > a.active {
+    background: #707cd2 !important;
+    color: #ffffff;
+    font-weight: 500;
+}
+.navbar-top-links > li > a {
+    color: #ffffff !important;
+}

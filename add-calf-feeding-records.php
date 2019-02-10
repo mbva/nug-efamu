@@ -166,7 +166,16 @@ if(isset($_POST['submit'])){
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-12">
-                    <h4><b>Calf Feeding Tips</b></h4>
+                    <marquee  behavior="scroll" direction="up" id="mymarquee" scrollamount="2" onmouseover="this.stop();" onmouseout="this.start();">
+                        <p style="text-align: justify">
+                            <?php
+                            $select = mysqli_query($con,"select * from farmertips where section='Weight' ORDER BY id desc LIMIT 1 ");
+                            while ($tipscheck = mysqli_fetch_array($select)){
+                                echo $tipscheck['tips'];
+                            }
+                            ?>
+                        </p>
+                    </marquee>
 
 
                 </div>

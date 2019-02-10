@@ -51,7 +51,7 @@ if(isset($_POST['submit'])){
             $insert_emp = mysqli_query($con,$sql_emp);
             $insert_transaction = mysqli_query($con,$sql_log);
             if($insert_emp && $insert_transaction){
-                $message = "<div class=\"alert alert-success\"><strong>Registration is Successful</strong></div>";
+                $message = "<div class=\"alert alert-success\"><strong>Salary details Successfully recorded</strong></div>";
             }else{
                 echo mysqli_error();
             }

@@ -111,46 +111,66 @@ if(isset($_POST['submit'])){
                             <table id="example23" class="myTable table table-responsive color-table info-table display nowrap table table-hover table-striped" cellspacing="0" width="100%">
                                 <thead>
                                 <tr>
-                                    <th  >ID</th>
-                                    <th >Section</th>
-                                    
-                                    <th >Added By</th>
-                                    <th >Date added</th>
-                                     
-                                    <th >Action</th>
-                                </tr>
+                                        <th data-field="id">ID</th>
+                                        <th data-editable="true">Farm Name</th>
+                                        <th data-editable="true">Owner</th>
+                                        <th data-editable="true">Address</th>
+                                        <th data-editable="true">Contact</th>
+                                        <th data-editable="true">Status</th>
+                                        <th >Action</th>
+                                        <th >Action</th>
+                                    </tr>
                                 </thead>
                                 <tfoot>
-                                <tr>
-                                    <th>ID</th>
-                                    <th >Section</th>
-                                    <th >Added By</th>
-                                    <th >Date added</th>
-									
-                                    <th >Action</th>
-                                </tr>
+                               <tr>
+                                        <th data-field="id">ID</th>
+                                        <th data-editable="true">Farm Name</th>
+                                        <th data-editable="true">Owner</th>
+                                        <th data-editable="true">Address</th>
+                                        <th data-editable="true">Contact</th>
+                                        <th data-editable="true">Status</th>
+                                        <th >Action</th>
+                                        <th >Action</th>
+                                    </tr>
                                 </tfoot>
                                 <tbody>
-                                <?php
-                                include 'db.php';
-                                $select = mysqli_query($con,"select * from farmertips where farm_id ='$farm'");
-                                $sno = 0;
-                                while($results = mysqli_fetch_array($select)){
-                                    $sno++
-                                    ?>
-                                    <tr><input type="hidden" id="id" name="id" value="<?=$results['id'];?>">
-                                        <td><?=$sno;?></td>
-                                        <td><?=$results['section'];?></td>
-                                        
-                                        <td><?=$results['addby'];?></td>
-                                        <td><?=$results['date_added'];?>
-                                   <!--<td><a  style="color: white" class="btn btn-info"  href="view-tips?farm_id=<?=$results['farm_id']?>&&id=<?=$results['id'];?>"><i class="fa fa-eye fa-1x"></a></i></td>
--->
-                                         <td><a  style="color: white" class="btn btn-success"  href="edit-doctor?farm_id=<?=$results['farm_id']?>&&id=<?=$results['id'];?>"><i class="fa fa-edit fa-1x"></a></i></td>
+                              <?php
+                                    include 'db.php';
+                                    $select = mysqli_query($con,"select * from farms");
+                                    $sno = 0;
+                                    while($results = mysqli_fetch_array($select)) {
+                                        $sno++
+                                        ?>
+                                    <tr>
+                                                <td><?=$sno;?></td>
+                                                <td><?php echo $results['farmname'];?></td>
+                                                <td><?php echo $results['owner'];?></td>
+                                                <td><?php echo $results['address'];?></td>
+                                                <td><?php echo $results['contact'];?></td>
 
-                                    <?php
-                                }
-                                ?>
+                                                <td><?=$results['status'];?>
+                                                    <?php
+                                                    if($results['status']=="Active"){
+                                                        ?>
+                                                        <a href="settings-process?memberid=<?=$results['farmid'];?>&&action=<?= "deactivate-farm";?>&&subject=<?= $results['memberid'];?>"  class="btn btn-danger" style="float: right;color: white;"><i class="fa fa-power-off"></i></a>
+                                                        <?php
+                                                        $message = "Success";
+                                                    }
+                                                    if($results['status']=="Inactive"){
+                                                        ?>
+                                                        <a href="settings-process?memberid=<?= $results['farmid'];?>&&action=<?= "activate-farm";?>&&subject=<?= $results['memberid'];?>"  class="btn btn-success" style="float: right;color: white;"><i class="fa fa-thumbs-up"></i></a>
+                                                        <?php
+                                                        $message = "Success";
+                                                    }
+                                                    ?>
+                                                </td>
+                                                <td><a  style="color: white" class="btn btn-info"  href="edit-farms?farm_id=<?=$results['farmid'];?>"><i class="fa fa-edit fa-1x"></a></i></td>
+                                                <td><a  style="color: white" class="btn btn-danger" onclick="return deleted()" href=""><i class="fa fa-trash fa-1x"></a></i></td>
+                                            </tr>
+                                        <?php
+
+                                    }
+                                    ?>
                                 </tbody>
                             </table>
                         </div>

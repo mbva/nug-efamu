@@ -146,7 +146,7 @@ if(isset($_POST['submit'])){
                     <marquee  behavior="scroll" direction="up" id="mymarquee" scrollamount="2" onmouseover="this.stop();" onmouseout="this.start();">
                         <p style="text-align: justify">
                             <?php
-                            $select = mysqli_query($con,"select * from farmertips where section='Profiling' ORDER BY id desc LIMIT 1 ");
+                            $select = mysqli_query($con,"select * from farmertips where section='Weight' ORDER BY id desc LIMIT 1 ");
                             while ($tipscheck = mysqli_fetch_array($select)){
                                 echo $tipscheck['tips'];
                             }

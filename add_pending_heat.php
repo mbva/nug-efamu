@@ -27,7 +27,8 @@ if(isset($_POST['submit'])){
     $time =         date("Y-m-d H:i:s");
     $action =       "Recorded Heat Records For  $aname";
     //Check if the records exists
-    $check_record = mysqli_query($con,"select * from heat_animals where animal_id='$animal_id' and status='Pending' and farm_id ='$farm'");
+    $check_record = mysqli_query($con,"select * from heat_animals where animal_id='$animal_id' 
+	and status='Pending' and farm_id ='$farm'");
     if(mysqli_num_rows($check_record)>0){
         echo "<script>alert('Record already Exists');</script>";
     }

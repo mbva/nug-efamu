@@ -20,6 +20,7 @@ if(isset($_POST['submit'])){
     $invoiceno = mysqli_real_escape_string($con,          ucwords($_POST['invoice']));
     $dop = mysqli_real_escape_string($con,          ucwords($_POST['dop']));
     $category =mysqli_real_escape_string($con,          ucwords($_POST['category']));
+	$descr=mysqli_real_escape_string($con, $_POST['descr']);
 
     //capturing the registrar of the data
     $entered_by =   $_SESSION['full_names'];
@@ -33,8 +34,8 @@ if(isset($_POST['submit'])){
         //$message = "<div class=\"alert alert-danger\"><strong>Failed! The Receipt Number is already under Use</strong></div>";
         echo "<script>alert('The Record already Exists');</script>";
     }else{
-        $sql_expense = mysqli_query($con,"insert into incomes(farm_id,amount,received_from,income_category,recorded_by,date_recieved,invoice_number,date_recorded)
-                        VALUES ('$farm','$amount','$from','$category','$entered_by','$dop','$invoiceno',NOW())");
+        $sql_expense = mysqli_query($con,"insert into incomes(descr,farm_id,amount,received_from,income_category,recorded_by,date_recieved,invoice_number,date_recorded)
+                        VALUES ('$descr','$farm','$amount','$from','$category','$entered_by','$dop','$invoiceno',NOW())");
 
 			if (!$sql_expense){
 			die('Not inserted. '.mysqli_error($con));
@@ -46,7 +47,7 @@ if (!$sql_log){
 	die('Not inserted log. '.mysqli_error($con));
 }else{
        
-            echo "<script>alert('Registration is Successful');</script>";
+            echo "<script>alert('Income Transaction Recorded Successful');</script>";
        
     }
 }
@@ -108,7 +109,7 @@ if (!$sql_log){
 
                 <div class="col-md-9 col-sm-12">
                     <div class="white-box">
-                        <h3 class="box-title m-b-0">Expenses Form</h3>
+                        
                         <form action="" method="post" enctype="multipart/form-data">
                             <div class="row">
                                 <div class="col-md-6">
@@ -161,6 +162,13 @@ if (!$sql_log){
                                             <div class="input-group-addon"><i class="ti-pencil-alt"></i></div>
                                         </div>
                                     </div>
+									<div class="form-group">
+                                        <label for="exampleInputEmail1">Description</label>
+                                        <div class="input-group">
+                                            <input class="form-control" name="descr" required autocomplete="off" placeholder="Income Description" type="text">
+                                            <div class="input-group-addon"><i class="ti-pencil-alt"></i></div>
+                                        </div>
+                                    </div>
 
                                     <div class="text-center">
                                         <button type="submit" name="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>
@@ -171,7 +179,20 @@ if (!$sql_log){
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-12">
-                    <h4><b></b></h4>
+                    <div class="white-box">
+                    <h4><b>Finance Management Tips</b></h4>
+                    <marquee  behavior="scroll" direction="up" id="mymarquee" scrollamount="2" onmouseover="this.stop();" onmouseout="this.start();">
+                        <p style="text-align: justify">
+                            <?php
+                            $select = mysqli_query($con,"select * from farmertips where section='Profiling' ORDER BY id desc LIMIT 1 ");
+                            while ($tipscheck = mysqli_fetch_array($select)){
+                                echo $tipscheck['tips'];
+                            }
+                            ?>
+                        </p>
+                    </marquee>
+
+                </div>
 
 
                 </div>

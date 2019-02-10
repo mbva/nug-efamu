@@ -52,9 +52,7 @@
         <div class="container-fluid">
             <div class="row bg-title">
                 <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                    <h4 class="page-title">
-                        Expenses Records
-                    </h4>
+                   
                 </div>
                 <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
 
@@ -105,42 +103,11 @@
                                 <thead>
                                 <tr>
                                     <th><?php
-                                        function get_client_ip()
-                                        {
-                                            $ipaddress = '';
-                                            if (getenv('HTTP_CLIENT_IP')){
-                                                $ipaddress = getenv('HTTP_CLIENT_IP');
-                                                echo "<h2> $ipaddress </h2>";
-                                            }
-                                            else if(getenv('HTTP_X_FORWARDED_FOR')){
-                                                $ipaddress = getenv('HTTP_X_FORWARDED_FOR');
-                                                echo "<h2> $ipaddress </h2>";
-                                            }
-                                            else if(getenv('HTTP_X_FORWARDED')){
-                                                $ipaddress = getenv('HTTP_X_FORWARDED');
-                                                echo "<h2> $ipaddress </h2>";
-                                            }
-                                            else if(getenv('HTTP_FORWARDED_FOR')){
-                                                $ipaddress = getenv('HTTP_FORWARDED_FOR');
-                                                echo "<h2> $ipaddress </h2>";
-                                            }
-                                            else if(getenv('HTTP_FORWARDED')){
-                                                $ipaddress = getenv('HTTP_FORWARDED');
-                                                echo "<h2> $ipaddress </h2>";
-                                            }
-
-                                            else if(getenv('REMOTE_ADDR')){
-                                                $ipaddress = getenv('REMOTE_ADDR');
-                                                echo "<h2> $ipaddress </h2>";
-                                            }
-                                            else{
-                                                $ipaddress = 'UNKNOWN';}
-
-                                            return $ipaddress;
-                                        }
+                                        
                                         ?>ID</th>
                                      
                                     <th>Income Category</th>
+									<th>Description</th>
                                     <th>Amount</th>
                                     <th>Recieved From</th>
                                     <th>Date</th>
@@ -172,8 +139,9 @@
                                     <tr>
                                         <td><?=$sno;?></td>
                                         <td><?php echo $results['income_category'];?></td>
-                                        <td><?php echo $results['amount'];?></td>
-                                        <td><?php echo $results['recieved_from'];?></td>
+                                        <td><?php echo $results['descr'];?></td>
+										<td><?php echo $results['amount'];?></td>
+                                        <td><?php echo $results['received_from'];?></td>
                                         <td><?php echo $results['date_recieved'];?></td>
                                         <td><?php echo $results['invoice_number'];?></td>
                                          
@@ -189,6 +157,7 @@
                                 <tr >
                                     <th ></th>
                                     <th >Total</th>
+									<th></th>
 									 <th ><?="Shs. ".number_format($totalamount);?></th>
                                     <th ></th>
                                     <th ></th>

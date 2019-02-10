@@ -109,6 +109,7 @@ if(isset($_POST['submit'])){
                                                 <option value="Calving">Calving</option>
                                                 <option value="Milk">Milk Production</option>
                                                 <option value="health">Herd Health</option>
+												   <option value="Weight">Weight Management</option>
                                             </select>
                                             <div class="input-group-addon"><i class="ti-email"></i></div>
                                         </div>
