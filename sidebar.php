@@ -5,7 +5,21 @@
   overflow: auto;
                
             } 
-        </style>
+			  </style>
+			 <?php
+			include 'db.php';
+$message="";
+$farm = $_SESSION['farm'];
+	$sess=$_SESSION['memberid'];
+	$username=$_SESSION['full_names'];
+     $select_tag = mysqli_query($con,"select * from users where memberid='$sess' and full_names='$username'");
+     while ($tag = mysqli_fetch_array($select_tag)){
+		 $user_id=$tag['memberid'];
+		
+	 }
+		?>
+
+      
 <div class="scroll">
 
 <div class="sidebar-nav slimscrollsidebar"  style="overflow-y: scroll;">
@@ -25,6 +39,24 @@
 
 
         <li><a href="dashboard" class="waves-effect"><i class="mdi mdi-av-timer fa-dashboard"></i> <span class="hide-menu">Dashboard</span></a></li>
+		
+		<?php 
+	
+
+               $psetting = mysqli_query($con, "SELECT * FROM emp_permission WHERE user_id = '$user_id' and module_name='Settings'") or die (mysqli_error($con));
+while($setting = mysqli_fetch_array($psetting))
+{
+	
+	$updates= $setting['pupdate'];
+	$deletes= $setting['pdelete'];
+	$reads= $setting['pread'];
+	$creates= $setting['pcreate'];
+	$setting_permission=($reads+$creates+$deletes+$updates);
+}
+
+	if($setting_permission>0){
+?>
+		
 <li> <a href="javascript:void(0)" class="waves-effect <?php if($active=='settings') echo "active" ?>"><i class="mdi mdi-settings fa-gear"></i> <span class="hide-menu">System Settings<span class="fa arrow"></span></span></a>
             <ul class="nav nav-second-level">
                 <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">Manage Doctors </span><span class="fa arrow"></span></a>
@@ -88,6 +120,21 @@
                 </li>
             </ul>
         </li>
+	<?php }
+               $panimals = mysqli_query($con, "SELECT * FROM emp_permission WHERE user_id = '$user_id' and module_name='Animals'") or die (mysqli_error($con));
+while($have = mysqli_fetch_array($panimals))
+{
+	
+	$updatep= $have['pupdate'];
+	$deletep= $have['pdelete'];
+	$readp= $have['pread'];
+	$createp= $have['pcreate'];
+	$anypermission=($readp+$createp+$deletep+$updatep);
+
+}
+
+	if($anypermission>0){
+?>
         <li> <a href="javascript:void(0)" class="waves-effect <?php if($active=='animal') echo "active" ?>"><i class="mdi  mdi-linux fa-fw"></i> <span class="hide-menu">Animal<span class="fa arrow"></span></span></a>
             <ul class="nav nav-second-level">
                 <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">Registration </span><span class="fa arrow"></span></a>
@@ -117,6 +164,24 @@
                 <li> <a href="animal-profile2"><i data-icon="7" class="fa fa-user fa-fw"></i><span class="hide-menu">Animal Profile</span></a> </li>
             </ul>
         </li>
+	<?php }?>
+		<?php 
+	
+               $pherd = mysqli_query($con, "SELECT * FROM emp_permission WHERE user_id = '$user_id' and module_name='Herd Health'") or die (mysqli_error($con));
+while($herd = mysqli_fetch_array($pherd))
+{
+	
+	$updateh= $herd['pupdate'];
+	$deleteh= $herd['pdelete'];
+	$readh= $herd['pread'];
+	$createh= $herd['pcreate'];
+	$herd_permission=($readh+$createh+$deleteh+$updateh);
+}
+
+	if($herd_permission>0){
+?>
+	
+	
         <li> <a href="javascript:void(0)" class="waves-effect <?php if($active=='health') echo "active" ?>"><i class="mdi mdi-ambulance fa-fw"></i> <span class="hide-menu">Health<span class="fa arrow"></span></span></a>
             <ul class="nav nav-second-level">
                 <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">Culling </span><span class="fa arrow"></span></a>
@@ -145,6 +210,20 @@
                 </li>
             </ul>
         </li>
+	<?php }
+               $pfeed = mysqli_query($con, "SELECT * FROM emp_permission WHERE user_id = '$user_id' and module_name='Feeding'") or die (mysqli_error($con));
+while($feed = mysqli_fetch_array($pfeed))
+{
+	
+	$updatef= $feed['pupdate'];
+	$deletef= $feed['pdelete'];
+	$readf= $feed['pread'];
+	$createf= $feed['pcreate'];
+	$feed_permission=($readf+$createf+$deletef+$updatef);
+}
+
+	if($feed_permission>0){
+?>
 
         <li> <a href="javascript:void(0)" class="waves-effect <?php if($active=='feeding') echo "active" ?>"><i class="mdi mdi-barley fa-fw"></i> <span class="hide-menu">Feeding<span class="fa arrow"></span></span></a>
             <ul class="nav nav-second-level">
@@ -164,6 +243,7 @@
                 </li>
             </ul>
         </li>
+	<?php }?>
 		
 		        <!--<li> <a href="javascript:void(0)" class="waves-effect <?php if($active=='reports') echo "active" ?>"><i class="mdi mdi-chart-bar fa-fw"></i> <span class="hide-menu">Analysis Reports<span class="fa arrow"></span></span></a>
             <ul class="nav nav-second-level">
@@ -184,7 +264,20 @@
 		
 		
 		
-		
+			<?php   
+				$pfinance = mysqli_query($con, "SELECT * FROM emp_permission WHERE user_id = '$user_id' and module_name='Finance Manager'") or die (mysqli_error($con));
+while($finance = mysqli_fetch_array($pfinance))
+{
+	
+	$updaten= $finance['pupdate'];
+	$deleten= $finance['pdelete'];
+	$readn= $finance['pread'];
+	$createn= $finance['pcreate'];
+	$finance_permission=($readn+$createn+$deleten+$updaten);
+}
+
+	if($finance_permission>0){
+?>
         <li> <a href="javascript:void(0)" class="waves-effect <?php if($active=='finance') echo "active" ?>"><i class="mdi mdi-cash-multiple fa-fw"></i> <span class="hide-menu">Finance Manager<span class="fa arrow"></span></span></a>
             <ul class="nav nav-second-level">
                 <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">Animal Sales</span><span class="fa arrow"></span></a>
@@ -220,6 +313,21 @@
                 </li>
             </ul>
         </li>
+	
+	<?php }   
+	$pmilk = mysqli_query($con, "SELECT * FROM emp_permission WHERE user_id = '$user_id' and module_name='Milk Production'") or die (mysqli_error($con));
+while($milk = mysqli_fetch_array($pmilk))
+{
+	
+	$updatem= $milk['pupdate'];
+	$deletem= $milk['pdelete'];
+	$readm= $milk['pread'];
+	$createm= $milk['pcreate'];
+	$milk_permission=($readm+$createm+$deletem+$updatem);
+}
+
+	if($milk_permission>0){
+?>
 
         <li> <a href="javascript:void(0)" class="waves-effect <?php if($active=='milk_production') echo "active" ?>"><i class="mdi mdi-beaker fa-fw"></i> <span class="hide-menu">Milk Production<span class="fa arrow"></span></span></a>
             <ul class="nav nav-second-level">
@@ -227,59 +335,20 @@
                 <li> <a href="view-milk-production-records"><i data-icon="7" class="fa fa-user fa-fw"></i><span class="hide-menu">View Records</span></a> </li>
             </ul>
         </li>
-		
-		    <!--   <li> <a href="javascript:void(0)" class="waves-effect <?php if($active=='users') echo "active" ?>"><i class="mdi  mdi-account fa-fw"></i> <span class="hide-menu">System Users<span class="fa arrow"></span></span></a>
-            <ul class="nav nav-second-level">
-                <li> <a href="add-users" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">Register User </span></a>
-                   
-                </li>
-				 <li> <a href="view-users" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">View Users </span></a>
-                   
-                </li>
-               </ul>
-        </li>
-		
-		<li> <a href="javascript:void(0)" class="waves-effect <?php if($active=='u-permissions') echo "active" ?>"><i class="mdi mdi-account-key fa-fw"></i> <span class="hide-menu">User Permissions<span class="fa arrow"></span></span></a>
-            <ul class="nav nav-second-level">
-                <li> <a href="permission_select" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">Add Records </span></a>
-                   
-                </li>
-				 <li> <a href="edit_permissions" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">Edit Permissions </span></a>
-                   
-                </li>
-				<li> <a href="view_permissions" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">View User Permissions </span></a>
-                   
-                </li>
-               </ul>
-        </li>
-				
-		       <li> <a href="javascript:void(0)" class="waves-effect <?php if($active=='employees') echo "active" ?>"><i class="mdi  mdi-bike fa-fw"></i> <span class="hide-menu">Employees<span class="fa arrow"></span></span></a>
-            <ul class="nav nav-second-level">
-                <li> <a href="add-employees" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">Add Emloyee </span></a>
-                   
-                </li>
-				 <li> <a href="view-employees" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">View Employees </span></a>
-                   
-                </li>
-				</ul>
-                
-             
-        </li>-->
-		
-			     <!--  <li> <a href="javascript:void(0)" class="waves-effect <?php if($active=='logs') echo "active" ?>"><i class="mdi mdi-checkbox-multiple-marked-outline fa-fw"></i> <span class="hide-menu">System Logs<span class="fa arrow"></span></span></a>
-            <ul class="nav nav-second-level">
-                <li> <a href="transaction-logs" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">Transaction Logs </span></a>
-                   
-                </li>
-				 <li> <a href="system-logs" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">View System Logs </span></a>
-                   
-                </li>
-				</ul>
-                
-             
-        </li>-->
+	<?php}
+               $pbreed = mysqli_query($con, "SELECT * FROM emp_permission WHERE user_id = '$user_id' and module_name='Breeding'") or die (mysqli_error($con));
+while($breed = mysqli_fetch_array($pbreed))
+{
+	
+	$updateb= $breed['pupdate'];
+	$deleteb= $breed['pdelete'];
+	$readb= $breed['pread'];
+	$createb= $breed['pcreate'];
+	$breead_permission=($readb+$createb+$deleteb+$updateb);
+}
 
-       
+	if($breead_permission>0){
+?>
 
         <li> <a href="javascript:void(0)" class="waves-effect <?php if($active=='breeding') echo "active" ?>"><i class="mdi mdi-checkbox-multiple-marked-outline fa-fw"></i> <span class="hide-menu">Breeding<span class="fa arrow"></span></span></a>
             <ul class="nav nav-second-level">
@@ -294,6 +363,7 @@
                 <li> <a href="wheel-pregnant"><i data-icon="7" class="fa fa-arrow-alt-circle-right fa-fw"></i><span class="hide-menu">Expecting Mothers</span></a> </li>
             </ul>
         </li>
+	<?php }?>
 		
 		
 		
