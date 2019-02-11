@@ -40,7 +40,7 @@
         <div class="container-fluid">
             <div class="row bg-title">
                 <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                    <h4 class="page-title">Graphical representation of Animal Sales</h4> </div>
+                    <h4 class="page-title">Graphical Variations in Income and Expenses</h4> </div>
                 <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                     <button class="right-side-toggle waves-effect waves-light btn-info btn-circle pull-right m-l-20"><i class="ti-settings text-white"></i></button>
                     <a href="javascript: void(0);" "></a>
@@ -53,108 +53,177 @@
                 <!-- /.col-lg-12 -->
             </div>
             <!--.row-->
-           <div class="row">
-                                <script>
-                                    window.onload = function () {
+            <div class="row">
 
-                                        var chart = new CanvasJS.Chart("chartContainer", {
-                                            animationEnabled: true,
-                                            exportEnabled: true,
-                                            title:{
-                                                text: " (<?php
-                                                    if(isset($_POST['submit'])){
-                                                        $date = $_POST['date'];
-                                                        $tagno = $_POST['tagno'];
-                                                        // $d = date_parse_from_format("Y-m-d", $date);
-                                                        $m =  date("F", strtotime($date));
-                                                        $y =  date("Y", strtotime($date));
-                                                        echo $tagno. " Weight Analysis as at ".$m."-".$y;
-                                                    }else{
-                                                        echo "Annual Representation of Average Animal Sales";
-                                                    }
-                                                    ?>)"
-                                            },
-                                            axisY:{
-                                                title: "ANIMAL SALES (UGX)"
-                                            },
-                                            toolTip: {
-                                                shared: true
-                                            },
-                                            legend:{
-                                                cursor:"pointer",
-                                                itemclick: toggleDataSeries
-                                            },
-                                            data: [
-                                                {
-                                                    type: "spline",
-                                                    name: "Amount collected from Animal Sales",
-                                                    showInLegend: true,
-                                                    dataPoints: [
-                                                        <?php
-                                                        include 'db.php';
+                <div class="col-md-8">
+                    <form action="" method="post">
+                        <div class="form-group-inner">
+                            <div class="row">
+                                <div class="graph-form" style="background: rebeccapurple;padding-left: 30%">
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                        <div class="input-daterange input-group" >
+                                            <select class="form-control select2" name="month">
+                                                <option value="">**** Month****</option>
+                                                <?php
+                                                for($i=1;$i<13;$i++)
+                                                    print("<option>".date('F',strtotime('01.'.$i.'.2001'))."</option>");
+                                                ?>
+                                            </select>
+                                        </div>
 
-                                                        if(isset($_POST['submit'])){
-                                                        $date_from = $_POST['date'];
-                                                        $tagno =$_POST['tagno'];
-
-                                                        for($i=1;$i<=31;$i++){
-
-                                                        //calculating incomes from milk sales
-                                                        $select_sales =mysqli_query($con,"select sum(sp) as total_daily_sales  from animalsales where solddate = '$date_from' and farm_id ='$farm'");
-                                                        $mresults = mysqli_fetch_array($select_sales);
-                                                       //formating the axis value
-                                                        $x_axis_value = $i."/".date('F', strtotime($date_from));
-
-                                                        ?>
-                                                        { label: "<?=$x_axis_value?>" , y: <?=($mresults['total_daily_sales']+0);?> },
-                                                        <?php
-                                                        $date_from = date ("Y-m-d", strtotime("+1 day", strtotime($date_from)));
-                                                        }
-
-														}
-														else{
-
-                                                        /*for($i=1;$i<=31;$i++){
-                                                        $select =mysqli_query($con,"select AVG (weight) as daily_avg_weight , wdate from weight where tagno = '$tagno' AND wdate = '$date_from'");
-                                                        $result = mysqli_fetch_array($select);
-                                                        $daily_avg_weight = $result['daily_avg_weight'];
-                                                        ?>
-                                                        { label: "<?=$result['wdate']?>" , y: <?=number_format($daily_avg_weight);?> },
-                                                        <?php
-                                                        $date_from = date ("Y-m-d", strtotime("+1 day", strtotime($date_from)));
-                                                        }*/
-                                                      
-                                                        for($iM =1;$iM<=12;$iM++){
-                                                        $month =  date("m", strtotime("$iM/12/10"));
-                                                        $x_axis = date("M", strtotime("$iM/12/10"));
-                                                        $select =mysqli_query($con,"select sum(sp) as total_sales  from animalsales where MONTH(solddate)= '$month' and farm_id ='$farm'");
-                                                        $result = mysqli_fetch_array($select);
-                                                        ?>
-                                                        { label: "<?=$x_axis?>" , y: <?php echo ($result['total_sales']+0);?>},
-                                                        <?php
-                                                        }
-                                                        }
-                                                        ?>
-                                                    ]
-                                                },
-                                            ]
-                                        });
-                                        chart.render();
-
-                                        function toggleDataSeries(e) {
-                                            if(typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
-                                                e.dataSeries.visible = false;
-                                            }
-                                            else {
-                                                e.dataSeries.visible = true;
-                                            }
-                                            chart.render();
-                                        }
-                                    }
-                                </script>
-                                <div id="chartContainer" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
-                                <script src="charts/canvasjs.min.js"></script>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                        <div class="input-daterange input-group" >
+                                            <select class="form-control select2" name="year">
+                                                <option value="">**** Year****</option>
+                                                <?php
+                                                // Sets the top option to be the current year. (IE. the option that is chosen by default).
+                                                $currently_selected = date('Y');
+                                                // Year to start available options at
+                                                $earliest_year = 1950;
+                                                // Set your latest year you want in the range, in this case we use PHP to just set it to the current year.
+                                                $latest_year = date('Y');
+                                                // Loops over each int[year] from current year, back to the $earliest_year [1950]
+                                                foreach ( range( $latest_year, $earliest_year ) as $i ) {
+                                                    // Prints the option with the next year in range.
+                                                    print '<option value="'.$i.'"'.($i === $currently_selected ? ' selected="selected"' : '').'>'.$i.'</option>';
+                                                };
+                                                ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                        <div class="login-btn-inner">
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                    <button style="float: right" name="submit" class="btn btn-sm btn-primary login-submit-cs" type="submit">Search</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br>
+            <br>
+            <div class="row">
+                <script>
+                    window.onload = function () {
+
+                        var chart = new CanvasJS.Chart("chartContainer", {
+                            animationEnabled: true,
+                            exportEnabled: true,
+                            title:{
+                                text: " (<?php
+                                    if(isset($_POST['submit'])){
+                                        //$date = $_POST['date'];
+                                        $tagno = $_POST['tagno'];
+                                        // $d = date_parse_from_format("Y-m-d", $date);
+                                        $m =  $_POST['month'];
+                                        $y =  $_POST['year'];
+                                        //$y =  date("Y", strtotime($date));
+                                        echo $tagno. " Weight Analysis as at ".$m."-".$y;
+                                    }else{
+                                        echo "Annual Representation of Average Animal Sales";
+                                    }
+                                    ?>)"
+                            },
+                            axisY:{
+                                title: "Amount (UGX)"
+                            },
+                            axisX:{
+                                title: "(<?php
+                                    if(isset($_POST['submit'])){
+                                        echo "Days of the Month";
+                                    }else{
+                                        echo "Months of the Year";
+                                    }
+                                    ?>)"
+                            },
+                            toolTip: {
+                                shared: true
+                            },
+                            legend:{
+                                cursor:"pointer",
+                                itemclick: toggleDataSeries
+                            },
+                            data: [
+                                {
+                                    type: "spline",
+                                    name: "Amount collected from Animal Sales",
+                                    showInLegend: true,
+                                    dataPoints: [
+                                        <?php
+                                        include 'db.php';
+
+                                        if(isset($_POST['submit'])){
+
+                                        $m = $_POST['month'];
+                                        $y = $_POST['year'];
+                                        $date_from = "$y-$m-01";
+                                        for($i=1;$i<=31;$i++){
+
+                                        //calculating incomes from milk sales
+                                        $select_sales =mysqli_query($con,"select sum(sp) as total_daily_sales  from animalsales where solddate= '$date_from'  and farm_id ='$farm'");
+                                        $mresults = mysqli_fetch_array($select_sales);
+                                        //formating the axis value
+                                        $x_axis_value = $i."/".date('F', strtotime($date_from));
+
+                                        ?>
+                                        { label: "<?=$x_axis_value?>" , y: <?=($mresults['total_daily_sales']+0);?> },
+                                        <?php
+                                        $date_from = date ("Y-m-d", strtotime("+1 day", strtotime($date_from)));
+                                        }
+
+                                        }
+                                        else{
+
+                                        /*for($i=1;$i<=31;$i++){
+                                        $select =mysqli_query($con,"select AVG (weight) as daily_avg_weight , wdate from weight where tagno = '$tagno' AND wdate = '$date_from'");
+                                        $result = mysqli_fetch_array($select);
+                                        $daily_avg_weight = $result['daily_avg_weight'];
+                                        ?>
+                                        { label: "<?=$result['wdate']?>" , y: <?=number_format($daily_avg_weight);?> },
+                                        <?php
+                                        $date_from = date ("Y-m-d", strtotime("+1 day", strtotime($date_from)));
+                                        }*/
+
+                                        for($iM =1;$iM<=12;$iM++){
+                                        $month =  date("m", strtotime("$iM/12/10"));
+                                        $year = date("Y");
+                                        $x_axis = date("M", strtotime("$iM/12/10"));
+                                        $select =mysqli_query($con,"select sum(sp) as total_sales  from animalsales where MONTH(solddate)= '$month' and YEAR (solddate)='$year' and farm_id ='$farm'");
+                                        $result = mysqli_fetch_array($select);
+                                        ?>
+                                        { label: "<?=$x_axis?>" , y: <?php echo ($result['total_sales']+0);?>},
+                                        <?php
+                                        }
+                                        }
+                                        ?>
+                                    ]
+                                },
+                            ]
+                        });
+                        chart.render();
+
+                        function toggleDataSeries(e) {
+                            if(typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                                e.dataSeries.visible = false;
+                            }
+                            else {
+                                e.dataSeries.visible = true;
+                            }
+                            chart.render();
+                        }
+                    }
+                </script>
+
+                <div id="chartContainer" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
+                <script src="charts/canvasjs.min.js"></script>
+            </div>
             <!-- ============================================================== -->
         </div>
         <!-- /.container-fluid -->

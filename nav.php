@@ -67,7 +67,7 @@
                 </li>
                 <li class="divider"></li>
                <li>
-                    <a href="">
+                    <a href="graph-animal-sales">
                         <div>
                          Animal Sales
                         </div>
@@ -75,7 +75,7 @@
                 </li>
                 <li class="divider"></li>
                 <li>
-                    <a href="graph-milk-sales">
+                    <a href="graph-cashflow">
                         <div>
                           Income Flow
                         </div>
@@ -109,20 +109,7 @@
                         
                     </ul>
                 </li>
-				
-				
-				
-				
-				
-				 
-				 <!--<li class="col-sm-2">
-                    <ul>
-                        <li class="dropdown-header">System Logs </li>
-                        <li><a href="#">Add</a></li>
-                        <li><a href="#">View</a></li>
-                        
-                    </ul>
-                </li>-->
+
 				
 				 <li class="col-sm-2">
                     <ul>
@@ -140,36 +127,6 @@
                         
                     </ul>
                 </li>
-			
-				
-				
-				 <!--<li class="col-sm-2">
-                    <ul>
-                        <li class="dropdown-header">Manage <br>Farms </li>
-                        <li><a href="">Add Farms</a></li>
-                        <li><a href="">View Farms</a></li>
-                        
-                    </ul>
-                </li>
-				 <li class="col-sm-1">
-                    <ul>
-                        <li class="dropdown-header">Manage<br> Doctors </li>
-                        <li><a href="graph-milk-sales">Add</a></li>
-                        <li><a href="graph-weight-tracking">View</a></li>
-                        
-                    </ul>
-                </li>
-				 <li class="col-sm-1">
-                    <ul>
-                        <li class="dropdown-header">Expense<br>Categories </li>
-                        <li><a href="graph-milk-sales">Add</a></li>
-                        <li><a href="graph-weight-tracking">View</a></li>
-                        
-                    </ul>
-                </li>-->
-				
-				
-                
                
             </ul>
         </li>
@@ -185,7 +142,7 @@
                 <input type="text" placeholder="Search..." class="form-control"> <a href=""><i class="fa fa-search"></i></a> </form>
         </li>
         <li class="dropdown">
-            <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#"> <img src="plugins/images/users/varun.jpg" alt="user-img" width="36" class="img-circle"><b class="hidden-xs">
+            <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#"> <img src="plugins/images/users/user.png" alt="user-img" width="36" class="img-circle"><b class="hidden-xs">
                     <?php
                     include 'db.php';
                     $user_id = $_SESSION['memberid'];
@@ -196,17 +153,19 @@
             <ul class="dropdown-menu dropdown-user animated flipInY">
                 <li>
                     <div class="dw-user-box">
-                        <div class="u-img"><img src="plugins/images/users/varun.jpg" alt="user" /></div>
+                        <div class="u-img"><img src="plugins/images/users/user.png" alt="user" /></div>
                         <div class="u-text">
-                            <h4>Steave Jobs</h4>
-                            <p class="text-muted">varun@gmail.com</p><a href="profile.html" class="btn btn-rounded btn-danger btn-sm">View Profile</a></div>
+                            <h4><?php echo $mnames['full_names'];?></h4>
+                           <a href="#" class="btn btn-rounded btn-danger btn-sm">View Profile</a></div>
                     </div>
                 </li>
                 <li role="separator" class="divider"></li>
                 <li><a href="#"><i class="ti-user"></i> My Profile</a></li>
+                <!--
                 <li><a href="#"><i class="ti-wallet"></i> My Balance</a></li>
                 <li><a href="#"><i class="ti-email"></i> Inbox</a></li>
                 <li role="separator" class="divider"></li>
+                -->
                 <li><a href="#"><i class="ti-settings"></i> Account Setting</a></li>
                 <li role="separator" class="divider"></li>
                 <li><a href="logout"><i class="fa fa-power-off"></i> Logout</a></li>

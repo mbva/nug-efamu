@@ -52,6 +52,62 @@
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
+            <div class="row">
+
+                <div class="col-md-8">
+                    <form action="" method="post">
+                        <div class="form-group-inner">
+                            <div class="row">
+                                <div class="graph-form" style="background: rebeccapurple;padding-left: 30%">
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                        <div class="input-daterange input-group" >
+                                            <select class="form-control select2" name="month">
+                                                <option value="">**** Month****</option>
+                                                <?php
+                                                for($i=1;$i<13;$i++)
+                                                    print("<option>".date('F',strtotime('01.'.$i.'.2001'))."</option>");
+                                                ?>
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                        <div class="input-daterange input-group" >
+                                            <select class="form-control select2" name="year">
+                                                <option value="">**** Year****</option>
+                                                <?php
+                                                // Sets the top option to be the current year. (IE. the option that is chosen by default).
+                                                $currently_selected = date('Y');
+                                                // Year to start available options at
+                                                $earliest_year = 1950;
+                                                // Set your latest year you want in the range, in this case we use PHP to just set it to the current year.
+                                                $latest_year = date('Y');
+                                                // Loops over each int[year] from current year, back to the $earliest_year [1950]
+                                                foreach ( range( $latest_year, $earliest_year ) as $i ) {
+                                                    // Prints the option with the next year in range.
+                                                    print '<option value="'.$i.'"'.($i === $currently_selected ? ' selected="selected"' : '').'>'.$i.'</option>';
+                                                };
+                                                ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                        <div class="login-btn-inner">
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                    <button style="float: right" name="submit" class="btn btn-sm btn-primary login-submit-cs" type="submit">Search</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br>
+            <br>
             <!--.row-->
             <div class="row">
                 <script>
@@ -65,8 +121,8 @@
                                     if(isset($_POST['submit'])){
                                         $date = $_POST['date'];
                                         // $d = date_parse_from_format("Y-m-d", $date);
-                                        $m =  date("F", strtotime($date));
-                                        $y =  date("Y", strtotime($date));
+                                        $m =  $_POST['month'];
+                                        $y =  $_POST['year'];
                                         echo $m."-".$y;
                                     }else{
                                         $date = date("Y-m-d");
@@ -79,6 +135,15 @@
                             },
                             axisY:{
                                 title: "Quantity of Milk in Litres"
+                            },
+                            axisX:{
+                                title: "(<?php
+                                    if(isset($_POST['submit'])){
+                                        echo "Days of the Month";
+                                    }else{
+                                        echo "Days of the Month";
+                                    }
+                                    ?>)"
                             },
                             toolTip: {
                                 shared: true
@@ -97,10 +162,12 @@
                                         include 'db.php';
 
                                         if(isset($_POST['submit'])){
-                                        $date_from = $_POST['date'];
+
                                         $date_from2=$date_from;
                                         //echo "<h2> datefrom $date_from2 </h2>";
-                                        $month = date("m");
+                                        $m =  $_POST['month'];
+                                        $y =  $_POST['year'];
+                                        $date_from = "$y-$m-01";
                                         $sno = 0;
                                         //$date_from = date("Y-m-01");
                                         //$date_from = "2018-10-01";
@@ -113,11 +180,10 @@
                                         $sno++;
                                         $y_axis_value  = "Day".$sno;
                                         ?>
-                                        { label: "<?=$result['solddate']?>" , y: <?=number_format($qty_sold);?> },
+                                        {label: "<?=$result['solddate']?>" , y: <?=number_format($qty_sold);?>},
                                         <?php
                                         $date_from = date ("Y-m-d", strtotime("+1 day", strtotime($date_from)));
                                         }
-
                                         }else{
                                         $month = date("m");
                                         $sno = 0;
