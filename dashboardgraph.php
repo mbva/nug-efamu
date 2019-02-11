@@ -97,7 +97,9 @@ $active='dash';?>
                                                 $month = date("m");
                                                 $year = date("Y");
                                                 //echo $month;
-                                                $sql=mysqli_query($con,"select sum(quantity) as total_milk from milkyield where MONTH (mdate)='$month' and YEAR (mdate)='$year' and farm_id = '$farm'");
+                                                $sql=mysqli_query($con,"select sum(quantity) as total_milk 
+												from milkyield where MONTH (mdate)='$month' and YEAR (mdate)='$year' 
+												and farm_id = '$farm'");
                                                 $ans = mysqli_fetch_array($sql);
                                                 echo number_format($ans['total_milk'])." Ltrs";
 												 $totalmilkcollected=$ans['total_milk'];
@@ -108,7 +110,7 @@ $active='dash';?>
                                                 echo number_format($ans['total_milk_spoilt'])." Ltrs";
 												$totalmilkspoilt=$ans['total_milk_spoilt'];
                                                 
-												$sql=mysqli_query($con,"select sum(qty) as total_milk_home from milkusage 
+												/*$sql=mysqli_query($con,"select sum(qty) as total_milk_home from milkusage 
 												where MONTH (date)='$month' and YEAR (date)='$year' and farm_id = '$farm' 
 												AND usagetype='Home Consumption'");
                                                 $ans = mysqli_fetch_array($sql);
@@ -119,7 +121,7 @@ $active='dash';?>
 												AND usagetype='Calves Feeding'");
                                                 $ans = mysqli_fetch_array($sql);
                                                 echo number_format($ans['total_milk_calves'])." Ltrs";
-                                                
+                                                */
 												
 												?>
                                             </h3></li>
@@ -169,87 +171,28 @@ $active='dash';?>
                     <div class="col-md-12 col-lg-8 col-sm-12 col-xs-12">
                         <div class="white-box">
 						
-						<html>
-<head>
-	<title>My first chart using FusionCharts Suite XT</title>
-	<script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
-	<script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js></script>
-	<script type="text/javascript">
-		FusionCharts.ready(function(){
-			var chartObj = new FusionCharts({
-    type: 'column3d',
-    renderAt: 'chart-container',
-    width: '700',
-    height: '400',
-    dataFormat: 'json',
-    dataSource: {
-        "chart": {
-            "caption": "Monthly revenue for last year",
-            "subCaption": "Harry's SuperMart",
-            "xAxisName": "Month",
-            "yAxisName": "Revenues (In USD)",
-            "numberPrefix": "$",
-            "theme": "fusion"
-        },
-        "data": [{
-                "label": "Jan",
-                "value": "420000"
-            },
-            {
-                "label": "Feb",
-                "value": "810000"
-            },
-            {
-                "label": "Mar",
-                "value": "720000"
-            },
-            {
-                "label": "Apr",
-                "value": "550000"
-            },
-            {
-                "label": "May",
-                "value": "910000"
-            },
-            {
-                "label": "Jun",
-                "value": "510000"
-            },
-            {
-                "label": "Jul",
-                "value": "680000"
-            },
-            {
-                "label": "Aug",
-                "value": "620000"
-            },
-            {
-                "label": "Sep",
-                "value": "610000"
-            },
-            {
-                "label": "Oct",
-                "value": "490000"
-            },
-            {
-                "label": "Nov",
-                "value": "900000"
-            },
-            {
-                "label": "Dec",
-                "value": "730000"
-            }
-        ]
-    }
-});
-			chartObj.render();
-		});
-	</script>
-	</head>
-	<body>
+						
+<script type="text/javascript">
+                                    window.onload = function () {
+                                        var chart = new CanvasJS.Chart("chartContainer", {
+                                            title: {
+                                                text: "Graph of Average Farm Records"
+                                            },
+                                            data: [{
+                                                type: "column",
+                                                dataPoints: [
+                                                    {y: <?php echo $totalmilkcollected; ?>, label: "Piglet Mortality Before Weaning"},
+                                                    {y: <?php echo $totalmilkspoilt; ?>, label: "Longevity of the Sow"},
+                                                    
+                                                ]
+                                            }]
+                                        });
+                                        chart.render();
+                                    }
+                                </script>
+	
 		<div id="chart-container">FusionCharts XT will load here!</div>
-	</body>
-</html>
+	
 						
 						   <div class="chartcss">
 <?php
@@ -353,7 +296,7 @@ $class='S'.$row["class"];
 <center>
  <div id="chart-container">Chart will render here!</div></center>
  </div>
-   </body>
+  
    
    
                             <script>
