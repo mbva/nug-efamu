@@ -177,6 +177,9 @@ $active='dash';?>
                                         axisY:{
                                             title: "Quantity of Milk in Litres"
                                         },
+                                        axisX:{
+                                            title: "Days of the Month"
+                                        },
                                         toolTip: {
                                             shared: true
                                         },

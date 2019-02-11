@@ -52,6 +52,80 @@
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
+            <div class="row">
+
+                <div class="col-md-8">
+                    <form action="" method="post">
+                        <div class="form-group-inner">
+                            <div class="row">
+                                <div class="graph-form" style="background: rebeccapurple;padding-left: 10%">
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                        <div class="input-daterange input-group" >
+                                            <select class="form-control select2" name="animal_id">
+                                                <option value="">**** Animal****</option>
+                                                <?php
+                                                $select = mysqli_query($con,"select * from animal_registration where status = 'Present' and farm_id ='$farm'");
+                                                while ($results = mysqli_fetch_array($select)){
+                                                    ?>
+                                                    <option value="<?php echo $results['animal_id'];?>"><?php echo $results['animal_name']." (".$results['tagNo'].")"; ?></option>
+                                            </select>
+                                            <input type="hidden" name="aname" value="<?php echo $results['animal_name']; ?>">
+                                            <input type="hidden" name="tagNo" value="<?php echo $results['tagNo']; ?>">
+                                            <?php
+                                            }
+                                            ?>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                        <div class="input-daterange input-group" >
+                                            <select class="form-control select2" name="month">
+                                                <option value="">**** Month****</option>
+                                                <?php
+                                                for($i=1;$i<13;$i++)
+                                                    print("<option>".date('F',strtotime('01.'.$i.'.2001'))."</option>");
+                                                ?>
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                        <div class="input-daterange input-group" >
+                                            <select class="form-control select2" name="year">
+                                                <option value="">**** Year****</option>
+                                                <?php
+                                                // Sets the top option to be the current year. (IE. the option that is chosen by default).
+                                                $currently_selected = date('Y');
+                                                // Year to start available options at
+                                                $earliest_year = 1950;
+                                                // Set your latest year you want in the range, in this case we use PHP to just set it to the current year.
+                                                $latest_year = date('Y');
+                                                // Loops over each int[year] from current year, back to the $earliest_year [1950]
+                                                foreach ( range( $latest_year, $earliest_year ) as $i ) {
+                                                    // Prints the option with the next year in range.
+                                                    print '<option value="'.$i.'"'.($i === $currently_selected ? ' selected="selected"' : '').'>'.$i.'</option>';
+                                                };
+                                                ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                        <div class="login-btn-inner">
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                    <button style="float: right" name="submit" class="btn btn-sm btn-primary login-submit-cs" type="submit">Search</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br>
+            <br>
             <!--.row-->
             <div class="row">
                 <script>
@@ -63,19 +137,29 @@
                             title:{
                                 text: " (<?php
                                     if(isset($_POST['submit'])){
-                                        $date = $_POST['date'];
+                                        //$date = $_POST['date'];
                                         $tagno = $_POST['tagno'];
+                                        $aname = $_POST['aname'];
                                         // $d = date_parse_from_format("Y-m-d", $date);
-                                        $m =  date("F", strtotime($date));
-                                        $y =  date("Y", strtotime($date));
-                                        echo $tagno. " Weight Analysis as at ".$m."-".$y;
+                                        $m =  $_POST['month'];
+                                        $y =  $_POST['year'];
+                                        echo $aname. " Weight Analysis as at ".$m."-".$y;
                                     }else{
                                         echo "Annual Representation of Herd Average Weight";
                                     }
                                     ?>)"
                             },
                             axisY:{
-                                title: "Average Weight in Kgs"
+                                title: "Average Weight (Kgs)"
+                            },
+                            axisX:{
+                                title: "(<?php
+                                    if(isset($_POST['submit'])){
+                                        echo "Days of the Month";
+                                    }else{
+                                        echo "Months of the Year";
+                                    }
+                                    ?>)"
                             },
                             toolTip: {
                                 shared: true
@@ -94,11 +178,13 @@
                                         include 'db.php';
 
                                         if(isset($_POST['submit'])){
-                                        $date_from = $_POST['date'];
-                                        $tagno =$_POST['tagno'];
+                                        $m = $_POST['month'];
+                                        $y = $_POST['year'];
+                                        $date_from = "$y-$m-01";
+                                        $animal_id =$_POST['animal_id'];
 
                                         for($i=1;$i<=31;$i++){
-                                        $select =mysqli_query($con,"select AVG (weight) as daily_avg_weight , wdate from weight where tagno = '$tagno' AND wdate = '$date_from' and farm_id ='$farm'");
+                                        $select =mysqli_query($con,"select AVG (weight) as daily_avg_weight , wdate from weight where animal_id = '$animal_id' AND wdate = '$date_from' and farm_id ='$farm'");
                                         $result = mysqli_fetch_array($select);
                                         $daily_avg_weight = $result['daily_avg_weight'];
                                         ?>
