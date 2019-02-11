@@ -5,46 +5,30 @@
 <?php include 'head.php';?>
 
 </head>
-<?php 
-include 'db.php';
-
-
-$farm_id = $_GET['farm_id'];
+<?php
+$animal_id = $_GET['animal_id'];
 $id = $_GET['id'];
-$details = mysqli_fetch_array(mysqli_query($con,"select * from manage_doctors where farm_id = '$farm_id' and id='$id'"))
-?>
-<?php 
-$farm  =$_SESSION['farm'];
-if(isset($_POST['submit'])){
-    $fname = mysqli_real_escape_string($con,    ucwords($_POST['fname']));
-    $farm_id = mysqli_real_escape_string($con,    ucwords($_POST['farm_id']));
-    $id = mysqli_real_escape_string($con,    ucwords($_POST['id']));
-    $contact = mysqli_real_escape_string($con,  $_POST['contact']);
-    $email = mysqli_real_escape_string($con, $_POST['email']);
+$details = mysqli_fetch_array(mysqli_query($con,"select a.*,c.* from animal_registration a, culling c where  c.animal_id ='$animal_id' and c.id='$id' "));
 
+
+$farm = $_SESSION['farm'];
+if(isset($_POST['submit'])){
+    $animal_id = mysqli_real_escape_string($con,        ucwords($_POST['animal_id']));
+    $id = mysqli_real_escape_string($con,        ucwords($_POST['id']));
+    $doc = mysqli_real_escape_string($con,          ucwords($_POST['cdate']));
+    $reason = mysqli_real_escape_string($con,          ucwords($_POST['reason']));
+    $comment = mysqli_real_escape_string($con,          ucwords($_POST['comment']));
     //capturing the registrar of the data
     $entered_by =   $_SESSION['full_names'];
     $time =         date("Y-m-d H:i:s");
-    $action =       "Registered Doctor ".' '.$fname;
-
-
-
-        $update_doctor = mysqli_query($con,"update manage_doctors set vet_name='$fname',contact='$contact',email='$email' where farm_id='$farm_id' and id='$id' ");
-        $insert_transaction = mysqli_query($con,"insert into transaction_logs(farm_id,transaction_action,transaction_time,transaction_by) VALUES ('$farm','$action','$time','$entered_by')");
-
-		if(!$update_doctor){
-			die('NOT UPDATED'.mysql_error());
-		}else{
-			?>
-			<script>alert("SUCESSFULY UPDATED");</script>
-		<script>window.location='view-doctors';</script>
-		<?php 
+    $action =       "Entered Culling records of ".' '.$animal_id;
+        $update = mysqli_query($con,"update culling set date_of_culling='$doc',reason='$reason',comment='$comment' where animal_id='$animal_id' and id='$id'");
+        //inserting the log
+    ?>
+<script>location='view-culling-records';</script>
+<?php
 		}
-}
-
-			
 ?>
-<body>
 
 <body class="fix-header">
     <!-- ============================================================== -->
@@ -110,30 +94,38 @@ if(isset($_POST['submit'])){
                         <div class="white-box">
                             <h3 class="box-title m-b-0">Edit Doctor Details</h3>
                             
-                            <form action="" method="post" enctype="multipart/form-data">
+                         <form action="" method="post" enctype="multipart/form-data">
                                     <div class="row">
-                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                       <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
                                             <div class="basic-login-inner">
+
                                             </div>
                                         </div>
-                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                             <div class="basic-login-inner">
-
                                                 <div class="form-group-inner">
-                                                    <label>Full Name</label>
-                                                    <input type="text" value="<?=$details['vet_name']; ?>" name="fname" required autocomplete="off" class="form-control" placeholder="First Name" />
-                                                    <input type="hidden" value="<?=$details['id']; ?>" name="id" required autocomplete="off" class="form-control" placeholder="First Name" />
-                                                    <input type="hidden" value="<?=$details['farm_id']; ?>" name="farm_id" required autocomplete="off" class="form-control" placeholder="First Name" />
+                                                    <label>Culling Date </label>
+                                                    <input type="date" readonly value="<?=$details['date_of_culling'];?>" class="form-control" name="cdate" />
+                                                </div>
+                                                <div class="form-group-inner">
+                                                    <label> Animal</label>
+                                                    <input type="text" readonly value="<?php
+                                                    $aname = mysqli_fetch_array(mysqli_query($con,"select * from animal_registration where animal_id='$animal_id'"));
+                                                    echo  $aname['animal_name']." (".$aname['tagNo'].")";?>" class="form-control" name="" id="datepicker" />
+                                                    <input type="hidden" value="<?=$details['id'];?>" class="form-control" name="id" />
+                                                    <input type="hidden" value="<?=$details['animal_id'];?>" class="form-control" name="animal_id" />
                                                 </div>
 
                                                 <div class="form-group-inner">
-                                                    <label>Contact </label>
-                                                    <input class="form-control" value="<?=$details['contact']; ?>"  required onkeypress="return isNumberKey(event)"  title= "Numbers only" name="contact"  autocomplete="off" placeholder="Contact " type="text" >
+                                                    <label>Reason </label>
+                                                    <input type="text" name="reason" value="<?=$details['reason'];?>" required autocomplete="off" class="form-control" placeholder="Reason of Culling " />
                                                 </div>
+
                                                 <div class="form-group-inner">
-                                                    <label>Email</label>
-                                                    <input type="email" value="<?=$details['email']; ?>" name="email" required autocomplete="off" class="form-control" placeholder="Email" />
+                                                    <label>Comment </label>
+                                                    <input type="text" name="comment" value="<?=$details['comment'];?>" required autocomplete="off" class="form-control"/>
                                                 </div>
+
                                                 <div class="login-btn-inner">
                                                     <div class="inline-remember-me" style="text-align: center">
                                                         <button class="btn btn-lg btn-primary login-submit-cs" name="submit" type="submit">Update</button>
@@ -141,8 +133,9 @@ if(isset($_POST['submit'])){
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
                                             <div class="basic-login-inner">
+
                                             </div>
                                         </div>
 

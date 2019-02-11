@@ -2,91 +2,48 @@
 <html lang="en">
 
 <head>
-    <?php 
-    $active='breeding';?>
-</head>
-<?php include 'head.php';?>
-<script src="resources/jquery-min.js"></script>
-<script type="text/javascript">
-
-    $(document).ready(function(){
-        $("select.smethod").change(function(){
-            var selectedsmethod = $(".smethod option:selected").val();
-            $.ajax({
-                type: "POST",
-                url: "process_smethod",
-                data: { smethod : selectedsmethod } 
-
-            }).done(function(data){
-                $("#response").html(data);
-            });
-        });
-		 });
-
-		 
-</script>
+    <?php include 'head.php';
+    $active='health';
+    ?>
 </head>
 <?php
 include 'db.php';
 $message="";
 $farm = $_SESSION['farm'];
+if(isset($_POST['submit'])){
+    $animal_id = mysqli_real_escape_string($con,        ucwords($_POST['animal_id']));
+    $doc = mysqli_real_escape_string($con,          ucwords($_POST['cdate']));
+    $reason = mysqli_real_escape_string($con,          ucwords($_POST['reason']));
+    $comment = mysqli_real_escape_string($con,          ucwords($_POST['comment']));
 
-$animal = $_GET['animal'];
-$animal_id = $_GET['animalid'];
 
-if(isset($_GET['submit'])){
-    $animal_id = $_GET['animal_id'];
-    $atag = mysqli_real_escape_string($con,ucwords($_GET['tagno']));
-    $dos = mysqli_real_escape_string($con,ucwords($_GET['dos']));
-    $doctor = mysqli_real_escape_string($con, ucwords($_GET['doctor']));
-	$aismethod= mysqli_real_escape_string($con,$_GET['aimethod']);
-	$smethod= mysqli_real_escape_string($con,$_GET['smethod']);
     //capturing the registrar of the data
-    $entered_by = $_SESSION['full_names'];
-    $time       = date("Y-m-d H:i:s");
-    $action     = "Entered Serving Record";
+    $entered_by =   $_SESSION['full_names'];
+    $time =         date("Y-m-d H:i:s");
+    $action =       "Entered death records of ".' '.$animal_id;
 
-    //checking for the result
-
-    $check = mysqli_query($con,"select * from animal_serving where animal_id= '$animal_id'
-	and farm_id ='$farm' and status='Pregnant'");
-    if(mysqli_num_rows($check)>0){
-        echo "<script>alert('The record already exists');</script>";
+    //checking if the record exists
+    $check_record = mysqli_query($con,"select * from death where animal_id ='$animal_id' and date_of_death='$doc' and farm_id ='$farm'");
+    if(mysqli_num_rows($check_record)>0){
+        echo "<script>alert('You are duplicating the records');</script>";
     }else{
-        $serving_date = $dos;
-        $max_check_date =date_create($serving_date);
-        date_add($max_check_date,date_interval_create_from_date_string("21 days"));
-        $max_check_for_signs_of_heat__date =  date_format($max_check_date,"Y-m-d");
+        $sql_deworm = "insert into death(farm_id,animal_id,date_of_death,reason,comment)VALUES ('$farm','$animal_id','$doc','$reason','$comment')";
+        //inserting the log
+        $sql_log  = "insert into transaction_logs(farm_id,transaction_action,transaction_time,transaction_by) VALUES ('$farm','$action','$time','$entered_by')";
 
-        $recordserve=mysqli_query($con,"insert into 
-		animal_serving(serve_method,ai_serve_method,farm_id,animal_id,servedate,servedby,checkup_date,soh_status)
-		VALUES ('$smethod','$aismethod','$farm','$animal_id','$serving_date','$doctor','$max_check_for_signs_of_heat__date','Pending')" );
-       if(!$recordserve){
-		   die('not inserted' .mysql_error($con));
-	   }else{
-		   
-	  $update_animal= mysqli_query($con,"update heat_animals set actualheatdate='$serving_date',
-		status='Served' where animal_id = '$animal_id' and farm_id='$farm'");
-		
-		if(!$update_animal){
-		   die('not updated' .mysql_error($con));
-		
-        /////////////////////////////Recording for the animal Serving///////////////////////////////
-
+        //Deleting the culled animal from the herd
+        $delete = mysqli_query($con,"update animal_registration set status = 'Died' where animal_id = '$animal_id' and farm_id ='$farm'");
+        
         //Executing the queries;
-        
-		}else{
-			 $sql_log  = mysqli_query($con,"insert into transaction_logs(farm_id,transaction_action,transaction_time,transaction_by) VALUES ('$farm','$action','$time','$entered_by')");
-       
-			echo "<script>alert('Animal  Served Successfullly ');</script>";
-        echo "<script>document.location='wheel-heat-animals';</script>";
-		} 
-        
+        $insert_deworm = mysqli_query($con,$sql_deworm);
+        $insert_transaction = mysqli_query($con,$sql_log);
+        if($insert_deworm && $insert_transaction ){
+            // $message = "<div class=\"alert alert-success\"><strong>Registration is Successful</strong></div>";
+            echo "<script>alert('Recorded Successful');</script>";
+        }
     }
 
 }
-}
-
 ?>
 <body class="fix-header">
 <!-- ============================================================== -->
@@ -124,14 +81,14 @@ if(isset($_GET['submit'])){
         <div class="container-fluid">
             <div class="row bg-title">
                 <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                    <h4 class="page-title">Animal Serving Form</h4> </div>
+                    <h4 class="page-title">Health death Form</h4> </div>
                 <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                     <button class="right-side-toggle waves-effect waves-light btn-info btn-circle pull-right m-l-20"><i class="ti-settings text-white"></i></button>
                     <a href="javascript: void(0);" "></a>
                     <ol class="breadcrumb">
                         <li><a href="#">Dashboard</a></li>
-                        <li><a href="#">Animal</a></li>
-                        <li><a href="#">Serving</a></li>
+                        <li><a href="#">Health</a></li>
+                        <li><a href="#">Death Records</a></li>
                     </ol>
                 </div>
                 <!-- /.col-lg-12 -->
@@ -141,36 +98,28 @@ if(isset($_GET['submit'])){
 
                 <div class="col-md-9 col-sm-12">
                     <div class="white-box">
-                        <h3 class="box-title m-b-0">Serving Form</h3>
-                        <form action="add-serving" method="GET"  enctype="multipart/form-data">
+                        <h3 class="box-title m-b-0">Death Record Form</h3>
+                        <form action="" method="post" enctype="multipart/form-data">
                             <div class="row">
                                 <div class="col-md-1"></div>
                                 <div class="col-sm-10 col-xs-12">
                                     <div class="form-group">
-                                        <label for="exampleInputpwd2">Animal</label>
+                                        <label for="exampleInputpwd2">Death Date</label>
                                         <div class="input-group">
-                                            <input class="form-control" name="tagno" required readonly value="<?=$animal;?>" type="text" >
-                                            <input class="form-control" name="animal_id" readonly value="<?=$animal_id;?>" type="hidden" >
-                                            <span class="input-group-addon"><i class="icon-pencil"></i></span>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputpwd2">Serving Date</label>
-                                        <div class="input-group">
-                                            <input type="date" class="form-control" name="dos" required id="datepicker" />
+                                            <input type="date" class="form-control" name="cdate" id="datepicker" />
                                             <span class="input-group-addon"><i class="icon-calender"></i></span>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputuname">Doctor </label>
+                                        <label for="exampleInputuname">Animal </label>
                                         <div class="input-group">
-                                            <select class="form-control select2" name="doctor" required>
+                                            <select class="form-control select2" name="animal_id" required>
                                                 <option>Select</option>
                                                 <?php
-                                                $select = mysqli_query($con,"select * from manage_doctors where status = 'Activated' and farm_id = '$farm'");
-                                                while ($doctor = mysqli_fetch_array($select)){
+                                                $select_tag = mysqli_query($con,"select * from animal_registration where status ='Present' and farm_id ='$farm'");
+                                                while ($tag = mysqli_fetch_array($select_tag)){
                                                     ?>
-                                                    <option value="<?php echo $doctor['vet_name']; ?>"><?php echo $doctor['vet_name']; ?></option>
+                                                    <option value="<?php echo $tag['animal_id']; ?>"><?php echo $tag['animal_name'].'('.$tag['tagNo'].')'; ?></option>
                                                     <?php
                                                 }
                                                 ?>
@@ -180,53 +129,34 @@ if(isset($_GET['submit'])){
                                             <div class="input-group-addon"><i class="ti-pencil"></i></div>
                                         </div>
                                     </div>
-									
-									  <div class="form-group">
-                                        <label for="exampleInputEmail1">Serving Method</label>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Death Cause</label>
                                         <div class="input-group">
-                                            <select class="form-control smethod" name="smethod" required>
-                                               
-                                                 <option value="">Select</option>
-                                                        <option value="Artifical Insermination">Artifical Insermination</option>
-                                                        <option value="Bull">Bull</option>
-                                                        
-                                            </select>
-                                            <div class="input-group-addon"><i class="ti-email"></i></div>
+                                            <input class="form-control" name="reason" required autocomplete="off" placeholder="Death Cause" type="text">
+                                            <div class="input-group-addon"><i class="ti-pencil-alt"></i></div>
                                         </div>
                                     </div>
-                                        <div class="form-group" id="response">
-                                    
-                                    
+                                    <div class="form-group">
+                                        <label for="exampleInputphone">comment</label>
+                                        <div class="input-group">
+                                            <textarea  name="comment" class="form-control" id="" rows="1" cols="100"  placeholder="Description"></textarea>
+                                        </div>
                                     </div>
-                                     <div class="form-group">
-                                     
                                     <div class="text-center">
                                         <button type="submit" name="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>
                                         <button type="reset" class="btn btn-inverse waves-effect waves-light">Cancel</button>
                                     </div>
                                 </div>
-                               
+                                <div class="col-md-1"></div>
                             </div>
                         </form>
                     </div>
                 </div>
-				</div>
                 <div class="col-md-3 col-sm-12">
-				<div class="white-box">
-                    <h4><b>Serving Tips</b></h4>
-                    <marquee  behavior="scroll" direction="up" id="mymarquee" scrollamount="2" onmouseover="this.stop();" onmouseout="this.start();">
-                        <p style="text-align: justify">
-                            <?php
-                            $select = mysqli_query($con,"select * from farmertips where section='Profiling' ORDER BY id desc LIMIT 1 ");
-                            while ($tipscheck = mysqli_fetch_array($select)){
-                                echo $tipscheck['tips'];
-                            }
-                            ?>
-                        </p>
-                    </marquee>
+                    <h4><b></b></h4>
+
 
                 </div>
-				</div>
             </div>
             <!-- ============================================================== -->
         </div>

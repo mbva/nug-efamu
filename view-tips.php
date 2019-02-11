@@ -3,48 +3,7 @@
 
 <head>
 <?php include 'head.php';?>
-
 </head>
-<?php 
-include 'db.php';
-
-
-$farm_id = $_GET['farm_id'];
-$id = $_GET['id'];
-$details = mysqli_fetch_array(mysqli_query($con,"select * from manage_doctors where farm_id = '$farm_id' and id='$id'"))
-?>
-<?php 
-$farm  =$_SESSION['farm'];
-if(isset($_POST['submit'])){
-    $fname = mysqli_real_escape_string($con,    ucwords($_POST['fname']));
-    $farm_id = mysqli_real_escape_string($con,    ucwords($_POST['farm_id']));
-    $id = mysqli_real_escape_string($con,    ucwords($_POST['id']));
-    $contact = mysqli_real_escape_string($con,  $_POST['contact']);
-    $email = mysqli_real_escape_string($con, $_POST['email']);
-
-    //capturing the registrar of the data
-    $entered_by =   $_SESSION['full_names'];
-    $time =         date("Y-m-d H:i:s");
-    $action =       "Registered Doctor ".' '.$fname;
-
-
-
-        $update_doctor = mysqli_query($con,"update manage_doctors set vet_name='$fname',contact='$contact',email='$email' where farm_id='$farm_id' and id='$id' ");
-        $insert_transaction = mysqli_query($con,"insert into transaction_logs(farm_id,transaction_action,transaction_time,transaction_by) VALUES ('$farm','$action','$time','$entered_by')");
-
-		if(!$update_doctor){
-			die('NOT UPDATED'.mysql_error());
-		}else{
-			?>
-			<script>alert("SUCESSFULY UPDATED");</script>
-		<script>window.location='view-doctors';</script>
-		<?php 
-		}
-}
-
-			
-?>
-<body>
 
 <body class="fix-header">
     <!-- ============================================================== -->
@@ -92,68 +51,107 @@ if(isset($_POST['submit'])){
             <div class="container-fluid">
                 <div class="row bg-title">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">Doctor Records</h4> </div>
-                    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
-
-                       
-                        <ol class="breadcrumb">
-                            <li><a href="#">Dashboard</a></li>
-                            <li><a href="#">Settings</a></li>
-                            <li class="active">Edit Doctor</li>
-                        </ol>
-                    </div>
-                    <!-- /.col-lg-12 -->
+                        <h4 class="page-title">
+                      Module Tips
+                    </h4> </div>
+                <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+                    <button class="right-side-toggle waves-effect waves-light btn-info btn-circle pull-right m-l-20"><i class="ti-settings text-white"></i></button>
+                    <a href="javascript: void(0);" "></a>
+                    <ol class="breadcrumb">
+                        <li><a href="#">Dashboard</a></li>
+                        <li><a href="#">Module Tips</a></li>
+                        <li><a href="#">View Records</a></li>
+                    </ol>
                 </div>
                 <!-- /row -->
                 <div class="row">
 					<div class="col-sm-12">
                         <div class="white-box">
-                            <h3 class="box-title m-b-0">Edit Doctor Details</h3>
+                            <h3 class="box-title m-b-0">Module Tip</h3>
                             
-                            <form action="" method="post" enctype="multipart/form-data">
-                                    <div class="row">
-                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                            <div class="basic-login-inner">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                            <div class="basic-login-inner">
+                            <div class="table-responsive">
+							 
+                              <table id="exampless" class="myable table table-responsive  display nowrap table table-hover table-striped" cellspacing="0" width="100%">
+                                    <thead>
+									</th>
+                                         <tr>
+                                        <th  > <?php 
+ function get_client_ip()
+ {
+      $ipaddress = '';
+      if (getenv('HTTP_CLIENT_IP')){
+          $ipaddress = getenv('HTTP_CLIENT_IP');
+	  echo "<h2> $ipaddress </h2>";
+	  }
+      else if(getenv('HTTP_X_FORWARDED_FOR')){
+          $ipaddress = getenv('HTTP_X_FORWARDED_FOR');
+	  echo "<h2> $ipaddress </h2>";
+	  }
+      else if(getenv('HTTP_X_FORWARDED')){
+          $ipaddress = getenv('HTTP_X_FORWARDED');
+	  echo "<h2> $ipaddress </h2>";
+	  }
+      else if(getenv('HTTP_FORWARDED_FOR')){
+          $ipaddress = getenv('HTTP_FORWARDED_FOR');
+	  echo "<h2> $ipaddress </h2>";
+	  }
+      else if(getenv('HTTP_FORWARDED')){
+          $ipaddress = getenv('HTTP_FORWARDED');
+	  echo "<h2> $ipaddress </h2>";
+	  }
+	  
+      else if(getenv('REMOTE_ADDR')){
+          $ipaddress = getenv('REMOTE_ADDR');
+	  echo "<h2> $ipaddress </h2>";
+	  }
+      else{
+	  $ipaddress = 'UNKNOWN';}
 
-                                                <div class="form-group-inner">
-                                                    <label>Full Name</label>
-                                                    <input type="text" value="<?=$details['vet_name']; ?>" name="fname" required autocomplete="off" class="form-control" placeholder="First Name" />
-                                                    <input type="hidden" value="<?=$details['id']; ?>" name="id" required autocomplete="off" class="form-control" placeholder="First Name" />
-                                                    <input type="hidden" value="<?=$details['farm_id']; ?>" name="farm_id" required autocomplete="off" class="form-control" placeholder="First Name" />
-                                                </div>
+      return $ipaddress; 
+ }
 
-                                                <div class="form-group-inner">
-                                                    <label>Contact </label>
-                                                    <input class="form-control" value="<?=$details['contact']; ?>"  required onkeypress="return isNumberKey(event)"  title= "Numbers only" name="contact"  autocomplete="off" placeholder="Contact " type="text" >
-                                                </div>
-                                                <div class="form-group-inner">
-                                                    <label>Email</label>
-                                                    <input type="email" value="<?=$details['email']; ?>" name="email" required autocomplete="off" class="form-control" placeholder="Email" />
-                                                </div>
-                                                <div class="login-btn-inner">
-                                                    <div class="inline-remember-me" style="text-align: center">
-                                                        <button class="btn btn-lg btn-primary login-submit-cs" name="submit" type="submit">Update</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                            <div class="basic-login-inner">
-                                            </div>
-                                        </div>
+                                        include 'db.php';
+                                        $tid= $_GET['id'];
+										$farm= $_GET['farm_id'];
+                                        $select = mysqli_query($con,"select * from farmertips where id = '$tid' and farm_id ='$farm'");
+                                        $animal_records = mysqli_fetch_array($select);
+                                        ?>
+                                       
+                                        <div class="table-responsive">
 
-                                    </div>
-                                </form>
+                            <table id="example23" class="myTable table table-responsive color-table info-table display nowrap table table-hover table-striped" cellspacing="0" width="100%">
+                                <thead>
+                                <tr>
+                                  
+                                    <th ><h3 style="text-align: center"><?= $animal_records['section'];?> Tips</h3></th>
+                                    
+                                    
+                                </tr>
+                                </thead>
+                               
+                                <tbody>
+                               
+                              
+                                   
+                                        <td><?=$animal_records['tips'];?></td></tr>
+										
+                           
+                                </tbody>
+                            </table>
+                        </div>
+                                       
+                                       
+                                            
+                                            
+                                           
+                                </table>
+                            </div>
+                        </div>
                     </div>
                   
              
                     </div>
                 </div>
-		
                 
                 <!-- ============================================================== -->
                 <!-- End Right sidebar -->

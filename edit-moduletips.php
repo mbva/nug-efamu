@@ -2,14 +2,34 @@
 <html lang="en">
 
 <head>
-    <?php include 'head.php';
-    $active='settings';
-    ?>
+    <?php include 'head.php';?>
+	
+	
+
+
+
 </head>
 <?php
 include 'db.php';
-$message="";
+                                        $tid= $_GET['id'];
+										$farm= $_GET['farm_id'];
+                                       
+$active='settings';
+$farm = $_SESSION['farm'];
+if(isset($_POST['submit'])){
+     $module = mysqli_real_escape_string($con,    ucwords($_POST['module']));
+    $notes = mysqli_real_escape_string($con,    ucwords($_POST['notes']));
+ $action =       "Edited Farmer Tips";
+
+        $update = mysqli_query($con,"update farmertips set tips='$notes' and module='$module where id='$id'");
+        $insert_transaction = mysqli_query($con,"insert into transaction_logs(farm_id,transaction_action,transaction_time,transaction_by) VALUES ('$farm','$action','$time','$entered_by')");
 ?>
+<script>window.location="view-moduletips";</script>
+<?php 
+}
+?>
+
+
 <body class="fix-header">
 <!-- ============================================================== -->
 <!-- Preloader -->
@@ -46,78 +66,66 @@ $message="";
         <div class="container-fluid">
             <div class="row bg-title">
                 <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                    <h4 class="page-title">
-                      Module Tips
-                    </h4> </div>
+                    <h4 class="page-title">Expenses Items</h4> </div>
                 <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                     <button class="right-side-toggle waves-effect waves-light btn-info btn-circle pull-right m-l-20"><i class="ti-settings text-white"></i></button>
                     <a href="javascript: void(0);" "></a>
                     <ol class="breadcrumb">
                         <li><a href="#">Dashboard</a></li>
-                        <li><a href="#">Module Tips</a></li>
-                        <li><a href="#">View Records</a></li>
+                        <li><a href="#">System Settings</a></li>
+                        <li><a href="#">Income Categories</a></li>
                     </ol>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
             <!--.row-->
-                <div class="row">
-                <div class="col-sm-12">
+            <div class="row">
+			<?php 
+ $select = mysqli_query($con,"select * from farmertips where id= '$tid' ");
+                                        $animal_records = mysqli_fetch_array($select);?>
+                <div class="col-md-9 col-sm-12">
                     <div class="white-box">
-                        <h3 class="box-title m-b-0">Module tips</h3>
+                        <h3 class="box-title m-b-0">Manage Income Categories</h3>
+                       <form action="" method="post" enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="col-md-1"></div>
+                                <div class="col-sm-10 col-xs-12">
+                                    <div class="form-group">
+                                        <label for="exampleInputphone"> Module/Section </label>
+                                        <div class="input-group">
+                                            <select class="form-control select2" name="module" required>
+                                                <option value="<?php echo $animal_records['section'];?>"><?=$animal_records['section'];?></option>
+                                                <option value="Profiling">Animal Profiling</option>
+                                                <option value="Feeding">Animal Feeding</option>
+                                                <option value="Calving">Calving</option>
+                                                <option value="Milk">Milk Production</option>
+                                                <option value="health">Herd Health</option>
+												   <option value="Weight">Weight Management</option>
+                                            </select>
+                                            <div class="input-group-addon"><i class="ti-email"></i></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputphone">Notes/Tips </label>
+                                        <div class="input-group">
+                                            <textarea  type='text' name="notes" class="form-control" id="" rows="3" cols="90"  placeholder="Notes/Tips " value="<?php echo $animal_records['tips'];?>"></textarea>
+                                        </div>
+                                    </div>
 
-                        <div class="table-responsive">
-
-                            <table id="example23" class="myTable table table-responsive color-table info-table display nowrap table table-hover table-striped" cellspacing="0" width="100%">
-                                <thead>
-                                <tr>
-                                    <th  >ID</th>
-                                    <th >Section</th>
-                                    
-                                    <th >Added By</th>
-                                    <th >Date added</th>
-                                     
-                                    <th >Action</th>
-                                </tr>
-                                </thead>
-                                <tfoot>
-                                <tr>
-                                    <th>ID</th>
-                                    <th >Section</th>
-                                    <th >Added By</th>
-                                    <th >Date added</th>
-									
-                                    <th >Action</th>
-                                </tr>
-                                </tfoot>
-                                <tbody>
-                                <?php
-                                include 'db.php';
-                                $select = mysqli_query($con,"select * from farmertips where farm_id ='$farm'");
-                                $sno = 0;
-                                while($results = mysqli_fetch_array($select)){
-                                    $sno++
-                                    ?>
-                                    <tr><input type="hidden" id="id" name="id" value="<?=$results['id'];?>">
-                                        <td><?=$sno;?></td>
-                                        <td><?=$results['section'];?></td>
-                                        
-                                        <td><?=$results['addby'];?></td>
-                                        <td><?=$results['date_added'];?>
-                                <td><a  style="color: white" class="btn btn-info"  href="view-tips?farm_id=<?=$results['farm_id']?>&&id=<?=$results['id'];?>"><i class="fa fa-eye fa-1x"></a></i>
-
-                                         <a  style="color: white" class="btn btn-success"  href="edit-moduletips?farm_id=<?=$results['farm_id']?>&&id=<?=$results['id'];?>"><i class="fa fa-edit fa-1x"></a></i>
-                                          <a  style="color: white" class="btn btn-danger"  href="delete-moduletips?farm_id=<?=$results['farm_id']?>&&id=<?=$results['id'];?>"><i class="fa fa-trash fa-1x"></a></i></td>
-                                    <?php
-                                }
-                                ?>
-                                </tbody>
-                            </table>
-                        </div>
+                                    <div class="text-center">
+                                        <button type="submit" name="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>
+                                    </div>
+                                </div>
+                                <div class="col-md-1"></div>
+                            </div>
+                        </form>
                     </div>
                 </div>
+                <div class="col-md-3 col-sm-12">
+                    <h4><b>Tips</b></h4>
 
 
+                </div>
             </div>
             <!-- ============================================================== -->
         </div>
