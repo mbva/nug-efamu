@@ -13,7 +13,7 @@ if(isset($_POST['submit'])){
     $aname = mysqli_real_escape_string($con,    ucwords($_POST['aname']));
     $brand = mysqli_real_escape_string($con,    ucwords($_POST['brand']));
     $manufacturer = mysqli_real_escape_string($con,  $_POST['manufacturer']);
-
+    $activeingridient = mysqli_real_escape_string($con,  $_POST['ingridient']);
     //capturing the registrar of the data
     $entered_by =   $_SESSION['full_names'];
     $time =         date("Y-m-d H:i:s");
@@ -26,7 +26,8 @@ if(isset($_POST['submit'])){
         echo "<script>alert('Failed! The Acaricide already exists');</script>";
     } else{
 
-        $sql_user = "insert into manage_acaricide(farm_id,acaricide_name,brand,manufacturer,registeredby,regdate,status)VALUES ('$farm','$aname','$brand','$manufacturer','$entered_by','$time','Activated')";
+        $sql_user = "insert into manage_acaricide(activeingridient,farm_id,acaricide_name,brand,manufacturer,registeredby,regdate,status)
+		VALUES ('$activeingridient','$farm','$aname','$brand','$manufacturer','$entered_by','$time','Activated')";
         $sql_log  = "insert into transaction_logs(farm_id,transaction_action,transaction_time,transaction_by) VALUES ('$farm','$action','$time','$entered_by')";
 
         //Executing the queries;
@@ -117,6 +118,13 @@ if(isset($_POST['submit'])){
                                         <label for="exampleInputEmail1">Acaricide Manufacturer</label>
                                         <div class="input-group">
                                             <input type="text" name="manufacturer" required autocomplete="off" class="form-control" id="exampleInputEmail1" placeholder="Manufacturer">
+                                            <div class="input-group-addon"><i class="ti-pencil-alt"></i></div>
+                                        </div>
+                                    </div>
+									<div class="form-group">
+                                        <label for="exampleInputEmail1">Active Ingriedient</label>
+                                        <div class="input-group">
+                                            <input type="text" name="ingridient" required autocomplete="off" class="form-control" id="exampleInputEmail1" placeholder="Manufacturer">
                                             <div class="input-group-addon"><i class="ti-pencil-alt"></i></div>
                                         </div>
                                     </div>

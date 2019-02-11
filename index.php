@@ -102,7 +102,7 @@ function test_input($data){
                 <a href="javascript:void(0)" class="p-20 di"><img src="plugins/images/admin-logo.png"></a>
                 <div class="lg-content">
                     <h2>EFAMU DAIRY</h2>
-                    <p class="text-muted">For all your Dairy farm Solutions </p> <a href="#" class="btn btn-rounded btn-danger p-l-20 p-r-20"> Buy now</a> </div>
+                    <p class="text-muted">For all your Dairy farm Solutions </p> <a href="signup" class="btn btn-rounded btn-success p-l-20 p-r-20"> Register Now</a> </div>
             </div>
     </div>
     <div class="new-login-box">
@@ -137,11 +137,11 @@ function test_input($data){
                         <button class="btn btn-info btn-lg btn-block btn-rounded text-uppercase waves-effect waves-light" name="login" type="submit">Log In</button>
                     </div>
                 </div>
-                <div class="row">
+                <!--<div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 m-t-10 text-center">
                         <div class="social"><a href="javascript:void(0)" class="btn  btn-facebook" data-toggle="tooltip"  title="Login with Facebook"> <i aria-hidden="true" class="fab fa-facebook-f"></i> </a> <a href="javascript:void(0)" class="btn btn-googleplus" data-toggle="tooltip"  title="Login with Google"> <i aria-hidden="true" class="fab fa-google-plus-g"></i> </a> </div>
                     </div>
-                </div>
+                </div>-->
                 <div class="form-group m-b-0">
                     <div class="col-sm-12 text-center">
                         <p>Don't have an account? <a href="signup" class="text-primary m-l-5"><b>Sign Up</b></a></p>

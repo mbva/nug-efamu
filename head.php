@@ -51,7 +51,7 @@ date_default_timezone_set("Africa/Nairobi");
 include 'session.php';
 include 'db.php';
 $farm = $_SESSION['farm'];
-$memberid = $_SERVER['memberid'];
+$memberid = $_SESSION['memberid'];
 $get_farmname = mysqli_fetch_array(mysqli_query($con,"select * from farms where farmid='$farm'"));
 $farmname =$get_farmname['farmname'];
 ?>

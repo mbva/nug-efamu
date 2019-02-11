@@ -53,7 +53,7 @@
             <div class="row bg-title">
                 <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
                     <h4 class="page-title">
-                        Milk Production Records
+                       Milk Usage Records
                     </h4>
                 </div>
                 <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
@@ -62,7 +62,7 @@
                     <ol class="breadcrumb">
                         <li><a href="#">Dashboard</a></li>
                         <li><a href="#">Finance</a></li>
-                        <li class="active">Milk Production Records</li>
+                        <li class="active">Milk Usage Records</li>
                     </ol>
                 </div>
                 <!-- /.col-lg-12 -->
@@ -73,7 +73,7 @@
                     <div class="white-box">
 
                         <div class="row">
-                            <div class="col-md-4"> <h3 class="box-title m-b-0">Employees Salary Records</h3></div>
+                            <div class="col-md-4"> <h3 class="box-title m-b-0">Milk Usage</h3></div>
                             <div class="col-md-8">
                                 <form action="" method="post">
                                     <div class="form-group-inner">
@@ -108,10 +108,9 @@
                                         
                                         ?>ID</th>
                                     <th>Date</th>
-                                    <th>TagNo</th>
-                                    <th>Name</th>
-                                    <th>Time</th>
-                                    <th>Quantity Produced</th>
+                                    <th>Usage Type</th>
+                                    <th>Quantity</th>
+                                    
                                     <th>Action</th>
                                     <th>Action</th>
                                 </tr>
@@ -123,12 +122,14 @@
                                     $today = date("Y-m-d");
                                     $date_to             = $_POST['tdate'];
                                     $date_from           = $_POST['sdate'];
-                                    $select = mysqli_query($con,"select a.*,m.* from animal_registration a, milkyield m where m.mdate BETWEEN '$date_from' AND '$date_to' and a.farm_id ='$farm' and m.farm_id ='$farm' and a.animal_id=m.animal_id");
+                                    $select = mysqli_query($con,"select * from milkusage  where date BETWEEN '$date_from' 
+									AND '$date_to' and farm_id ='$farm'");
                                 }
                                 else{
                                     $current_month = date("m");
                                     //$current_month = 10;
-                                    $select = mysqli_query($con,"select a.*,m.* from animal_registration a, milkyield m where MONTH (m.mdate)='$current_month' and a.farm_id ='$farm' and m.farm_id ='$farm' AND a.animal_id=m.animal_id");
+                                    $select = mysqli_query($con,"
+select * from milkusage  WHERE farm_id ='$farm' and  MONTH (date)='$current_month' ");
                                 }
                                 $sno = 0;
                                 while($results = mysqli_fetch_array($select)){
@@ -136,11 +137,10 @@
                                     ?>
                                     <tr>
                                         <td><?=$sno;?></td>
-                                        <td><?=$results['mdate'];?></td>
-                                        <td><?=$results['tagNo'];?></td>
-                                        <td><?=$results['animal_name'];?></td>
-                                        <td><?=$results['milkingtime'];?></td>
-                                        <td><?=$results['quantity'];?></td>
+                                        <td><?=$results['date'];?></td>
+                                        <td><?=$results['usagetype'];?></td>
+                                        <td><?=$results['qty'];?></td>
+                                       
                                         <td><a  style="color: white" class="btn btn-info"  href="edit-milk-production?animal_id=<?=$results['animal_id'];?>&&id=<?=$results['id']; ?>"><i class="fa fa-edit fa-1x"></a></i></td>
                                         <td><a  style="color: white" class="btn btn-danger" onclick="return deleted()" href=""><i class="fa fa-trash fa-1x"></a></i></td>
                                     </tr>

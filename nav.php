@@ -100,6 +100,22 @@
                     </ul>
                 </li>
 				
+				<li class="col-sm-2">
+                    <ul>
+                        <li class="dropdown-header">Manage Income Categories </li>
+                        <li><a href="add-income-categories">Add Categories</a></li>
+                        <li><a href="#">View Categories</a></li>
+                        
+                    </ul>
+                </li>
+				<li class="col-sm-2">
+                    <ul>
+                        <li class="dropdown-header">Manage Expense Categories </li>
+                        <li><a href="manage-expense-items">Add Categories</a></li>
+                        <li><a href="view-expenses-items">View Categories</a></li>
+                        
+                    </ul>
+                </li>
 				
 				 <li class="col-sm-2">
                     <ul>

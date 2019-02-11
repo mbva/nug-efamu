@@ -224,8 +224,7 @@ while($feed = mysqli_fetch_array($pfeed))
 
 	if($feed_permission>0){
 ?>
-
-        <li> <a href="javascript:void(0)" class="waves-effect <?php if($active=='feeding') echo "active" ?>"><i class="mdi mdi-barley fa-fw"></i> <span class="hide-menu">Feeding<span class="fa arrow"></span></span></a>
+ <li> <a href="javascript:void(0)" class="waves-effect <?php if($active=='feeding') echo "active" ?>"><i class="mdi mdi-barley fa-fw"></i> <span class="hide-menu">Feeding<span class="fa arrow"></span></span></a>
             <ul class="nav nav-second-level">
                 <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">Calf </span><span class="fa arrow"></span></a>
                     <ul class="nav nav-third-level">
@@ -328,13 +327,26 @@ while($milk = mysqli_fetch_array($pmilk))
 
 	if($milk_permission>0){
 ?>
-
-        <li> <a href="javascript:void(0)" class="waves-effect <?php if($active=='milk_production') echo "active" ?>"><i class="mdi mdi-beaker fa-fw"></i> <span class="hide-menu">Milk Production<span class="fa arrow"></span></span></a>
+  <li> <a href="javascript:void(0)" class="waves-effect <?php if($active=='milk_production') echo "active" ?>"><i class="mdi mdi-beaker fa-fw"></i> <span class="hide-menu">Milk Management<span class="fa arrow"></span></span></a>
             <ul class="nav nav-second-level">
-                <li> <a href="add-milk-production-records"><i data-icon="7" class="fa fa-user fa-fw"></i><span class="hide-menu">Add Records</span></a> </li>
-                <li> <a href="view-milk-production-records"><i data-icon="7" class="fa fa-user fa-fw"></i><span class="hide-menu">View Records</span></a> </li>
+                <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">Milk Production </span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-third-level">
+                        <li> <a href="add-milk-production-records"><i class="fa fa-plus-square fa-fw"></i><span class="hide-menu">Add Records</span></a> </li>
+                        <li> <a href="view-milk-production-records"><i class="fa fa-eye-slash fa-fw"></i><span class="hide-menu">View Records</span></a> </li>
+                    </ul>
+                </li>
+                <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">Milk Usage </span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-third-level">
+                        <li> <a href="milk-usage"><i class="fa fa-plus-square fa-fw"></i><span class="hide-menu">New Records</span></a> </li>
+
+                        <li> <a href="view-milk-production-records"><i class="fa fa-eye-slash fa-fw"></i><span class="hide-menu">View Records</span></a> </li>
+
+                    </ul>
+                </li>
             </ul>
         </li>
+		
+        
 	<?php}
                $pbreed = mysqli_query($con, "SELECT * FROM emp_permission WHERE user_id = '$user_id' and module_name='Breeding'") or die (mysqli_error($con));
 while($breed = mysqli_fetch_array($pbreed))

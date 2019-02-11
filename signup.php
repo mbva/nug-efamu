@@ -16,6 +16,7 @@
     <link href="css/animate.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="css/style.css" rel="stylesheet">
+	  <link href="css/customcss.css" rel="stylesheet">
     <!-- color CSS -->
     <link href="css/colors/default.css" id="theme"  rel="stylesheet">
  
@@ -74,7 +75,6 @@ if(isset($_POST['submit'])){
         $sql_log  = mysqli_query($con,"insert into transaction_logs(transaction_action,transaction_time,transaction_by) VALUES ('$action','$time','Self Register')");
 
         if($sql_spray && $sql_log){
-       
 $select_farmid="SELECT * FROM farms ORDER by farmid desc limit 1";
 $lastfarmid=mysqli_query($con,$select_farmid) or die("ERROR : " . mysqli_error($con));
 
@@ -82,10 +82,7 @@ while ($lfarmid = mysqli_fetch_array($lastfarmid,MYSQLI_ASSOC)){
 $farmid = $lfarmid['farmid'];
 		}
     
-
-
-
-    //checking if the id doesn't exist
+ //checking if the id doesn't exist
     $check_id = mysqli_query($con,"select * from users where memberid = '$member_id'");
     if(mysqli_num_rows($check_id) > 0){
         $member_id++;
@@ -110,54 +107,40 @@ $farmid = $lfarmid['farmid'];
                 $insert_transaction = mysqli_query($con,$sql_log);
                 if($insert_user && $insert_transaction){
                   
+
+
+//SEND EMAIL ABOUT NEW ACCOUNT Registration
+
 //SEND EMAIL TO SYSTEM ADMIN ON NEW FARM REGISTRATION
-$email='vmatsiko@gmail.com';
+//SEND EMAIL TO SYSTEM ADMIN ON NEW FARM REGISTRATION
+$email='brendabakesigaki@gmail.com';
 $msg1 = "Dear  Admin ,\n ";
-		$msg1 .= "Anew farm has been registered at EFAMU.   \n ";
-		$msg1 .= "See the farm details below:  \n ";
+		$msg1 .= "A new user & New farm  has been registered at EFAMU.   \n ";
+		$msg1 .= "\n ";
+		$msg1 .= "****FARM DETAILS*****:  \n ";
 		$msg1 .= "Farm Name:$farmname \n ";
 		$msg1 .= "District/Address:$address \n ";
 		$msg1 .= "Farm Owner:$owner \n ";
 		$msg1 .= "Owner Contact:$ownercontact \n ";
 		$msg1 .= "Registered By:$fname $lname (New User) \n ";
-		
-		
-		$msg1 .= "Click on the link below to login and approve the Farm\n ";
-		
-		$msg1 .= "\nhttp://{$_SERVER['SERVER_NAME']}/efamunew/";
-		$msg1 .="\nThank You";
-					$msg1 .="\n EFAMU Admin";
-					$msg1 .="\nNote! This an auto generated mail . Donot reply it!";
-					$headers .= 'From: <admin@nugsoft.com>' . "\r\n";
-					
-mail("$email","New Farm Registration",$msg1,$headers);
-
-//SEND EMAIL ABOUT NEW ACCOUNT Registration
-
-//SEND EMAIL TO SYSTEM ADMIN ON NEW FARM REGISTRATION
-$email='vmatsiko@gmail.com';
-$msg1 = "Dear  Admin ,\n ";
-		$msg1 .= "Anew User has been registered at EFAMU.   \n ";
-		$msg1 .= "See the farm details below:  \n ";
+		$msg1 .= "\n ";
+		$msg1 .= "****NEW USER ACCOUNT DETAILS****:  \n ";
 		$msg1 .= "Name:$fname $lname \n ";
-		$msg1 .= "District/Address:$district \n ";
-		
-		$msg1 .= "Owner Contact:$contact \n ";
+		$msg1 .= "User District/Address:$district \n ";
+		$msg1 .= "User Contact:$contact \n ";
 		$msg1 .= "Registered By:Self \n ";
-		
-		
 		$msg1 .= "Click on the link below to login and approve the Farm\n ";
 		
 		$msg1 .= "\nhttp://{$_SERVER['SERVER_NAME']}/efamunew/";
 		$msg1 .="\nThank You";
 					$msg1 .="\n EFAMU Admin";
 					$msg1 .="\nNote! This an auto generated mail . Donot reply it!";
-					$headers .= 'From: <admin@nugsoft.com>' . "\r\n";
+					$headers .= 'From: <info@nugsoft.com>' . "\r\n";
 					
 mail("$email","New Farm Registration",$msg1,$headers);
 
-	
-				  echo "<script>alert('Registration is Successful');</script>";
+				  echo "<script>alert('Thank You for Registering ,Your account will be activated');</script>";
+				  echo "<script>document.location='index'</script>";
                 }
             }
         }
@@ -174,18 +157,12 @@ mail("$email","New Farm Registration",$msg1,$headers);
             <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
         </svg>
     </div>
-    <section id="wrapper" class="new-login-register">
-        <div class="lg-info-panel">
-            <div class="inner-panel">
-                <a href="javascript:void(0)" class="p-20 di"><img src="plugins/images/admin-logo.png"></a>
-                <div class="lg-content">
-                    <h2>EFAMU DAIRY</h2>
-                    <p class="text-muted">For all your Dairy farm Solutions </p> <a href="#" class="btn btn-rounded btn-danger p-l-20 p-r-20"> Buy now</a> </div>
-            </div>
-        </div>
-        <div class="new-login-box">
-            <div class="white-box">
-                <h3 class="box-title m-b-0">Sign UP </h3> <small>Enter your details below</small>
+	<div class="row">
+	<div class="col-md-4 login">
+	</div>
+	<div class="col-md-6">
+	
+	<h3 class="mybox-title m-b-0">Sign UP </h3> <small>Enter your details below</small>
               <form action="signup" method="post" enctype="multipart/form-data">
                             <div class="row">
                                 <div class="col-md-6">
@@ -308,8 +285,149 @@ mail("$email","New Farm Registration",$msg1,$headers);
                                     </div>
                                 </div>
                         </form>
+	
+	
+	</div>
+	</div>
+    <section id="wrapper" class="new-login-register">
+        <div class="lg-info-panel">
+            <div class="inner-panel">
+                <a href="javascript:void(0)" class="p-20 di"><img src="plugins/images/admin-logo.png"></a>
+                <div class="lg-content">
+                    <h2>EFAMU DAIRY</h2>
+                    <p class="text-muted">For all your Dairy farm Solutions </p>
+<p class="text-muted">If You have Efamu Account </p>	
+				<a href="index" class="btn btn-rounded btn-success p-l-20 p-r-20"> Signin Now</a> </div>
             </div>
         </div>
+        <div class="new-login-box">
+            <div class="mywhite-box">
+                <!--<h3 class="mybox-title m-b-0">Sign UP </h3> <small>Enter your details below</small>
+              <form action="signup" method="post" enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">First Name</label>
+                                        <div class="input-group">
+                                            <input class="form-control" name="fname" required autocomplete="off" placeholder="First Name" type="text">
+                                            <div class="input-group-addon"><i class="ti-pencil-alt"></i></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Last Name</label>
+                                        <div class="input-group">
+                                            <input class="form-control" name="lname" required autocomplete="off" placeholder="Last Name" type="text">
+                                            <div class="input-group-addon"><i class="ti-pencil-alt"></i></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Contact</label>
+                                        <div class="input-group">
+                                            <input class="form-control" name="contact" onkeypress="return isNumberKey(event)" maxlength="10" required autocomplete="off" placeholder="Contact" type="text">
+                                            <div class="input-group-addon"><i class="fa fa-phone"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Username</label>
+                                        <div class="input-group">
+                                            <input class="form-control" name="username"  required autocomplete="off" placeholder="Username" type="text">
+                                            <div class="input-group-addon"><i class="fa fa-user-circle"></i></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Password</label>
+                                        <div class="input-group">
+                                            <input class="form-control" name="password" required autocomplete="off" placeholder="Password" type="text">
+                                            <div class="input-group-addon"><i class="fa fa-lock"></i></div>
+                                        </div>
+                                    </div>
+									
+									  <div class="form-group">
+                                        <label for="exampleInputuname">District </label>
+                                        <div class="input-group">
+										 <select class="form-control select2" name="district" required>
+                                                <option>Select</option>
+                                                <?php
+                                                $select = mysqli_query($con,"select * from districts ");
+                                                while ($district = mysqli_fetch_array($select)){
+                                                    ?>
+                                                    <option value="<?php echo $district['district']; ?>"><?php echo $district['district']; ?></option>
+                                                    <?php
+                                                }
+                                                ?>
+                                            </select>
+                                             
+                                           
+                                            <?php
+                                            ?>
+                                            <div class="input-group-addon"><i class="ti-pencil"></i></div>
+                                        </div>
+                                    </div>
+
+                                    
+                                </div>
+                            </div>
+							<h4><b>FARM DETAILS</b></H4>
+							         <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Farm Name</label>
+                                        <div class="input-group">
+                                            <input class="form-control" name="farmname" required autocomplete="off" placeholder="Farm Name" type="text">
+                                            <div class="input-group-addon"><i class="ti-pencil-alt"></i></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Farm Owner</label>
+                                        <div class="input-group">
+                                            <input class="form-control" name="owner" required autocomplete="off" placeholder="Farm Owner" type="text">
+                                            <div class="input-group-addon"><i class="ti-pencil-alt"></i></div>
+                                        </div>
+                                    </div>
+
+                                   
+                                </div>
+                                <div class="col-sm-6">
+								 <div class="form-group">
+                                        <label for="exampleInputEmail1">Contact</label>
+                                        <div class="input-group">
+                                            <input class="form-control" name="contact" onkeypress="return isNumberKey(event)" maxlength="10" required autocomplete="off" placeholder="Contact" type="text">
+                                            <div class="input-group-addon"><i class="fa fa-phone"></i></div>
+                                        </div>
+                                    </div>
+                                     <div class="form-group">
+                                        <label for="exampleInputuname">District(Location) </label>
+                                        <div class="input-group">
+										 <select class="form-control select2" name="address" required>
+                                                <option>Select</option>
+                                                <?php
+                                                $select = mysqli_query($con,"select * from districts ");
+                                                while ($district = mysqli_fetch_array($select)){
+                                                    ?>
+                                                    <option value="<?php echo $district['district']; ?>"><?php echo $district['district']; ?></option>
+                                                    <?php
+                                                }
+                                                ?>
+                                            </select>
+                                             
+                                           
+                                            <?php
+                                            ?>
+                                            <div class="input-group-addon"><i class="ti-pencil"></i></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="text-center">
+                                        <button type="submit" name="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>
+                                    </div>
+                                </div>
+                        </form>-->
+            </div>
+        </div>
+		</div>
     </section>
     <!-- jQuery -->
    <!-- jQuery -->

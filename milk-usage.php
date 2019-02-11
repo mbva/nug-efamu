@@ -12,30 +12,28 @@ include 'db.php';
 $message="";
 $farm = $_SESSION['farm'];
 if(isset($_POST['submit'])){
-    $mdate = mysqli_real_escape_string($con,  ucwords($_POST['mdate']));
-    $animal_id= mysqli_real_escape_string($con,   ucwords($_POST['animal_id']));
-    //$aname = mysqli_real_escape_string($con,   ucwords($_POST['aname']));
+    $usagedate = mysqli_real_escape_string($con,$_POST['usagedate']);
+    $usagecat= mysqli_real_escape_string($con,$_POST['usagecat']);
+    
     $qty = mysqli_real_escape_string($con,   ucwords($_POST['qty']));
-    $mtime = mysqli_real_escape_string($con,   ucwords($_POST['time']));
+    
     $recdate = date("Y-m-d");
     $recby = $_SESSION['full_names'];
-    $selects = mysqli_query($con,"select * from animal_registration where animal_id='$animal_id' 
-	and farm_id ='$farm'");
-    $names=mysqli_fetch_array($selects);
-    $aname=$names['animal_name'];
 
-    //capturing the registrar of the data
+	//capturing the registrar of the data
     $entered_by =   $_SESSION['full_names'];
     $time =         date("Y-m-d H:i:s");
     $action =       "Recorded Milking yield";
     //Check if the records exists
-    $check_record = mysqli_query($con,"select * from milkyield where mdate = '$mdate' and animal_id='$animal_id' and milkingtime='$mtime' and farm_id ='$farm'");
+    $check_record = mysqli_query($con,"select * from milkusage where date = '$usagedate'
+	and usagetype='$usagecat' and farm_id ='$farm'");
     if(mysqli_num_rows($check_record)>0){
         echo "<script>alert('Record already Exists');</script>";
     }
     else{
         //checking if the member was already paid
-        $insert_record = mysqli_query($con,"insert into milkyield(farm_id,mdate,animal_id,quantity,milkingtime)VALUES ('$farm','$mdate','$animal_id','$qty','$mtime')");
+        $insert_record = mysqli_query($con,"insert into milkusage(farm_id,date,qty,usagetype)
+		VALUES ('$farm','$usagedate','$qty','$usagecat')");
         $insert_log = mysqli_query($con,"insert into transaction_logs(farm_id,transaction_action,transaction_time,transaction_by) VALUES ('$farm','$action','$time','$entered_by')");
 
         if($insert_record && $insert_log){
@@ -84,7 +82,7 @@ if(isset($_POST['submit'])){
             <div class="row bg-title">
                 <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
                     <h4 class="page-title">
-                        Milk Production Form
+                        Milk Usage Form
                     </h4> </div>
                 <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                     <button class="right-side-toggle waves-effect waves-light btn-info btn-circle pull-right m-l-20"><i class="ti-settings text-white"></i></button>
@@ -102,70 +100,40 @@ if(isset($_POST['submit'])){
 
                 <div class="col-md-9 col-sm-12">
                     <div class="white-box">
-                        <h3 class="box-title m-b-0">  Milk Production Form</h3>
-                        <form action="add-milk-production-records" method="post" enctype="multipart/form-data">
+                        <h3 class="box-title m-b-0">  Milk Usage Form</h3>
+                        <form action="milk-usage" method="post" enctype="multipart/form-data">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="exampleInputpwd2">Milking Date</label>
+                                        <label for="exampleInputpwd2">Usage Date</label>
                                         <div class="input-group">
-                                            <input type="date" class="form-control" name="mdate" id="datepicker" />
+                                            <input type="date" class="form-control" name="usagedate" id="datepicker" />
                                             <span class="input-group-addon"><i class="icon-calender"></i></span>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputuname">Animal</label>
+                                   
+                                  <div class="form-group">
+                                        <label for="exampleInputuname">Usage Category</label>
                                         <div class="input-group">
-                                            <select class="form-control select2" name="animal_id" required>
+                                            <select class="form-control select2" name="usagecat" required>
                                                 <option value="">Select</option>
-                                                <?php
-                                                $select = mysqli_query($con,"select c.*,a.* from calving c,
-												animal_registration a where c.animal_id=a.animal_id 
-												AND c.farm_id=a.farm_id
-												AND a.status='Present' and c.farm_id ='$farm'");
-                                                while ($details = mysqli_fetch_array($select)){
-                                                    $to_date = time(); // Input your date here e.g. strtotime("2014-01-02")
-                                                    $from_date = strtotime($details['cdate']);
-                                                    $day_diff = $to_date - $from_date;
-                                                    $days =  floor($day_diff/(60*60*24))."\n";
-													//checking the difference between when animal gave birth and date today//
-                                                    if($days<=360){
-                                                        ?>
-                                                        <option value="<?php echo $details['animal_id']; ?>"><?php echo $details['animal_name'].'('. $details['tagNo'];?></option>
-                                                        <?php
-                                                    }
-
-                                                }
-												if($select){}else {echo "<h2>FAILED </h2>".mysqli_error($con); }
-                                                ?>
+                                                <option value="Home Consumption">Home Consumption</option>
+                                                <option value="Calves Feeding">Calves Feeding</option>
+                                                <option value="Spoilt">Spoilt</option>
                                             </select>
                                             <?php
                                             ?>
                                             <div class="input-group-addon"><i class="ti-pencil"></i></div>
                                         </div>
                                     </div>
-
                                 </div>
                                 <div class="col-sm-6 col-xs-12">
 
-                                    <div class="form-group">
-                                        <label for="exampleInputuname">Milking Time</label>
-                                        <div class="input-group">
-                                            <select class="form-control select2" name="time" required>
-                                                <option value="">Select</option>
-                                                <option value="Morning">Morning</option>
-                                                <option value="Afternoon">Afternoon</option>
-                                                <option value="Evening">Evening</option>
-                                            </select>
-                                            <?php
-                                            ?>
-                                            <div class="input-group-addon"><i class="ti-pencil"></i></div>
-                                        </div>
-                                    </div>
+                                  
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Quantity of Milk</label>
                                         <div class="input-group">
-                                            <input class="form-control" name="qty" onkeypress="return isNumberKey(event)" required autocomplete="off" placeholder="Quantity of Milk Produced" type="number">
+                                            <input class="form-control" name="qty" onkeypress="return isNumberKey(event)" required autocomplete="off" placeholder="Quantity of Milk Used" type="number">
                                             <div class="input-group-addon"><i class="ti-pencil-alt"></i></div>
                                         </div>
                                     </div>
