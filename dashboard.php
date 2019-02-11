@@ -91,7 +91,7 @@ $active='dash';?>
                                             <span class="circle circle-md bg-success"><i class="fas fa-dollar-sign"></i></span>
                                         </li>
                                         <li class="col-last">
-                                            <h4 class="counter text-right m-t-15">
+                                            <h3 class="counter text-right m-t-15">
                                                 <?php
                                                 $month = date("m");
                                                 $year = date("Y");
@@ -119,7 +119,7 @@ $active='dash';?>
                                                 
 												
 												?>
-                                            </h4></li>
+                                            </h3></li>
                                         <li class="col-middle">
                                             <h4>Milk Production </h4>
                                             <div class="progress">
@@ -176,9 +176,6 @@ $active='dash';?>
                                         },
                                         axisY:{
                                             title: "Quantity of Milk in Litres"
-                                        },
-                                        axisX:{
-                                            title: "Days of the Month"
                                         },
                                         toolTip: {
                                             shared: true
