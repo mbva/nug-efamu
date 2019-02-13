@@ -1,49 +1,39 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <?php include 'head.php';
-    $active='milk_production';
-	//error_reporting(1);
-    ?>
+    <?php include 'head.php';?>
 </head>
 <?php
 include 'db.php';
 $message="";
-$farm = $_SESSION['farm'];
 if(isset($_POST['submit'])){
-    $usagedate = mysqli_real_escape_string($con,$_POST['usagedate']);
-    $usagecat= mysqli_real_escape_string($con,$_POST['usagecat']);
-    
-    $qty = mysqli_real_escape_string($con,   ucwords($_POST['qty']));
-    
-    $recdate = date("Y-m-d");
-    $recby = $_SESSION['full_names'];
+    $owner = mysqli_real_escape_string($con,          ucwords($_POST['owner']));
+    $farmname = mysqli_real_escape_string($con,          ucwords($_POST['farmname']));
+    $address = mysqli_real_escape_string($con,          ucwords($_POST['address']));
+    $contact = mysqli_real_escape_string($con,          ucwords($_POST['contact']));
 
-	//capturing the registrar of the data
+    //capturing the registrar of the data
     $entered_by =   $_SESSION['full_names'];
     $time =         date("Y-m-d H:i:s");
-    $action =       "Recorded Milking yield";
-    //Check if the records exists
-    $check_record = mysqli_query($con,"select * from milkusage where date = '$usagedate'
-	and usagetype='$usagecat' and farm_id ='$farm'");
-    if(mysqli_num_rows($check_record)>0){
-        echo "<script>alert('Record already Exists');</script>";
-    }
-    else{
-        //checking if the member was already paid
-        $insert_record = mysqli_query($con,"insert into milkusage(farm_id,date,qty,usagetype)
-		VALUES ('$farm','$usagedate','$qty','$usagecat')");
-        $insert_log = mysqli_query($con,"insert into transaction_logs(farm_id,transaction_action,transaction_time,transaction_by) VALUES ('$farm','$action','$time','$entered_by')");
+    $action =       "Registered a farm $farmname";
 
-        if($insert_record && $insert_log){
-            //$message = "<div class=\"alert alert-success\"><strong>Recorded Successfully</strong></div>";
-            echo "<script>alert('Recorded Successfully');</script>";
-        }else{
-            echo mysqli_error($con);
+    //checking records
+    $check_records= mysqli_query($con,"select * from farms where farmname ='$farmname' and owner ='$owner' and contact='$contact'");
+    if(mysqli_num_rows($check_records)>0){
+        echo "<script>alert('The Farm  ($farmname) already exists');</script>";
+    }else{
+        $sql_spray = mysqli_query($con,"insert into farms(farmname,owner,address,contact,status,regby,regtime)VALUES ('$farmname','$owner','$address','$contact','Active','$entered_by','$time')");
+
+        $sql_log  = mysqli_query($con,"insert into transaction_logs(transaction_action,transaction_time,transaction_by) VALUES ('$action','$time','$entered_by')");
+
+        if($sql_spray && $sql_log){
+            // $message = "<div class=\"alert alert-success\"><strong>Registration is Successful</strong></div>";
+            echo "<script>alert('Recorded is Successfully');</script>";
         }
     }
 }
+
 ?>
 <body class="fix-header">
 <!-- ============================================================== -->
@@ -81,16 +71,14 @@ if(isset($_POST['submit'])){
         <div class="container-fluid">
             <div class="row bg-title">
                 <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                    <h4 class="page-title">
-                        Milk Usage Form
-                    </h4> </div>
+                    <h4 class="page-title">incomes categories</h4> </div>
                 <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                     <button class="right-side-toggle waves-effect waves-light btn-info btn-circle pull-right m-l-20"><i class="ti-settings text-white"></i></button>
                     <a href="javascript: void(0);" "></a>
                     <ol class="breadcrumb">
                         <li><a href="#">Dashboard</a></li>
-                        <li><a href="#">Milk Production</a></li>
-                        <li><a href="#">Add Records</a></li>
+                        <li><a href="#">System Settings</a></li>
+                        <li><a href="#">incomes categories</a></li>
                     </ol>
                 </div>
                 <!-- /.col-lg-12 -->
@@ -100,65 +88,52 @@ if(isset($_POST['submit'])){
 
                 <div class="col-md-9 col-sm-12">
                     <div class="white-box">
-                        <h3 class="box-title m-b-0">  Milk Usage Form</h3>
-                        <form action="milk-usage" method="post" enctype="multipart/form-data">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="exampleInputpwd2">Usage Date</label>
-                                        <div class="input-group">
-                                            <input type="date" class="form-control" name="usagedate" id="datepicker" />
-                                            <span class="input-group-addon"><i class="icon-calender"></i></span>
-                                        </div>
-                                    </div>
-                                   
-                                  <div class="form-group">
-                                        <label for="exampleInputuname">Usage Category</label>
-                                        <div class="input-group">
-                                            <select class="form-control select2" name="usagecat" required>
-                                                <option value="">Select</option>
-                                                <option value="Home Consumption">Home Consumption</option>
-                                                <option value="Calves Feeding">Calves Feeding</option>
-                                                <option value="Spoilt">Spoilt</option>
-                                            </select>
-                                            <?php
-                                            ?>
-                                            <div class="input-group-addon"><i class="ti-pencil"></i></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-xs-12">
+                        <h3 class="box-title m-b-0">Manage incomes categories</h3>
+                       <form action="add-farm" method="post" enctype="multipart/form-data">
+                                    <div class="row">
+                                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                            <div class="basic-login-inner">
 
-                                  
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Quantity of Milk</label>
-                                        <div class="input-group">
-                                            <input class="form-control" name="qty" onkeypress="return isNumberKey(event)" required autocomplete="off" placeholder="Quantity of Milk Used" type="number">
-                                            <div class="input-group-addon"><i class="ti-pencil-alt"></i></div>
+                                            </div>
                                         </div>
+                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                            <div class="basic-login-inner">
+                                                <div class="form-group-inner">
+                                                    <label>Farm Name</label>
+                                                    <input type="text" name="farmname" required autocomplete="off" class="form-control" placeholder="Farm Name" />
+                                                </div>
+                                                <div class="form-group-inner">
+                                                    <label>Owner</label>
+                                                    <input type="text" name="owner" required autocomplete="off" class="form-control" placeholder="Farm Owner" />
+                                                </div>
+                                                <div class="form-group-inner">
+                                                    <label>Address</label>
+                                                    <input type="text" name="address" required autocomplete="off" class="form-control" placeholder="Address" />
+                                                </div>
+                                                <div class="form-group-inner">
+                                                    <label>Contact </label>
+                                                    <input class="form-control"  required onkeypress="return isNumberKey(event)"  title= "Numbers only" name="contact"  autocomplete="off" placeholder="Contact " type="text" >
+                                                </div>
+                                                <div class="login-btn-inner">
+                                                    <div class="inline-remember-me" style="text-align: center">
+                                                        <button class="btn btn-lg btn-primary login-submit-cs" name="submit" type="submit">Submit</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                            <div class="basic-login-inner">
+
+                                            </div>
+                                        </div>
+
                                     </div>
-                                    <div class="text-center">
-                                        <button type="submit" name="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
+                                </form>
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-12">
-                    <h4><b>Milk Production Tips</b></h4>
-                    <marquee  behavior="scroll" direction="up" id="mymarquee" scrollamount="2" onmouseover="this.stop();" onmouseout="this.start();">
-                        <p style="text-align: justify">
-                            <?php
-                            $select = mysqli_query($con,"select * from farmertips where section='Milk' ORDER BY id desc LIMIT 1 ");
-                            while ($tipscheck = mysqli_fetch_array($select)){
+                    <h4><b>Tips</b></h4>
 
-                                echo $tipscheck['tips'];
-
-                            }
-                            ?>
-                        </p>
-                    </marquee>
 
                 </div>
             </div>

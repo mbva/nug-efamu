@@ -51,12 +51,12 @@ if (isset($_POST['login'])){
             if($insert){
 
                 header("location:dashboard");
-                echo "<script>document.location='dashboard'</script>";
+                echo "<script>document.location='admin-dashboard'</script>";
             }else{ //echo "<h2>insert $action </h2>".mysqli_error($con);
 
             }
         }
-        elseif($user_status['status']=='Activated' AND $farmid=1){
+        elseif($user_status['status']=='Activated' AND $farmid==1){
             $_SESSION['memberid'] = $user_status['memberid'];
             $_SESSION['full_names'] = $user_status['full_names'];
             $_SESSION['farm'] = $user_status['farm_id'];
@@ -69,8 +69,8 @@ if (isset($_POST['login'])){
             $insert = mysqli_query($con,"insert into login_logs(login_action,login_time,username,accountnames)VALUES ('$action','$time','$username','$accountnames')");
             if($insert){
 
-                header("location:dashboard");
-                echo "<script>document.location='dashboard'</script>";
+                header("location:admin-dashboard");
+                echo "<script>document.location='admin-dashboard'</script>";
             }else{ //echo "<h2>insert $action </h2>".mysqli_error($con);
 
             }

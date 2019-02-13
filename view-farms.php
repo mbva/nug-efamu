@@ -9,7 +9,7 @@
 <?php
 include 'db.php';
 $message="";
-$farm = $_SESSION['farm'];
+
 if(isset($_POST['submit'])){
     $exdate = mysqli_real_escape_string($con,  ucwords($_POST['exdate']));
     $animal_id= mysqli_real_escape_string($con,   ucwords($_POST['animal_id']));
@@ -67,14 +67,14 @@ if(isset($_POST['submit'])){
     <!-- Topbar header - style you can find in pages.scss -->
     <!-- ============================================================== -->
     <nav class="navbar navbar-default navbar-static-top m-b-0">
-        <?php include 'nav.php';?>
+        <?php include 'admin-nav.php';?>
     </nav>
     <!-- End Top Navigation -->
     <!-- ============================================================== -->
     <!-- Left Sidebar - style you can find in sidebar.scss  -->
     <!-- ============================================================== -->
     <div class="navbar-default sidebar" role="navigation">
-        <?php include 'sidebar.php';?>
+        <?php include 'admin-sidebar.php';?>
     </div>
     <!-- ============================================================== -->
     <!-- End Left Sidebar -->
@@ -104,7 +104,7 @@ if(isset($_POST['submit'])){
                 <div class="row">
                 <div class="col-sm-12">
                     <div class="white-box">
-                        <h3 class="box-title m-b-0">Animal Records Table</h3>
+                        <h3 class="box-title m-b-0">Records On farms</h3>
 
                         <div class="table-responsive">
 

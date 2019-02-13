@@ -30,7 +30,7 @@ $active='dash';?>
         <!-- Left Sidebar - style you can find in sidebar.scss  -->
         <!-- ============================================================== -->
         <div class="navbar-default sidebar" role="navigation">
-       <?php include 'sidebar.php';?>
+       <?php include 'admin-sidebar.php';?>
         </div>
         <!-- ============================================================== -->
         <!-- End Left Sidebar -->
@@ -70,7 +70,7 @@ $active='dash';?>
                                             <h3 class="counter text-right m-t-15">
                                                 <?php
                                                 include 'db.php';
-                                                $sql = mysqli_query($con,"select count(tagNo) as total_animals from animal_registration  where status ='Present' and farm_id = '$farm'");
+                                                $sql = mysqli_query($con,"select count(animal_id) as total_animals from animal_registration  where status ='Present'");
                                                 $total_animals = mysqli_fetch_array($sql);
                                                 echo $total_animals['total_animals'];
                                                 ?>
@@ -96,32 +96,18 @@ $active='dash';?>
                                                 $month = date("m");
                                                 $year = date("Y");
                                                 //echo $month;
-                                                $sql=mysqli_query($con,"select sum(quantity) as total_milk from milkyield where MONTH (mdate)='$month' and YEAR (mdate)='$year' and farm_id = '$farm'");
+                                                $sql=mysqli_query($con,"select count(farmid) as total_farms from farms where status='Active'");
                                                 $ans = mysqli_fetch_array($sql);
-                                                echo number_format($ans['total_milk'])." Ltrs";
+                                                echo number_format($ans['total_farms'])." Ltrs";
                                                
-                                                $sql=mysqli_query($con,"select sum(qty) as total_milk_spoilt from milkusage 
-												where MONTH (date)='$month' and YEAR (date)='$year' and farm_id = '$farm' AND usagetype='Spoilt'");
-                                                $ans = mysqli_fetch_array($sql);
-                                                //echo number_format($ans['total_milk_spoilt'])." Ltrs";
-                                                
-												$sql=mysqli_query($con,"select sum(qty) as total_milk_home from milkusage 
-												where MONTH (date)='$month' and YEAR (date)='$year' and farm_id = '$farm' 
-												AND usagetype='Home Consumption'");
-                                                $ans = mysqli_fetch_array($sql);
-                                                //echo number_format($ans['total_milk_home'])." Ltrs";
-												
-												$sql=mysqli_query($con,"select sum(qty) as total_milk_calves from milkusage 
-												where MONTH (date)='$month' and YEAR (date)='$year' and farm_id = '$farm' 
-												AND usagetype='Calves Feeding'");
-                                                $ans = mysqli_fetch_array($sql);
                                                 //echo number_format($ans['total_milk_calves'])." Ltrs";
                                                 
 												
 												?>
+												
                                             </h4></li>
                                         <li class="col-middle">
-                                            <h4>Milk Production </h4>
+                                            <h4>Number Of Active Farms </h4>
                                             <div class="progress">
                                                 <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
                                                     <span class="sr-only">40% Complete (success)</span>
@@ -141,13 +127,13 @@ $active='dash';?>
                                                 $month = date("m");
                                                 $year = date("Y");
                                                 //echo $month;
-                                                $illness_results = mysqli_fetch_array(mysqli_query($con,"select COUNT(animal_id) as total_illness from disease_incidences where MONTH (tdate)='$month' and YEAR (tdate)='$year' and farm_id = '$farm'"));
-                                                $total_illness = $illness_results['total_illness'];
-                                                echo $total_illness;
+                                                $user_results = mysqli_fetch_array(mysqli_query($con,"select COUNT(id) as total_users from users where status='Activated'"));
+                                                $tusers = $user_results['total_users'];
+                                                echo $tusers;
                                                 ?>
                                             </h3></li>
                                         <li class="col-middle">
-                                            <h4>Total Illness </h4>
+                                            <h4>Number Of Active System Users </h4>
                                             <div class="progress">
                                                 <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
                                                     <span class="sr-only">40% Complete (success)</span>
@@ -384,102 +370,6 @@ $cityId=$weather['address'];
                         </div>
                     </div>
                 </div>
-				
-				
-				   <!--<div class="row">
-                    <div class="col-lg-4 col-md-12">
-                        <div class="white-box">
-                            <h3 class="box-title">Visit from the countries</h3>
-                            <ul class="country-state  p-t-20">
-                                <li>
-                                    <h2>6350</h2> <small>From India</small>
-                                    <div class="pull-right">48% <i class="fa fa-level-up text-success"></i></div>
-                                    <div class="progress">
-                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:48%;"> <span class="sr-only">48% Complete</span></div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <h2>3250</h2> <small>From UAE</small>
-                                    <div class="pull-right">98% <i class="fa fa-level-up text-success"></i></div>
-                                    <div class="progress">
-                                        <div class="progress-bar progress-bar-inverse" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:98%;"> <span class="sr-only">98% Complete</span></div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <h2>1250</h2> <small>From Australia</small>
-                                    <div class="pull-right">75% <i class="fa fa-level-down text-danger"></i></div>
-                                    <div class="progress">
-                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:75%;"> <span class="sr-only">75% Complete</span></div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <h2>1350</h2> <small>From USA</small>
-                                    <div class="pull-right">48% <i class="fa fa-level-up text-success"></i></div>
-                                    <div class="progress">
-                                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:48%;"> <span class="sr-only">48% Complete</span></div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <h2>3250</h2> <small>From UAE</small>
-                                    <div class="pull-right">98% <i class="fa fa-level-up text-success"></i></div>
-                                    <div class="progress">
-                                        <div class="progress-bar progress-bar-inverse" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:98%;"> <span class="sr-only">98% Complete</span></div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <h2>1250</h2> <small>From Australia</small>
-                                    <div class="pull-right">75% <i class="fa fa-level-down text-danger"></i></div>
-                                    <div class="progress">
-                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:75%;"> <span class="sr-only">75% Complete</span></div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-12 col-lg-8">
-                        <div class="white-box bg-theme m-b-0">
-                            <div class="city-weather-widget">
-                                <h1>Kufri, Himachal Pradesh</h1>
-                                <h4>Friday, 19 Jan 2017</h4>
-                                <div class="row p-t-30">
-                                    <div class="col-sm-6">
-                                        <ul class="side-icon-text">
-                                            <li><span class="di vm"><i class="wi wi-day-hail"></i></span>
-                                                <div class="di vm">
-                                                    <h1 class="m-b-0">23<sup>o</sup></h1>
-                                                    <h5 class="m-t-0">Mostly Sunny</h5>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <ul class="list-icons pull-right text-white">
-                                            <li><i class="wi wi-day-sunny m-r-5"></i>Humidity 38%</li>
-                                            <li><i class=" wi wi-day-windy m-r-5"></i>Wind 38%</li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div id="ct-city-wth" style="height:220px"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel">
-                            <div class="row">
-                                <ul class="list-unstyled city-weather-days">
-                                    <li class="col-xs-4 col-sm-2"><span>Tue</span><i class="wi wi-day-sunny"></i><span>32<sup>°F</sup></span></li>
-                                    <li class="col-xs-4 col-sm-2"><span>Wed</span><i class="wi wi-day-cloudy"></i><span>34<sup>°F</sup></span></li>
-                                    <li class="col-xs-4 col-sm-2"><span>Thu</span><i class="wi wi-day-hail"></i><span>35<sup>°F</sup></span></li>
-                                    <li class="col-xs-4 col-sm-2 active"><span>Fri</span><i class="wi wi-day-sprinkle"></i><span>34<sup>°F</sup></span></li>
-                                    <li class="col-xs-4 col-sm-2"><span>Sat</span><i class="wi wi-day-snow"></i><span>30<sup>°F</sup></span></li>
-                                    <li class="col-xs-4 col-sm-2"><span>Sun</span><i class="wi wi-day-sunny"></i><span>26<sup>°F</sup></span></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>-->
-				
-				
 				
                 <!-- ============================================================== -->
                 <!-- wallet, & manage users widgets -->

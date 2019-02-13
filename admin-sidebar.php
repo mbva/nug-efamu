@@ -66,15 +66,12 @@
                 <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">Farm Subscription</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-third-level">
 
-                        <li> <a href="manage-farms"><i class="fa fa-plus-square fa-fw"></i><span class="hide-menu">New</span></a> </li>
+                        <li> <a href="farm-subscription"><i class="fa fa-plus-square fa-fw"></i><span class="hide-menu">New</span></a> </li>
                        
 					   <li> <a href="view-farms"><i class="fa fa-eye-slash fa-fw"></i><span class="hide-menu">View</span></a> </li>
 
                     </ul>
                 </li>
-				
-         
-				
              <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">Payment Methods</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-third-level">
 					
